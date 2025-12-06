@@ -1,0 +1,52 @@
+/* src/assets/global.css */
+html, body, #app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', Pretendard, sans-serif;
+    font-size: 9px;
+    background-color: #fff;
+}
+
+/* ======= Compact NaiveUI 폼 ======= */
+.n-form-item {
+    margin-bottom: 4px !important;
+}
+.n-form-item-label {
+    padding-right: 6px !important;
+}
+.n-form-item-gi {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+/* ======= Input / Select ======= */
+.n-input,
+.n-select,
+.n-date-picker {
+    height: 26px !important;
+    font-size: 13px !important;
+}
+.n-input__input {
+    padding: 2px 6px !important;
+    line-height: 20px !important;
+}
+
+/* ======= Button ======= */
+.n-button {
+    font-size: 13px !important;
+    border-radius: 2px !important;
+    padding: 2px 8px !important;
+}
+
+/* ======= Card ======= */
+.n-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.n-card__header {
+    padding: 6px 8px !important;
+    font-weight: 600;
+}
+.n-card__content {
+    padding: 8px 8px !important;
+}

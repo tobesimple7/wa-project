@@ -1,0 +1,67 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Lecture",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm dev:lecture",
+      "cwd": "${workspaceFolder}/wavue"
+    },    
+    {
+      "name": "WaErp",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm --filter waerp dev",
+      "cwd": "${workspaceFolder}/wavue"
+    },
+    {
+      "name": "WaGrid",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm --filter wagrid dev",
+      "cwd": "${workspaceFolder}/wavue"
+    },
+    {
+      "name": "ChromeLecture",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/wavue/packages/lecture/src",
+      "sourceMaps": true
+    },
+    {
+      "name": "ChromeWaErp",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/wavue/packages/waerp/src",
+      "sourceMaps": true
+    },
+    {
+      "name": "WaApi",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "waapi.WaApiApplication",
+      "projectName": "waapi",
+      "cwd": "${workspaceFolder}/waapi"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "DebugLecture",
+      "configurations": [
+        "Lecture",
+        "ChromeLecture"
+      ]
+    },
+    {
+      "name": "DebugWaErp",
+      "configurations": [
+        "WaErp",
+        "ChromeWaErp",
+        "WaApi"
+      ]
+    }    
+  ]
+}

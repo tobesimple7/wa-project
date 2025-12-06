@@ -1,0 +1,2647 @@
+﻿/* =========================================================================== */
+/*                                                                             */
+/*    [TBS Grid CSS]                                                           */
+/*                                                                             */
+/* =========================================================================== */
+/*
+[Struture]
+wa-grid (relative)
+    - wa-grid-panel10 (relative)
+    - wa-grid-panel80 (relative)
+    - wa-grid-main (relative)
+        - wa-grid-wrap (absolute)
+            - wa-grid-group21 (absolute)
+                - wa-grid-panel (relative)
+                    - wa-grid-panel21 (absolute)
+                    - wa-grid-panel22 (absolute)
+            - wa-grid-group20 (absolute)
+                - wa-grid-panel (relative)
+                    - wa-grid-panel20 (absolute)
+            - wa-grid-group31 (absolute)
+                - wa-grid-panel (relative)
+                    - wa-grid-panel31 (absolute)
+                    - wa-grid-panel32 (absolute)
+            - wa-grid-group30 (absolute)
+                - wa-grid-panel (relative)
+                    - wa-grid-panel30 (absolute)
+
+* cascade : font-family, font-size, font-weight, line-height, visibility, opacity, color, line-height, text-align, white-space, list-style
+* not cascade : margin, padding, border , box-sizing, display, background, vertical-align, text-ecoration, top/right/bottom/left, position, overflow, width/height
+
+ */
+/* =========================================================================== */
+/*  [variable declare]                                                         */
+/* =========================================================================== */
+:root {
+    --wa-grid-cell-start-color: #f7f5eb; /* var(--wa-grid-cell-start-color); */
+    --wa-grid-cell-select-color: #fffbe5; /* var(--wa-grid-cell-select-color); */
+    --wa-grid-cell-select-guide-color: #fff6ee; /* var(--wa-grid-cell-select-guide-color); */
+    --wa-grid-cell-hover-color: #fffbe5; /* var(--wa-grid-cell-hover-color); */
+    --wa-grid-cell-border: 1px solid #bbbbbb; /* var(--wa-grid-cell-border); */
+    --wa-grid-cell-fixed-line-border: solid 2px #8d8d8d; /* var(--wa-grid-cell-fixed-line-border); */
+}
+.tbs-row-color1 { background-color: #e2e5fa; }
+.tbs-row-color2 { background-color: #e7e9f8; }
+.tbs-row-color3 { background-color: #cccccc; }
+.tbs-row-color4 { background-color: #d7d7d7; }
+.tbs-row-color5 { background-color: #e3e2e2; }
+.tbs-row-color6 { background-color: #eeeeee; }
+.tbs-row-color7 { background-color: #eeeeee; }
+.tbs-row-color8 { background-color: #eeeeee; }
+.tbs-row-color9 { background-color: #eeeeee; }
+.tbs-row-color-white { background-color: #ffffff; }
+.wa-grid-show {
+    display: block;
+}
+.wa-grid-hide {
+    display: none;
+}
+.wa-grid .wa-grid-cell-start {
+    background: var(--wa-grid-cell-start-color);
+}
+.wa-grid .wa-grid-cell-select {
+    background: var(--wa-grid-cell-select-color);
+}
+.wa-grid .wa-grid-cell-select-guide {
+    background: var(--wa-grid-cell-select-guide-color);
+}
+.wa-grid .wa-grid-cell:hover {
+    background: var(--wa-grid-cell-hover-color);
+}
+/*  font, size, color */
+/*.wa-grid [class^="wa-grid"] { font-size: 12px; font-family: 'Arial, Helvetica, sans-serif, Nanum Gothic';  }*/
+.wa-grid > * {
+    font-size: 10px;
+    font-family: 'Arial, Helvetica, sans-serif, Nanum Gothic';
+}
+/* =========================================================================== */
+/*  frame css                                                                  */
+/* =========================================================================== */
+.wa-grid {
+    position: relative;
+    width: 100%;
+    border: solid 1px #9b9b9b;
+    outline: none;
+    box-shadow: none;
+    background: white;
+    direction: ltr;
+    box-sizing: border-box;
+    border-spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none; /* no drag */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.wa-grid .wa-grid-main {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    background: #ffffff;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-wrap {
+    position: absolute;
+    overflow: hidden;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+/* =========================================================================== */
+/*  Grid Group                                                                 */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel10 {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #9b9b9b;
+    height: 25px;
+    overflow: hidden;
+    background: #dfe3e8;
+}
+.wa-grid .wa-grid-group21 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.wa-grid .wa-grid-group20 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group41 {
+    position: absolute;
+    left: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group40 {
+    position: absolute;
+    right: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group31 {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group30 {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group51 {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group50 {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group61 {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group60 {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group71 {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-group70 {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+}
+/* =========================================================================== */
+/*  Grid Panel                                                                 */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-panel21 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: auto;
+}
+.wa-grid .wa-grid-panel22 {
+    position: absolute;
+    top: 0px;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-right:  var(--wa-grid-cell-fixed-line-border);
+    box-sizing: border-box;
+}
+.wa-grid .wa-grid-panel20 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel31 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel32 {
+    position: absolute;
+    top: 0px;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-right: var(--wa-grid-cell-fixed-line-border);
+    box-sizing: border-box;
+}
+.wa-grid .wa-grid-panel30 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel41 {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: 0px;
+    width: auto;
+    height: auto;
+    overflow-y: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel42 {
+    position: absolute;
+    top: 0px;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-right: var(--wa-grid-cell-fixed-line-border);
+    box-sizing: border-box;
+}
+.wa-grid .wa-grid-panel40 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel51 {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 0px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    overflow-y: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel52 {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-right: var(--wa-grid-cell-fixed-line-border);
+    box-sizing: border-box;
+}
+.wa-grid .wa-grid-panel50 {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel61 {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-bottom: solid 1px #38480d;
+}
+.wa-grid .wa-grid-panel62 {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-bottom: solid 1px #38480d;
+    border-right: var(--wa-grid-cell-fixed-line-border);
+    box-sizing: border-box;
+}
+.wa-grid .wa-grid-panel60 {
+    position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-bottom: solid 1px #38480d;
+}
+.wa-grid .wa-grid-panel71 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: auto;
+}
+.wa-grid .wa-grid-panel72 {
+    position: absolute;
+    top: 0px;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    background: white;
+    border-right: var(--wa-grid-cell-fixed-line-border);
+    box-sizing: border-box;
+}
+.wa-grid .wa-grid-panel70 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-panel99 {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #9b9b9b;
+    height: 28px;
+    overflow: hidden;
+    background: #efeeee;
+}
+/* =========================================================================== */
+/*  Grid Panel Table                                                           */
+/* =========================================================================== */
+/* Header Table */
+.wa-grid .wa-grid-panel21 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel22 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel20 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+/* Content Table */
+.wa-grid .wa-grid-panel31 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel32 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #ffffff;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel30 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #ffffff;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+/* Summary Top Table */
+.wa-grid .wa-grid-panel41 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel42 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #dbffe3;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel40 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #dbffe3;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+/* Summary Footer Table*/
+.wa-grid .wa-grid-panel51 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel52 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #dbffe3;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel50 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #dbffe3;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+/* Frozen Table */
+.wa-grid .wa-grid-panel61 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel62 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #ffffff;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel60 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #ffffff;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+/* Filter Table */
+.wa-grid .wa-grid-panel71 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel72 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+.wa-grid .wa-grid-panel70 .wa-grid-table {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    background: #e5e6e7;
+    border-spacing: 0px;
+    width: 0px !important;
+}
+/* div with table */
+.wa-grid .wa-grid-div {
+    z-index: 1;
+    width: 100%;
+    border: 0px solid #ccc;
+}
+.wa-grid .wa-grid-div-overflow-x {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 0px solid #ccc;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+.wa-grid .wa-grid-div-overflow-y {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 0px solid #ccc;
+    overflow-x: visible;
+    overflow-y: hidden;
+}
+.wa-grid .wa-grid-div-overflow-xy {
+    position: static;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 0px solid #ccc;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+/* =========================================================================== */
+/*    Alternative Background                                                   */
+/* =========================================================================== */
+.wa-grid-tr-bg {
+    background: white;
+}
+.wa-grid-tr-bg2 {
+    background: #f8f8f8;
+}
+/* =========================================================================== */
+/*    [TBS Grid CSS] Table                                                     */
+/* =========================================================================== */
+.wa-grid .wa-grid-table {
+    position: relative;
+    z-index: 0;
+    border: 0px solid #ccc;
+    border-collapse: unset
+}
+.wa-grid .wa-grid-table .wa-grid-cell {
+    position: relative;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: var(--wa-grid-cell-border);
+    border-left: 0px solid #bbbbbb;
+    border-right: var(--wa-grid-cell-border);
+    border-spacing: 0px;
+    overflow: hidden;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none; /* no drag */
+}
+.wa-grid .wa-grid-table .wa-grid-cell-bottom-none {
+    border-bottom: 0px;
+}
+.wa-grid .wa-grid-table .wa-grid-cell-top {
+    border-top: 1px solid #bbbbbb;
+}
+.wa-grid .wa-grid-group51 .wa-grid-cell {
+    border-top: 0px;
+    border-bottom: 0px;
+}
+.wa-grid .wa-grid-group50 .wa-grid-cell {
+    border-top: 0px;
+    border-bottom: 0px;
+}
+/* =========================================================================== */
+/*    thead, tr, th                                                            */
+/* =========================================================================== */
+.wa-grid .wa-grid-table thead,
+.wa-grid .wa-grid-table thead th {
+    height: 0px !important;
+    border-spacing: 0px !important;
+    border-collapse: separate !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+/* =========================================================================== */
+/*    top cell                                                                 */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel21 .wa-grid-cell {
+    text-align: center;
+    vertical-align: middle;
+    border-right: var(--wa-grid-cell-border);
+    border-bottom: var(--wa-grid-cell-border);
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel21 .wa-grid-cell-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+/* =========================================================================== */
+/*    header cell                                                              */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel20 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel20 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel20 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/*.wa-grid .wa-grid-panel20 .wa-grid-cell-span {*/
+/*    padding-left: 0px;*/
+/*    padding-right: 0px;*/
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
+/*    line-height: 1.5em;*/
+/*    white-space: nowrap;*/
+/*}*/
+.wa-grid .wa-grid-panel20 .wa-grid-html-sort {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel20 .wa-grid-html-resize {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 5px;
+    cursor: col-resize;
+    user-select: none;
+}
+.wa-grid .wa-grid-panel20 .wa-grid-html-resize:hover,
+.wa-grid .wa-grid-panel20 .wa-grid-html-resizing {
+    cursor: col-resize;
+    border-right: 2px solid blue;
+}
+/* =========================================================================== */
+/*    left content cell                                                                */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel31 .wa-grid-cell-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+/* =========================================================================== */
+/*    content cell                                                             */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel30 .wa-grid-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+.wa-grid .wa-grid-panel32 .wa-grid-cell-div
+.wa-grid .wa-grid-panel30 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+    display: table-cell;
+    vertical-align: middle;
+}
+/* =========================================================================== */
+/*    wa-grid-panel41                                                       */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel41 .wa-grid-cell {
+    position: relative;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    width: auto;
+    height: auto;
+    border-right: var(--wa-grid-cell-border);
+    border-bottom: var(--wa-grid-cell-border);
+}
+.wa-grid .wa-grid-panel41 .wa-grid-cell-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+/* =========================================================================== */
+/*    wa-grid-panel40                                                        */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel40 .wa-grid-cell {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    width: auto;
+    height: auto;
+    border-right: var(--wa-grid-cell-border);
+    border-bottom: var(--wa-grid-cell-border);
+}
+.wa-grid .wa-grid-panel40 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/* =========================================================================== */
+/*    wa-grid-panel51                                                     */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel51 .wa-grid-cell {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    width: auto;
+    height: auto;
+    border-top: var(--wa-grid-cell-border);
+    border-right: var(--wa-grid-cell-border);
+    border-bottom: 0px;
+}
+.wa-grid .wa-grid-panel51 .wa-grid-cell-div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/* =========================================================================== */
+/*    wa-grid-panel50                                                          */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel50 .wa-grid-cell {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    width: auto;
+    height: auto;
+    border-top: var(--wa-grid-cell-border);
+    border-bottom: 0px;
+}
+.wa-grid .wa-grid-panel50 .wa-grid-cell-div {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/* ======================================================================================================================== fix */
+.wa-grid .wa-grid-panel22 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel22 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel22 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel22 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/*.wa-grid .wa-grid-panel22 .wa-grid-cell-span {*/
+/*    padding-left: 0px;*/
+/*    padding-right: 0px;*/
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
+/*    line-height: 1.5em;*/
+/*    white-space: nowrap;*/
+/*}*/
+.wa-grid .wa-grid-panel22 .wa-grid-html-sort {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel22 .wa-grid-html-resize {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 5px;
+    cursor: col-resize;
+    user-select: none;
+}
+.wa-grid .wa-grid-panel22 .wa-grid-html-resize:hover,
+.wa-grid .wa-grid-panel22 .wa-grid-html-resizing {
+    cursor: col-resize;
+    border-right: 2px solid blue;
+}
+.wa-grid .wa-grid-panel32 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel32 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel32 .wa-grid-cell-right {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel32 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+.wa-grid .wa-grid-panel42 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel42 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel42 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel42 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+.wa-grid .wa-grid-panel52 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel52 .wa-grid-cell {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    width: auto;
+    height: auto;
+    border-top: var(--wa-grid-cell-border);
+    border-bottom: 0px;
+    border-right: var(--wa-grid-cell-border);
+    border-left: 0px;
+}
+.wa-grid .wa-grid-panel52 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel52 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/* panel60 */
+.wa-grid .wa-grid-panel61 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel61 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel61 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel61 .wa-grid-cell-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel62 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel62 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel62 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel62 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+.wa-grid .wa-grid-panel60 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel60 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel60 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel60 .wa-grid-cell-div {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: auto;
+    height: auto;
+}
+/* panel70 */
+.wa-grid .wa-grid-panel71 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel71 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel71 .wa-grid-cell-readonly {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: left;
+    vertical-align: middle;
+    background: #ecf7fe;
+}
+.wa-grid .wa-grid-panel71 .wa-grid-cell-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel72 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel72 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel72 .wa-grid-cell-div {
+    position: relative;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: auto;
+    height: auto;
+    background: white;
+    /*height: 25px;*/
+}
+.wa-grid .wa-grid-panel72 .wa-grid-cell-filter-text {
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    bottom: 0px;
+    left: 0px;
+    display: inline-block;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-panel72 .wa-grid-cell-filter-input {
+    display: inline-block;
+    height: 24px;
+    width: 100%;
+    background: #ffffff /*#f8f8f8*/;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline: none;
+}
+.wa-grid .wa-grid-panel72 .wa-grid-cell-filter-combo {
+    display: inline-block;
+    height: 24px;
+    width: 100%;
+    background: #ffffff /*#f8f8f8*/;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline: none;
+}
+.wa-grid .wa-grid-panel72 .wa-grid-cell-filter-icon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+.wa-grid .wa-grid-panel70 {
+    table-layout: fixed;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel70 .wa-grid-cell {
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel70 .wa-grid-cell-div {
+    position: relative;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    border: 0px solid #ccc;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: auto;
+    height: auto;
+    background: white;
+    /*height: 25px;*/
+}
+.wa-grid .wa-grid-panel70 .wa-grid-cell-filter-text {
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    bottom: 0px;
+    left: 0px;
+    display: inline-block;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-panel70 .wa-grid-cell-filter-input {
+    display: inline-block;
+    height: 24px;
+    width: 100%;
+    background: #ffffff /*#f8f8f8*/;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline: none;
+}
+.wa-grid .wa-grid-panel70 .wa-grid-cell-filter-combo {
+    display: inline-block;
+    height: 24px;
+    width: 100%;
+    background: #ffffff /*#f8f8f8*/;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline: none;
+}
+.wa-grid .wa-grid-panel70 .wa-grid-cell-filter-icon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+/* =========================================================================== */
+/*    select line                                                              */
+/* =========================================================================== */
+.wa-grid-top-line {
+    position: absolute;
+    width: 0px;
+    height: 1px;
+    background: #1c4000;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid-bottom-line {
+    position: absolute;
+    width: 0px;
+    height: 1px;
+    background: #1c4000;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid-left-line {
+    position: absolute;
+    width: 1px;
+    height: 0px;
+    background: #1c4000;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid-right-line {
+    position: absolute;
+    width: 1px;
+    height: 0px;
+    background: #1c4000;
+    padding: 0px;
+    margin: 0px;
+}
+/* =========================================================================== */
+/* Froze line                                                              */
+/* =========================================================================== */
+/*.wa-grid-fix-col-line {*/
+/*    position: absolute;*/
+/*    width: 0px;*/
+/*    height: 0px;*/
+/*    background: rgb(74, 79, 104);*/
+/*    padding: 0px;*/
+/*    margin: 0px;*/
+/*}*/
+/*.wa-grid-fix-row-line {*/
+/*    position: absolute;*/
+/*    width: 0px;*/
+/*    height: 0px;*/
+/*    background: rgb(74, 79, 104);*/
+/*    padding: 0px;*/
+/*    margin: 0px;*/
+/*}*/
+/* =========================================================================== */
+/*    icon                                                                     */
+/* =========================================================================== */
+.wa-grid-cell-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid-day-icon {
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid-table-condition {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    border: 0px solid #ccc;
+    table-layout: fixed;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    border-collapse: collapse;
+}
+/* =========================================================================== */
+/*    top summary, footer summary                                              */
+/* =========================================================================== */
+.wa-grid-sum-background {
+    background: #c1e7c6;
+    font-weight: bold;
+}
+.wa-grid-sum-background0 {
+    background: #fecc9c;
+    font-weight: bold;
+}
+.wa-grid-sum-background1 {
+    background: #d0fffb;
+    font-weight: bold;
+}
+.wa-grid-sum-background2 {
+    background: #bed8bb;
+    font-weight: bold;
+}
+.wa-grid-sum-background3 {
+    background: #9cb09f;
+    font-weight: bold;
+}
+.wa-grid-sum-background4 {
+    background: #8ea4a3;
+    font-weight: bold;
+}
+.wa-grid-sum-background5 {
+    background: #c2daee;
+    font-weight: bold;
+}
+.wa-grid-sum-background6 {
+    background: #87929f;
+    font-weight: bold;
+}
+.wa-grid-sum-background7 {
+    background: #e9caf7;
+    font-weight: bold;
+}
+.wa-grid-sum-background8 {
+    background: #ac93a8;
+    font-weight: bold;
+}
+.wa-grid-sum-background9 {
+    background: #fe97b3;
+    font-weight: bold;
+}
+/* =========================================================================== */
+/*    move column                                                              */
+/* =========================================================================== */
+.wa-grid-move {
+    position: fixed;
+    overflow-x: hidden;
+    background-color : rgb(255,255,255,0.5);
+    z-index: 1000;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ff4141;
+    overflow: hidden;
+}
+.wa-grid-move .wa-grid-table {
+    table-layout: fixed;
+    box-sizing: border-box;
+    border: 0;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-spacing: 0px;
+}
+.wa-grid-move .wa-grid-cell {
+    vertical-align: middle;
+    width: 100%
+}
+.wa-grid-move .wa-grid-cell-div {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 100%
+}
+/*.wa-grid-move .wa-grid-cell-span {*/
+/*    padding-left: 0px;*/
+/*    padding-right: 0px;*/
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
+/*    line-height: 1.5em;*/
+/*    white-space: nowrap;*/
+/*    width: 100%*/
+/*}*/
+/* =========================================================================== */
+/*    [TBS Grid CSS] verti : scroll                                            */
+/* =========================================================================== */
+.wa-grid .wa-grid-vertical-scroll {
+    position: absolute;
+    width: 14px;
+    height: auto;
+    top: 0;
+    bottom: 14px;
+    left: auto;
+    right: 0;
+    box-shadow: inset 0 0 14px rgb(0 0 0 / 20%);
+}
+.wa-grid .wa-grid-vertical-scroll-wrap {
+    position: absolute;
+    width: 14px;
+    height: auto;
+    top: 16px;
+    bottom: 16px;
+    left: auto;
+    right: 0;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: inset 1px 1px 14px rgb(0 0 0 / 10%);
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-vertical-scroll-bar {
+    position: relative;
+    width: 13px;
+    top: 0;
+    height: 30px;
+    margin: 0px 0px 0px 0px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    text-align: center;
+    background-color: #bebebe;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 40%), inset -1px 0 0 rgb(0 0 0 / 20%);
+    user-select: none;
+}
+.wa-grid .wa-grid-vertical-scroll-up {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    text-align: center;
+    vertical-align: middle;
+    /* -webkit-border-radius:7px;-moz-border-radius: 7px;border-radius:7px; */
+}
+.wa-grid .wa-grid-vertical-scroll-down {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: auto;
+    text-align: center;
+    vertical-align: top;
+    /* -webkit-border-radius:7px;-moz-border-radius: 7px;border-radius:7px; */
+}
+.wa-grid .wa-grid-vertical-scroll-up div {
+    font-family: Verdana;
+    font-size: 11px;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid .wa-grid-vertical-scroll-down div {
+    font-family: Verdana;
+    font-size: 11px;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid .wa-grid-vertical-scroll6 {
+    position: absolute;
+    width: 14px;
+    height: auto;
+    top: 0;
+    bottom: 14px;
+    left: auto;
+    right: 0;
+    box-shadow: inset 0 0 14px rgb(0 0 0 / 20%);
+}
+.wa-grid .wa-grid-vertical-scroll6-wrap {
+    position: absolute;
+    width: 14px;
+    height: auto;
+    top: 16px;
+    bottom: 16px;
+    left: auto;
+    right: 0;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: inset 1px 1px 14px rgb(0 0 0 / 10%);
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-vertical-scroll6-bar {
+    position: relative;
+    width: 13px;
+    top: 0;
+    height: 30px;
+    margin: 0px 0px 0px 0px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    text-align: center;
+    background-color: #bebebe;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 40%), inset -1px 0 0 rgb(0 0 0 / 20%);
+    user-select: none;
+}
+.wa-grid .wa-grid-vertical-scroll6-up {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    /* -webkit-border-radius:7px;-moz-border-radius: 7px;border-radius:7px; */
+}
+.wa-grid .wa-grid-vertical-scroll6-down {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: auto;
+    /* -webkit-border-radius:7px;-moz-border-radius: 7px;border-radius:7px; */
+}
+/* =========================================================================== */
+/*    [TBS Grid CSS] hori : scroll                                             */
+/* =========================================================================== */
+.wa-grid .wa-grid-horizontal-scroll {
+    position: absolute;
+    width: auto;
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 14px;
+    box-shadow: inset 0 0 14px rgb(0 0 0 / 20%);
+}
+.wa-grid .wa-grid-horizontal-scroll-wrap {
+    position: absolute;
+    width: auto;
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: inset 1px 1px 14px rgb(0 0 0 / 10%);
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-horizontal-scroll-bar {
+    position: relative;
+    width: 30px;
+    bottom: 0;
+    height: 12px;
+    margin: 1px 0px 1px 0px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #bebebe;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 40%), inset -1px 0 0 rgb(0 0 0 / 20%);
+    user-select: none;
+}
+.wa-grid .wa-grid-horizontal-scroll-left {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: 0;
+    right: auto;
+    text-align: center;
+    vertical-align: top;
+    padding: 0px;
+}
+.wa-grid .wa-grid-horizontal-scroll-right {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: 0;
+    text-align: center;
+}
+.wa-grid .wa-grid-horizontal-scroll-left div {
+    font-family: Verdana;
+    font-size: 11px;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid .wa-grid-horizontal-scroll-right div {
+    font-family: Verdana;
+    font-size: 11px;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    padding: 0px;
+    margin: 0px;
+}
+.wa-grid .wa-grid-horizontal-scroll2 {
+    position: absolute;
+    width: auto;
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 14px;
+    box-shadow: inset 0 0 14px rgb(0 0 0 / 20%);
+}
+.wa-grid .wa-grid-horizontal-scroll2-wrap {
+    position: absolute;
+    width: auto;
+    height: 14px;
+    top: auto;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: inset 1px 1px 14px rgb(0 0 0 / 10%);
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-horizontal-scroll2-bar {
+    position: relative;
+    width: 30px;
+    bottom: 0;
+    height: 12px;
+    margin: 1px 0px 1px 0px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    background-color: #bebebe;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 40%), inset -1px 0 0 rgb(0 0 0 / 20%);
+    user-select: none;
+}
+.wa-grid .wa-grid-horizontal-scroll2-left {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: 0;
+    right: auto;
+}
+.wa-grid .wa-grid-horizontal-scroll2-right {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: 0;
+}
+/* =========================================================================== */
+/*    [TBS Grid CSS]  : scroll  box                                            */
+/* =========================================================================== */
+.wa-grid .wa-grid-scroll-box {
+    width: 14px;
+    height: 14px;
+    background: green;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    background-color: #9a9a9a;
+}
+/* =========================================================================== */
+/*    Panel10 Toolbar                                                          */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel10 .wa-grid-button {
+    position: relative;
+    width: 100px;
+    height: 18px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 5px 0px 0px;
+    background: #ccdb87;
+    border: 1px solid #424242;
+    cursor: pointer;
+    line-height: 1.0em;
+}
+.wa-grid .wa-grid-panel10 .bg-red {
+    background-color: rgb(255, 92, 92);
+}
+.wa-grid .wa-grid-panel10 .font-white {
+    color: #ffffff;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons {
+    position: relative;
+    display: inline-block;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #a0a0a0;
+    /*width: 600px;*/
+    height: 25px;
+    top: 0px; right: 0px; bottom: 0px;
+    margin: 0px 0px 0px 0px;
+    border-spacing: 0px;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-wrap {
+    position: relative;
+    display: inline-block;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 100%;
+    height: 25px;
+    margin: 2px 0px 0px 0px;
+    border-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-filter {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #fce3e3;
+    /*width: 70px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-filter-reset {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #e8e8e8;
+    /*width: 40px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-sort {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #fce3e3;
+    /*width: 70px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-sort-reset {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #e8e8e8;
+    /*width: 40px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-group {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #fce3e3;
+    /*width: 70px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-group-expand {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #e8e8e8;
+    /*width: 50px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-group-collapse {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #e8e8e8;
+    /*width: 50px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-group-reset {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #e8e8e8;
+    /*width: 50px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+.wa-grid .wa-grid-panel10 .wa-grid-panel10-buttons-fixed-column {
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    background-color: #fce3e3;
+    /*width: 50px;*/
+    /*height: 25px;*/
+    margin: 0px 0px 0px 2px;
+    padding: 0px 10px 0px 10px;
+    border-spacing: 0px;
+}
+/* =========================================================================== */
+/*    Panel10 Toolbar                                                          */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-wrap {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 100%;
+    height: 28px;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    border-spacing: 0px;
+    vertical-align: middle;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 100%;
+    height: 28px;
+    padding: 0px;
+    margin: 3px 0px 0px 0px;
+    border-spacing: 0px;
+    vertical-align: middle;
+    text-align: center;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page-first {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 30px;
+    height: 25px;
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    border-spacing: 0px;
+    text-align: center;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page-prev {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 30px;
+    height: 25px;
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    border-spacing: 0px;
+    text-align: center;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page-select {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 80px;
+    height: 25px;
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    border-spacing: 0px;
+    text-align: center;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page-next {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 30px;
+    height: 25px;
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    border-spacing: 0px;
+    text-align: center;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page-last {
+    position: relative;
+    border-top: 0px solid #bbbbbb;
+    border-bottom: 0px solid #bbbbbb;
+    border-left: 0px solid #bbbbbb;
+    border-right: 0px solid #919191;
+    width: 20px;
+    height: 25px;
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    border-spacing: 0px;
+    text-align: center;
+}
+.wa-grid .wa-grid-panel99 .bg-red {
+    background-color: rgb(255, 92, 92);
+}
+.wa-grid .wa-grid-panel99 .font-white {
+    color: #ffffff;
+}
+.wa-grid .wa-grid-panel99 .wa-grid-panel99-page-combo {
+    position: relative;
+    /*border-top: 0px solid #bbbbbb;*/
+    /*border-bottom: 0px solid #bbbbbb;*/
+    /*border-left: 0px solid #bbbbbb;*/
+    /*border-right: 0px solid #919191;*/
+    width: 100px;
+    padding: 0px;
+    margin: 0px 0px 0px 30px;
+    border-spacing: 0px;
+    vertical-align: middle;
+    text-align: center;
+}
+/* =========================================================================== */
+/*   Panel80 Grouping                                                          */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel80 {
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #9b9b9b;
+    height: 33px;
+    overflow: hidden;
+    background: #dfe3e8;
+    padding: 0px 0px 0px 0px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-panel80 .wa-grid-panel-bar {
+    position: relative;
+    align-content: center;
+    width: 100%;
+    height: 33px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px;
+    cursor: pointer;
+}
+.wa-grid .wa-grid-panel80 .wa-grid-panel-bar-span {
+    position: relative;
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+}
+.wa-grid .wa-grid-panel80 .wa-grid-panel-button {
+    position: relative;
+    align-content: center;
+    display: inline-block;
+    height: 27px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 5px 0px 0px;
+    background: #d8f595;
+    border: 1px solid #424242;
+    cursor: pointer;
+    line-height: 1.0em;
+}
+.wa-grid .wa-grid-panel80 .wa-grid-panel-button-text {
+    display: inline-block;
+    /*height: 27px;*/
+    padding: 0px 5px 0px 5px;
+}
+
+.wa-grid .wa-grid-panel80 .bg-red {
+    background-color: rgb(255, 92, 92);
+}
+.wa-grid .wa-grid-panel80 .font-white {
+    color: #ffffff;
+}
+/* =========================================================================== */
+/*   Panel90 Grouping                                                          */
+/* =========================================================================== */
+.wa-grid .wa-grid-panel90 {
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #9b9b9b;
+    height: 33px;
+    overflow: hidden;
+    background: #dfe3e8;
+    padding: 0px 0px 0px 0px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.wa-grid .wa-grid-panel90 .wa-grid-panel-bar {
+    position: relative;
+    align-content: center;
+    width: 100%;
+    height: 33px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px;
+    cursor: pointer;
+}
+.wa-grid .wa-grid-panel90 .wa-grid-panel-bar-span {
+    position: relative;
+    display: inline-block;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    cursor: pointer;
+}
+.wa-grid .wa-grid-panel90 .wa-grid-panel-button {
+    position: relative;
+    align-content: center;
+    display: inline-block;
+    height: 27px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 5px 0px 0px;
+    background: #dee4ff;
+    border: 1px solid #424242;
+    cursor: pointer;
+    line-height: 1.0em;
+}
+.wa-grid .wa-grid-panel90 .wa-grid-panel-button-text {
+    display: inline-block;
+    /*height: 27px;*/
+    padding: 0px 5px 0px 5px;
+}
+.wa-grid .wa-grid-panel90 .bg-red {
+    background-color: rgb(255, 92, 92);
+}
+.wa-grid .wa-grid-panel90 .font-white {
+    color: #ffffff;
+}
+/* =========================================================================== */
+/*    [TBS Grid CSS]  : cell line                                              */
+/* =========================================================================== */
+.wa-grid .wa-grid-table .wa-grid-cell-div .wa-grid-cell-line-top {
+    border-top: solid 1px #1c4000;
+}
+.wa-grid .wa-grid-table .wa-grid-cell-div .wa-grid-cell-line-bottom {
+    border-bottom: solid 1px #1c4000;
+}
+.wa-grid .wa-grid-table .wa-grid-cell-div .wa-grid-cell-line-left {
+    border-left: solid 1px #1c4000;
+}
+.wa-grid .wa-grid-table .wa-grid-cell-div .wa-grid-cell-line-right {
+    border-right: solid 1px #1c4000;
+}
+/* =========================================================================== */
+/*    [TBS Grid CSS]  : icon, img, text                                        */
+/* =========================================================================== */
+.wa-grid .wa-grid-html-checkbox {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    margin-left: 0px;
+    margin-right: 0px;
+    vertical-align: middle;
+    user-select: none; /* no drag */
+}
+.wa-grid .wa-grid-html-img {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    /*width: 15px;*/
+    /*height: 15px;*/
+    user-select: none; /* no drag */
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+.wa-grid .wa-grid-html-string {
+    padding: 0px 3px 0px 3px;
+    margin: 0px;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5em;
+    white-space: nowrap;
+    user-select: none; /* no drag */
+}
+.wa-grid .wa-grid-html-button {
+    padding: 0px 3px 0px 3px;
+    margin: 0px;
+    border: 1px solid #424242;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 80%;
+    user-select: none; /* no drag */
+}
+.wa-grid .wa-grid-html-link {
+    padding: 0px 3px 0px 3px;
+    margin: 0px;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 80%;
+    user-select: none; /* no drag */
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+.wa-grid .wa-grid-html-icon {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    height: 15px;
+    user-select: none; /* no drag */
+}
+.wa-grid .wa-grid-html-icon-remove {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    height: 15px;
+    user-select: none; /* no drag */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADZGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFGMzY1RkUwQjFENzExRTlCM0I5QTRERkJGNDc0N0ZCIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFGMzY1RkRGQjFENzExRTlCM0I5QTRERkJGNDc0N0ZCIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkExQTM1NTI0RDFCMUU5MTFBQUJERjQ2QUREMEY2NDdDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+kjklIwAAAChJREFUGFdjsPc4858BC4CLoyvA0AATwGUSYQmcRsIAnI/LKHuPM/8B5R0eK61awtUAAAAASUVORK5CYII=');
+}
+.wa-grid .wa-grid-html-icon-open {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    height: 15px;
+    user-select: none; /* no drag */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADZGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjYzOTI5NjY4QjFEODExRTk4ODdGQjkxOEQ3MURCNUFBIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjYzOTI5NjY3QjFEODExRTk4ODdGQjkxOEQ3MURCNUFBIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkExQTM1NTI0RDFCMUU5MTFBQUJERjQ2QUREMEY2NDdDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+e3tcnwAAAB5JREFUGFdjsPc4858BC4CLoyvA0AATwGUSmgQDAwAJ/RA/fzNnjAAAAABJRU5ErkJggg==');
+}
+.wa-grid .wa-grid-html-icon-closed {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    height: 15px;
+    user-select: none; /* no drag */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHCAYAAAAvZezQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADZGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFGMzY1RkUwQjFENzExRTlCM0I5QTRERkJGNDc0N0ZCIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFGMzY1RkRGQjFENzExRTlCM0I5QTRERkJGNDc0N0ZCIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkExQTM1NTI0RDFCMUU5MTFBQUJERjQ2QUREMEY2NDdDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+kjklIwAAABdJREFUGFdjsPc4858BHZApSCSHgYEBAMtLED+l2gSCAAAAAElFTkSuQmCC');
+}
+.wa-grid .wa-grid-html-icon-date {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    height: 15px;
+    user-select: none; /* no drag */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAAsRAAALEQF/ZF+RAAACGUlEQVQ4T51RO2wTQRCd3b2fz/ZdYkdCwhUEZFlKKEhHF4mS1iUtDRUSqSj4NFQpqJBoU7qyhECRoIjCV5ACOcUJBYsU0IDt8//OvrtlZu9ikoKGJ+2+ezPzbmdn4TRe7r27upMkTibP4AXGd/c/bGRSQcsYfty6YR9xeHux2dz+tbm+ExaLWQbAHA7ha7N5Myqfu4t1pcqz5xOKc9q61zdc+Ol/NDm33Nbne5IJTyR8sUhT3BTcpDpVf2LWjPx5PY7Xxm9ew/y4jdoEjbG/C/X8+BuM91+BkcRrtp2rkI/R1t5cr4pIelNsTzNNMCwLZCIppcA4g1kQQBSGYON1BIdaZe/QU+Yvj7aqPOaeqWswj2NlkOjFQxdM0IWAWRRBInntysPHqbmfJNVYMi+KUmOCPxCaANIacozM0UjQdQGCQc1hLDP3+9W5BO+o/R2cYgH8/gBKy0vQ7fWQl5F9WHIdGAxHcHn1AuimUXMsy1MDm9GGWCmXoJDPw0qpBHk7B+WMSas45gnhLHUos6E+AXp+HybTKfjI0yA8wxSnPME0Uocyn8B1HMjhpB23CBZO3cVWiUlTnPIpTp3MEJxzvCudFOAMBhDgs9DdiUlTnPJUh71m80d8arVWO4ORjKWUQRT/c1G+i3UHB4eXyKf+UK/Xxe07W/dxstfGkxE1Qs+rkguWkuXtgvzd6bx/+mT7QaPRSN/1/wDwB45OEdPU+XeMAAAAAElFTkSuQmCC');
+}
+.wa-grid .wa-grid-html-icon-combo {
+    display: inline-block;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 15px;
+    height: 15px;
+    user-select: none; /* no drag */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAYAAABCxiV9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADZGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjYzOTI5NjY4QjFEODExRTk4ODdGQjkxOEQ3MURCNUFBIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjYzOTI5NjY3QjFEODExRTk4ODdGQjkxOEQ3MURCNUFBIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkExQTM1NTI0RDFCMUU5MTFBQUJERjQ2QUREMEY2NDdDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjg4M0ZBRkUwOUNBRUU5MTE5QzFCQTFERTQzNDgyOUYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+e3tcnwAAAB5JREFUGFdjsPc4858BC4CLoyvA0AATwGUSmgQDAwAJ/RA/fzNnjAAAAABJRU5ErkJggg==');
+}
+/* =========================================================================== */
+/*    [TBS Grid Layer]                                                         */
+/* =========================================================================== */
+.wa-grid .wa-grid-layer {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    left: 70000px;
+    overflow: hidden;
+    border: 0px solid #424242;
+    background: #0a73a7;
+}
+
+
+/* =========================================================================== */
+/*                                                                             */
+/*    grid combo                                                               */
+/*                                                                             */
+/* =========================================================================== */
+.wa-grid .wa-grid-input-combo {
+    position: relative;
+    width: 140px;
+    height: 130px;
+    background : white;
+    z-index: 1;
+    border: 1px solid black !important;
+    overflow:hidden;
+    padding : 0px;
+    margin : 0px;
+}
+.wa-grid .wa-grid-input-combo-content {
+    position: absolute;
+    width:auto;
+    top: 0px;
+    left : 0px;
+    width: 140px;
+    height: 130px;
+    border: 0px solid black !important;
+    overflow:hidden;
+    padding : 0px;
+    margin : 0px;
+}
+.wa-grid .wa-grid-input-combo-content-table {
+    position: absolute;
+    width: 140px;
+    height: 130px;
+    padding : 0px;
+    margin : 0px;
+}
+.wa-grid .wa-grid-input-combo-select {
+    width: 140px;
+    height: 130px;
+    padding : 0px;
+    margin : 0px;
+    border-style : none;
+    outline:none;
+}
+/* =========================================================================== */
+/*                                                                             */
+/*    input day                                                      */
+/*                                                                             */
+/* =========================================================================== */
+.wa-grid .wa-grid-input-date {
+    z-index: 1;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 231px;
+    height: 187px;
+    background : white;
+    z-index: 1;
+    border: 1px solid black !important;
+    overflow-wrap: normal;
+    overflow: visible;
+    /* background:url('/wa.grid/img/calendar.png') no-repeat center; */
+}
+.wa-grid .wa-grid-input-date-header {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    background : #caf180;
+}
+.wa-grid .wa-grid-input-date-content {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 155px;
+    overflow: hidden;
+    background: white;
+}
+.wa-grid .wa-grid-input-date-header-table {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+}
+.wa-grid .wa-grid-input-date-content-table {
+    position: absolute;
+    width: 100%;
+}
+.wa-grid .wa-grid-input-date-cell-start {
+    text-align:center;
+}
+.wa-grid .wa-grid-input-date-cell-end {
+    text-align:center;
+}
+.wa-grid .wa-grid-input-date-cell {
+    text-align:center;
+    width:30px;
+}
+/**
+ * header
+ */
+.wa-grid .wa-grid-input-date-prev
+.wa-grid .wa-grid-input-date-year
+.wa-grid .wa-grid-input-date-month
+.wa-grid .wa-grid-input-date-today
+.wa-grid .wa-grid-input-date-next {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: #ffffff /*#f8f8f8*/;
+    border: 0px solid black !important;
+    outline:none;
+}
+.wa-grid .wa-grid-input-date-div-start { cursor: pointer; color:red; font-weight: 600; border: 1px solid grey !important;}
+.wa-grid .wa-grid-input-date-div       { cursor: pointer; color:black; font-weight: 600; border: 1px solid grey !important;}
+.wa-grid .wa-grid-input-date-div-end   { cursor: pointer; color:blue; font-weight: 600; border: 1px solid grey !important;}
+
+/* =========================================================================== */
+/*                                                                             */
+/*    input day                                                      */
+/*                                                                             */
+/* =========================================================================== */
+.wa-grid .wa-grid-layer-filter {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 180px;
+    background : white;
+    z-index: 0;
+    border: 0px solid black !important;
+    overflow-wrap: normal;
+    overflow: hidden;
+    /* background:url('/wa.grid/img/calendar.png') no-repeat center; */
+}
+.wa-grid .wa-grid-layer-filter-main {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom:auto;
+    left : 0;
+    height: 180px;
+    overflow: hidden;
+}
+.wa-grid .wa-grid-layer-filter-content {
+    position: relative;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
+    border-bottom: solid 1px #ccc;
+    /*background: magenta;*/
+}
+.wa-grid .wa-grid-layer-filter-combo {
+    width: 100%;
+    height : 25px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline:none;
+    background: papayawhip;
+}
+.wa-grid .wa-grid-layer-filter-content-input {
+    display: inline-block;
+    height: 25px;
+    width: 100%;
+    background: #ffffff /*#f8f8f8*/;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline:none;
+    background: #f5eee4;
+}
+.wa-grid .wa-grid-layer-filter-content-input-to {
+    display: inline-block;
+    height: 25px;
+    width: 100%;
+    background: #ffffff /*#f8f8f8*/;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline:none;
+    background: #b9b2a4;
+}
+.wa-grid .wa-grid-layer-filter-content-button {
+    display: flex;
+    height: 25px;
+    width: 100%;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline:none;
+    font-size: 0;
+    letter-spacing: 0;
+    word-spacing: 0;
+    background: #b9b2a4;
+}
+.wa-grid .wa-grid-layer-filter-content-button-save {
+    display: inline-block;
+    height: 25px;
+    width: 95px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline:none;
+    color : white;
+    background: #343750;
+}
+.wa-grid .wa-grid-layer-filter-content-button-reset {
+    display: inline-block;
+    height: 25px;
+    width: 95px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 0px;
+    border-spacing: 0px;
+    outline:none;
+    color : white;
+    background: #787880;
+}
+/* =========================================================================== */
+/*    input box                                                                */
+/* =========================================================================== */
+.wa-grid .wa-grid-input-panel {
+    z-index: 1;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    align-content: center;
+}
+.wa-grid .wa-grid-input {
+    z-index: 1;
+    width: 100% !important;
+    height:20px !important;
+    border: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    -webkit-appearance: none; /* ✅ Chrome/Safari 기본 스타일 제거 */
+    -moz-appearance: none;
+    appearance: none;
+}
+.wa-grid .wa-grid-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 0px #007aff33; /* ✅ 커스텀 포커스 효과 */
+}
+.wa-grid .wa-grid-input-code {
+    z-index: 0;
+    width: 100px;
+    height: 20px;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    position: fixed;
+    border: 0px;
+}
+.wa-grid .wa-grid-input-panel-icon {
+    z-index: 1;
+    overflow: hidden;
+    position: fixed;
+    display: inline-block;
+    border: 0px;
+    width: 15px;
+    height: 15px;
+}
+.wa-grid .wa-grid-input-layer-panel {
+    z-index: 1;
+    left: 70000px;
+    overflow: visible;
+    position: fixed;
+    border: 1px;
+    background: #0a73a7;
+}
+
+
+

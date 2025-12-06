@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    /* === 모듈/타깃 설정 === */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
+    /* === 타입 선언 파일 생성 === */
+    "declaration": true,               // ✅ .d.ts 파일 생성
+    "emitDeclarationOnly": true,       // ✅ JS 출력 없이 타입만 생성
+    "declarationDir": "dist/types",  // ✅ 타입 선언 출력 폴더
+    "rootDir": "src",                // ✅ 기준 폴더 설정
+
+    /* === 타입 및 호환성 === */
+    "strict": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    /* === 경로 설정 === */
+    "baseUrl": "",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* === 라이브러리 === */
+    "lib": ["ESNext", "DOM"]
+  },
+
+  /* === 포함/제외 경로 === */
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "types/**/*.d.ts"   // <= 여기에 포함
+  ],
+  "exclude": ["node_modules", "dist", "dist-source"]
+}
+

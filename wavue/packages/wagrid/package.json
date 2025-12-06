@@ -1,0 +1,59 @@
+{
+  "name": "wagrid",
+  "version": "0.0.1",
+  "description": "WaGrid - Lightweight TypeScript grid component",
+  "author": "tobesimple7",
+  "license": "MIT",
+  "homepage": "https://tobesimple.net",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tobesimple7/WaGrid.git"
+  },
+  "type": "module",
+  "files": ["dist/**"],
+  "main": "./dist/wagrid.umd.js",
+  "module": "./dist/wagrid.esm.js",
+  "types": "./dist/types/index.d.ts",
+  "style": "./dist/wagrid.css",
+  "exports": {
+    ".": {
+      "import": "./dist/wagrid.esm.js",
+      "require": "./dist/wagrid.umd.js",
+      "default": "./dist/wagrid.esm.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./waGridCss": "./dist/wagrid.css",
+    "./waGridConfigs": {
+      "import": "./dist/wagrid-configs.js",
+      "types": "./dist/types/wa.grid.configs.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --emitDeclarationOnly && vite build",
+    "preview": "vite preview",
+    "clean": "rimraf dist dist-source"
+  },
+  "peerDependencies": {
+    "naive-ui": "^2.43.1",
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5",
+    "@types/node": "^22.18.12",
+    "@vicons/ionicons5": "^0.13.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "axios": "^1.12.2",
+    "realgrid": "^2.9.4",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vue-tsc": "^3.1.5"
+  }
+}

@@ -1,0 +1,204 @@
+<template>
+  <n-card
+      size="small"
+      class="nbs-card"
+  >
+    <template #header>
+      전표 조회 (FA_010)
+    </template>
+
+    <template #header-extra>
+      <n-space justify="end">
+        <n-button type="primary" size="small" @click="btnSearch">조회</n-button>
+        <n-button size="small" @click="handleReset">초기화</n-button>
+        <n-button size="small" @click="handleTest">테스트</n-button>
+      </n-space>
+    </template>
+    <wa-form :form="form" :columns="fields"></wa-form>
+  </n-card>
+
+  <div id="grid1" style="padding-top:5px; width: 100%; height: 600px;"></div>
+
+</template>
+
+<script setup>
+// defineOptions({ name: 'accounting' });
+import {ref, computed, onMounted, reactive} from 'vue'
+import {
+  NForm, NFormItemGi, NGrid,
+  NInput, NSelect, NDatePicker, NButton,
+  NSpace, NCard
+} from 'naive-ui'
+import { SearchOutline } from '@vicons/ionicons5'
+import { waGridConfigs } from "@/components/WaGridConfigs"
+import "wagrid/waGridCss"
+import { WaGridCore } from 'wagrid'
+import axios from 'axios'
+import WaForm from '@/forms/WaForm.vue'
+
+import { grid_data } from "@/components/wagrid_data.js"
+const fields = ref([
+  { label: '전표번호', path: 'acctgTransId', placeholder: '전표번호', type: 'input' },
+  { label: '작업ID', path: 'workEffortId', placeholder: '작업ID', type: 'input' },
+  { label: '작업명', path: 'workName', placeholder: '작업명', type: 'input' },
+  { label: '카테고리', path: 'category', placeholder: '카테고리 선택', type: 'select', options: ['카테고리1', '카테고리2', '카테고리3'] },
+  { label: '날짜', path: 'date', placeholder: '날짜 선택', type: 'date' }
+]);
+
+//===============================================================
+const loading = ref(false)
+const form = reactive({
+  acctgTransId: '',
+  acctgTransTypeId: '',
+  glFiscalTypeId: '',
+  glJournalId: '',
+  isPosted: '',
+  invoiceId: '',
+  paymentId: '',
+  productId: '',
+  workEffortId: '',
+  shipmentId: '',
+  fromDate: null,
+  thruDate: null
+})
+function handleTest() {
+  alert(form.acctgTransId)
+}
+
+handleTest()
+const acctgTransTypeOptions = [
+  { label: 'Journal Entry', value: 'JOURNAL' },
+  { label: 'Payment', value: 'PAYMENT' }
+]
+
+const glFiscalTypeOptions = [
+  { label: 'Actual', value: 'ACTUAL' },
+  { label: 'Budget', value: 'BUDGET' }
+]
+
+const glJournalOptions = [
+  { label: '일반분개장 [GL001]', value: 'GL001' },
+  { label: '매출분개장 [GL002]', value: 'GL002' }
+]
+
+function handleSearch () {
+  console.log('검색조건:', form.value)
+}
+
+function handleReset () {
+  Object.keys(form.value).forEach(k => form.value[k] = '')
+}
+
+const productCode = ref('')
+const showLookup = ref(false)
+const searchKeyword = ref('')
+
+// 샘플 상품 데이터
+const products = ref([
+  { id: 'P1001', name: '볼펜', price: 500 },
+  { id: 'P1002', name: '노트', price: 1000 },
+  { id: 'P1003', name: '지우개', price: 300 }
+])
+
+// 테이블 컬럼 정의
+const columns = [
+  { title: '상품코드', key: 'id' },
+  { title: '상품명', key: 'name' },
+  { title: '단가', key: 'price' }
+]
+
+// 검색 필터링
+const filteredProducts = computed(() =>
+    products.value.filter(p =>
+        p.name.includes(searchKeyword.value) || p.id.includes(searchKeyword.value)
+    )
+)
+
+// 행 선택 시 input에 값 반영
+function handleSelect(row) {
+  productCode.value = row.id
+  showLookup.value = false
+}
+
+function searchProducts() {
+  // 실제 환경에서는 axios 등으로 서버 검색 호출
+  console.log('검색어:', searchKeyword.value)
+}
+
+
+async function btnSearch () {
+  loading.value = true
+  try {
+    const res = await axios.get('http://localhost:8300/api/fa010_search')
+    //console.log('로그인 결과:', res.data) //{ "userLoginId": "admin", "status": "success" }
+    grid1.setData(res.data)
+  } catch (err) {
+    console.log(err)
+  } finally {
+    loading.value = false
+  }
+}
+
+
+let grid1
+onMounted(() => {
+  /*
+  ACCTG_TRANS_ID
+  ACCTG_TRANS_TYPE_ID
+  DESCRIPTION
+  TRANSACTION_DATE
+  IS_POSTED
+  POSTED_DATE
+  SCHEDULED_POSTING_DATE
+  GL_JOURNAL_ID
+  GL_FISCAL_TYPE_ID
+  VOUCHER_REF
+  VOUCHER_DATE
+  GROUP_STATUS_ID
+  FIXED_ASSET_ID
+  INVENTORY_ITEM_ID
+  PHYSICAL_INVENTORY_ID
+  PARTY_ID
+  ROLE_TYPE_ID
+  INVOICE_ID
+  PAYMENT_ID
+  FIN_ACCOUNT_TRANS_ID
+  SHIPMENT_ID
+  RECEIPT_ID
+  WORK_EFFORT_ID
+  THEIR_ACCTG_TRANS_ID
+  CREATED_DATE
+  CREATED_BY_USER_LOGIN
+  LAST_MODIFIED_DATE
+  LAST_MODIFIED_BY_USER_LOGIN
+  LAST_UPDATED_STAMP
+  LAST_UPDATED_TX_STAMP
+  CREATED_STAMP
+  CREATED_TX_STAMP
+  */
+  grid1 = new WaGridCore('grid1', waGridConfigs);
+  const options = {};
+  const columns = [
+      {name: "ACCTG_TRANS_ID", header: {text: "Code"}, width: 100, editable: true }
+    , {name: "ACCTG_TRANS_TYPE_ID", header: {text: "Manager"}, width: 100}
+    , {name: "DESCRIPTION", header: {text: "Customer"}, width: 100}
+    , {name: "SCHEDULED_POSTING_DATE", header: {text: "Biz Number"}, width: 100}
+    , {name: "VOUCHER_DATE", header: {text: "ceo"}, width: 100}
+    , {name: "ROLE_TYPE_ID", header: {text: "Telephone"}, width: 100}
+    , {name: "GL_JOURNAL_ID", header: {text: "E-Mail"}, width: 100}
+    , {name: "WORK_EFFORT_ID", header: {text: "Area"}, width: 100}
+    , {name: "IS_POSTED", header: {text: "Address"}, width: 100}
+    , {name: "SCHEDULED_POSTING_DATE", header: {text: "Credit limit"}, type: 'number', scale: '18,2'}
+    , {name: "ROLE_TYPE_ID", header: {text: "Other Payable"}, type: 'number', scale: '18,2'}
+    , {name: "INVOICE_ID", header: {text: "Accounts receivable"}, type: 'number', scale: '18,2'}
+    , {name: "FIN_ACCOUNT_TRANS_ID", header: {text: "Use"}, width: 60}
+    , {name: "GL_FISCAL_TYPE_ID", header: {text: "note"}, width: 100}
+  ];
+  grid1.setGrid(columns, options);
+  // grid1.setData(grid_data);
+})
+</script>
+
+<style scoped>
+
+</style>

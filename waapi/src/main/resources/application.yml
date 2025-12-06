@@ -1,0 +1,22 @@
+server:
+  port: 8300
+
+spring:
+  datasource:
+    maria:
+      url: jdbc:mariadb://localhost:3306/your_database_name?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: your_username
+      password: your_password
+    mssql:
+      url: jdbc:sqlserver://localhost:1433;databaseName=your_database_name
+      username: your_username
+      password: your_password
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+mybatis:
+  # MyBatis 설정 (MariaDB용, MSSQL용은 각각 config에서 override)
+  # type-aliases-package: waapi.model
+  mapper-locations: classpath*:mapper/maria/**/*.xml   # 리소스 경로
+  configuration:
+    map-underscore-to-camel-case: false           # created_at → createdAt
+    jdbc-type-for-null: 'NULL'
