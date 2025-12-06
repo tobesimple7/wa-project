@@ -1,5 +1,10 @@
-
-application.yaml
+# -----------------------------
+# Spring Boot config
+# -----------------------------
+# git update-index --assume-unchanged waapi/src/main/resources/application.yml
+# git update-index --no-assume-unchanged waapi/src/main/resources/application.yml
+application.yml
+application.properties
 
 # -----------------------------
 # Node / PNPM / Vite

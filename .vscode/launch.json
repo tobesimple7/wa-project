@@ -23,6 +23,13 @@
       "cwd": "${workspaceFolder}/wavue"
     },
     {
+      "name": "BuildWaGrid",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm --filter wagrid dev",
+      "cwd": "${workspaceFolder}/wavue"
+    },    
+    {
       "name": "ChromeLecture",
       "type": "chrome",
       "request": "launch",
