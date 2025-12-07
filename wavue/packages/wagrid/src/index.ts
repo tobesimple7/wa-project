@@ -3,7 +3,7 @@ import './assets/wagrid.css'
 // src/index.ts
 import type { App } from 'vue'
 import WaGrid from './components/WaGrid.vue'
-import { WaGridCore } from './core/wa.grid.core'
+import { WaGridCore } from './core/WaGridCore'
 
 // 👉 1) 기본 export는 컴포넌트
 export default WaGrid

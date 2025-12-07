@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch, provide, nextTick} from 'vue'
 import type { Ref } from 'vue'
-import { WaGridCore } from '@/core/wa.grid.core'
+import { WaGridCore } from '@/core/WaGridCore'
 import type { WaGridOption } from '@/core/WaGrid.types'
 import { waGridConfigs } from "@/components/WaGridConfigs"
 

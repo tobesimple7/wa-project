@@ -114,7 +114,7 @@ import {
 import { SearchOutline } from '@vicons/ionicons5'
 import { waGridConfigs } from "../components/WaGridConfigs"
 import "wagrid/waGridCss"
-import { WaGrid } from '../core/wa.grid.core'
+import { WaGrid } from '../core/WaGridCore'
 
 import { grid_data } from "../components/wagrid_data.js"
 

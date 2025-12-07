@@ -1,5 +1,5 @@
 
-import {WaGridDom} from "../wa.grid.dom";
+import {WaGridDom} from "../WaDom";
 
 export class WaGridRenderGroup {
 

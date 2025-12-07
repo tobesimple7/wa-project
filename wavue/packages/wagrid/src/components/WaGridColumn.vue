@@ -2,8 +2,8 @@
 
 <script setup lang="ts">
 import {inject, onMounted, onBeforeUnmount} from 'vue'
-import {WaGridColumnDef} from '@/core/columns/WaGridColumnDef'
-import {WaColumnKind} from "@/core/columns/WaGridColumn.enum";
+import {WaGridColumnDef} from '@/core/columns/WaColumnDef'
+import {WaColumnKind} from "@/core/columns/WaColumnEnum";
 
 export interface columnDef {
   name: any,

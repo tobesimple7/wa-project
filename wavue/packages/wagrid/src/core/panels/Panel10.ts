@@ -1,5 +1,5 @@
 import { WaPanelBase } from './PanelBase';
-import {WaGridCore} from "@/core/wa.grid.core"
+import {WaGridCore} from "@/core/WaGridCore"
 
 export class WaPanel10 extends WaPanelBase {
     constructor(grid: WaGridCore) {
@@ -35,7 +35,7 @@ export class WaPanel10 extends WaPanelBase {
         s += '</div>';
         parentElement.insertAdjacentHTML('beforeend', s);
 
-        grid.classPanel10.panel10_select();
+        grid.waPanel10.panel10_select();
     }
 
     createTable() {

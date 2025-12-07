@@ -2,7 +2,7 @@
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel30 } from './RenderPanel30';
 import { WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 export class WaPanel80 extends WaPanelBase {
 
     constructor(grid) {
@@ -17,7 +17,7 @@ export class WaPanel80 extends WaPanelBase {
         let s ='<div class="wa-grid-panel80 ' + className + '"></div>';
         parentElement.insertAdjacentHTML('beforeend', s);
 
-        grid.classPanel80.panel80_select();
+        grid.waPanel80.panel80_select();
     }
 
     createTable() {
@@ -331,7 +331,7 @@ export class WaPanel80 extends WaPanelBase {
                 }
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(0, -1, startCellIndex, maxCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             //==================================================================
             if (moveX < 0) {
@@ -344,7 +344,7 @@ export class WaPanel80 extends WaPanelBase {
                 }
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(0, -1, startCellIndex, minCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             //==================================================================
         }
@@ -367,7 +367,7 @@ export class WaPanel80 extends WaPanelBase {
                     flagRight = false;
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, tdCount - 1);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else {
                     grid.classScroll.setBarPositionByDirection('right');
@@ -380,7 +380,7 @@ export class WaPanel80 extends WaPanelBase {
                     }
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, maxCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
             }
             //==================================================================
@@ -389,7 +389,7 @@ export class WaPanel80 extends WaPanelBase {
                     flagLeft = false;
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, 0);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else {
                     grid.classScroll.setBarPositionByDirection('left');
@@ -402,7 +402,7 @@ export class WaPanel80 extends WaPanelBase {
                     }
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, minCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
             }
         }

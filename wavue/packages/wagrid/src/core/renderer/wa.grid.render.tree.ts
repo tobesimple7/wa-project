@@ -1,6 +1,6 @@
 
-import {WaGridDom} from "../wa.grid.dom";
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaGridDom} from "../WaDom";
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
 export class WaGridRenderTree {
     addElement(param) {

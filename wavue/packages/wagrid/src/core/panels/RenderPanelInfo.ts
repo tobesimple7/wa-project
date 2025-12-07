@@ -1,9 +1,9 @@
 
 import { WaGridRenderString } from "../renderer/wa.grid.render.string";
 import { WaGridRenderCheckbox } from "../renderer/wa.grid.render.checkbox";
-import {WaGridCore} from "@/core/wa.grid.core"
+import {WaGridCore} from "@/core/WaGridCore"
 import {CellType, GridMode} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
 export class WaRenderPanelInfo {
 
@@ -93,8 +93,8 @@ export class WaRenderPanelInfo {
                 render.cellText   = '';
             }
             else if (render.columnName == 'checkbox') {
-                render.cellValue  = grid.classPanel20.isChecked;
-                render.cellText   = grid.classPanel20.isChecked;
+                render.cellValue  = grid.waPanel20.isChecked;
+                render.cellText   = grid.waPanel20.isChecked;
             }
         }
         else if (panelName == 'panel31') {

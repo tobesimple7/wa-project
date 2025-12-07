@@ -110,8 +110,8 @@ import {
   NSpace, NCard
 } from 'naive-ui'
 import { SearchOutline } from '@vicons/ionicons5'
-import { waGridConfigs } from "@/components/WaGridConfigs.js"
-import { WaGridCore } from '../core/wa.grid.core.js'
+import { waGridConfigs } from "@/components/WaGridConfig"
+import { WaGridCore } from '../core/WaGridCore'
 import "@/assets/wagrid.css"
 import axios from 'axios'
 

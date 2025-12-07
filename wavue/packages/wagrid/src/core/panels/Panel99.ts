@@ -1,5 +1,5 @@
 import {WaPanelBase} from './PanelBase';
-import {WaGridCore} from "@/core/wa.grid.core"
+import {WaGridCore} from "@/core/WaGridCore"
 import {ClickPageOrder, GridMode} from "@/core/WaGrid.types"
 
 export class WaPanel99 extends WaPanelBase {
@@ -31,7 +31,7 @@ export class WaPanel99 extends WaPanelBase {
         s += '</div>';
         parentElement.insertAdjacentHTML('beforeend', s);
 
-        grid.classPanel99.panel99_select();
+        grid.waPanel99.panel99_select();
     }
 
     createTable() {
@@ -86,7 +86,7 @@ export class WaPanel99 extends WaPanelBase {
         //             grid.onClickPage(grid, grid.classPage.pageIndex, grid.options.pageRowCount, ClickPageOrder.last);
         //         }
         //     }
-        //     else grid.classPanel30.setDataPanel(0);
+        //     else grid.waPanel30.setDataPanel(0);
         // }
         //
         // if (document.querySelector(`${selector} .wa-grid-panel99-page-select`))

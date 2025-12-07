@@ -23,7 +23,7 @@
 //
 //         const headerCols = grid.header_column_table.data;
 //         const movingColumn = headerCols[grid.moveCellRowIndex - 1][grid.moveCellIndex];
-//         const tdList = document.querySelectorAll(`${this.selector} .wa-grid-${grid.classPanel20.panelName} tbody td`);
+//         const tdList = document.querySelectorAll(`${this.selector} .wa-grid-${grid.waPanel20.panelName} tbody td`);
 //
 //         const fixedWidth = 50;
 //         const direction = grid.lastX - grid.startX > 0 ? 'after' : 'before';

@@ -2,9 +2,9 @@
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel30 } from './RenderPanel30';
 import { WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaGridTable} from "../wa.grid.table";
+import {WaGridTable} from "../WaTable";
 import {CellType, Direction, GridMode, RowAlias} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 /*
 1. td, div, checkbox 에 다음과 같은 정보를 준다.
     => data-row-index,      data-name,      data-column-index
@@ -73,10 +73,10 @@ export class WaPanel30 extends WaPanelBase {
 
         const tableRows =  document.querySelectorAll(`${selector} .wa-grid-panel30 tbody tr`);
         if (tableRows.length == 0) {
-            grid.classPanel30.createTable();
+            grid.waPanel30.createTable();
         }
         else {
-            if (tableRows.length < grid.pageRowCount) grid.classPanel30.updateTableRows();
+            if (tableRows.length < grid.pageRowCount) grid.waPanel30.updateTableRows();
         }
 
         grid.classRange.removePanelRange('panel30');
@@ -314,7 +314,7 @@ export class WaPanel30 extends WaPanelBase {
                     let newValue = grid.reverseBoolean(columnName, value);
                     grid.setValue(rowIndex, columnName, newValue);
                 }
-                setTimeout(() => grid.classPanel30.setDataPanel(grid.getFirstRowIndex()), 20);
+                setTimeout(() => grid.waPanel30.setDataPanel(grid.getFirstRowIndex()), 20);
             }
             else if (columnType == CellType.button) {
                 e.preventDefault();
@@ -479,7 +479,7 @@ export class WaPanel30 extends WaPanelBase {
                 //         let newValue = grid.reverseBoolean(value);
                 //         grid.setValue(rowIndex, columnName, newValue);
                 //     }
-                //     setTimeout(() => grid.classPanel30.setDataPanel(grid.getFirstRowIndex()), 50);
+                //     setTimeout(() => grid.waPanel30.setDataPanel(grid.getFirstRowIndex()), 50);
                 // }
                 // else if (e.target.classList.contains('wa-grid-html-button')) {
                 //     let rowIndex = e.target.parentNode.dataset.rowIndex;
@@ -582,7 +582,7 @@ export class WaPanel30 extends WaPanelBase {
             //console.log(`startRowIndex ${startRowIndex} startRowIndex ${startRowIndex} startCellIndex  ${startCellIndex} lastCellIndex ${lastCellIndex}`)
             grid.classRange.removeRange(0, -1);
             let _topRowIndex = grid.classRange.selectRange(startRowIndex, startRowIndex, startCellIndex, lastCellIndex);
-            grid.classPanel30.setDataPanel(_topRowIndex);
+            grid.waPanel30.setDataPanel(_topRowIndex);
         }
 
         const selectCellMove = function(e) {
@@ -706,7 +706,7 @@ export class WaPanel30 extends WaPanelBase {
 
             grid.classRange.removeRange(0, -1);
             let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, lastCellIndex);
-            grid.classPanel30.setDataPanel(_topRowIndex);
+            grid.waPanel30.setDataPanel(_topRowIndex);
         }
 
         const selectCellShiftMove = function(e) {
@@ -780,7 +780,7 @@ export class WaPanel30 extends WaPanelBase {
                 //console.log(`eventPanelName ${eventPanelName} 1) $maxRowIndex  ${maxRowIndex} maxCellIndex ${maxCellIndex}`);
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, maxRowIndex, startCellIndex, maxCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             if (moveY > 0 && moveX < 0) { //down, left
                 let maxRowIndex, minCellIndex;
@@ -789,7 +789,7 @@ export class WaPanel30 extends WaPanelBase {
                 //console.log(`eventPanelName ${eventPanelName} 2) $maxRowIndex  ${maxRowIndex} minCellIndex ${minCellIndex}`);
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, maxRowIndex, startCellIndex, minCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             if (moveY < 0 && moveX > 0) { //up, right
                 let minRowIndex, maxCellIndex;
@@ -798,7 +798,7 @@ export class WaPanel30 extends WaPanelBase {
                 //console.log(`eventPanelName ${eventPanelName}  3) minRowIndex ${minRowIndex} maxCellIndex ${maxCellIndex}`);
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, minRowIndex, startCellIndex, maxCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             if (moveY < 0 && moveX < 0) { //up, left
                 let minRowIndex, minCellIndex;
@@ -807,7 +807,7 @@ export class WaPanel30 extends WaPanelBase {
                 //console.log(`eventPanelName ${eventPanelName} 4)  minRowIndex ${minRowIndex} minCellIndex ${minCellIndex}`);
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, minRowIndex, startCellIndex, minCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
         }
 
@@ -830,7 +830,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, -1);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else {
                     grid.classScroll.setBarPositionByDirection('right');
@@ -838,7 +838,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, maxCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
             }
             else if (type == 'left') {
@@ -847,7 +847,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, lastCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else {
                     grid.classScroll.setBarPositionByDirection('left');
@@ -855,7 +855,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex, minCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
             }
             else if (type == 'down') {
@@ -865,7 +865,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, startCellIndex,lastCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else flagDown = false;
             }
@@ -878,7 +878,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, minRowIndex, startCellIndex, lastCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else flagUp = false;
             }
@@ -965,7 +965,7 @@ export class WaPanel30 extends WaPanelBase {
             else {
                 grid.view_table.data[rowIndex][WaColumnProperty.isChecked] = grid.isNull(value, false) ? false : true;
             }
-            setTimeout(() => grid.classPanel30.setDataPanel(grid.getFirstRowIndex()), 20);
+            setTimeout(() => grid.waPanel30.setDataPanel(grid.getFirstRowIndex()), 20);
         }
 
         const mouseDownEvent = function (e) {
@@ -1106,7 +1106,7 @@ export class WaPanel30 extends WaPanelBase {
 
             grid.classRange.removeRange(0, -1);
             let _topRowIndex = grid.classRange.selectRange(startRowIndex, startRowIndex, fromCellIndex, toCellIndex);
-            grid.classPanel30.setDataPanel(_topRowIndex);
+            grid.waPanel30.setDataPanel(_topRowIndex);
         }
         const selectCellMove = function(e) {
             flagUp      = false;
@@ -1196,7 +1196,7 @@ export class WaPanel30 extends WaPanelBase {
             let toCellIndex = grid.classColumn.getLastVisibleColumnIndex();
             grid.classRange.removeRange(0, -1);
             let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, fromCellIndex, toCellIndex);
-            grid.classPanel30.setDataPanel(_topRowIndex);
+            grid.waPanel30.setDataPanel(_topRowIndex);
         }
         const selectCellShiftMove = function(e) {
             flagUp      = false;
@@ -1270,28 +1270,28 @@ export class WaPanel30 extends WaPanelBase {
                 maxRowIndex  = grid.tbs_getMaxRowIndexByMouseMove();
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, maxRowIndex, fromCellIndex, toCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             if (moveY > 0 && moveX < 0) { //down, left
                 let maxRowIndex, minCellIndex;
                 maxRowIndex  = grid.tbs_getMaxRowIndexByMouseMove();
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, maxRowIndex, fromCellIndex, toCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             if (moveY < 0 && moveX > 0) { //up, right
                 let minRowIndex, maxCellIndex;
                 minRowIndex = grid.tbs_getMinRowIndexByMouseMove();
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, minRowIndex, fromCellIndex, toCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
             if (moveY < 0 && moveX < 0) { //up, left
                 let minRowIndex, minCellIndex;
                 minRowIndex = grid.tbs_getMinRowIndexByMouseMove();
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(startRowIndex, minRowIndex, fromCellIndex, toCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
+                grid.waPanel30.setDataPanel(_topRowIndex);
             }
         }
         const setPanelMove = function(type) {
@@ -1316,14 +1316,14 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, fromCellIndex, toCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else {
                     grid.classScroll.setBarPositionByDirection('right');
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, fromCellIndex, toCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
             }
             else if (type == 'left') {
@@ -1332,14 +1332,14 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, fromCellIndex, toCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else {
                     grid.classScroll.setBarPositionByDirection('left');
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, fromCellIndex, toCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
             }
             else if (type == 'down') {
@@ -1349,7 +1349,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, lastRowIndex, fromCellIndex, toCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else flagDown = false;
             }
@@ -1361,7 +1361,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     grid.classRange.removeRange(0, -1);
                     let _topRowIndex = grid.classRange.selectRange(startRowIndex, minRowIndex, fromCellIndex, toCellIndex);
-                    grid.classPanel30.setDataPanel(_topRowIndex);
+                    grid.waPanel30.setDataPanel(_topRowIndex);
                 }
                 else flagUp = false;
             }

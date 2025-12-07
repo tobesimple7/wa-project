@@ -1,8 +1,8 @@
 ﻿
 import {WaPanelBase } from './PanelBase';
-import {WaGridTable } from "../wa.grid.table";
+import {WaGridTable } from "../WaTable";
 import {GridMode} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 export class WaPanel70 extends WaPanelBase {
 
     constructor(grid) {
@@ -183,8 +183,8 @@ export class WaPanel70 extends WaPanelBase {
         /* on fixed columns */
         grid.classCell.hideTableCells(grid, panelName, tableRow, lastColumnIndex);
 
-        grid.classPanel70.panel70_select('panel70');
-        grid.classPanel70.panel70_select('panel72');
+        grid.waPanel70.panel70_select('panel70');
+        grid.waPanel70.panel70_select('panel72');
     }
 
     panel70_select(panelName) {

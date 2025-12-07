@@ -1,5 +1,5 @@
-import {WaBase } from "../wa.base";
-import {WaGridCore} from "@/core/wa.grid.core"
+import {WaBase } from "../WaBase";
+import {WaGridCore} from "@/core/WaGridCore"
 
 export class WaPanelBase  extends WaBase {
     grid: WaGridCore;

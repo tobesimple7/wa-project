@@ -1,6 +1,6 @@
-import {WaGridCore} from "@/core/wa.grid.core"
+import {WaGridCore} from "@/core/WaGridCore"
 import {CellType, GridMode} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 import {WaGridRenderGroup} from "../renderer/wa.grid.render.group";
 import {WaGridRenderTree} from "../renderer/wa.grid.render.tree";
 import {WaGridRenderCheckbox} from "../renderer/wa.grid.render.checkbox";

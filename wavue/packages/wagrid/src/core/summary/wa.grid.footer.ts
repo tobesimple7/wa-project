@@ -1,5 +1,5 @@
-import {WaGridCore} from "@/core/wa.grid.core"
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaGridCore} from "@/core/WaGridCore"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
 export class WaGridFooter {
     grid: WaGridCore;

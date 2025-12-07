@@ -30,7 +30,7 @@
 //         if (maxCell >= 0) {
 //             grid.classRange.removeRange(0, -1);
 //             const topRow = grid.classRange.selectRange(0, -1, grid.startCellIndex, maxCell);
-//             grid.classPanel30.setDataPanel(topRow);
+//             grid.waPanel30.setDataPanel(topRow);
 //         }
 //     }
 // }

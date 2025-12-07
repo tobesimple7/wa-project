@@ -2,9 +2,9 @@
 import {WaPanelBase } from './PanelBase';
 import {WaRenderPanel40 } from './RenderPanel40';
 import {WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaGridTable } from "../wa.grid.table";
+import {WaGridTable } from "../WaTable";
 import {Direction, GridMode, RowAlias} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
+import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 export class WaPanel40 extends WaPanelBase {
 
     constructor(grid) {
