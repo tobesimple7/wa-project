@@ -8,7 +8,7 @@ import {WaRangePanel} from "./RangePanel";
 import {WaFilter} from "./Filter";
 import {WaGridGroup} from "./Group";
 import {WaPage} from "@/core/page/Page";
-import {WaSort} from "./Sort";
+import {WaSort} from "./sort/Sort";
 import {WaTree} from "./Tree";
 import {WaPanelBase} from "@/core/panels/PanelBase";
 import {WaPanel10} from "@/core/panels/Panel10";

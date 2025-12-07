@@ -4,6 +4,7 @@ import {WaDatabase, DataTableType} from '@/core/database/Database';
 import {WaDataTable} from '@/core/database/DataTable';
 import {waGridConfigs} from "./GridConfigs";
 import {WaDataArrayTable} from "@/core/database/DataArrayTable";
+import { SortColumnDef } from "./sort/SortColumnDef";
 
 export class WaGridBase extends WaBase {
     gridId: string;
@@ -27,7 +28,7 @@ export class WaGridBase extends WaBase {
     column_table: WaDataTable;
     top_column_table: WaDataTable;
     footer_column_table: WaDataTable;
-    sort_column_table: WaDataTable;
+    sort_column_table: WaDataTable<SortColumnDef>;
     filter_column_table: WaDataTable;
     group_column_table: WaDataTable;
     source_table: WaDataTable;

@@ -1,11 +1,13 @@
 import {WaGridCore} from "@/core/WaGridCore"
-//import {CellType, OptionAlias, SortColumn} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+//import {CellType, OptionAlias, SortColumnDef} from "@/core/WaGrid.types"
+import { WaColumnProperty } from "@/core/columns/ColumnEnum"
+import { SortColumnDef } from "./SortColumnDef";
+import { SORT_KEYS } from "./SortColumnEnum";
 export class WaSort {
     grid: WaGridCore;
     selector: string;
 
-    sortColumns: any[];
+    sortColumns: SortColumnDef[];
     options: any;
 
     constructor(grid: WaGridCore) {
@@ -23,28 +25,28 @@ export class WaSort {
     getSortRow(columnName: string) { return this.grid.sort_column_table.selectRow(WaColumnProperty.name, columnName); }
 
     changeSortButtonOrder(name: string, text: string, order: string, targetIndex: number) {
-        const selector = this.selector;
-        const grid = this.grid;
+        const selector: string = this.selector;
+        const grid: WaGridCore = this.grid;
 
         /* targetIndex <> name Index */
-        let sourceIndex = null;
+        let sourceIndex: number = null;
         for (let i = 0, len = grid.sort_column_table.count(); i < len; i++) {
-            const dataRow = grid.sort_column_table.data[i];
-            if (name == dataRow[WaColumnProperty.name] && i == targetIndex) return;
-            else if (name == dataRow[WaColumnProperty.name]) { sourceIndex = i;  break; }
+            const sortColumn = grid.sort_column_table.data[i];
+            if (name == sortColumn.name && i == targetIndex) return;
+            else if (name == sortColumn.name) { sourceIndex = i;  break; }
         }
 
         /* new sort data */
-        const dataRow = {};
-        dataRow[WaColumnProperty.name]  = name;
-        dataRow[WaColumnProperty.order] = grid.sort_column_table.selectValue(sourceIndex, WaColumnProperty.order);
+        const sortColumn: SortColumnDef = {};
+        sortColumn.name  = name;
+        sortColumn.order = grid.sort_column_table.selectValue(sourceIndex, SORT_KEYS.order);
 
         /* update source column */
         grid.sort_column_table.updateByRowIndex(sourceIndex, WaColumnProperty.name, '_temp_sort');
 
         /* create sort data */
-        if (grid.null(targetIndex)) grid.sort_column_table.insert(dataRow);
-        else grid.sort_column_table.insertBefore(dataRow, targetIndex);
+        if (grid.null(targetIndex)) grid.sort_column_table.insert(sortColumn);
+        else grid.sort_column_table.insertBefore(sortColumn, targetIndex);
 
         /* remove source */
         sourceIndex = grid.sort_column_table.selectRowIndex(WaColumnProperty.name, '_temp_sort');

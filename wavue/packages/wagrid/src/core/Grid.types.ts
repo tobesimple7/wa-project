@@ -23,11 +23,11 @@ export interface GroupColumn {
     name: string
 }
 
-export interface SortColumn {
-    name: string,
-    order: string,
-    orderNumber: number
-}
+// export interface SortColumnDef {
+//     name: string,
+//     order: string,
+//     orderNumber: number
+// }
 
 export interface FilterColumn {
     name: string,
