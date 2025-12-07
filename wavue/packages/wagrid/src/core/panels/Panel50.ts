@@ -1,6 +1,6 @@
 ﻿
-import { WaGridPanelBase } from './wa.grid.panel.base';
-import { WaGridRenderPanel40 } from './wa.grid.render.panel40';
+import { WaGridPanelBase } from './PanelBase';
+import { WaGridRenderPanel40 } from './RenderPanel40';
 import { WaGridTable } from "../wa.grid.table";
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 

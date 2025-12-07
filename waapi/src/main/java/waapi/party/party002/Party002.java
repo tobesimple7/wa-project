@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 @RestController
-public class Party002Controller {
+public class Party002 {
 
     @GetMapping("/api/party/party002")
     public Map<String, Object> party002() {

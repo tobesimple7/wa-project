@@ -1,41 +1,44 @@
 ﻿
-import { WaGridPanelBase } from './wa.grid.panel.base';
-import { WaGridRenderPanel30 } from './wa.grid.render.panel30';
-import { WaGridRenderPanelInfo } from './wa.grid.render.panel.info';
+import { WaGridPanelBase } from './PanelBase';
+import { WaGridRenderPanel30 } from './RenderPanel30';
+import { WaGridRenderPanelInfo } from './RenderPanelInfo';
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
-export class WaGridPanel80 extends WaGridPanelBase {
+export class WaGridPanel90 extends WaGridPanelBase {
 
     constructor(grid) {
         super(grid);
-        this.panelName  = 'panel80';
+        this.panelName  = 'panel90';
     }
 
     createHtml(parentElement) {
         const grid = this.grid;
 
-        let className = grid.options.showGroupPanel ? 'wa-grid-show' : 'wa-grid-hide';
-        let s ='<div class="wa-grid-panel80 ' + className + '"></div>';
+        let s = '';
+        if (grid.options.showSortPanel) s += '<div class="wa-grid-panel90 wa-grid-show"></div>';
+        else s += '<div class="wa-grid-panel90 wa-grid-hide"></div>';
         parentElement.insertAdjacentHTML('beforeend', s);
-
-        grid.classPanel80.panel80_select();
+        grid.classPanel90.panel90_select();
     }
 
     createTable() {
-        let selector = '#' + this.grid.gridId;
+        let selector = this.selector;
         const grid = this.grid;
+
+        //if (grid.options.showSortPanel != true) return;
 
         const div = document.createElement('div');
         div.className = 'wa-grid-panel-bar';
 
         const span = document.createElement('span');
         span.className = 'wa-grid-panel-bar-span';
-        span.textContent = grid.getConfigLabel('group_placeholder');
+        span.textContent = grid.getConfigLabel('sort_placeholder');
         div.appendChild(span);
 
-        document.querySelector(selector + ' .wa-grid-panel80').appendChild(div);
+        document.querySelector(selector + ' .wa-grid-panel90').innerHTML = '';
+        document.querySelector(selector + ' .wa-grid-panel90').appendChild(div);
     }
 
-    panel80_select() { //type : header, content, left, top
+    panel90_select() {
         let selector = this.selector;
         const grid = this.grid;
 
@@ -57,7 +60,8 @@ export class WaGridPanel80 extends WaGridPanelBase {
         let moveCellIndex;
         let moveCellRowIndex;
 
-        let panel80= document.querySelector(selector + ' .wa-grid-panel80');
+        let panel90= document.querySelector(selector + ' .wa-grid-panel90');
+
         const mouseDownEvent = function(e) {
             let element;
 
@@ -77,11 +81,11 @@ export class WaGridPanel80 extends WaGridPanelBase {
             if (window.event.button === 0) {
                 // @ts-ignore
                 if (!window.event.ctrlKey && !window.event.shiftKey) {
-                    selectCell(e, panel80);
+                    selectCell(e, panel90);
                 }
                 // @ts-ignore
                 else if (window.event.shiftKey) {
-                    selectCellShift(e, panel80);
+                    selectCellShift(e, panel90);
                 }
             }
             document.addEventListener('mousemove', mouseMoveEvent);
@@ -95,7 +99,7 @@ export class WaGridPanel80 extends WaGridPanelBase {
             if (window.event.button === 0) {
                 // @ts-ignore
                 if (!window.event.ctrlKey && !window.event.shiftKey) {
-                    selectCellMove(e, panel80);
+                    selectCellMove(e, panel90);
                 }
             }
         };
@@ -110,8 +114,8 @@ export class WaGridPanel80 extends WaGridPanelBase {
             grid.lastX = lastX = window.pageXOffset + e.clientX;
             grid.lastY = lastY = window.pageYOffset + e.clientY;
 
-            let isInPanel80 = grid.isInPanel(e, 'panel80');
-            if (isInPanel80) {
+            let isInPanel90 = grid.isInPanel(e, 'panel90');
+            if (isInPanel90) {
                 if (mouseButton == 0
                     && startX > lastX - grid.mousePointRange
                     && startX < lastX + grid.mousePointRange
@@ -120,18 +124,20 @@ export class WaGridPanel80 extends WaGridPanelBase {
                     let element = e.target;
                     let name = element.dataset.name;
                     if (e.detail == 1 && targetName == 'icon') {
-                        grid.classGroup.removeGroupButton(element);
+                        grid.classSort.removeSortButton(element);
+                    }
+                    else if (e.detail == 1) {
+                        grid.event_columnSort(e.target);
                     }
                 }
                 else {
                     if (document.querySelectorAll(' .wa-grid-move').length > 0) {
                         let moveElement: any = document.querySelector('.wa-grid-move');
-                        let rectPanel80: any = document.querySelector(selector + ' .wa-grid-panel80').getBoundingClientRect();
-                        let rectMoveCell: any= moveElement.getBoundingClientRect();
+                        let rectMoveCell = moveElement.getBoundingClientRect();
 
-                        let name  = moveElement.dataset.name;
+                        let name = moveElement.dataset.name;
                         let column = grid.getColumn(name);
-                        let text  = column[WaColumnProperty.text];
+                        let text = column.header[WaColumnProperty.text];
                         let order = 'asc';
 
                         // Find the one that is smaller to the button left than then move element left
@@ -154,7 +160,7 @@ export class WaGridPanel80 extends WaGridPanelBase {
                             targetButton = null;
                             targetIndex = null;
                         }
-                        grid.classGroup.changeGroupButtonOrder(name, text, order, targetIndex);
+                        grid.classSort.changeSortButtonOrder(name, text, order, targetIndex);
 
                         flagLeft = false;
                         flagRight = false;
@@ -181,7 +187,6 @@ export class WaGridPanel80 extends WaGridPanelBase {
 
         const selectCell = function(e, table) {
             let element;
-
             if      (e.target.classList.contains('wa-grid-html-icon-remove')) { targetName = 'icon'   ; element = e.target; }
             else if (e.target.classList.contains('wa-grid-panel-button-text')) { targetName = 'text'   ; element = e.target; }
             else if (e.target.classList.contains('wa-grid-panel-button'))      { targetName = 'button' ; element = e.target; }
@@ -259,7 +264,7 @@ export class WaGridPanel80 extends WaGridPanelBase {
         }
 
         const selectCellMove = function(e, table) {
-            let col: any = e.target.closest('.wa-grid-cell');
+            let col = e.target.closest('.wa-grid-cell');
 
             flagLeft    = false;
             flagRight   = false;
@@ -267,8 +272,8 @@ export class WaGridPanel80 extends WaGridPanelBase {
             startX = grid.startX;
             startY = grid.startY;
 
-            grid.lastX = lastX = window.scrollX + e.clientX;
-            grid.lastY = lastY = window.scrollY + e.clientY;
+            grid.lastX = lastX = window.pageXOffset + e.clientX;
+            grid.lastY = lastY = window.pageYOffset + e.clientY;
 
             let moveY = lastY - startY;
             let moveX = lastX - startX;
@@ -326,12 +331,11 @@ export class WaGridPanel80 extends WaGridPanelBase {
                 for (let x = 0, len = tdList.length; x < len; x++) {
                     let cell: any =  tdList[x];
                     if (grid.column_table.data[x][WaColumnProperty.visible] == false) continue;
-                    let left = window.scrollX + cell.getBoundingClientRect().left;
+                    let left = window.pageXOffset + cell.getBoundingClientRect().left;
                     if (lastX > left) maxCellIndex = cell.cellIndex;
                 }
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(0, -1, startCellIndex, maxCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
             }
             //==================================================================
             if (moveX < 0) {
@@ -344,7 +348,6 @@ export class WaGridPanel80 extends WaGridPanelBase {
                 }
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(0, -1, startCellIndex, minCellIndex);
-                grid.classPanel30.setDataPanel(_topRowIndex);
             }
             //==================================================================
         }
@@ -414,16 +417,13 @@ export class WaGridPanel80 extends WaGridPanelBase {
                 setTimeout(function() {doInterval('left', lastX, lastY);}, 5);
                 selectRefresh('left', lastX, lastY);
             }
-            else if (flagRight) {
+            if (flagRight) {
                 flagLeft    = false;
                 //flagRight = false;
                 setTimeout(function() {doInterval('right', lastX, lastY);}, 5);
                 selectRefresh('right', lastX, lastY);
             }
         }
-        panel80.addEventListener('mousedown', mouseDownEvent);
+        panel90.addEventListener('mousedown', mouseDownEvent);
     }
 }
-
-
-

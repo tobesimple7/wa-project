@@ -1,7 +1,7 @@
 ﻿
-import { WaGridPanelBase } from './wa.grid.panel.base';
-import { WaGridRenderPanel30 } from './wa.grid.render.panel30';
-import { WaGridRenderPanelInfo } from './wa.grid.render.panel.info';
+import { WaGridPanelBase } from './PanelBase';
+import { WaGridRenderPanel30 } from './RenderPanel30';
+import { WaGridRenderPanelInfo } from './RenderPanelInfo';
 import {WaGridTable} from "../wa.grid.table";
 import {CellType, Direction, GridMode, RowAlias} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"

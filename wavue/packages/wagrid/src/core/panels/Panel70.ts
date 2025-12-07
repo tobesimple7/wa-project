@@ -1,5 +1,5 @@
 ﻿
-import {WaGridPanelBase } from './wa.grid.panel.base';
+import {WaGridPanelBase } from './PanelBase';
 import {WaGridTable } from "../wa.grid.table";
 import {GridMode} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"

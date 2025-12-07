@@ -26,8 +26,8 @@ panel20_select()
       ├─ selectRefresh()      : 자동 스크롤 갱신
       └─ doInterval()         : 반복 스크롤 타이머
 */
-import { WaGridPanelBase } from '../wa.grid.panel.base';
-import { WaGridRenderPanelInfo } from '../wa.grid.render.panel.info';
+import { WaGridPanelBase } from '../PanelBase';
+import { WaGridRenderPanelInfo } from '../RenderPanelInfo';
 import { WaGridTable } from "../../wa.grid.table";
 import {WaGridCore} from "@/core/wa.grid.core"
 import {CellType} from "@/core/WaGrid.types"

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class Party001_Service {
+public class PartyService001 {
 
-    private final Party001_Mapper mapper;
+    private final PartyMapper001 mapper;
 
-    public Party001_Service(Party001_Mapper mapper) {   // 직접 작성
+    public PartyService001(PartyMapper001 mapper) {   // 직접 작성
         this.mapper = mapper;
     }
 

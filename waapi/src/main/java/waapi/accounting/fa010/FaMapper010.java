@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface Fa010Mapper {
-    List<Map<String, Object>> FA010_SEARCH();
+public interface FaMapper010 {
+    List<Map<String, Object>> fa010_search();
 }

@@ -18,22 +18,23 @@
     @ready="onReady2"
   />
 </template>
-<script setup>
+<script setup lang="ts">
 import {ref, computed} from 'vue'
 import { waGridConfigs } from "@/components/WaGridConfigs"
 import WaGrid from '@/components/WaGrid.vue'
-import {grid_data} from "@/components/wagrid_data.js";   // ✅ 래퍼(.vue)를 임포트해야 함
+import {grid_data} from "@/components/wagrid_data.js"; 
+import { WaGridColumnDef } from '@/core/columns/WaGridColumnDef';
 
 const gridConfigs = waGridConfigs;
 
-const columns1 = [
+const columns1: WaGridColumnDef[] = [
     { name: "ACCTG_TRANS_ID", header: {text: "Code"}, width: 100, editable: true }
   , { name: "ACCTG_TRANS_TYPE_ID", header: {text: "Manager"}, width: 100}
   , { name: "DESCRIPTION", header: {text: "Customer"}, width: 100}
   , { name: "SCHEDULED_POSTING_DATE", header: {text: "Biz Number"}, width: 100}
   , { name: "VOUCHER_DATE", header: {text: "ceo"}, width: 100}
 ]
-const columns2 = [
+const columns2: WaGridColumnDef[] = [
     { name: "ACCTG_TRANS_ID", header: {text: "Code"}, width: 100, editable: true }
   , { name: "ACCTG_TRANS_TYPE_ID", header: {text: "Manager"}, width: 100}
   , { name: "DESCRIPTION", header: {text: "Customer"}, width: 100}

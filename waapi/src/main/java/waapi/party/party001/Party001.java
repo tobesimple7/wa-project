@@ -1,4 +1,4 @@
-package waapi.accounting.fa010;
+package waapi.party.party001;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class Fa010Controller {
+public class Party001 {
 
-    private final Fa010Service svc;
+    private final PartyService001 svc;
 
-    public Fa010Controller(Fa010Service svc) {
+    public Party001(PartyService001 svc) {
         this.svc = svc;
     }
 
-    @GetMapping("/api/fa010_search")
+    @GetMapping("/api/party001/search")
     public List<Map<String, Object>> search() {
 
         return svc.search();
     }
-    @GetMapping("/api/fa001/hello2")
+    @GetMapping("/api/party001/hello2")
     public Map<String, Object> hello2() {
         return Map.of(
                 "message", "1Hello from Spring Boot 2.5.2 (JDK 17)",

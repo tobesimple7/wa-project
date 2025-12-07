@@ -1,4 +1,4 @@
-import {WaGridPanelBase} from './wa.grid.panel.base';
+import {WaGridPanelBase} from './PanelBase';
 import {WaGridCore} from "@/core/wa.grid.core"
 import {ClickPageOrder, GridMode} from "@/core/WaGrid.types"
 

@@ -10,22 +10,22 @@ import {WaGridGroup} from "./wa.grid.group";
 import {WaGridPage} from "@/core/page/wa.grid.page";
 import {WaGridSort} from "./wa.grid.sort";
 import {WaGridTree} from "./wa.grid.tree";
-import {WaGridPanelBase} from "@/core/panels/wa.grid.panel.base";
-import {WaGridPanel10} from "@/core/panels/wa.grid.panel10";
-import {WaGridPanel20} from "@/core/panels/panel20/wa.grid.panel20";
-import {WaGridPanel30} from "@/core/panels/wa.grid.panel30";
-import {WaGridPanel40} from "@/core/panels/wa.grid.panel40";
-import {WaGridPanel50} from "@/core/panels/wa.grid.panel50";
-import {WaGridPanel70} from "@/core/panels/wa.grid.panel70";
-import {WaGridPanel80} from "@/core/panels/wa.grid.panel80";
-import {WaGridPanel90} from "@/core/panels/wa.grid.panel90";
-import {WaGridPanel99 } from "@/core/panels/wa.grid.panel99";
+import {WaGridPanelBase} from "@/core/panels/PanelBase";
+import {WaGridPanel10} from "@/core/panels/Panel10";
+import {WaGridPanel20} from "@/core/panels/Panel20";
+import {WaGridPanel30} from "@/core/panels/Panel30";
+import {WaGridPanel40} from "@/core/panels/Panel40";
+import {WaGridPanel50} from "@/core/panels/Panel50";
+import {WaGridPanel70} from "@/core/panels/Panel70";
+import {WaGridPanel80} from "@/core/panels/Panel80";
+import {WaGridPanel90} from "@/core/panels/Panel90";
+import {WaGridPanel99 } from "@/core/panels/Panel99";
 import {WaGridTop} from "@/core/summary/wa.grid.top";
 import {WaGridFooter} from "@/core/summary/wa.grid.footer";
 import {WaGridDate} from "@/core/layer/wa.grid.date";
 import {WaGridCombo} from "@/core/layer/wa.grid.combo";
-import {WaGridRow} from "./wa.grid.row";
-import {WaGridCell} from "./wa.grid.cell";
+import {WaGridRow} from "@/core/wa.grid.row";
+import {WaGridCell} from "@/core/wa.grid.cell";
 import {WaGridBase} from "@/core/base/wa.grid.base";
 import {WaGridBaseIs} from "@/core/base/wa.grid.base.is";
 import {WaGridBaseEvent} from "@/core/base/wa.grid.base.event";
@@ -119,7 +119,7 @@ export class WaGridCore extends WaGridBase {
         this.classRange50   = new WaGridRangePanel(this, 'panel50');
         this.classFilter    = new WaGridFilter(this);
         this.classGroup     = new WaGridGroup(this);
-        this.classPage      = new WaGridPage(this);
+        this.classPage = new WaGridPage(this);
         this.classSort      = new WaGridSort(this);
         this.classTree      = new WaGridTree(this);
 
@@ -134,7 +134,6 @@ export class WaGridCore extends WaGridBase {
         this.classPanel90 = new WaGridPanel90(this);
         this.classPanel99 = new WaGridPanel99(this);
 
-        this.classPage = new WaGridPage(this);
         this.classPagination = new WaGridPagination(this);
 
         this.classTop    = new WaGridTop(this);
