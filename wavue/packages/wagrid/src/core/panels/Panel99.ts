@@ -1,6 +1,6 @@
 import {WaPanelBase} from './PanelBase';
 import {WaGridCore} from "@/core/WaGridCore"
-import {ClickPageOrder, GridMode} from "@/core/WaGrid.types"
+import {ClickPageOrder, GridMode} from "@/core/Grid.types"
 
 export class WaPanel99 extends WaPanelBase {
 

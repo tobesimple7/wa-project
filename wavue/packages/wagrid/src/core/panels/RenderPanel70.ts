@@ -1,5 +1,5 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 
 
 

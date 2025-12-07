@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
-import {WaStringRender} from "../renderer/WaStringRender";
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {WaStringRender} from "../renderer/StringRender";
 
 
 export class WaRenderPanel40 {

@@ -1,6 +1,6 @@
 ﻿// import { WaPanelBase } from './wa.grid.panel.base';
 // import { WaRenderPanelInfo } from './wa.grid.render.panel.info';
-// import { WaGridTable } from '../wa.grid.table';
+// import { WaTable } from '../wa.grid.table';
 // import { WaGridCore } from '../wa.grid';
 // import { WaColumnProperty, CellType } from '../wa.grid.types';
 // import { WaPanel20Events } from './wa.grid.panel20.events';
@@ -37,7 +37,7 @@
 //
 //     createTable() {
 //         const grid = this.grid;
-//         const table = new WaGridTable(grid);
+//         const table = new WaTable(grid);
 //         ['panel21', 'panel22', 'panel20'].forEach(name => table.createTable(name, 0, grid.headerRowCount));
 //         this.setDataPanel();
 //     }

@@ -23,7 +23,7 @@ import {ref, computed} from 'vue'
 import { waGridConfigs } from "@/components/WaGridConfigs"
 import WaGrid from '@/components/WaGrid.vue'
 import {grid_data} from "@/components/wagrid_data.js"; 
-import { WaGridColumnDef } from '@/core/columns/WaColumnDef';
+import { WaGridColumnDef } from '@/core/columns/ColumnDef';
 
 const gridConfigs = waGridConfigs;
 

@@ -2,7 +2,7 @@
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel30 } from './RenderPanel30';
 import { WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 export class WaPanel90 extends WaPanelBase {
 
     constructor(grid) {

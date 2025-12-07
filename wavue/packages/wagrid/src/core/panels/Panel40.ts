@@ -2,9 +2,9 @@
 import {WaPanelBase } from './PanelBase';
 import {WaRenderPanel40 } from './RenderPanel40';
 import {WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaGridTable } from "../WaTable";
-import {Direction, GridMode, RowAlias} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {WaTable } from "../Table";
+import {Direction, GridMode, RowAlias} from "@/core/Grid.types"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 export class WaPanel40 extends WaPanelBase {
 
     constructor(grid) {
@@ -38,7 +38,7 @@ export class WaPanel40 extends WaPanelBase {
 
         if (grid.top_column_table.count() == 0) return;
 
-        const classTable = new WaGridTable(grid);
+        const classTable = new WaTable(grid);
         classTable.createTable('panel41', 0, 1);
         classTable.createTable('panel42', 0, 1);
         classTable.createTable('panel40', 0, 1);

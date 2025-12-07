@@ -28,10 +28,10 @@ panel20_select()
 */
 import { WaPanelBase } from '../PanelBase';
 import { WaRenderPanelInfo } from '../RenderPanelInfo';
-import { WaGridTable } from "../../WaTable";
+import { WaTable } from "../../Table";
 import {WaGridCore} from "@/core/WaGridCore"
-import {CellType} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {CellType} from "@/core/Grid.types"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 export class WaPanel20 extends WaPanelBase {
     isChecked: boolean;
 
@@ -65,7 +65,7 @@ export class WaPanel20 extends WaPanelBase {
 
     createTable()  {
         const grid = this.grid;
-        const table = new WaGridTable(grid);
+        const table = new WaTable(grid);
         ['panel21', 'panel22', 'panel20'].forEach(name => table.createTable(name, 0, grid.headerRowCount));
         this.setDataPanel();
     }

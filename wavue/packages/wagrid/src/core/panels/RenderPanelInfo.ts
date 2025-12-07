@@ -1,9 +1,9 @@
 
-import { WaStringRender } from "../renderer/WaStringRender";
-import { WaCheckboxRender } from "../renderer/WaCheckboxRender";
+import { WaStringRender } from "../renderer/StringRender";
+import { WaCheckboxRender } from "../renderer/CheckboxRender";
 import {WaGridCore} from "@/core/WaGridCore"
-import {CellType, GridMode} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {CellType, GridMode} from "@/core/Grid.types"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 
 export class WaRenderPanelInfo {
 

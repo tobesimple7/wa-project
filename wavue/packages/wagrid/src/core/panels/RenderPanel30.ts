@@ -1,13 +1,13 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {CellType, GridMode} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
-import {WaGroupRender} from "../renderer/WaGroupRender";
-import {WaTreeRender} from "../renderer/WaTreeRender";
-import {WaCheckboxRender} from "../renderer/WaCheckboxRender";
-import {WaButtonRender} from "../renderer/WaButtonRender";
-import {WaLinkRender} from "../renderer/WaLinkRender";
-import {WaImgRender} from "../renderer/WaImgRender";
-import {WaStringRender} from "../renderer/WaStringRender";
+import {CellType, GridMode} from "@/core/Grid.types"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {WaGroupRender} from "../renderer/GroupRender";
+import {WaTreeRender} from "../renderer/TreeRender";
+import {WaCheckboxRender} from "../renderer/CheckboxRender";
+import {WaButtonRender} from "../renderer/ButtonRender";
+import {WaLinkRender} from "../renderer/LinkRender";
+import {WaImgRender} from "../renderer/ImgRender";
+import {WaStringRender} from "../renderer/StringRender";
 
 
 export class WaRenderPanel30 {

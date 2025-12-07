@@ -2,9 +2,9 @@
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel30 } from './RenderPanel30';
 import { WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaGridTable} from "../WaTable";
-import {CellType, Direction, GridMode, RowAlias} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {WaTable} from "../Table";
+import {CellType, Direction, GridMode, RowAlias} from "@/core/Grid.types"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 /*
 1. td, div, checkbox 에 다음과 같은 정보를 준다.
     => data-row-index,      data-name,      data-column-index
@@ -47,7 +47,7 @@ export class WaPanel30 extends WaPanelBase {
     createTable() {
         const grid = this.grid;
 
-        const classTable = new WaGridTable(grid);
+        const classTable = new WaTable(grid);
         classTable.createTable('panel31', 0, grid.pageRowCount);
         classTable.createTable('panel32', 0, grid.pageRowCount);
         classTable.createTable('panel30', 0, grid.pageRowCount);
@@ -61,7 +61,7 @@ export class WaPanel30 extends WaPanelBase {
         let addRowCount=  grid.pageRowCount - tableRows.length;
         if (addRowCount == 0) return;
 
-        const classTable = new WaGridTable(grid);
+        const classTable = new WaTable(grid);
         classTable.updateTableRows('panel31', addRowCount);
         classTable.updateTableRows('panel32', addRowCount);
         classTable.updateTableRows('panel30', addRowCount);

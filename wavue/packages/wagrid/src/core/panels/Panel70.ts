@@ -1,8 +1,8 @@
 ﻿
 import {WaPanelBase } from './PanelBase';
-import {WaGridTable } from "../WaTable";
-import {GridMode} from "@/core/WaGrid.types"
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import {WaTable } from "../Table";
+import {GridMode} from "@/core/Grid.types"
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 export class WaPanel70 extends WaPanelBase {
 
     constructor(grid) {
@@ -34,7 +34,7 @@ export class WaPanel70 extends WaPanelBase {
     createTable() {
         const grid = this.grid;
 
-        const classTable = new WaGridTable(grid);
+        const classTable = new WaTable(grid);
         classTable.createTable('panel71', 0, 2);
         classTable.createTable('panel72', 0, 2);
         classTable.createTable('panel70', 0, 2);

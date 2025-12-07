@@ -10,7 +10,7 @@
 import { ref, onMounted, onBeforeUnmount, watch, provide, nextTick} from 'vue'
 import type { Ref } from 'vue'
 import { WaGridCore } from '@/core/WaGridCore'
-import type { WaGridOption } from '@/core/WaGrid.types'
+import type { WaGridOption } from '@/core/Grid.types'
 import { waGridConfigs } from "@/components/WaGridConfigs"
 
 // props 정의

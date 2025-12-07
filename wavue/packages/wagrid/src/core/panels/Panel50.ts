@@ -1,8 +1,8 @@
 ﻿
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel40 } from './RenderPanel40';
-import { WaGridTable } from "../WaTable";
-import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
+import { WaTable } from "../Table";
+import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 
 export class WaPanel50 extends WaPanelBase {
     constructor(grid) {
@@ -35,7 +35,7 @@ export class WaPanel50 extends WaPanelBase {
 
         if(grid.footer_column_table.count() == 0) return;
 
-        const classTable = new WaGridTable(grid);
+        const classTable = new WaTable(grid);
         classTable.createTable('panel51', 0, 1);
         classTable.createTable('panel52', 0, 1);
         classTable.createTable('panel50', 0, 1);
