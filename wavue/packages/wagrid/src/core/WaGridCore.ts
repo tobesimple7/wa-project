@@ -1,7 +1,7 @@
 import {WaScrollBase} from "./ScrollBase";
 import {WaScroll} from "./Scroll";
 import {WaHeader} from "@/core/header/Header";
-import {WaColumnCore} from "@/core/columns/ColumnCore";
+import {WaColumn} from "@/core/columns/ColumnCore";
 import {WaControl} from "./Control";
 import {WaRange} from "./Range";
 import {WaRangePanel} from "./RangePanel";
@@ -65,7 +65,7 @@ export class WaGridCore extends WaGridBase {
     horizontalScroll: WaScroll;
 
     classHeader: WaHeader;
-    classColumn: WaColumnCore;
+    classColumn: WaColumn;
     classControl: WaControl;
     classRange: WaRange;
     classRange40: WaRangePanel;
@@ -112,7 +112,7 @@ export class WaGridCore extends WaGridBase {
         this.horizontalScroll = new WaScroll(this, 'horizontalScroll');
 
         this.classHeader    = new WaHeader(this);
-        this.classColumn    = new WaColumnCore(this);
+        this.classColumn    = new WaColumn(this);
         this.classControl   = new WaControl(this); 
         this.classRange     = new WaRange(this);
         this.classRange40   = new WaRangePanel(this, 'panel40');

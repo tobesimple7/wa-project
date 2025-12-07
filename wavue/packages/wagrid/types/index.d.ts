@@ -4894,7 +4894,7 @@ declare class WaCell {
     showSelectedCells(grid: any, panelName: any, tableCell: any, rowIndex: any, cellIndex: any): void;
 }
 
-declare class WaColumnCore {
+declare class WaColumn {
     grid: WaGridCore;
     selector: string;
     constructor(grid: any);
@@ -4946,7 +4946,7 @@ export declare class WaGridCore extends WaGridBase {
     verticalScroll: WaScroll;
     horizontalScroll: WaScroll;
     classHeader: WaHeader;
-    classColumn: WaColumnCore;
+    classColumn: WaColumn;
     classControl: WaControl;
     classRange: WaRange;
     classRange40: WaRangePanel;

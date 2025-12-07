@@ -2,7 +2,7 @@ import {BeforeAfter, CellType} from "@/core/Grid.types"
 import {WaColumnProperty} from "@/core/columns/ColumnEnum"
 import {WaGridCore} from "@/core/WaGridCore";
 
-export class WaColumnCore {
+export class WaColumn {
     grid: WaGridCore;
     selector: string;
 

@@ -37,9 +37,9 @@ const gridId = ref<string>(props.id)
 const grid = ref<WaGridCore | null>(null)
 
 // 선언형 컬럼 수집 공간
-// const collectedColumns = ref<WaGridColumnDef[]>([])
+// const collectedColumns = ref<WaColumnDef[]>([])
 //
-// function registerColumn(column: WaGridColumnDef) {
+// function registerColumn(column: WaColumnDef) {
 //     const i = collectedColumns.value.findIndex(c => c.name === column.name)
 //     if (i >= 0) collectedColumns.value[i] = column
 //     else collectedColumns.value.push(column)
