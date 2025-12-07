@@ -1,6 +1,6 @@
 import {WaGridDom} from "../WaDom";
 
-export class WaGridRenderButton {
+export class WaButtonRender {
 
     addElement(param) {
         const element = WaGridDom.createElement('button');

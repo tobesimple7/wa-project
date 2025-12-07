@@ -1,4 +1,4 @@
-// export class WaGridHeaderSelect {
+// export class WaHeaderSelect {
 //     grid: any;
 //     selector: string;
 //     panelName: string;

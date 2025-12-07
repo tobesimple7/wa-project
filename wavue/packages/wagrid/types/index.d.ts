@@ -217,6 +217,15 @@ declare class WaDataTable extends WaBase {
     getMin(columnName: string): number;
 }
 
+declare class WaFooter {
+    grid: WaGrid;
+    selector: string;
+    constructor(grid: WaGrid);
+    setFooterColumns(columns: any): void;
+    setFooterData(): void;
+    setFooterValue(rowIndex: any, columnName: any, value: any): void;
+}
+
 /**
  *
  * Class Mixins
@@ -232,7 +241,7 @@ declare class WaGrid extends WaGridBase {
     classScroll: WaScrollBase;
     verticalScroll: WaScroll;
     horizontalScroll: WaScroll;
-    classHeader: WaGridHeaders;
+    classHeader: WaHeaders;
     classColumn: WaGridColumns;
     classControl: WaGridControl;
     classRange: WaGridRange;
@@ -245,19 +254,19 @@ declare class WaGrid extends WaGridBase {
     waPanelBase: WaPanelBase;
     waPanel10: WaPanel10;
     waPanel20: WaPanel20;
-    waPanel30: WaPanel30;
+    waPanel30:WaTop0;
     waPanel40: WaPanel40;
     waPanel50: WaPanel50;
     waPanel70: WaPanel70;
     waPanel80: WaPanel80;
     waPanel90: WaPanel90;
     waPanel99: WaPanel99;
-    classPage: WaGridPage;
-    classPagination: WaGridPagination;
+    classPage: WaPage;
+    classPagination: WaPagination;
     classTop: WaGridTop;
-    classFooter: WaGridFooter;
-    tbsGridDate: WaGridDate;
-    tbsGridCombo: WaGridCombo;
+    classFooter: WaFooter;
+    tbsGridDate: WaDate;
+    tbsGridCombo: WaCombo;
     classRow: WaGridRow;
     classCell: WaGridCell;
     topLineDiv: any;
@@ -689,7 +698,7 @@ declare class WaGridColumns {
     getLastVisibleColumnIndex(): any;
 }
 
-declare class WaGridCombo {
+declare class WaCombo {
     colType: any;
     grid: WaGrid;
     gridId: string;
@@ -718,7 +727,7 @@ declare class WaGridControl {
     after_setColumnVisible(): void;
 }
 
-declare class WaGridDate {
+declare class WaDate {
     colType: any;
     grid: WaGrid;
     gridId: string;
@@ -753,15 +762,6 @@ declare class WaGridFilter {
     createFilterCombo(column: any): HTMLSelectElement;
     addFilterComboOption(combo: any, value: any, text: any): void;
     initFilterData(): void;
-}
-
-declare class WaGridFooter {
-    grid: WaGrid;
-    selector: string;
-    constructor(grid: WaGrid);
-    setFooterColumns(columns: any): void;
-    setFooterData(): void;
-    setFooterValue(rowIndex: any, columnName: any, value: any): void;
 }
 
 declare class WaGridGroup {
@@ -810,7 +810,7 @@ declare class WaGridGroup {
     collapseGroup(): void;
 }
 
-declare class WaGridHeaders {
+declare class WaHeaders {
     grid: WaGrid;
     selector: string;
     constructor(grid: WaGrid);
@@ -857,7 +857,7 @@ declare interface WaGridOption {
     elseValue?: any;
 }
 
-declare class WaGridPage {
+declare class WaPage {
     grid: WaGrid;
     selector: string;
     pageIndex: number;
@@ -868,7 +868,7 @@ declare class WaGridPage {
     setPageData(data: any[], isFirst?: boolean): void;
 }
 
-declare class WaGridPagination {
+declare class WaPagination {
     grid: WaGrid;
     selector: string;
     pageIndex: number;
@@ -948,7 +948,7 @@ declare class WaGridSort {
     initSortData(): void;
 }
 
-declare class WaGridTop {
+declare class WaTop {
     grid: WaGrid;
     selector: string;
     constructor(grid: any);

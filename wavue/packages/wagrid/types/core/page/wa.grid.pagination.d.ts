@@ -1,5 +1,5 @@
 import { WaGrid } from '../wa.grid';
-export declare class WaGridPagination {
+export declare class WaPagination {
     grid: WaGrid;
     selector: string;
     pageIndex: number;

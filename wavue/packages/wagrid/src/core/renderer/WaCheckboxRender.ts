@@ -1,6 +1,6 @@
 import {WaGridDom} from "../WaDom";
 
-export class WaGridRenderCheckbox {
+export class WaCheckboxRender {
     addElement(param) {
         const element = WaGridDom.createElement('checkbox');
         const tableCell = param.tableCell;

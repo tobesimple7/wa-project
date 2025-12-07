@@ -1,7 +1,7 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 import {GridMode} from "@/core/WaGrid.types"
-export class WaGridPage {
+export class WaPage {
     grid: WaGridCore;
     selector: string;
 

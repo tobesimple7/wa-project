@@ -1,7 +1,7 @@
 import {AddRowDirection, CellType, GridMode, OptionAlias, RowAlias} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
-import {WaGridDate} from "@/core/layer/WaGridDate"
-import {WaGridCombo} from "@/core/layer/WaCombo"
+import {WaDate} from "@/core/layer/WaDate"
+import {WaCombo} from "@/core/layer/WaCombo"
 import {WaGridCore} from "@/core/WaGridCore"
 
 export class WaGridBaseEvent {
@@ -259,10 +259,10 @@ export class WaGridBaseEvent {
 
             //wa-grid-input-layer-panel : calendar, combo
             if (colType == 'date') {
-                grid.tbsGridDate = new WaGridDate(grid, column, input);
+                grid.tbsGridDate = new WaDate(grid, column, input);
             }
             else if (colType == CellType.combo) {
-                grid.tbsGridCombo = new WaGridCombo(grid, column, input, input_code);
+                grid.tbsGridCombo = new WaCombo(grid, column, input, input_code);
             }
         }
         input_icon.addEventListener('mousedown', mousedownEvent);

@@ -100,14 +100,14 @@ export class WaRenderPanel70 {
     }
 
     createHtml() {
-        // const render = new WaGridRenderString();
+        // const render = new WaStringRender();
         // render.addElement(this);
         //
         // this.setBounding();
     }
 
     setBounding() {
-        // const render = new WaGridRenderString();
+        // const render = new WaStringRender();
         // render.setBounding(this);
 
     }

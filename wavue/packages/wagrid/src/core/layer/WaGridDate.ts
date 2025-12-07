@@ -1,7 +1,7 @@
 ﻿import {WaGridCore} from "@/core/WaGridCore"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
-export class WaGridDate{
+export class WaDate{
     colType: any;
     grid: WaGridCore;
     gridId: string;

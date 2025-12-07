@@ -1,2 +1,2 @@
-export declare class WaGridRenderSvg {
+export declare class WaSvgRender {
 }

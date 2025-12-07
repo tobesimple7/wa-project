@@ -2,7 +2,7 @@
 import {WaGridCore} from "@/core/WaGridCore";
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 import {WaColumnKind} from "@/core/columns/WaColumnEnum"
-export class WaGridHeader {
+export class WaHeader {
     grid: WaGridCore;
     selector: string;
 

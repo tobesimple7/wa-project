@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
-import {WaGridRenderString} from "../renderer/wa.grid.render.string";
+import {WaStringRender} from "../renderer/WaStringRender";
 
 
 export class WaRenderPanel40 {
@@ -126,14 +126,14 @@ export class WaRenderPanel40 {
     }
 
     createHtml() {
-        const render = new WaGridRenderString();
+        const render = new WaStringRender();
         render.addElement(this);
 
         this.setBounding();
     }
 
     setBounding() {
-        const render = new WaGridRenderString();
+        const render = new WaStringRender();
         render.setBounding(this);
 
     }

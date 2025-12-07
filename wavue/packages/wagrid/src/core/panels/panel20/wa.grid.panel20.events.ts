@@ -1,6 +1,6 @@
 // import { WaGridCore } from '../wa.grid';
 // import { WaGridColumnDrag } from './wa.grid.panel20.drag.column';
-// import { WaGridHeaderSelect } from './wa.grid.panel20.select.header';
+// import { WaHeaderSelect } from './wa.grid.panel20.select.header';
 // import { WaGridAutoScroll } from './wa.grid.panel20.scroll.autoscroll';
 // import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 // export class WaPanel20Events {
@@ -8,7 +8,7 @@
 //     selector: string;
 //     panelName: string;
 //     drag: WaGridColumnDrag;
-//     select: WaGridHeaderSelect;
+//     select: WaHeaderSelect;
 //     scroll: WaGridAutoScroll;
 //
 //     constructor(grid: WaGridCore, selector: string, panelName: string) {
@@ -16,7 +16,7 @@
 //         this.selector = selector;
 //         this.panelName = panelName;
 //         this.drag = new WaGridColumnDrag(grid, selector);
-//         this.select = new WaGridHeaderSelect(grid, selector, panelName);
+//         this.select = new WaHeaderSelect(grid, selector, panelName);
 //         this.scroll = new WaGridAutoScroll(grid, selector, panelName);
 //     }
 //

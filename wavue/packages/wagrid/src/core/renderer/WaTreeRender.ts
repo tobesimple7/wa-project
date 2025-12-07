@@ -2,7 +2,7 @@
 import {WaGridDom} from "../WaDom";
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
-export class WaGridRenderTree {
+export class WaTreeRender {
     addElement(param) {
         const row = param.grid.view_table.selectRowByRowIndex(param.rowIndex);;
         const children = row[WaColumnProperty.children];

@@ -1,29 +1,29 @@
 import {WaScrollBase} from "./WaScrollBase";
 import {WaScroll} from "./WaScroll";
-import {WaGridHeader} from "@/core/header/WaHeader";
+import {WaHeader} from "@/core/header/WaHeader";
 import {WaGridColumnCore} from "@/core/columns/WaColumnCore";
 import {WaGridControl} from "./WaControl";
 import {WaGridRange} from "./WaRange";
 import {WaGridRangePanel} from "./WaRangePanel";
 import {WaGridFilter} from "./WaFilter";
 import {WaGridGroup} from "./WaGroup";
-import {WaGridPage} from "@/core/page/WaPage";
+import {WaPage} from "@/core/page/WaPage";
 import {WaGridSort} from "./WaSort";
 import {WaGridTree} from "./WaTree";
-import {WaPanelBase} from "@/core/panels/PanelBase";
-import {WaPanel10} from "@/core/panels/Panel10";
+import {WaPanelBase} from "@/core/panels/WaPanelBase";
+import {WaPanel10} from "@/core/panels/WaPanel10";
 import {WaPanel20} from "@/core/panels/Panel20";
-import {WaPanel30} from "@/core/panels/Panel30";
-import {WaPanel40} from "@/core/panels/Panel40";
+import {WaPanel30} from "@/core/panels/WaPanel30";
+import {WaPanel40} from "@/core/panels/WaPanel40";
 import {WaPanel50} from "@/core/panels/Panel50";
 import {WaPanel70} from "@/core/panels/Panel70";
 import {WaPanel80} from "@/core/panels/Panel80";
 import {WaPanel90} from "@/core/panels/Panel90";
-import {WaPanel99 } from "@/core/panels/Panel99";
-import {WaGridTop} from "@/core/summary/wa.grid.top";
-import {WaGridFooter} from "@/core/summary/wa.grid.footer";
-import {WaGridDate} from "@/core/layer/WaGridDate";
-import {WaGridCombo} from "@/core/layer/WaCombo";
+import {WaPanel99 } from "@/core/panels/WaPanel99";
+import {WaTop} from "@/core/summary/WaTop";
+import {WaFooter} from "@/core/summary/WaFooter";
+import {WaDate} from "@/core/layer/WaDate";
+import {WaCombo} from "@/core/layer/WaCombo";
 import {WaGridRow} from "@/core/WaRow";
 import {WaGridCell} from "@/core/WaCell";
 import {WaGridBase} from "@/core/base/WaBase";
@@ -36,7 +36,7 @@ import {WaGridBaseRows} from "@/core/base/WaBaseRows";
 import {WaGridBaseData} from "@/core/base/WaBaseData";
 import {WaGridBaseMain} from "@/core/base/WaBaseMain";
 import {WaGridOption} from "@/core/WaGrid.types"
-import {WaGridPagination} from "@/core/page/WaPagination";
+import {WaPagination} from "@/core/page/WaPagination";
 
 /**
  *
@@ -64,7 +64,7 @@ export class WaGridCore extends WaGridBase {
     verticalScroll: WaScroll;
     horizontalScroll: WaScroll;
 
-    classHeader: WaGridHeader;
+    classHeader: WaHeader;
     classColumn: WaGridColumnCore;
     classControl: WaGridControl;
     classRange: WaGridRange;
@@ -85,14 +85,14 @@ export class WaGridCore extends WaGridBase {
     waPanel80: WaPanel80;
     waPanel90: WaPanel90;
     waPanel99: WaPanel99;
-    classPage: WaGridPage;
-    classPagination: WaGridPagination;
+    classPage: WaPage;
+    classPagination: WaPagination;
 
-    classTop: WaGridTop;
-    classFooter: WaGridFooter;
+    classTop: WaTop;
+    classFooter: WaFooter;
 
-    tbsGridDate: WaGridDate;
-    tbsGridCombo: WaGridCombo;
+    tbsGridDate: WaDate;
+    tbsGridCombo: WaCombo;
 
     classRow: WaGridRow;
     classCell: WaGridCell;
@@ -111,7 +111,7 @@ export class WaGridCore extends WaGridBase {
         this.verticalScroll = new WaScroll(this, 'verticalScroll');
         this.horizontalScroll = new WaScroll(this, 'horizontalScroll');
 
-        this.classHeader    = new WaGridHeader(this);
+        this.classHeader    = new WaHeader(this);
         this.classColumn    = new WaGridColumnCore(this);
         this.classControl   = new WaGridControl(this); 
         this.classRange     = new WaGridRange(this);
@@ -119,7 +119,7 @@ export class WaGridCore extends WaGridBase {
         this.classRange50   = new WaGridRangePanel(this, 'panel50');
         this.classFilter    = new WaGridFilter(this);
         this.classGroup     = new WaGridGroup(this);
-        this.classPage      = new WaGridPage(this);
+        this.classPage      = new WaPage(this);
         this.classSort      = new WaGridSort(this);
         this.classTree      = new WaGridTree(this);
 
@@ -134,10 +134,10 @@ export class WaGridCore extends WaGridBase {
         this.waPanel90 = new WaPanel90(this);
         this.waPanel99 = new WaPanel99(this);
 
-        this.classPagination = new WaGridPagination(this);
+        this.classPagination = new WaPagination(this);
 
-        this.classTop    = new WaGridTop(this);
-        this.classFooter = new WaGridFooter(this);
+        this.classTop    = new WaTop(this);
+        this.classFooter = new WaFooter(this);
 
         this.tbsGridDate;
         this.tbsGridCombo;

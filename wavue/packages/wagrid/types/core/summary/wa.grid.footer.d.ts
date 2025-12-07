@@ -1,5 +1,5 @@
 import { WaGrid } from '../wa.grid';
-export declare class WaGridFooter {
+export declare class WaFooter {
     grid: WaGrid;
     selector: string;
     constructor(grid: WaGrid);

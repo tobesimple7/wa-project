@@ -1,6 +1,6 @@
 
-import { WaGridRenderString } from "../renderer/wa.grid.render.string";
-import { WaGridRenderCheckbox } from "../renderer/wa.grid.render.checkbox";
+import { WaStringRender } from "../renderer/WaStringRender";
+import { WaCheckboxRender } from "../renderer/WaCheckboxRender";
 import {WaGridCore} from "@/core/WaGridCore"
 import {CellType, GridMode} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
@@ -177,12 +177,12 @@ export class WaRenderPanelInfo {
         const grid = this.grid;
         if (this.columnType == CellType.checkbox) {
             if (this.visible && (this.panelName == 'panel21' || this.panelName == 'panel31')) {
-                const render = new WaGridRenderCheckbox();
+                const render = new WaCheckboxRender();
                 render.addElement(this);
             }
         }
         else {
-            const render = new WaGridRenderString();
+            const render = new WaStringRender();
             render.addElement(this);
         }
         this.setBounding();
@@ -221,12 +221,12 @@ export class WaRenderPanelInfo {
 
         if (this.columnType == CellType.checkbox) {
             if (this.visible && (this.panelName == 'panel21' || this.panelName == 'panel31')) {
-                const render = new WaGridRenderCheckbox();
+                const render = new WaCheckboxRender();
                 render.setBounding(this);
             }
         }
         else {
-            const render = new WaGridRenderString();
+            const render = new WaStringRender();
             render.setBounding(this);
         }
     }

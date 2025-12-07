@@ -3,7 +3,7 @@ import {WaGridCore} from "@/core/WaGridCore";
 import {CellType} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
-export class WaGridCombo {
+export class WaCombo {
     colType: any;
     grid: WaGridCore;
     gridId: string;

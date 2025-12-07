@@ -1,5 +1,5 @@
 import { WaGrid } from '../wa.grid';
-export declare class WaGridDate {
+export declare class WaDate {
     colType: any;
     grid: WaGrid;
     gridId: string;

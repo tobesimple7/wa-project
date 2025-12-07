@@ -1,13 +1,13 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {CellType, GridMode} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
-import {WaGridRenderGroup} from "../renderer/wa.grid.render.group";
-import {WaGridRenderTree} from "../renderer/wa.grid.render.tree";
-import {WaGridRenderCheckbox} from "../renderer/wa.grid.render.checkbox";
-import {WaGridRenderButton} from "../renderer/wa.grid.render.button";
-import {WaGridRenderLink} from "../renderer/wa.grid.render.link";
-import {WaGridRenderImg} from "../renderer/wa.grid.render.img";
-import {WaGridRenderString} from "../renderer/wa.grid.render.string";
+import {WaGroupRender} from "../renderer/WaGroupRender";
+import {WaTreeRender} from "../renderer/WaTreeRender";
+import {WaCheckboxRender} from "../renderer/WaCheckboxRender";
+import {WaButtonRender} from "../renderer/WaButtonRender";
+import {WaLinkRender} from "../renderer/WaLinkRender";
+import {WaImgRender} from "../renderer/WaImgRender";
+import {WaStringRender} from "../renderer/WaStringRender";
 
 
 export class WaRenderPanel30 {
@@ -147,31 +147,31 @@ export class WaRenderPanel30 {
         const grid = this.grid;
 
         if (grid.group_column_table.count() > 0 && this.depth <= grid.group_column_table.count()) {
-            const render = new WaGridRenderGroup();
+            const render = new WaGroupRender();
             render.addElement(this);
         }
         else if (grid.grid_mode == GridMode.tree && this.columnIndex == 0) {
-            const render = new WaGridRenderTree();
+            const render = new WaTreeRender();
             render.addElement(this);
         }
         else if (this.columnType == CellType.checkbox) {
-            const render = new WaGridRenderCheckbox();
+            const render = new WaCheckboxRender();
             render.addElement(this);
         }
         else if (this.columnType == CellType.button) {
-            const render = new WaGridRenderButton();
+            const render = new WaButtonRender();
             render.addElement(this);
         }
         else if (this.columnType == CellType.link) {
-            const render = new WaGridRenderLink();
+            const render = new WaLinkRender();
             render.addElement(this);
         }
         else if (this.columnType == CellType.img) {
-            const render = new WaGridRenderImg();
+            const render = new WaImgRender();
             render.addElement(this);
         }
         else {
-            const render = new WaGridRenderString();
+            const render = new WaStringRender();
             render.addElement(this);
         }
         this.setBounding();
@@ -200,34 +200,34 @@ export class WaRenderPanel30 {
         }
 
         if (grid.group_column_table.count() > 0 && this.depth <= grid.group_column_table.count()) {
-            const render = new WaGridRenderGroup();
+            const render = new WaGroupRender();
             render.setBounding(this);
         }
         else if (grid.grid_mode == GridMode.tree && this.columnIndex == 0) {
-            const render = new WaGridRenderTree();
+            const render = new WaTreeRender();
             render.setBounding(this);
         }
         else if (this.columnType == CellType.checkbox) {
             if (this.cellValue == this.grid.getTrueValue(this.columnName)) this.cellValue = true;
             else this.cellValue = false;
 
-            const render = new WaGridRenderCheckbox();
+            const render = new WaCheckboxRender();
             render.setBounding(this);
         }
         else if (this.columnType == CellType.button) {
-            const render = new WaGridRenderButton();
+            const render = new WaButtonRender();
             render.setBounding(this);
         }
         else if (this.columnType == CellType.link) {
-            const render = new WaGridRenderLink();
+            const render = new WaLinkRender();
             render.setBounding(this);
         }
         else if (this.columnType == CellType.img) {
-            const render = new WaGridRenderImg();
+            const render = new WaImgRender();
             render.setBounding(this);
         }
         else {
-            const render = new WaGridRenderString();
+            const render = new WaStringRender();
             render.setBounding(this);
         }
 

@@ -1,5 +1,5 @@
 import { WaGrid } from '../wa.grid';
-export declare class WaGridCombo {
+export declare class WaCombo {
     colType: any;
     grid: WaGrid;
     gridId: string;

@@ -1,7 +1,7 @@
 
 import {WaGridDom} from "../WaDom";
 
-export class WaGridRenderGroup {
+export class WaGroupRender {
 
     addElement(param) {
         const row = param.grid.view_table.selectRowByRowIndex(param.rowIndex);;

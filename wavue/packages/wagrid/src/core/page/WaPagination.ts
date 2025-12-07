@@ -1,7 +1,7 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {WaColumnProperty} from "@/core/columns/WaColumnEnum"
 
-export class WaGridPagination {
+export class WaPagination {
     grid: WaGridCore;
     selector: string;
 

@@ -1,13 +1,13 @@
 import { WaScrollBase } from './wa.grid.scroll.base';
 import { WaScroll } from './wa.grid.scroll';
-import { WaGridHeaders } from './columns/wa.grid.headers';
+import { WaHeaders } from './columns/wa.grid.headers';
 import { WaGridColumns } from './columns/columns';
 import { WaGridControl } from './wa.grid.control';
 import { WaGridRange } from './wa.grid.range';
 import { WaGridRangePanel } from './wa.grid.range.panel';
 import { WaGridFilter } from './wa.grid.filter';
 import { WaGridGroup } from './wa.grid.group';
-import { WaGridPage } from './page/wa.grid.page';
+import { WaPage } from './page/wa.grid.page';
 import { WaGridSort } from './wa.grid.sort';
 import { WaGridTree } from './wa.grid.tree';
 import { WaPanelBase } from './panels/wa.grid.panel.base';
@@ -20,10 +20,10 @@ import { WaPanel70 } from './panels/wa.grid.panel70';
 import { WaPanel80 } from './panels/wa.grid.panel80';
 import { WaPanel90 } from './panels/wa.grid.panel90';
 import { WaPanel99 } from './panels/wa.grid.panel99';
-import { WaGridTop } from './summary/wa.grid.top';
-import { WaGridFooter } from './summary/wa.grid.footer';
-import { WaGridDate } from './layer/wa.grid.date';
-import { WaGridCombo } from './layer/wa.grid.combo';
+import { WaTop } from './summary/wa.grid.top';
+import { WaFooter } from './summary/wa.grid.footer';
+import { WaDate } from './layer/wa.grid.date';
+import { WaCombo } from './layer/wa.grid.combo';
 import { WaGridRow } from './wa.grid.row';
 import { WaGridCell } from './wa.grid.cell';
 import { WaGridBase } from './base/wa.grid.base';
@@ -36,7 +36,7 @@ import { WaGridBaseRows } from './base/wa.grid.base.rows';
 import { WaGridBaseData } from './base/wa.grid.base.data';
 import { WaGridBaseMain } from './base/wa.grid.base.main';
 import { WaGridOption } from './wa.grid.types';
-import { WaGridPagination } from './page/wa.grid.pagination';
+import { WaPagination } from './page/wa.grid.pagination';
 /**
  *
  * Class Mixins
@@ -51,7 +51,7 @@ export declare class WaGrid extends WaGridBase {
     classScroll: WaScrollBase;
     verticalScroll: WaScroll;
     horizontalScroll: WaScroll;
-    classHeader: WaGridHeaders;
+    classHeader: WaHeaders;
     classColumn: WaGridColumns;
     classControl: WaGridControl;
     classRange: WaGridRange;
@@ -71,12 +71,12 @@ export declare class WaGrid extends WaGridBase {
     waPanel80: WaPanel80;
     waPanel90: WaPanel90;
     waPanel99: WaPanel99;
-    classPage: WaGridPage;
-    classPagination: WaGridPagination;
-    classTop: WaGridTop;
-    classFooter: WaGridFooter;
-    tbsGridDate: WaGridDate;
-    tbsGridCombo: WaGridCombo;
+    classPage: WaPage;
+    classPagination: WaPagination;
+    classTop: WaTop;
+    classFooter: WaFooter;
+    tbsGridDate: WaDate;
+    tbsGridCombo: WaCombo;
     classRow: WaGridRow;
     classCell: WaGridCell;
     topLineDiv: any;

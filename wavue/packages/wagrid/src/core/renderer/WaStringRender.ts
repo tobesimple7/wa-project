@@ -1,7 +1,7 @@
 import {WaGridDom} from "../WaDom";
 
 
-export class WaGridRenderString {
+export class WaStringRender {
     /**
      * @param { panelName, columnName, tableCell, cellValue, className, visible, align, width }
      */

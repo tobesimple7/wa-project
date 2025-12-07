@@ -1,4 +1,4 @@
-export declare class WaGridRenderString {
+export declare class WaStringRender {
     /**
      * @param { panelName, columnName, tableCell, cellValue, className, visible, align, width }
      */
