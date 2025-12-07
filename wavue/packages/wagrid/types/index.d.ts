@@ -229,9 +229,9 @@ declare class WaGrid extends WaGridBase {
     /**
      * Class
      */
-    classScroll: WaGridScrollBase;
-    verticalScroll: WaGridScroll;
-    horizontalScroll: WaGridScroll;
+    classScroll: WaScrollBase;
+    verticalScroll: WaScroll;
+    horizontalScroll: WaScroll;
     classHeader: WaGridHeaders;
     classColumn: WaGridColumns;
     classControl: WaGridControl;
@@ -242,16 +242,16 @@ declare class WaGrid extends WaGridBase {
     classGroup: WaGridGroup;
     classSort: WaGridSort;
     classTree: WaGridTree;
-    classPanelBase: WaGridPanelBase;
-    classPanel10: WaGridPanel10;
-    classPanel20: WaGridPanel20;
-    classPanel30: WaGridPanel30;
-    classPanel40: WaGridPanel40;
-    classPanel50: WaGridPanel50;
-    classPanel70: WaGridPanel70;
-    classPanel80: WaGridPanel80;
-    classPanel90: WaGridPanel90;
-    classPanel99: WaGridPanel99;
+    classPanelBase: WaPanelBase;
+    classPanel10: WaPanel10;
+    classPanel20: WaPanel20;
+    classPanel30: WaPanel30;
+    classPanel40: WaPanel40;
+    classPanel50: WaPanel50;
+    classPanel70: WaPanel70;
+    classPanel80: WaPanel80;
+    classPanel90: WaPanel90;
+    classPanel99: WaPanel99;
     classPage: WaGridPage;
     classPagination: WaGridPagination;
     classTop: WaGridTop;
@@ -879,115 +879,6 @@ declare class WaGridPagination {
     setPaginationData(data: any[]): void;
 }
 
-declare class WaGridPanel10 extends WaGridPanelBase {
-    constructor(grid: WaGrid);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    panel10_select(): void;
-    showToolbarPanel(): void;
-    hideToolbarPanel(): void;
-    showToolbarButtons(buttonType: any): void;
-    hideToolbarButtons(buttonType: any): void;
-}
-
-declare class WaGridPanel20 extends WaGridPanelBase {
-    isChecked: boolean;
-    constructor(grid: WaGrid);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    setDataPanel(topRowIndex?: number): void;
-    setDataPanel1(param: any): void;
-    setDataPanel2(param: any): void;
-    setDataPanel0(param: any): void;
-    setDataPanelSub(panelName: string, param: any): void;
-    panel21_select(): void;
-    panel20_select(panelName: any): void;
-}
-
-declare class WaGridPanel30 extends WaGridPanelBase {
-    constructor(grid: any);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    updateTableRows(): void;
-    setDataPanel(topRowIndex: any): void;
-    setDataPanel1(param: any): void;
-    setDataPanel2(param: any): void;
-    setDataPanel0(param: any): void;
-    panel30_select(eventPanelName: any): void;
-    panel31_select(eventPanelName: any): void;
-}
-
-declare class WaGridPanel40 extends WaGridPanelBase {
-    constructor(grid: any);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    setDataPanel(): void;
-    setDataPanel1(): void;
-    setDataPanel2(): void;
-    setDataPanel0(): void;
-    panel40_select(eventPanelName: any): void;
-    panel41_select(eventPanelName: any): void;
-}
-
-declare class WaGridPanel50 extends WaGridPanelBase {
-    constructor(grid: any);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    setDataPanel(): void;
-    setDataPanel1(): void;
-    setDataPanel2(): void;
-    setDataPanel0(): void;
-}
-
-declare class WaGridPanel70 extends WaGridPanelBase {
-    constructor(grid: any);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    setDataPanel(): void;
-    setDataPanel2(param: any): void;
-    setDataPanel0(param: any): void;
-    panel70_select(panelName: any): void;
-}
-
-declare class WaGridPanel80 extends WaGridPanelBase {
-    constructor(grid: any);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    panel80_select(): void;
-}
-
-declare class WaGridPanel90 extends WaGridPanelBase {
-    constructor(grid: any);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    panel90_select(): void;
-}
-
-declare class WaGridPanel99 extends WaGridPanelBase {
-    constructor(grid: WaGrid);
-    createHtml(parentElement: any): void;
-    createTable(): void;
-    panel99_select(): void;
-    setPageRowCountList(data?: any[]): void;
-    showPagePanel(): void;
-    hidePagePanel(): void;
-}
-
-declare class WaGridPanelBase extends WaBase {
-    grid: WaGrid;
-    selector: string;
-    panelName: string;
-    panelName1: string;
-    panelName2: string;
-    panelName0: string;
-    constructor(grid: WaGrid);
-    /**
-     *  Panel Interface
-     */
-    createHtml(parentElement: any): void;
-    createEtcHtml(parentElement: any): void;
-}
-
 declare class WaGridRange {
     grid: WaGrid;
     selector: string;
@@ -1037,57 +928,6 @@ declare class WaGridRow {
     hideTableRows(grid: any, panelName: any, tableRows: any, fromRowIndex: any, toRowIndex: any): void;
 }
 
-declare class WaGridScroll {
-    /**
-     * ScrollName : verticalScroll, horizontalScroll, verticalScroll60, horizontalScroll32
-     *
-     */
-    grid: WaGrid;
-    selector: string;
-    scrollName: string;
-    barSize: number;
-    railSize: number;
-    moveCount: number;
-    margin: string;
-    hiddenSize: number;
-    panelName: string;
-    type: string;
-    constructor(grid: WaGrid, scrollName: string);
-    setScroll(type: any): void;
-    setHorizontalScroll(): void;
-    setVerticalScroll(): void;
-    showScroll(type: any): void;
-    hideScroll(type: any): void;
-    setScrollSize(type: any): void;
-    getBarSize(type: any): any;
-    getHorizontalBarSize(): any;
-    getVerticalBarSize(): number;
-    getRailSize(type: any, barSize: any): number;
-    getHorizontalRailSize(barSize: any): number;
-    getVerticalRailSize(barSize: any): number;
-    getMoveCount(type: any, railSize: any): number;
-    getHiddenSize(type: any): any;
-    getBarWidth(type: any, barSize: any): string;
-}
-
-declare class WaGridScrollBase {
-    grid: WaGrid;
-    selector: string;
-    constructor(grid: any);
-    setPanelSize(): void;
-    setBarPosition(type: string, topRowIndex?: number): void;
-    setBarPositionByDirection(type: string, rowIndex?: number): number;
-    getContentPanelLeft(value: any): string;
-    setContentPanelLeft(value: any): void;
-    setContentPanelLeftMove(value: any): void;
-    setColumnWidth(panelName: any, colIndex: any, value: any): void;
-    setColumnWidth20(panelName: any, colIndex: any, value: any): void;
-    setColumnWidth22(panelName: any, colIndex: any, value: any): void;
-    getFixedColumnsWidth(): number;
-    setAllColumnWidth(arr: any): void;
-    setPageRowCount(panelName?: string): void;
-}
-
 declare class WaGridSort {
     grid: WaGrid;
     selector: string;
@@ -1135,6 +975,166 @@ declare class WaGridTree {
     addTreeRows(rowIndex: any): void;
     addTreeRow(startRowIndex: any, row: any): void;
     removeTreeRow(row: any): void;
+}
+
+declare class WaPanel10 extends WaPanelBase {
+    constructor(grid: WaGrid);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    panel10_select(): void;
+    showToolbarPanel(): void;
+    hideToolbarPanel(): void;
+    showToolbarButtons(buttonType: any): void;
+    hideToolbarButtons(buttonType: any): void;
+}
+
+declare class WaPanel20 extends WaPanelBase {
+    isChecked: boolean;
+    constructor(grid: WaGrid);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    setDataPanel(topRowIndex?: number): void;
+    setDataPanel1(param: any): void;
+    setDataPanel2(param: any): void;
+    setDataPanel0(param: any): void;
+    setDataPanelSub(panelName: string, param: any): void;
+    panel21_select(): void;
+    panel20_select(panelName: any): void;
+}
+
+declare class WaPanel30 extends WaPanelBase {
+    constructor(grid: any);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    updateTableRows(): void;
+    setDataPanel(topRowIndex: any): void;
+    setDataPanel1(param: any): void;
+    setDataPanel2(param: any): void;
+    setDataPanel0(param: any): void;
+    panel30_select(eventPanelName: any): void;
+    panel31_select(eventPanelName: any): void;
+}
+
+declare class WaPanel40 extends WaPanelBase {
+    constructor(grid: any);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    setDataPanel(): void;
+    setDataPanel1(): void;
+    setDataPanel2(): void;
+    setDataPanel0(): void;
+    panel40_select(eventPanelName: any): void;
+    panel41_select(eventPanelName: any): void;
+}
+
+declare class WaPanel50 extends WaPanelBase {
+    constructor(grid: any);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    setDataPanel(): void;
+    setDataPanel1(): void;
+    setDataPanel2(): void;
+    setDataPanel0(): void;
+}
+
+declare class WaPanel70 extends WaPanelBase {
+    constructor(grid: any);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    setDataPanel(): void;
+    setDataPanel2(param: any): void;
+    setDataPanel0(param: any): void;
+    panel70_select(panelName: any): void;
+}
+
+declare class WaPanel80 extends WaPanelBase {
+    constructor(grid: any);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    panel80_select(): void;
+}
+
+declare class WaPanel90 extends WaPanelBase {
+    constructor(grid: any);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    panel90_select(): void;
+}
+
+declare class WaPanel99 extends WaPanelBase {
+    constructor(grid: WaGrid);
+    createHtml(parentElement: any): void;
+    createTable(): void;
+    panel99_select(): void;
+    setPageRowCountList(data?: any[]): void;
+    showPagePanel(): void;
+    hidePagePanel(): void;
+}
+
+declare class WaPanelBase extends WaBase {
+    grid: WaGrid;
+    selector: string;
+    panelName: string;
+    panelName1: string;
+    panelName2: string;
+    panelName0: string;
+    constructor(grid: WaGrid);
+    /**
+     *  Panel Interface
+     */
+    createHtml(parentElement: any): void;
+    createEtcHtml(parentElement: any): void;
+}
+
+declare class WaScroll {
+    /**
+     * ScrollName : verticalScroll, horizontalScroll, verticalScroll60, horizontalScroll32
+     *
+     */
+    grid: WaGrid;
+    selector: string;
+    scrollName: string;
+    barSize: number;
+    railSize: number;
+    moveCount: number;
+    margin: string;
+    hiddenSize: number;
+    panelName: string;
+    type: string;
+    constructor(grid: WaGrid, scrollName: string);
+    setScroll(type: any): void;
+    setHorizontalScroll(): void;
+    setVerticalScroll(): void;
+    showScroll(type: any): void;
+    hideScroll(type: any): void;
+    setScrollSize(type: any): void;
+    getBarSize(type: any): any;
+    getHorizontalBarSize(): any;
+    getVerticalBarSize(): number;
+    getRailSize(type: any, barSize: any): number;
+    getHorizontalRailSize(barSize: any): number;
+    getVerticalRailSize(barSize: any): number;
+    getMoveCount(type: any, railSize: any): number;
+    getHiddenSize(type: any): any;
+    getBarWidth(type: any, barSize: any): string;
+}
+
+declare class WaScrollBase {
+    grid: WaGrid;
+    selector: string;
+    constructor(grid: any);
+    setPanelSize(): void;
+    setBarPosition(type: string, topRowIndex?: number): void;
+    setBarPositionByDirection(type: string, rowIndex?: number): number;
+    getContentPanelLeft(value: any): string;
+    setContentPanelLeft(value: any): void;
+    setContentPanelLeftMove(value: any): void;
+    setColumnWidth(panelName: any, colIndex: any, value: any): void;
+    setColumnWidth20(panelName: any, colIndex: any, value: any): void;
+    setColumnWidth22(panelName: any, colIndex: any, value: any): void;
+    getFixedColumnsWidth(): number;
+    setAllColumnWidth(arr: any): void;
+    setPageRowCount(panelName?: string): void;
 }
 
 export { }

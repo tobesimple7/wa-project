@@ -1,6 +1,6 @@
 import { WaBase } from '../wa.base';
 import { WaGrid } from '../wa.grid';
-export declare class WaGridPanelBase extends WaBase {
+export declare class WaPanelBase extends WaBase {
     grid: WaGrid;
     selector: string;
     panelName: string;

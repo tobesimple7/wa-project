@@ -1,6 +1,6 @@
-import { WaGridPanelBase } from '../wa.grid.panel.base';
+import { WaPanelBase } from '../wa.grid.panel.base';
 import { WaGrid } from '../../wa.grid';
-export declare class WaGridPanel20 extends WaGridPanelBase {
+export declare class WaPanel20 extends WaPanelBase {
     isChecked: boolean;
     constructor(grid: WaGrid);
     createHtml(parentElement: any): void;

@@ -1,7 +1,7 @@
 ﻿
-import { WaGridPanelBase } from './PanelBase';
-import { WaGridRenderPanel30 } from './RenderPanel30';
-import { WaGridRenderPanelInfo } from './RenderPanelInfo';
+import { WaPanelBase } from './PanelBase';
+import { WaRenderPanel30 } from './RenderPanel30';
+import { WaRenderPanelInfo } from './RenderPanelInfo';
 import {WaGridTable} from "../wa.grid.table";
 import {CellType, Direction, GridMode, RowAlias} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
@@ -15,7 +15,7 @@ import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 4. 이벤트에 정보를 넘겨줄때, rowIndex, columnIndex,
                          cellRowIndex, cellColumnIndex
 */
-export class WaGridPanel30 extends WaGridPanelBase {
+export class WaPanel30 extends WaPanelBase {
 
     constructor(grid) {
         super(grid);
@@ -122,7 +122,7 @@ export class WaGridPanel30 extends WaGridPanelBase {
                 tableCell.dataset.cellType = grid.info_column_table.selectValue(x, WaColumnProperty.type);
 
                 /* Render: Start */
-                let tbsGridRenderInfo = new WaGridRenderPanelInfo(grid);
+                let tbsGridRenderInfo = new WaRenderPanelInfo(grid);
                 tbsGridRenderInfo.start(panelName, tableCell, grid.info_column_table.data[x], i, x);
                 tbsGridRenderInfo = null;
 
@@ -177,7 +177,7 @@ export class WaGridPanel30 extends WaGridPanelBase {
                 if (x <= grid.fixedColumnIndex) tableCell = tableRow.childNodes[x];
 
                 /* Render: Start */
-                let tbsGridRender = new WaGridRenderPanel30(grid);
+                let tbsGridRender = new WaRenderPanel30(grid);
                 tbsGridRender.start(panelName, tableCell, grid.column_table.data[x], i, x);
                 tbsGridRender = null;
                 //grid.classRender.start(panelName, tableCell, grid.column_table.data[x], i, x);
@@ -237,7 +237,7 @@ export class WaGridPanel30 extends WaGridPanelBase {
                 if (grid.fixedColumnIndex != -1 && x <= grid.fixedColumnIndex) continue;
 
                 /* Render: Start */
-                let tbsGridRender = new WaGridRenderPanel30(grid);
+                let tbsGridRender = new WaRenderPanel30(grid);
                 tbsGridRender.start(panelName, tableCell, grid.column_table.data[x], i, x);
                 tbsGridRender = null;
 

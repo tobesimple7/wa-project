@@ -1,8 +1,8 @@
-import {WaGridPanelBase} from './PanelBase';
+import {WaPanelBase} from './PanelBase';
 import {WaGridCore} from "@/core/wa.grid.core"
 import {ClickPageOrder, GridMode} from "@/core/WaGrid.types"
 
-export class WaGridPanel99 extends WaGridPanelBase {
+export class WaPanel99 extends WaPanelBase {
 
     constructor(grid: WaGridCore) {
         super(grid);

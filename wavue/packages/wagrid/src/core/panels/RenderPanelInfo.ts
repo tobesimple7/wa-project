@@ -5,7 +5,7 @@ import {WaGridCore} from "@/core/wa.grid.core"
 import {CellType, GridMode} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 
-export class WaGridRenderPanelInfo {
+export class WaRenderPanelInfo {
 
     /**
      * num, mode, checkbox

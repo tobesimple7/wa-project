@@ -3,7 +3,7 @@
 // import { WaGridHeaderSelect } from './wa.grid.panel20.select.header';
 // import { WaGridAutoScroll } from './wa.grid.panel20.scroll.autoscroll';
 // import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
-// export class WaGridPanel20Events {
+// export class WaPanel20Events {
 //     grid: WaGridCore;
 //     selector: string;
 //     panelName: string;

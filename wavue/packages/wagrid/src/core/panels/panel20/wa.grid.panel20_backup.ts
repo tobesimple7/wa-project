@@ -1,11 +1,11 @@
-﻿// import { WaGridPanelBase } from './wa.grid.panel.base';
-// import { WaGridRenderPanelInfo } from './wa.grid.render.panel.info';
+﻿// import { WaPanelBase } from './wa.grid.panel.base';
+// import { WaRenderPanelInfo } from './wa.grid.render.panel.info';
 // import { WaGridTable } from '../wa.grid.table';
 // import { WaGridCore } from '../wa.grid';
 // import { WaColumnProperty, CellType } from '../wa.grid.types';
-// import { WaGridPanel20Events } from './wa.grid.panel20.events';
+// import { WaPanel20Events } from './wa.grid.panel20.events';
 //
-// export class WaGridPanel20 extends WaGridPanelBase {
+// export class WaPanel20 extends WaPanelBase {
 //     isChecked: boolean;
 //
 //     constructor(grid: WaGridCore) {
@@ -65,7 +65,7 @@
 //                 cell.dataset.rowIndex = i;
 //                 cell.dataset.cellType = column[WaColumnProperty.type];
 //
-//                 const renderInfo = new WaGridRenderPanelInfo(grid);
+//                 const renderInfo = new WaRenderPanelInfo(grid);
 //                 renderInfo.start(panelName, cell, column, i, x);
 //                 grid.classCell.showSelectedCells(grid, panelName, cell, i, 0);
 //             }
@@ -74,7 +74,7 @@
 //
 //     /** 이벤트 초기화 */
 //     bindEvents() {
-//         const eventManager = new WaGridPanel20Events(this.grid, this.selector, this.panelName);
+//         const eventManager = new WaPanel20Events(this.grid, this.selector, this.panelName);
 //         eventManager.bind();
 //     }
 // }

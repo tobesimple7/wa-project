@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/wa.grid.core"
 
-export class WaGridScroll {
+export class WaScroll {
     /**
      * ScrollName : verticalScroll, horizontalScroll, verticalScroll60, horizontalScroll32
      *

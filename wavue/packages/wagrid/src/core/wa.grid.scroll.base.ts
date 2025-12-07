@@ -1,7 +1,7 @@
 import {WaGridCore} from "@/core/wa.grid.core"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 
-export class WaGridScrollBase {
+export class WaScrollBase {
 
     grid: WaGridCore;
     selector: string;

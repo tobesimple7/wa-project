@@ -3,7 +3,7 @@ import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 
 
 
-export class WaGridRenderPanel70 {
+export class WaRenderPanel70 {
     grid: WaGridCore;
     selector: string;
 

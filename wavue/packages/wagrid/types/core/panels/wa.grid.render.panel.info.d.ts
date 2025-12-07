@@ -1,5 +1,5 @@
 import { WaGrid } from '../wa.grid';
-export declare class WaGridRenderPanelInfo {
+export declare class WaRenderPanelInfo {
     /**
      * num, mode, checkbox
      */

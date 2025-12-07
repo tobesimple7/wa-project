@@ -10,7 +10,7 @@ import {WaGridRenderImg} from "../renderer/wa.grid.render.img";
 import {WaGridRenderString} from "../renderer/wa.grid.render.string";
 
 
-export class WaGridRenderPanel30 {
+export class WaRenderPanel30 {
 
     grid: WaGridCore;
     selector: string;

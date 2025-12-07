@@ -1,9 +1,9 @@
 ﻿
-import {WaGridPanelBase } from './PanelBase';
+import {WaPanelBase } from './PanelBase';
 import {WaGridTable } from "../wa.grid.table";
 import {GridMode} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
-export class WaGridPanel70 extends WaGridPanelBase {
+export class WaPanel70 extends WaPanelBase {
 
     constructor(grid) {
         super(grid);

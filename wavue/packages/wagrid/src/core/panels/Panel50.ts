@@ -1,10 +1,10 @@
 ﻿
-import { WaGridPanelBase } from './PanelBase';
-import { WaGridRenderPanel40 } from './RenderPanel40';
+import { WaPanelBase } from './PanelBase';
+import { WaRenderPanel40 } from './RenderPanel40';
 import { WaGridTable } from "../wa.grid.table";
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
 
-export class WaGridPanel50 extends WaGridPanelBase {
+export class WaPanel50 extends WaPanelBase {
     constructor(grid) {
         super(grid);
         this.panelName  = 'panel50';
@@ -114,7 +114,7 @@ export class WaGridPanel50 extends WaGridPanelBase {
 
             if (x > grid.fixedColumnIndex && x < startColumnIndex) continue;
 
-            let tbsGridRender = new WaGridRenderPanel40(grid);
+            let tbsGridRender = new WaRenderPanel40(grid);
             tbsGridRender.start(panelName, tableCell, column, 0, x);
             tbsGridRender = null;
             //grid.classRender.start(panelName, tableCell, column, 0, x);
@@ -151,7 +151,7 @@ export class WaGridPanel50 extends WaGridPanelBase {
             }
             else { if (x < startColumnIndex) continue; }
 
-            let tbsGridRender = new WaGridRenderPanel40(grid);
+            let tbsGridRender = new WaRenderPanel40(grid);
             tbsGridRender.start(panelName, tableCell, grid.column_table.data[x], 0, x);
             tbsGridRender = null;
             //grid.classRender.start(panelName, tableCell, grid.column_table.data[x], 0, x);

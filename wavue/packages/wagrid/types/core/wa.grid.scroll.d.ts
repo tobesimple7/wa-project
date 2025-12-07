@@ -1,5 +1,5 @@
 import { WaGrid } from './wa.grid';
-export declare class WaGridScroll {
+export declare class WaScroll {
     /**
      * ScrollName : verticalScroll, horizontalScroll, verticalScroll60, horizontalScroll32
      *

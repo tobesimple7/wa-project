@@ -1,5 +1,5 @@
 import { WaGrid } from '../wa.grid';
-export declare class WaGridRenderPanel30 {
+export declare class WaRenderPanel30 {
     grid: WaGrid;
     selector: string;
     column: any;

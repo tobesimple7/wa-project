@@ -1,5 +1,5 @@
-import {WaGridScrollBase} from "./wa.grid.scroll.base";
-import {WaGridScroll} from "./wa.grid.scroll";
+import {WaScrollBase} from "./wa.grid.scroll.base";
+import {WaScroll} from "./wa.grid.scroll";
 import {WaGridHeader} from "@/core/header/WaGridHeader";
 import {WaGridColumnCore} from "@/core/columns/WaGridColumnCore";
 import {WaGridControl} from "./wa.grid.control";
@@ -10,16 +10,16 @@ import {WaGridGroup} from "./wa.grid.group";
 import {WaGridPage} from "@/core/page/wa.grid.page";
 import {WaGridSort} from "./wa.grid.sort";
 import {WaGridTree} from "./wa.grid.tree";
-import {WaGridPanelBase} from "@/core/panels/PanelBase";
-import {WaGridPanel10} from "@/core/panels/Panel10";
-import {WaGridPanel20} from "@/core/panels/Panel20";
-import {WaGridPanel30} from "@/core/panels/Panel30";
-import {WaGridPanel40} from "@/core/panels/Panel40";
-import {WaGridPanel50} from "@/core/panels/Panel50";
-import {WaGridPanel70} from "@/core/panels/Panel70";
-import {WaGridPanel80} from "@/core/panels/Panel80";
-import {WaGridPanel90} from "@/core/panels/Panel90";
-import {WaGridPanel99 } from "@/core/panels/Panel99";
+import {WaPanelBase} from "@/core/panels/PanelBase";
+import {WaPanel10} from "@/core/panels/Panel10";
+import {WaPanel20} from "@/core/panels/Panel20";
+import {WaPanel30} from "@/core/panels/Panel30";
+import {WaPanel40} from "@/core/panels/Panel40";
+import {WaPanel50} from "@/core/panels/Panel50";
+import {WaPanel70} from "@/core/panels/Panel70";
+import {WaPanel80} from "@/core/panels/Panel80";
+import {WaPanel90} from "@/core/panels/Panel90";
+import {WaPanel99 } from "@/core/panels/Panel99";
 import {WaGridTop} from "@/core/summary/wa.grid.top";
 import {WaGridFooter} from "@/core/summary/wa.grid.footer";
 import {WaGridDate} from "@/core/layer/wa.grid.date";
@@ -60,9 +60,9 @@ export class WaGridCore extends WaGridBase {
      * Class
      */
 
-    classScroll: WaGridScrollBase;
-    verticalScroll: WaGridScroll;
-    horizontalScroll: WaGridScroll;
+    classScroll: WaScrollBase;
+    verticalScroll: WaScroll;
+    horizontalScroll: WaScroll;
 
     classHeader: WaGridHeader;
     classColumn: WaGridColumnCore;
@@ -75,16 +75,16 @@ export class WaGridCore extends WaGridBase {
     classSort: WaGridSort
     classTree: WaGridTree;
 
-    classPanelBase: WaGridPanelBase;
-    classPanel10: WaGridPanel10;
-    classPanel20: WaGridPanel20;
-    classPanel30: WaGridPanel30;
-    classPanel40: WaGridPanel40;
-    classPanel50: WaGridPanel50;
-    classPanel70: WaGridPanel70;
-    classPanel80: WaGridPanel80;
-    classPanel90: WaGridPanel90;
-    classPanel99: WaGridPanel99;
+    classPanelBase: WaPanelBase;
+    classPanel10: WaPanel10;
+    classPanel20: WaPanel20;
+    classPanel30: WaPanel30;
+    classPanel40: WaPanel40;
+    classPanel50: WaPanel50;
+    classPanel70: WaPanel70;
+    classPanel80: WaPanel80;
+    classPanel90: WaPanel90;
+    classPanel99: WaPanel99;
     classPage: WaGridPage;
     classPagination: WaGridPagination;
 
@@ -107,9 +107,9 @@ export class WaGridCore extends WaGridBase {
     constructor(gridId: string, gridConfigs: object) {
         super(gridId, gridConfigs);
 
-        this.classScroll    = new WaGridScrollBase(this);
-        this.verticalScroll = new WaGridScroll(this, 'verticalScroll');
-        this.horizontalScroll = new WaGridScroll(this, 'horizontalScroll');
+        this.classScroll    = new WaScrollBase(this);
+        this.verticalScroll = new WaScroll(this, 'verticalScroll');
+        this.horizontalScroll = new WaScroll(this, 'horizontalScroll');
 
         this.classHeader    = new WaGridHeader(this);
         this.classColumn    = new WaGridColumnCore(this);
@@ -119,20 +119,20 @@ export class WaGridCore extends WaGridBase {
         this.classRange50   = new WaGridRangePanel(this, 'panel50');
         this.classFilter    = new WaGridFilter(this);
         this.classGroup     = new WaGridGroup(this);
-        this.classPage = new WaGridPage(this);
+        this.classPage      = new WaGridPage(this);
         this.classSort      = new WaGridSort(this);
         this.classTree      = new WaGridTree(this);
 
-        this.classPanelBase = new WaGridPanelBase(this);
-        this.classPanel10 = new WaGridPanel10(this);
-        this.classPanel20 = new WaGridPanel20(this);
-        this.classPanel30 = new WaGridPanel30(this);
-        this.classPanel40 = new WaGridPanel40(this);
-        this.classPanel50 = new WaGridPanel50(this);
-        this.classPanel70 = new WaGridPanel70(this);
-        this.classPanel80 = new WaGridPanel80(this);
-        this.classPanel90 = new WaGridPanel90(this);
-        this.classPanel99 = new WaGridPanel99(this);
+        this.classPanelBase = new WaPanelBase(this);
+        this.classPanel10 = new WaPanel10(this);
+        this.classPanel20 = new WaPanel20(this);
+        this.classPanel30 = new WaPanel30(this);
+        this.classPanel40 = new WaPanel40(this);
+        this.classPanel50 = new WaPanel50(this);
+        this.classPanel70 = new WaPanel70(this);
+        this.classPanel80 = new WaPanel80(this);
+        this.classPanel90 = new WaPanel90(this);
+        this.classPanel99 = new WaPanel99(this);
 
         this.classPagination = new WaGridPagination(this);
 

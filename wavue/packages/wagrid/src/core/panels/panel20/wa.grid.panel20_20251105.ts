@@ -26,13 +26,13 @@ panel20_select()
       ├─ selectRefresh()      : 자동 스크롤 갱신
       └─ doInterval()         : 반복 스크롤 타이머
 */
-import { WaGridPanelBase } from '../PanelBase';
-import { WaGridRenderPanelInfo } from '../RenderPanelInfo';
+import { WaPanelBase } from '../PanelBase';
+import { WaRenderPanelInfo } from '../RenderPanelInfo';
 import { WaGridTable } from "../../wa.grid.table";
 import {WaGridCore} from "@/core/wa.grid.core"
 import {CellType} from "@/core/WaGrid.types"
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
-export class WaGridPanel20 extends WaGridPanelBase {
+export class WaPanel20 extends WaPanelBase {
     isChecked: boolean;
 
     constructor(grid: WaGridCore) {
@@ -111,7 +111,7 @@ export class WaGridPanel20 extends WaGridPanelBase {
                 /**
                  * Render: Start
                  */
-                let tbsGridRenderInfo = new WaGridRenderPanelInfo(grid);
+                let tbsGridRenderInfo = new WaRenderPanelInfo(grid);
                 tbsGridRenderInfo.start(panelName, tableCell, grid.info_column_table.data[x], i, x);
                 tbsGridRenderInfo = null;
 

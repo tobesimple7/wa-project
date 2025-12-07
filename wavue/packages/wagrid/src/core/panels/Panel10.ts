@@ -1,7 +1,7 @@
-import { WaGridPanelBase } from './PanelBase';
+import { WaPanelBase } from './PanelBase';
 import {WaGridCore} from "@/core/wa.grid.core"
 
-export class WaGridPanel10 extends WaGridPanelBase {
+export class WaPanel10 extends WaPanelBase {
     constructor(grid: WaGridCore) {
         super(grid);
         this.grid = grid;

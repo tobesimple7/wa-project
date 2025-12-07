@@ -1,9 +1,9 @@
 ﻿
-import { WaGridPanelBase } from './PanelBase';
-import { WaGridRenderPanel30 } from './RenderPanel30';
-import { WaGridRenderPanelInfo } from './RenderPanelInfo';
+import { WaPanelBase } from './PanelBase';
+import { WaRenderPanel30 } from './RenderPanel30';
+import { WaRenderPanelInfo } from './RenderPanelInfo';
 import {WaColumnProperty} from "@/core/columns/WaGridColumn.enum"
-export class WaGridPanel90 extends WaGridPanelBase {
+export class WaPanel90 extends WaPanelBase {
 
     constructor(grid) {
         super(grid);
