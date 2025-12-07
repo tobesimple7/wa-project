@@ -4327,284 +4327,6 @@ declare class WaBase {
     printMe(): void;
 }
 
-declare enum WaColumnProperty {
-    rowId = "_rowId",
-    rowMode = "_mode",
-    isChecked = "_isChecked",
-    num = "_number",
-    mode = "_mode",
-    checkbox = "_checkbox",
-    parentNum = "_parentNumber",
-    depth = "_depth",
-    children = "children",
-    childRowIds = "_childRowIds",
-    childRows = "_childRows",
-    childCount = "_childCount",
-    isOpen = "_isOpen",
-    isShow = "_isShow",
-    open = "open",
-    closed = "closed",
-    rowCount = "_rowCount",
-    /** User Property */
-    name = "name",
-    text = "text",
-    type = "type",
-    dataType = "dataType",
-    width = "width",
-    editable = "editable",
-    visible = "visible",
-    align = "align",
-    scale = "scale",
-    roundType = "roundType",
-    fixedScale = "fixedScale",
-    scaleMax = "scaleMax",
-    scaleMin = "scalemin",
-    showZero = "showZero",
-    commaUnit = "commaUnit",// to be deprecated, Fixed 3
-    thousandChar = "thousandChar",
-    decimalChar = "decimalChar",
-    currencyChar = "currencyChar",
-    className = "className",// className
-    resizable = "resizable",
-    sortable = "sortable",
-    movable = "movable",
-    autoResizable = "autoResizable",
-    autoWidth = "autoWidth",
-    summaryType = "summaryType",
-    required = "required",
-    combo = "combo",
-    format = "format",
-    kind = "kind",//header, column, empty
-    rowSpan = "rowSpan",
-    colSpan = "colSpan",
-    rowIndex = "rowIndex",
-    colIndex = "colIndex",
-    subRowSpan = "subRowSpan",
-    subColSpan = "subColSpan",
-    order = "order",
-    value = "value",
-    header = "header"
-}
-
-declare class WaCombo {
-    colType: any;
-    grid: WaGridCore;
-    gridId: string;
-    column: object;
-    input: HTMLInputElement;
-    input_code: HTMLInputElement;
-    constructor(grid: WaGridCore, column: any, input: any, input_code: any);
-    create(): void;
-    clear(): void;
-    setData(): void;
-    AddEvent(): void;
-    destroy(): void;
-}
-
-declare class WaDataArrayTable extends WaBase {
-    tableName: string;
-    data: object[][];
-    currentRowId: number;
-    type: string;
-    constructor(tableName: string);
-    /**
-     * select functions
-     */
-    selectRows(arrayIndex: any, field: any, value: any, topIndex?: any): object[];
-    selectRow(arrayIndex: any, field: any, value: any): object;
-    selectRowByRowIndex(arrayIndex: any, rowIndex: any): object;
-    selectRowByRowId(arrayIndex: any, rowId: any): object;
-    selectRowIndexByRowId(arrayIndex: any, rowId: any): any;
-    selectRowIndex(arrayIndex: any, field: any, value: any): any;
-    selectRowIdByRowIndex(arrayIndex: any, rowIndex: any): any;
-    selectRowRange(arrayIndex: any, startRowIndex: any, endRowIndex: any): any[];
-    selectValue(arrayIndex: any, rowIndex: any, field: any): any;
-    isRow(arrayIndex: any, field: any, value: any): boolean;
-    /**
-     * Insert
-     */
-    insertRows(arrayIndex: any, dataRows: any): void;
-    insertRowsBefore(arrayIndex: any, dataRows: any, rowIndex: any): void;
-    insertRowsAfter(arrayIndex: any, dataRows: any, rowIndex: any): void;
-    insert(arrayIndex: any, dataRow: any): void;
-    insertBefore(arrayIndex: any, dataRow: any, rowIndex: any): void;
-    insertAfter(arrayIndex: any, dataRow: any, rowIndex: any): void;
-    /**
-     * Remove
-     */
-    remove(arrayIndex?: any, rowIndex?: any): void;
-    removeByRowId(arryIndex: any, rowId: any): void;
-    /**
-     * Update
-     */
-    update(arrayIndex: any, columnName: any, field: any, value: any): void;
-    updateRow(arrayIndex: any, columnName: any, field: any, value: any): void;
-    updateByRowIndex(arrayIndex: any, rowIndex: any, name: any, value: any): void;
-    updateByRowId(arrayIndex: any, rowId: any, name: any, value: any): void;
-    count(arrayIndex?: any, field?: any, value?: any): number;
-    makeColIndex(): void;
-}
-
-declare class WaDatabase extends WaBase {
-    tables: DataTableType[];
-    constructor();
-    createTable(tableName: string): WaDataTable;
-    createView(tableName: string): WaDataTable;
-    createArrayTable(tableName: string): WaDataArrayTable;
-    removeTable(tableName: string): void;
-    getTable(tableName: string): DataTableType;
-}
-
-declare class WaDataTable extends WaBase {
-    tableName: string;
-    data: any[];
-    currentRowId: number;
-    type: string;
-    constructor(tableName: string);
-    /**
-     * select functions
-     */
-    select(): void;
-    selectRows(field?: string, value?: any, topIndex?: number): object[];
-    selectRow(field: any, value: any): object;
-    selectRowByRowIndex(rowIndex: number): object;
-    selectRowByRowId(rowId: any): object;
-    selectRowIndexByRowId(rowId: any): number;
-    selectRowIndex(field: any, value: any): number;
-    selectRowIdByRowIndex(rowIndex: any): any;
-    selectRowRange(startRowIndex?: number, endRowIndex?: number): object[];
-    selectValue(rowIndex: any, field: any): any;
-    isRow(field: any, value: any): boolean;
-    /**
-     * Insert
-     */
-    insertRows(dataRows: any): void;
-    insertRowsBefore(dataRows: object[], rowIndex: number): void;
-    insertRowsAfter(dataRows: object[], rowIndex: number): void;
-    insert(dataRow: object): void;
-    insertBefore(dataRow: object, rowIndex: any): void;
-    insertAfter(dataRow: any, rowIndex: number): void;
-    /**
-     * Remove
-     */
-    remove(rowIndex?: number): void;
-    removeByRowId(rowId: any): void;
-    /**
-     * Update
-     */
-    update(columnName: string, field: string, value: any): void;
-    updateRow(columnName: string, field: string, value: any): void;
-    updateByRowIndex(rowIndex: number, name: string, value: any): void;
-    updateByRowId(rowId: number, name: string, value: any): void;
-    count(field?: any, value?: any): number;
-    /**
-     * orderBy
-     * @param sortColumns : [{ name : , order :, dataType: string | number }, ...]
-     */
-    orderBy(column_table: WaDataTable, sort_column_table: WaDataTable): any[];
-    getSum(columnName: string): number;
-    getAvg(columnName: string): number;
-    getMax(columnName: string): number;
-    getMin(columnName: string): number;
-}
-
-declare class WaDate {
-    colType: any;
-    grid: WaGridCore;
-    gridId: string;
-    column: object;
-    input: HTMLInputElement;
-    constructor(grid: WaGridCore, column: object, input: HTMLInputElement);
-    create(): void;
-    clear(): void;
-    setData(data?: any): void;
-    getToday(): string;
-    today(): void;
-    prev(): void;
-    next(): void;
-    selectMonth(value: any): void;
-    addEvent(): void;
-    addZero(value: any): any;
-    destroy(): void;
-}
-
-declare class WaFooter {
-    grid: WaGridCore;
-    selector: string;
-    constructor(grid: WaGridCore);
-    setFooterColumns(columns: any): void;
-    setFooterData(): void;
-    setFooterValue(rowIndex: any, columnName: any, value: any): void;
-}
-
-declare class WaGridBase extends WaBase {
-    gridId: string;
-    gridConfig: object;
-    grid_mode: string;
-    mousePointRange: number;
-    isMobile: boolean;
-    userAgent: string;
-    columns: any;
-    headerColumnTable: any[];
-    renderer: any;
-    infoRenderer: any;
-    db: WaDatabase;
-    header_column_table: WaDataArrayTable;
-    column_table: WaDataTable;
-    top_column_table: WaDataTable;
-    footer_column_table: WaDataTable;
-    sort_column_table: WaDataTable;
-    filter_column_table: WaDataTable;
-    group_column_table: WaDataTable;
-    source_table: WaDataTable;
-    view_table: WaDataTable;
-    group_table: WaDataTable;
-    group_header_table: WaDataTable;
-    tree_table: WaDataTable;
-    page_table: WaDataTable;
-    top_table: WaDataTable;
-    footer_table: WaDataTable;
-    temp_table: WaDataTable;
-    data_update: any[];
-    data_insert: any[];
-    data_delete: any[];
-    info_column_table: WaDataTable;
-    panel21_table: WaDataTable;
-    panel20_table: WaDataTable;
-    panel31_table: WaDataTable;
-    cell_template_table: WaDataTable;
-    data_select_panel30: object[];
-    data_select_panel31: object[];
-    pageRowCount: number;
-    pageIntRowCount: number;
-    startRowIndex: number;
-    startCellIndex: number;
-    lastRowIndex: number;
-    lastCellIndex: number;
-    _startRowIndex: number;
-    _startCellIndex: number;
-    _lastRowIndex: number;
-    _lastCellIndex: number;
-    selectRangeArray: any[];
-    startX: number;
-    startY: number;
-    lastX: number;
-    lastY: number;
-    const_filterValue: string;
-    const_filterType: string;
-    const_filterReset: string;
-    const_filterSave: string;
-    headerRowCount: number;
-    fixedColumnIndex: number;
-    headerRowHeight: number;
-    rowHeight: number;
-    topRowHeight: number;
-    footerRowHeight: number;
-    code_horizontal: string;
-    code_vertical: string;
-    constructor(gridId: string, gridConfigs: object);
-}
-
 declare class WaBaseColumns {
     constructor();
     /**
@@ -4916,6 +4638,80 @@ declare class WaColumn {
     getLastVisibleColumnIndex(): any;
 }
 
+declare enum WaColumnProperty {
+    rowId = "_rowId",
+    rowMode = "_mode",
+    isChecked = "_isChecked",
+    num = "_number",
+    mode = "_mode",
+    checkbox = "_checkbox",
+    parentNum = "_parentNumber",
+    depth = "_depth",
+    children = "children",
+    childRowIds = "_childRowIds",
+    childRows = "_childRows",
+    childCount = "_childCount",
+    isOpen = "_isOpen",
+    isShow = "_isShow",
+    open = "open",
+    closed = "closed",
+    rowCount = "_rowCount",
+    /** User Property */
+    name = "name",
+    text = "text",
+    type = "type",
+    dataType = "dataType",
+    width = "width",
+    editable = "editable",
+    visible = "visible",
+    align = "align",
+    scale = "scale",
+    roundType = "roundType",
+    fixedScale = "fixedScale",
+    scaleMax = "scaleMax",
+    scaleMin = "scalemin",
+    showZero = "showZero",
+    commaUnit = "commaUnit",// to be deprecated, Fixed 3
+    thousandChar = "thousandChar",
+    decimalChar = "decimalChar",
+    currencyChar = "currencyChar",
+    className = "className",// className
+    resizable = "resizable",
+    sortable = "sortable",
+    movable = "movable",
+    autoResizable = "autoResizable",
+    autoWidth = "autoWidth",
+    summaryType = "summaryType",
+    required = "required",
+    combo = "combo",
+    format = "format",
+    kind = "kind",//header, column, empty
+    rowSpan = "rowSpan",
+    colSpan = "colSpan",
+    rowIndex = "rowIndex",
+    colIndex = "colIndex",
+    subRowSpan = "subRowSpan",
+    subColSpan = "subColSpan",
+    order = "order",
+    value = "value",
+    header = "header"
+}
+
+declare class WaCombo {
+    colType: any;
+    grid: WaGridCore;
+    gridId: string;
+    column: object;
+    input: HTMLInputElement;
+    input_code: HTMLInputElement;
+    constructor(grid: WaGridCore, column: any, input: any, input_code: any);
+    create(): void;
+    clear(): void;
+    setData(): void;
+    AddEvent(): void;
+    destroy(): void;
+}
+
 declare class WaControl {
     grid: WaGridCore;
     selector: string;
@@ -4928,6 +4724,227 @@ declare class WaControl {
     after_showSortrPanel(): void;
     after_hideSortPanel(): void;
     after_setColumnVisible(): void;
+}
+
+declare class WaDataArrayTable extends WaBase {
+    tableName: string;
+    data: object[][];
+    currentRowId: number;
+    type: string;
+    constructor(tableName: string);
+    /**
+     * select functions
+     */
+    selectRows(arrayIndex: any, field: any, value: any, topIndex?: any): object[];
+    selectRow(arrayIndex: any, field: any, value: any): object;
+    selectRowByRowIndex(arrayIndex: any, rowIndex: any): object;
+    selectRowByRowId(arrayIndex: any, rowId: any): object;
+    selectRowIndexByRowId(arrayIndex: any, rowId: any): any;
+    selectRowIndex(arrayIndex: any, field: any, value: any): any;
+    selectRowIdByRowIndex(arrayIndex: any, rowIndex: any): any;
+    selectRowRange(arrayIndex: any, startRowIndex: any, endRowIndex: any): any[];
+    selectValue(arrayIndex: any, rowIndex: any, field: any): any;
+    isRow(arrayIndex: any, field: any, value: any): boolean;
+    /**
+     * Insert
+     */
+    insertRows(arrayIndex: any, dataRows: any): void;
+    insertRowsBefore(arrayIndex: any, dataRows: any, rowIndex: any): void;
+    insertRowsAfter(arrayIndex: any, dataRows: any, rowIndex: any): void;
+    insert(arrayIndex: any, dataRow: any): void;
+    insertBefore(arrayIndex: any, dataRow: any, rowIndex: any): void;
+    insertAfter(arrayIndex: any, dataRow: any, rowIndex: any): void;
+    /**
+     * Remove
+     */
+    remove(arrayIndex?: any, rowIndex?: any): void;
+    removeByRowId(arryIndex: any, rowId: any): void;
+    /**
+     * Update
+     */
+    update(arrayIndex: any, columnName: any, field: any, value: any): void;
+    updateRow(arrayIndex: any, columnName: any, field: any, value: any): void;
+    updateByRowIndex(arrayIndex: any, rowIndex: any, name: any, value: any): void;
+    updateByRowId(arrayIndex: any, rowId: any, name: any, value: any): void;
+    count(arrayIndex?: any, field?: any, value?: any): number;
+    makeColIndex(): void;
+}
+
+declare class WaDatabase extends WaBase {
+    tables: DataTableType[];
+    constructor();
+    createTable(tableName: string): WaDataTable;
+    createView(tableName: string): WaDataTable;
+    createArrayTable(tableName: string): WaDataArrayTable;
+    removeTable(tableName: string): void;
+    getTable(tableName: string): DataTableType;
+}
+
+declare class WaDataTable extends WaBase {
+    tableName: string;
+    data: any[];
+    currentRowId: number;
+    type: string;
+    constructor(tableName: string);
+    /**
+     * select functions
+     */
+    select(): void;
+    selectRows(field?: string, value?: any, topIndex?: number): object[];
+    selectRow(field: any, value: any): object;
+    selectRowByRowIndex(rowIndex: number): object;
+    selectRowByRowId(rowId: any): object;
+    selectRowIndexByRowId(rowId: any): number;
+    selectRowIndex(field: any, value: any): number;
+    selectRowIdByRowIndex(rowIndex: any): any;
+    selectRowRange(startRowIndex?: number, endRowIndex?: number): object[];
+    selectValue(rowIndex: any, field: any): any;
+    isRow(field: any, value: any): boolean;
+    /**
+     * Insert
+     */
+    insertRows(dataRows: any): void;
+    insertRowsBefore(dataRows: object[], rowIndex: number): void;
+    insertRowsAfter(dataRows: object[], rowIndex: number): void;
+    insert(dataRow: object): void;
+    insertBefore(dataRow: object, rowIndex: any): void;
+    insertAfter(dataRow: any, rowIndex: number): void;
+    /**
+     * Remove
+     */
+    remove(rowIndex?: number): void;
+    removeByRowId(rowId: any): void;
+    /**
+     * Update
+     */
+    update(columnName: string, field: string, value: any): void;
+    updateRow(columnName: string, field: string, value: any): void;
+    updateByRowIndex(rowIndex: number, name: string, value: any): void;
+    updateByRowId(rowId: number, name: string, value: any): void;
+    count(field?: any, value?: any): number;
+    /**
+     * orderBy
+     * @param sortColumns : [{ name : , order :, dataType: string | number }, ...]
+     */
+    orderBy(column_table: WaDataTable, sort_column_table: WaDataTable): any[];
+    getSum(columnName: string): number;
+    getAvg(columnName: string): number;
+    getMax(columnName: string): number;
+    getMin(columnName: string): number;
+}
+
+declare class WaDate {
+    colType: any;
+    grid: WaGridCore;
+    gridId: string;
+    column: object;
+    input: HTMLInputElement;
+    constructor(grid: WaGridCore, column: object, input: HTMLInputElement);
+    create(): void;
+    clear(): void;
+    setData(data?: any): void;
+    getToday(): string;
+    today(): void;
+    prev(): void;
+    next(): void;
+    selectMonth(value: any): void;
+    addEvent(): void;
+    addZero(value: any): any;
+    destroy(): void;
+}
+
+declare class WaFilter {
+    grid: WaGridCore;
+    selector: string;
+    constructor(grid: WaGridCore);
+    showFilterPanel(): void;
+    hideFilterPanel(): void;
+    filters(): void;
+    filter(data: any, filterColumn: any): any;
+    filterNumberByType(filterType: FilterType, n: any, targetNumber: any): boolean;
+    filterStringByType(filterType: FilterType, s: any, targetString: any): boolean;
+    setFilterColumn(column: any, filterType: any, word: any): void;
+    removeFilterColumn(column: any): void;
+    createFilterCombo(column: any): HTMLSelectElement;
+    addFilterComboOption(combo: any, value: any, text: any): void;
+    initFilterData(): void;
+}
+
+declare class WaFooter {
+    grid: WaGridCore;
+    selector: string;
+    constructor(grid: WaGridCore);
+    setFooterColumns(columns: any): void;
+    setFooterData(): void;
+    setFooterValue(rowIndex: any, columnName: any, value: any): void;
+}
+
+declare class WaGridBase extends WaBase {
+    gridId: string;
+    gridConfig: object;
+    grid_mode: string;
+    mousePointRange: number;
+    isMobile: boolean;
+    userAgent: string;
+    columns: any;
+    headerColumnTable: any[];
+    renderer: any;
+    infoRenderer: any;
+    db: WaDatabase;
+    header_column_table: WaDataArrayTable;
+    column_table: WaDataTable;
+    top_column_table: WaDataTable;
+    footer_column_table: WaDataTable;
+    sort_column_table: WaDataTable;
+    filter_column_table: WaDataTable;
+    group_column_table: WaDataTable;
+    source_table: WaDataTable;
+    view_table: WaDataTable;
+    group_table: WaDataTable;
+    group_header_table: WaDataTable;
+    tree_table: WaDataTable;
+    page_table: WaDataTable;
+    top_table: WaDataTable;
+    footer_table: WaDataTable;
+    temp_table: WaDataTable;
+    data_update: any[];
+    data_insert: any[];
+    data_delete: any[];
+    info_column_table: WaDataTable;
+    panel21_table: WaDataTable;
+    panel20_table: WaDataTable;
+    panel31_table: WaDataTable;
+    cell_template_table: WaDataTable;
+    data_select_panel30: object[];
+    data_select_panel31: object[];
+    pageRowCount: number;
+    pageIntRowCount: number;
+    startRowIndex: number;
+    startCellIndex: number;
+    lastRowIndex: number;
+    lastCellIndex: number;
+    _startRowIndex: number;
+    _startCellIndex: number;
+    _lastRowIndex: number;
+    _lastCellIndex: number;
+    selectRangeArray: any[];
+    startX: number;
+    startY: number;
+    lastX: number;
+    lastY: number;
+    const_filterValue: string;
+    const_filterType: string;
+    const_filterReset: string;
+    const_filterSave: string;
+    headerRowCount: number;
+    fixedColumnIndex: number;
+    headerRowHeight: number;
+    rowHeight: number;
+    topRowHeight: number;
+    footerRowHeight: number;
+    code_horizontal: string;
+    code_vertical: string;
+    constructor(gridId: string, gridConfigs: object);
 }
 
 /**
@@ -5021,23 +5038,6 @@ export declare class WaGridCore extends WaGridBase {
     setOptions(options: any): void;
 }
 
-declare class WaFilter {
-    grid: WaGridCore;
-    selector: string;
-    constructor(grid: WaGridCore);
-    showFilterPanel(): void;
-    hideFilterPanel(): void;
-    filters(): void;
-    filter(data: any, filterColumn: any): any;
-    filterNumberByType(filterType: FilterType, n: any, targetNumber: any): boolean;
-    filterStringByType(filterType: FilterType, s: any, targetString: any): boolean;
-    setFilterColumn(column: any, filterType: any, word: any): void;
-    removeFilterColumn(column: any): void;
-    createFilterCombo(column: any): HTMLSelectElement;
-    addFilterComboOption(combo: any, value: any, text: any): void;
-    initFilterData(): void;
-}
-
 declare class WaGridGroup {
     grid: WaGridCore;
     selector: string;
@@ -5117,46 +5117,6 @@ export declare const WaGridPlugin: {
     install(app: App): void;
 };
 
-declare class WaRange {
-    grid: WaGridCore;
-    selector: string;
-    constructor(grid: WaGridCore);
-    removePanelRange: (panelName?: string) => void;
-    selectRange: (startRowIndex: any, lastRowIndex: any, startCellIndex?: any, lastCellIndex?: any, topRowIndex?: number) => any;
-    setRange: (startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any, topRowIndex: any, type?: string) => any;
-    setRangeValue: (startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any) => void;
-    removeRange: (startRowIndex: any, lastRowIndex: any, startCellIndex?: any, lastCellIndex?: any) => void;
-    addRange: (startRowIndex: number, lastRowIndex: number, startCellIndex: number, lastCellIndex: number, topRowIndex: number) => void;
-}
-
-declare class WaRangePanel {
-    grid: WaGridCore;
-    selector: string;
-    panelName: string;
-    startRowIndex: number;
-    startCellIndex: number;
-    lastRowIndex: number;
-    lastCellIndex: number;
-    _startRowIndex: number;
-    _startCellIndex: number;
-    _lastRowIndex: number;
-    _lastCellIndex: number;
-    selectRangeArray: any[];
-    data_select_panel31: any[];
-    data_select_panel30: any[];
-    data_summary: any[];
-    constructor(grid: WaGridCore, panelName: string);
-    selectRange(startRowIndex: number, lastRowIndex: number, startCellIndex?: number, lastCellIndex?: number, topRowIndex?: number): void;
-    setRange(startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any, topRowIndex: any, type?: string): void;
-    setRangeValue(startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any): void;
-    removeRange(startRowIndex: number, lastRowIndex: number, startCellIndex?: number, lastCellIndex?: number): void;
-    addRange(startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any, topRowIndex: any): void;
-    getMaxCellIndexByMouseMove(): any;
-    getMinCellIndexByMouseMove(): any;
-    getMaxCellIndexByMouseMove2(panelName: any): any;
-    getMinCellIndexByMouseMove2(panelName: any): any;
-}
-
 declare class WaGridRow {
     grid: WaGridCore;
     constructor(grid: WaGridCore);
@@ -5164,46 +5124,6 @@ declare class WaGridRow {
     setTableRow(grid: any, tableRow: any, rowIndex: any, panelName?: string): void;
     showAlternativeRowColor(grid: any, panelName: any, tableRow: any, rowIndex: any): void;
     hideTableRows(grid: any, panelName: any, tableRows: any, fromRowIndex: any, toRowIndex: any): void;
-}
-
-declare class WaSort {
-    grid: WaGridCore;
-    selector: string;
-    sortColumns: any[];
-    options: any;
-    constructor(grid: WaGridCore);
-    orderBy(): void;
-    getSortRow(columnName: string): object;
-    changeSortButtonOrder(name: string, text: string, order: string, targetIndex: number): void;
-    addSortButton(name: any, text: any, order: any, targetIndex: any): void;
-    removeSortButton(element: any): void;
-    removeSortButtonList(): void;
-    getSortButtonList(): void;
-    createSortButton(columnName: any): HTMLDivElement;
-    toggleSortPlaceHolder(): void;
-    showSortPanel(): void;
-    hideSortPanel(): void;
-    initSortData(): void;
-}
-
-declare class WaTree {
-    grid: WaGridCore;
-    selector: string;
-    openDepth: number;
-    constructor(grid: any);
-    createTreeData(): void;
-    setTreeSortColumns(sortColumns: any): void;
-    setTreeData(data: any, openDepth?: number, isFirst?: boolean): void;
-    setTreeIcon(tableCell: any, rowIndex: any): void;
-    toggleTreeIcon(element: any, type?: any): void;
-    getTreeFoldingStatus(tableCell: any): WaColumnProperty.open | WaColumnProperty.closed;
-    setTreeFolding(tableCell: any): void;
-    getTreechildRows(folding: any, rowIndex: any, isAll?: boolean): any[];
-    openTreeRow(rowIndex: any): void;
-    closeTreeRow(rowIndex: any): void;
-    addTreeRows(rowIndex: any): void;
-    addTreeRow(startRowIndex: any, row: any): void;
-    removeTreeRow(row: any): void;
 }
 
 declare class WaHeader {
@@ -5355,6 +5275,46 @@ declare class WaPanelBase extends WaBase {
     createEtcHtml(parentElement: any): void;
 }
 
+declare class WaRange {
+    grid: WaGridCore;
+    selector: string;
+    constructor(grid: WaGridCore);
+    removePanelRange: (panelName?: string) => void;
+    selectRange: (startRowIndex: any, lastRowIndex: any, startCellIndex?: any, lastCellIndex?: any, topRowIndex?: number) => any;
+    setRange: (startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any, topRowIndex: any, type?: string) => any;
+    setRangeValue: (startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any) => void;
+    removeRange: (startRowIndex: any, lastRowIndex: any, startCellIndex?: any, lastCellIndex?: any) => void;
+    addRange: (startRowIndex: number, lastRowIndex: number, startCellIndex: number, lastCellIndex: number, topRowIndex: number) => void;
+}
+
+declare class WaRangePanel {
+    grid: WaGridCore;
+    selector: string;
+    panelName: string;
+    startRowIndex: number;
+    startCellIndex: number;
+    lastRowIndex: number;
+    lastCellIndex: number;
+    _startRowIndex: number;
+    _startCellIndex: number;
+    _lastRowIndex: number;
+    _lastCellIndex: number;
+    selectRangeArray: any[];
+    data_select_panel31: any[];
+    data_select_panel30: any[];
+    data_summary: any[];
+    constructor(grid: WaGridCore, panelName: string);
+    selectRange(startRowIndex: number, lastRowIndex: number, startCellIndex?: number, lastCellIndex?: number, topRowIndex?: number): void;
+    setRange(startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any, topRowIndex: any, type?: string): void;
+    setRangeValue(startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any): void;
+    removeRange(startRowIndex: number, lastRowIndex: number, startCellIndex?: number, lastCellIndex?: number): void;
+    addRange(startRowIndex: any, lastRowIndex: any, startCellIndex: any, lastCellIndex: any, topRowIndex: any): void;
+    getMaxCellIndexByMouseMove(): any;
+    getMinCellIndexByMouseMove(): any;
+    getMaxCellIndexByMouseMove2(panelName: any): any;
+    getMinCellIndexByMouseMove2(panelName: any): any;
+}
+
 declare class WaScroll {
     /**
      * ScrollName : verticalScroll, horizontalScroll, verticalScroll60, horizontalScroll32
@@ -5406,6 +5366,26 @@ declare class WaScrollBase {
     setPageRowCount(panelName?: string): void;
 }
 
+declare class WaSort {
+    grid: WaGridCore;
+    selector: string;
+    sortColumns: any[];
+    options: any;
+    constructor(grid: WaGridCore);
+    orderBy(): void;
+    getSortRow(columnName: string): object;
+    changeSortButtonOrder(name: string, text: string, order: string, targetIndex: number): void;
+    addSortButton(name: any, text: any, order: any, targetIndex: any): void;
+    removeSortButton(element: any): void;
+    removeSortButtonList(): void;
+    getSortButtonList(): void;
+    createSortButton(columnName: any): HTMLDivElement;
+    toggleSortPlaceHolder(): void;
+    showSortPanel(): void;
+    hideSortPanel(): void;
+    initSortData(): void;
+}
+
 declare class WaTop {
     grid: WaGridCore;
     selector: string;
@@ -5413,6 +5393,26 @@ declare class WaTop {
     setTopColumns(columns: any): void;
     setTopData(): void;
     setTopValue(rowIndex: any, columnName: any, value: any): void;
+}
+
+declare class WaTree {
+    grid: WaGridCore;
+    selector: string;
+    openDepth: number;
+    constructor(grid: any);
+    createTreeData(): void;
+    setTreeSortColumns(sortColumns: any): void;
+    setTreeData(data: any, openDepth?: number, isFirst?: boolean): void;
+    setTreeIcon(tableCell: any, rowIndex: any): void;
+    toggleTreeIcon(element: any, type?: any): void;
+    getTreeFoldingStatus(tableCell: any): WaColumnProperty.open | WaColumnProperty.closed;
+    setTreeFolding(tableCell: any): void;
+    getTreechildRows(folding: any, rowIndex: any, isAll?: boolean): any[];
+    openTreeRow(rowIndex: any): void;
+    closeTreeRow(rowIndex: any): void;
+    addTreeRows(rowIndex: any): void;
+    addTreeRow(startRowIndex: any, row: any): void;
+    removeTreeRow(row: any): void;
 }
 
 export { }
