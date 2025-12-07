@@ -1,6 +1,7 @@
-import {BeforeAfter, CellType} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
-import {WaGridCore} from "@/core/WaGridCore";
+import { BeforeAfter, CellType } from "@/core/Grid.types"
+import { WaColumnProperty } from "@/core/columns/ColumnEnum"
+import { WaGridCore } from "@/core/WaGridCore";
+import { WaColumnDef } from "./ColumnDef";
 
 export class WaColumn {
     grid: WaGridCore;
