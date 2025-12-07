@@ -5,67 +5,84 @@ import dts from 'vite-plugin-dts'
 import path from 'node:path'
 
 export default defineConfig({
-    plugins: [
-        vue(),
-        dts({
-            // 타입 생성 기준 루트
-            entryRoot: 'src',
+  plugins: [
+    vue(),
+    dts({
+      entryRoot: 'src',
+      include: ['src', 'types'],
+      exclude: [
+        '**/*.test.*',
+        '**/*.test.vue',
+        'node_modules',
+        'dist',
+        'src/App.vue',    // ← 와일드카드보다 명시 경로가 안전
+        'src/views/**',   // ← views 이하 전부 제외
+      ],
+      outDir: ['dist/types', 'types'],
+      insertTypesEntry: true,
+      rollupTypes: true,
+      copyDtsFiles: true,
+      cleanVueFileName: true,
+      staticImport: true,
+      tsconfigPath: path.resolve(__dirname, 'tsconfig.json'),
 
-            // .vue 포함 (폴더 단위로 지정하는 편이 안전)
-            include: ['src', 'types'],
-            exclude: ['**/*.test.*', 'node_modules', 'dist'],
-
-            // 한 번의 실행으로 두 위치에 타입 출력
-            outDir: ['dist/types', 'types'],
-
-            insertTypesEntry: true, // dist/types/index.d.ts 엔트리 생성
-            rollupTypes: true,      // 타입 번들 (권장)
-            copyDtsFiles: true,     // 기존 d.ts도 복사
-            cleanVueFileName: true, // SFC 파일명 깔끔하게
-            staticImport: true,
-            //logDiagnostics: false,
-            //skipDiagnostics: true,
-            // tsconfig 강제 지정(모노레포/서브패키지일 때 유용)
-            tsconfigPath: path.resolve(__dirname, 'tsconfig.json'),
-        }),
-    ],
-    build: {
-        lib: {
-            entry: path.resolve(__dirname, 'src/index.ts'),
-            name: 'WaGrid',
-            formats: ['es', 'umd'],
-            fileName: (format) =>
-                format === 'es' ? 'wagrid.esm.js' : 'wagrid.umd.js',
-        },
-        outDir: 'dist',
-        emptyOutDir: false,
-        sourcemap: false,
-        cssCodeSplit: false,
-        rollupOptions: {
-            external: ['vue', /^vue(\/.+)?$/, 'xlsx', 'file-saver'],
-            output: {
-                globals: {
-                    vue: 'Vue',
-                    xlsx: 'XLSX',
-                    'file-saver': 'saveAs',
-                },
-                exports: 'named',
-                assetFileNames: (assetInfo) => {
-                    if (assetInfo.name?.endsWith('.css')) return 'wagrid.css'
-                    return assetInfo.name || '[name].[ext]'
-                },
-            },
-        },
-        minify: 'terser',
-        terserOptions: {
-            format: { comments: false },
-            compress: { drop_console: true, drop_debugger: true },
-            keep_classnames: true,
-            keep_fnames: true,
-        },
+      // ✅ 마지막 세이프가드: 실제 파일 쓰기 직전에 걸러냄
+      beforeWriteFile: (filePath, content) => {
+        // d.ts 생성 경로 기준 필터
+        if (
+          filePath.includes('/views/') ||
+          filePath.includes('\\views\\') ||
+          /[\\/]?App\.vue(\.d\.ts)?$/.test(filePath) ||
+          /\.test\.vue\.d\.ts$/.test(filePath)
+        ) {
+          return undefined; // ← 이 파일은 생성하지 않음
+        }
+        return { filePath, content };
+      },
+    }),
+  ],
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'WaGrid',
+      formats: ['es', 'umd'],
+      fileName: (format) => (format === 'es' ? 'wagrid.esm.js' : 'wagrid.umd.js'),
     },
-    resolve: {
-        alias: { '@': path.resolve(__dirname, 'src') },
-        extensions: ['.ts', '.js', '.vue'],
+    outDir: 'dist',
+    emptyOutDir: false, // types 유지 목적이면 그대로 OK
+    sourcemap: false,
+    cssCodeSplit: false,
+    rollupOptions: {
+      external: ['vue', /^vue(\/.+)?$/, 'xlsx', 'file-saver'],
+      input: [path.resolve(__dirname, 'src/index.ts')],
+      plugins: [
+        // 번들 단계에서도 .test.vue는 확실히 무시
+        {
+          name: 'exclude-test-vue',
+          load(id) {
+            if (id.endsWith('.test.vue')) return '';
+          },
+        },
+      ],
+      output: {
+        globals: { vue: 'Vue', xlsx: 'XLSX', 'file-saver': 'saveAs' },
+        exports: 'named',
+        assetFileNames: (assetInfo) =>
+          assetInfo.name?.endsWith('.css') ? 'wagrid.css' : assetInfo.name || '[name].[ext]',
+      },
+      // ✅ 사이드이펙트 없는 모듈을 더 잘 제거
+      treeshake: { moduleSideEffects: false },
     },
+    minify: 'terser',
+    terserOptions: {
+      format: { comments: false },
+      compress: { drop_console: true, drop_debugger: true },
+      keep_classnames: true,
+      keep_fnames: true,
+    },
+  },
+  resolve: {
+    alias: { '@': path.resolve(__dirname, 'src') },
+    extensions: ['.ts', '.js', '.vue'],
+  },
 })

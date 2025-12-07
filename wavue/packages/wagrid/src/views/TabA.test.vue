@@ -20,10 +20,10 @@
 </template>
 <script setup lang="ts">
 import {ref, computed} from 'vue'
-import { waGridConfigs } from "@/components/WaGridConfigs"
+import {waGridConfigs} from "@/components/WaGridConfigs"
 import WaGrid from '@/components/WaGrid.vue'
 import {grid_data} from "@/components/wagrid_data.js"; 
-import { WaColumnDef } from '@/core/columns/ColumnDef';
+import {WaColumnDef} from '@/core/columns/ColumnDef';
 
 const gridConfigs = waGridConfigs;
 

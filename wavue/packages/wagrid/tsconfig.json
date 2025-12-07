@@ -34,6 +34,16 @@
     "src/**/*.vue",
     "types/**/*.d.ts"   // <= 여기에 포함
   ],
-  "exclude": ["node_modules", "dist", "dist-source"]
+  "exclude": [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/*.test.vue",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/views/**",
+    "dist",
+    "node_modules",
+    "**/App.vue"
+  ]
 }
 

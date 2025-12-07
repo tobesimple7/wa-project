@@ -16,9 +16,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { NSpace, NTabs, NTabPane } from 'naive-ui'
-import TabA from './views/TabA.vue'
-import TabB from './views/TabB.vue'
-import TabC from './views/TabC.vue'
+import TabA from './views/TabA.test.vue'
+import TabB from './views/TabB.test.vue'
+import TabC from './views/TabC.test.vue'
 
 const activeTab = ref('a')
 const activeComponent = computed(() =>

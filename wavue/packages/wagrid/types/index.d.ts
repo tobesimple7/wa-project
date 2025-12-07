@@ -4,7 +4,7 @@ import { ComponentProvideOptions } from 'vue';
 import { DefineComponent } from 'vue';
 import { PublicProps } from 'vue';
 import { Ref } from 'vue';
-import { WaColumnProperty as WaColumnProperty_2 } from '../core/columns/WaColumnEnum';
+import { WaColumnProperty as WaColumnProperty_2 } from '../core/columns/ColumnEnum';
 
 declare type __VLS_Props = {
     id: string;
