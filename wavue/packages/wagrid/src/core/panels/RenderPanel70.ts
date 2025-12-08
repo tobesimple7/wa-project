@@ -1,5 +1,5 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 
 
@@ -73,14 +73,14 @@ export class WaRenderPanel70 {
         this.rowIndex   = rowIndex;
         this.columnIndex= columnIndex;
 
-        this.columnName = column[WaColumnProperty.name];
-        this.columnType = column[WaColumnProperty.type];
+        this.columnName = column[COLUMN_KEYS.name];
+        this.columnType = column[COLUMN_KEYS.type];
 
-        this.visible    = column[WaColumnProperty.visible];
-        this.width      = column[WaColumnProperty.width];
+        this.visible    = column[COLUMN_KEYS.visible];
+        this.width      = column[COLUMN_KEYS.width];
 
-        this.align = column[WaColumnProperty.align];
-        this.className = column[WaColumnProperty.className];
+        this.align = column[COLUMN_KEYS.align];
+        this.className = column[COLUMN_KEYS.className];
 
         render.updateData();
     }

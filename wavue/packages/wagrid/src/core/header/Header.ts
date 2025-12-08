@@ -1,7 +1,7 @@
-
 import {WaGridCore} from "@/core/WaGridCore";
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
-import {WaColumnKind} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
+import {COLUMN_KIND} from "@/core/columns/ColumnEnum"
+import { HeaderColumnDef } from "./HeaderDef";
 export class WaHeader {
     grid: WaGridCore;
     selector: string;
@@ -17,9 +17,9 @@ export class WaHeader {
         const getChildrenColumnCount = function (userColumn) {
             let columnCount = 0;
             const getCount = function (userColumn) {
-                if (userColumn[WaColumnProperty.children]) {
-                    for (let i = 0, len = userColumn[WaColumnProperty.children].length; i < len; i++) {
-                        getCount(userColumn[WaColumnProperty.children][i]);
+                if (userColumn[COLUMN_KEYS.children]) {
+                    for (let i = 0, len = userColumn[COLUMN_KEYS.children].length; i < len; i++) {
+                        getCount(userColumn[COLUMN_KEYS.children][i]);
                     }
                 }
                 else columnCount += 1;
@@ -33,9 +33,9 @@ export class WaHeader {
             const getDepth = (userColumn, depth = 1) => {
                 if (depth > maxDepth)
                     maxDepth = depth;
-                if (userColumn[WaColumnProperty.children]) {
-                    for (let i = 0, len = userColumn[WaColumnProperty.children].length; i < len; i++) {
-                        getDepth(userColumn[WaColumnProperty.children][i], depth + 1);
+                if (userColumn[COLUMN_KEYS.children]) {
+                    for (let i = 0, len = userColumn[COLUMN_KEYS.children].length; i < len; i++) {
+                        getDepth(userColumn[COLUMN_KEYS.children][i], depth + 1);
                     }
                 }
             }
@@ -46,14 +46,14 @@ export class WaHeader {
         const setNumber = function(userColumns, rowIndex, parentNum = 0) {
             userColumns.map(userColumn => {
                 num = num + 1;
-                userColumn[WaColumnProperty.num] = num;
-                userColumn[WaColumnProperty.parentNum] = parentNum;
+                userColumn[COLUMN_KEYS.num] = num;
+                userColumn[COLUMN_KEYS.parentNum] = parentNum;
 
-                userColumn[WaColumnProperty.rowIndex] = rowIndex;
-                userColumn[WaColumnProperty.rowSpan] = userColumn[WaColumnProperty.children] ? 1 : headerRowCount - rowIndex;
-                userColumn[WaColumnProperty.colSpan] = getChildrenColumnCount(userColumn);
-                if (userColumn[WaColumnProperty.children]) {
-                    setNumber(userColumn[WaColumnProperty.children], rowIndex + 1, num);
+                userColumn[COLUMN_KEYS.rowIndex] = rowIndex;
+                userColumn[COLUMN_KEYS.rowSpan] = userColumn[COLUMN_KEYS.children] ? 1 : headerRowCount - rowIndex;
+                userColumn[COLUMN_KEYS.colSpan] = getChildrenColumnCount(userColumn);
+                if (userColumn[COLUMN_KEYS.children]) {
+                    setNumber(userColumn[COLUMN_KEYS.children], rowIndex + 1, num);
                 }
             });
         }
@@ -74,84 +74,84 @@ export class WaHeader {
             userColumns.map(userColumn => {
                 let headerColumn = {};
 
-                let kind     = userColumn[WaColumnProperty.children] ? 'header' : 'column';
+                let kind     = userColumn[COLUMN_KEYS.children] ? 'header' : 'column';
                 let name     = null;
                 let text     = null;
                 let align    = null;
                 let className= null;
-                let rowSpan  = userColumn[WaColumnProperty.rowSpan ];
-                let colSpan  = userColumn[WaColumnProperty.colSpan ];
-                let rowIndex = userColumn[WaColumnProperty.rowIndex];
-                let colIndex = userColumn[WaColumnProperty.colIndex];
+                let rowSpan  = userColumn[COLUMN_KEYS.rowSpan ];
+                let colSpan  = userColumn[COLUMN_KEYS.colSpan ];
+                let rowIndex = userColumn[COLUMN_KEYS.rowIndex];
+                let colIndex = userColumn[COLUMN_KEYS.colIndex];
                 let visible  = null;
 
-                let children = grid.isNull(userColumn[WaColumnProperty.children], null);
-                let num      = userColumn[WaColumnProperty.num];
-                let parentNum= userColumn[WaColumnProperty.parentNum];
+                let children = grid.isNull(userColumn[COLUMN_KEYS.children], null);
+                let num      = userColumn[COLUMN_KEYS.num];
+                let parentNum= userColumn[COLUMN_KEYS.parentNum];
 
                 let type = 'string';
 
                 if (kind == 'column') {
-                    let columnName = userColumn[WaColumnProperty.name];
+                    let columnName = userColumn[COLUMN_KEYS.name];
                     let column = grid.getColumn(columnName);
 
-                    name       = column[WaColumnProperty.name];
-                    text       = grid.isNull(column.header[WaColumnProperty.text]   , null);
-                    align      = grid.isNull(column.header[WaColumnProperty.align]  , 'center');
-                    className  = grid.isNull(column[WaColumnProperty.className]     , null);
-                    visible    = grid.isNull(column[WaColumnProperty.visible]       , true);
+                    name       = column[COLUMN_KEYS.name];
+                    text       = grid.isNull(column.header[COLUMN_KEYS.text]   , null);
+                    align      = grid.isNull(column.header[COLUMN_KEYS.align]  , 'center');
+                    className  = grid.isNull(column[COLUMN_KEYS.className]     , null);
+                    visible    = grid.isNull(column[COLUMN_KEYS.visible]       , true);
                 }
                 else {
-                    name      = grid.isNull(userColumn[WaColumnProperty.name]     , null);
-                    align     = grid.isNull(userColumn[WaColumnProperty.align]    , 'center');
-                    text      = grid.isNull(userColumn[WaColumnProperty.text]     , null);
-                    className = grid.isNull(userColumn[WaColumnProperty.className], null);
-                    visible   = grid.isNull(userColumn[WaColumnProperty.visible]  , true);
+                    name      = grid.isNull(userColumn[COLUMN_KEYS.name]     , null);
+                    align     = grid.isNull(userColumn[COLUMN_KEYS.align]    , 'center');
+                    text      = grid.isNull(userColumn[COLUMN_KEYS.text]     , null);
+                    className = grid.isNull(userColumn[COLUMN_KEYS.className], null);
+                    visible   = grid.isNull(userColumn[COLUMN_KEYS.visible]  , true);
                 }
 
-                headerColumn[WaColumnProperty.kind     ] = kind;
-                headerColumn[WaColumnProperty.name     ] = name;
-                headerColumn[WaColumnProperty.align    ] = align;
-                headerColumn[WaColumnProperty.text     ] = text;
-                headerColumn[WaColumnProperty.className] = className;
-                headerColumn[WaColumnProperty.visible  ] = visible;
+                headerColumn[COLUMN_KEYS.kind     ] = kind;
+                headerColumn[COLUMN_KEYS.name     ] = name;
+                headerColumn[COLUMN_KEYS.align    ] = align;
+                headerColumn[COLUMN_KEYS.text     ] = text;
+                headerColumn[COLUMN_KEYS.className] = className;
+                headerColumn[COLUMN_KEYS.visible  ] = visible;
 
-                headerColumn[WaColumnProperty.rowSpan  ] = rowSpan;
-                headerColumn[WaColumnProperty.colSpan  ] = colSpan;
-                headerColumn[WaColumnProperty.rowIndex ] = rowIndex;
-                headerColumn[WaColumnProperty.colIndex ] = colIndex;
+                headerColumn[COLUMN_KEYS.rowSpan  ] = rowSpan;
+                headerColumn[COLUMN_KEYS.colSpan  ] = colSpan;
+                headerColumn[COLUMN_KEYS.rowIndex ] = rowIndex;
+                headerColumn[COLUMN_KEYS.colIndex ] = colIndex;
 
-                headerColumn[WaColumnProperty.children ] = children
+                headerColumn[COLUMN_KEYS.children ] = children
 
-                headerColumn[WaColumnProperty.num      ] = num;
-                headerColumn[WaColumnProperty.parentNum] = parentNum;
+                headerColumn[COLUMN_KEYS.num      ] = num;
+                headerColumn[COLUMN_KEYS.parentNum] = parentNum;
 
-                headerColumn[WaColumnProperty.type     ] = type;
+                headerColumn[COLUMN_KEYS.type     ] = type;
 
-                let childrenCount = headerColumn[WaColumnProperty.children] ? headerColumn[WaColumnProperty.children].length : 0;
-                let columnCount   = headerColumn[WaColumnProperty.colSpan];
+                let childrenCount = headerColumn[COLUMN_KEYS.children] ? headerColumn[COLUMN_KEYS.children].length : 0;
+                let columnCount   = headerColumn[COLUMN_KEYS.colSpan];
 
                 headerColumnRows[rowIndex].push(headerColumn);
 
                 let blankColumn = {};
-                blankColumn[WaColumnProperty.kind      ] = 'empty';
-                blankColumn[WaColumnProperty.name      ] = name;
-                blankColumn[WaColumnProperty.align     ] = align;
-                blankColumn[WaColumnProperty.text      ] = text;
-                blankColumn[WaColumnProperty.className ] = className
-                blankColumn[WaColumnProperty.visible   ] = false;
+                blankColumn[COLUMN_KEYS.kind      ] = 'empty';
+                blankColumn[COLUMN_KEYS.name      ] = name;
+                blankColumn[COLUMN_KEYS.align     ] = align;
+                blankColumn[COLUMN_KEYS.text      ] = text;
+                blankColumn[COLUMN_KEYS.className ] = className
+                blankColumn[COLUMN_KEYS.visible   ] = false;
 
-                blankColumn[WaColumnProperty.rowSpan   ] = rowSpan;
-                blankColumn[WaColumnProperty.colSpan   ] = colSpan;
-                blankColumn[WaColumnProperty.rowIndex  ] = rowIndex;
-                blankColumn[WaColumnProperty.colIndex  ] = colIndex;
+                blankColumn[COLUMN_KEYS.rowSpan   ] = rowSpan;
+                blankColumn[COLUMN_KEYS.colSpan   ] = colSpan;
+                blankColumn[COLUMN_KEYS.rowIndex  ] = rowIndex;
+                blankColumn[COLUMN_KEYS.colIndex  ] = colIndex;
 
-                blankColumn[WaColumnProperty.children  ] = children
+                blankColumn[COLUMN_KEYS.children  ] = children
 
-                blankColumn[WaColumnProperty.num       ] = num;
-                blankColumn[WaColumnProperty.parentNum ] = parentNum;
+                blankColumn[COLUMN_KEYS.num       ] = num;
+                blankColumn[COLUMN_KEYS.parentNum ] = parentNum;
 
-                headerColumn[WaColumnProperty.type     ] = type;
+                headerColumn[COLUMN_KEYS.type     ] = type;
 
                 //make blank column(row)
                 if (childrenCount == 0) {
@@ -163,8 +163,8 @@ export class WaHeader {
                     for (let i =  1; i < columnCount; i++) headerColumnRows[rowIndex].push(blankColumn);
                 }
 
-                if (userColumn[WaColumnProperty.children]) {
-                    createHeaderColumns(userColumn[WaColumnProperty.children]);
+                if (userColumn[COLUMN_KEYS.children]) {
+                    createHeaderColumns(userColumn[COLUMN_KEYS.children]);
                 }
             });
         }
@@ -177,9 +177,9 @@ export class WaHeader {
 
         headerColumnRows.map((columns, rowIndex) => {
             columns.map((column, colIndex) => {
-                column[WaColumnProperty.rowIndex] = rowIndex;
-                column[WaColumnProperty.colIndex] = colIndex;
-                delete column[WaColumnProperty.children];
+                column[COLUMN_KEYS.rowIndex] = rowIndex;
+                column[COLUMN_KEYS.colIndex] = colIndex;
+                delete column[COLUMN_KEYS.children];
             })
         })
 
@@ -188,20 +188,19 @@ export class WaHeader {
         headerColumnRows.map((headerColumns, rowIndex) => {
             for (let i = 0, len = headerColumns.length; i < len; i++) {
                 const headerColumn = headerColumns[i];
-                const item: any = {};
-                item.kind	   = grid.isNull(headerColumn['kind'], null);
-                item.name      = grid.isNull(headerColumn['name'], null);
-                item.align	   = grid.isNull(headerColumn['align'], null);
-                item.text	   = grid.isNull(headerColumn['text'], null);
-                item.className = grid.isNull(headerColumn['className'], null);
-                item.visible   = grid.isNull(headerColumn['visible'], false);
-                item.rowSpan   = grid.isNull(headerColumn['rowSpan'], null);
-                item.colSpan   = grid.isNull(headerColumn['colSpan'], null);
-                item.rowIndex  = rowIndex;
-                item.colIndex  = grid.isNull(headerColumn['colIndex'], null);
-                item.type	   = grid.isNull(headerColumn['type'], 'string');
-
-                item.children  = grid.isNull(headerColumn['children'], null);
+                const item: HeaderColumnDef = {};
+                item.kind      = headerColumn['kind'] ?? null
+                item.name      = headerColumn['name'] ?? null
+                item.align     = headerColumn['align'] ?? null
+                item.text      = headerColumn['text'] ?? null
+                item.className = headerColumn['className'] ?? null
+                item.visible   = headerColumn['visible'] ?? false
+                item.rowSpan   = headerColumn['rowSpan'] ?? null
+                item.colSpan   = headerColumn['colSpan'] ?? null
+                item.rowIndex  = rowIndex
+                item.colIndex  = headerColumn['colIndex'] ?? null
+                item.type      = headerColumn['type'] ?? 'string'
+                item.children  = headerColumn['children'] ?? null
 
                 grid.header_column_table.insert(rowIndex, item);
             }
@@ -218,9 +217,9 @@ export class WaHeader {
 
             for (let x = grid.fixedColumnIndex; x >= 0; x--) {
                 const column = grid.header_column_table.selectRowByRowIndex(0, x);
-                if (column[WaColumnProperty.kind] != 'empty') {
+                if (column[COLUMN_KEYS.kind] != 'empty') {
                     rootColumnIndex = x;
-                    rootColumnColSpan = column[WaColumnProperty.colSpan];
+                    rootColumnColSpan = column[COLUMN_KEYS.colSpan];
                     break;
                 }
             }
@@ -267,10 +266,10 @@ export class WaHeader {
 
         let result;
         const getParentColumn = function (headerColumn) {
-            if (headerColumn[WaColumnProperty.num] == num) { result = headerColumn; return; }
-            if (headerColumn[WaColumnProperty.children]) {
-                for (let i = 0, len = headerColumn[WaColumnProperty.children].length; i < len; i++) {
-                    getParentColumn(headerColumn[WaColumnProperty.children][i]);
+            if (headerColumn[COLUMN_KEYS.num] == num) { result = headerColumn; return; }
+            if (headerColumn[COLUMN_KEYS.children]) {
+                for (let i = 0, len = headerColumn[COLUMN_KEYS.children].length; i < len; i++) {
+                    getParentColumn(headerColumn[COLUMN_KEYS.children][i]);
                 }
             }
         }
@@ -299,17 +298,17 @@ export class WaHeader {
         const grid = this.grid;
 
         const column = grid.header_column_table.data[rowIndex][colIndex];
-        let kind = column[WaColumnProperty.kind];
+        let kind = column[COLUMN_KEYS.kind];
         column[property] = value;
 
-        if (kind == WaColumnKind.column) {
-            let name = column[WaColumnProperty.name];
-            let dataRow: any = grid.column_table.selectRow(WaColumnProperty.name, name);
-            if (property == WaColumnProperty.text) {
-                dataRow.header[WaColumnProperty.text] = value;
+        if (kind == COLUMN_KIND.column) {
+            let name = column[COLUMN_KEYS.name];
+            let dataRow: any = grid.column_table.selectRow(COLUMN_KEYS.name, name);
+            if (property == COLUMN_KEYS.text) {
+                dataRow.header[COLUMN_KEYS.text] = value;
             }
-            else if (property == WaColumnProperty.className) {
-                dataRow.header[WaColumnProperty.className] = value;
+            else if (property == COLUMN_KEYS.className) {
+                dataRow.header[COLUMN_KEYS.className] = value;
             }
             else {
                 dataRow.header[property] = value;

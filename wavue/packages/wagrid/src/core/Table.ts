@@ -1,7 +1,7 @@
 
 import { WaDom } from "./Dom";
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaTable {
 
@@ -61,8 +61,8 @@ export class WaTable {
             let dataRow = grid.info_column_table.data[i];
 
             let th = document.createElement('th');
-            th.style.width = dataRow[WaColumnProperty.width] + 'px';
-            th.style.display = dataRow[WaColumnProperty.visible] ? '' : 'none';
+            th.style.width = dataRow[COLUMN_KEYS.width] + 'px';
+            th.style.display = dataRow[COLUMN_KEYS.visible] ? '' : 'none';
             tr.appendChild(th);
         }
         thead.appendChild(tr);
@@ -83,9 +83,9 @@ export class WaTable {
         for (let i = 0, len = grid.column_table.count(); i < len; i++) {
             let column = grid.column_table.data[i];
             let th = document.createElement('th');
-            th.style.width = (column[WaColumnProperty.visible] == true) ? parseInt(column[WaColumnProperty.width]) + 'px' : '0px';
-            th.style.display = (column[WaColumnProperty.visible] == true) ? '' : 'none';
-            sumWidth += (grid.column_table.data[i][WaColumnProperty.visible] == true) ? parseInt(column[WaColumnProperty.width]) : 0;
+            th.style.width = (column[COLUMN_KEYS.visible] == true) ? parseInt(String(column[COLUMN_KEYS.width])) + 'px' : '0px';
+            th.style.display = (column[COLUMN_KEYS.visible] == true) ? '' : 'none';
+            sumWidth += (grid.column_table.data[i][COLUMN_KEYS.visible] == true) ? parseInt(String(column[COLUMN_KEYS.width])) : 0;
             tr.appendChild(th);
         }
         thead.appendChild(tr);
@@ -144,8 +144,8 @@ export class WaTable {
                 const column: any = grid.info_column_table.data[i];
                 const td: any = document.createElement('td');
                 td.classList.add('wa-grid-cell');
-                td.style.width = column[WaColumnProperty.width] + 'px';
-                td.dataset.name = column[WaColumnProperty.name];
+                td.style.width = column[COLUMN_KEYS.width] + 'px';
+                td.dataset.name = column[COLUMN_KEYS.name];
                 td.dataset.columnIndex = i;
 
                 let div = WaDom.createElementCellDiv();
@@ -169,13 +169,13 @@ export class WaTable {
                 const column: any = grid.column_table.data[i];
                 const td: any = document.createElement('td');
                 td.classList.add('wa-grid-cell');
-                td.style.width = column[WaColumnProperty.width] + 'px';
+                td.style.width = column[COLUMN_KEYS.width] + 'px';
 
                 if (panelName == 'panel22' || panelName == 'panel32' || panelName == 'panel42' || panelName == 'panel52' || panelName == 'panel72') {
                     td.style.display = 'none';
                 }
 
-                td.dataset.name = column[WaColumnProperty.name];
+                td.dataset.name = column[COLUMN_KEYS.name];
                 td.dataset.columnIndex = i;
 
                 let div = WaDom.createElementCellDiv();

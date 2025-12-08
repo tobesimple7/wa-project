@@ -46,6 +46,14 @@
       "sourceMaps": true
     },
     {
+      "name": "ChromeGrid",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/wavue/packages/wagrid/src",
+      "sourceMaps": true
+    },    
+    {
       "name": "WaApi",
       "type": "java",
       "request": "launch",
@@ -69,6 +77,13 @@
         "ChromeWaErp",
         "WaApi"
       ]
-    }    
+    },
+    {
+      "name": "DebugGrid",
+      "configurations": [
+        "WaGrid",
+        "ChromeGrid"
+      ]
+    }        
   ]
 }

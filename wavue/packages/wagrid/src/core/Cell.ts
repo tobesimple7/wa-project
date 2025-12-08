@@ -5,7 +5,7 @@
  */
 import {WaDom} from "./Dom";
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaCell {
     grid: WaGridCore;
@@ -19,8 +19,8 @@ export class WaCell {
     createHtml() {
         // const grid = this.grid;
         //
-        // let type = this.column[WaColumnProperty.type];
-        // let cellTemplate = this.column[WaColumnProperty.cellTemplate];
+        // let type = this.column[COLUMN_KEYS.type];
+        // let cellTemplate = this.column[COLUMN_KEYS.cellTemplate];
         //
         // if (grid.null(cellTemplate)) {
         //     this.createCell(type);

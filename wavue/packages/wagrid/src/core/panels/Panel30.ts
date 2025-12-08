@@ -4,7 +4,7 @@ import { WaRenderPanel30 } from './RenderPanel30';
 import { WaRenderPanelInfo } from './RenderPanelInfo';
 import {WaTable} from "../Table";
 import {CellType, Direction, GridMode, RowAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 /*
 1. td, div, checkbox 에 다음과 같은 정보를 준다.
     => data-row-index,      data-name,      data-column-index
@@ -119,7 +119,7 @@ export class WaPanel30 extends WaPanelBase {
 
                 tableCell.dataset.rowIndex = i;
                 tableCell.dataset.displayRowIndex = i;
-                tableCell.dataset.cellType = grid.info_column_table.selectValue(x, WaColumnProperty.type);
+                tableCell.dataset.cellType = grid.info_column_table.selectValue(x, COLUMN_KEYS.type);
 
                 /* Render: Start */
                 let tbsGridRenderInfo = new WaRenderPanelInfo(grid);
@@ -292,7 +292,7 @@ export class WaPanel30 extends WaPanelBase {
             let rowIndex = e.target.parentNode.dataset.rowIndex;
             let columnIndex = e.target.parentNode.dataset.columnIndex;
             let columnName = e.target.parentNode.dataset.name;
-            let columnType = grid.column_table.selectValue(columnIndex, WaColumnProperty.type);
+            let columnType = grid.column_table.selectValue(columnIndex, COLUMN_KEYS.type);
             let value = grid.view_table.selectValue(rowIndex, columnName);
             if (columnType == CellType.checkbox) {
                 if (grid.notEmpty(grid.onClickCheckbox) && grid.isEditableColumn(columnName) && e.target.disabled != 'disabled') {
@@ -457,7 +457,7 @@ export class WaPanel30 extends WaPanelBase {
                 //     let rowIndex = e.target.parentNode.dataset.rowIndex;
                 //     let columnIndex = e.target.parentNode.dataset.columnIndex;
                 //     let columnName = e.target.parentNode.dataset.name;
-                //     let columnType = grid.column_table.selectValue(columnIndex, WaColumnProperty.type);
+                //     let columnType = grid.column_table.selectValue(columnIndex, COLUMN_KEYS.type);
                 //     let value = grid.view_table.selectValue(rowIndex, columnName);
                 //
                 //     if (grid.notEmpty(grid.onClickCheckbox) && grid.isEditableColumn(columnName) && e.target.disabled != 'disabled') {
@@ -485,7 +485,7 @@ export class WaPanel30 extends WaPanelBase {
                 //     let rowIndex = e.target.parentNode.dataset.rowIndex;
                 //     let columnIndex = e.target.parentNode.dataset.columnIndex;
                 //     let columnName = e.target.parentNode.dataset.name;
-                //     let columnType = grid.column_table.selectValue(columnIndex, WaColumnProperty.type);
+                //     let columnType = grid.column_table.selectValue(columnIndex, COLUMN_KEYS.type);
                 //     let value = grid.view_table.selectValue(rowIndex, columnName);
                 //
                 //     if (grid.notEmpty(grid.onClickButton) && e.target.disabled != 'disabled') {
@@ -504,7 +504,7 @@ export class WaPanel30 extends WaPanelBase {
                 //     let rowIndex = e.target.parentNode.dataset.rowIndex;
                 //     let columnIndex = e.target.parentNode.dataset.columnIndex;
                 //     let columnName = e.target.parentNode.dataset.name;
-                //     let columnType = grid.column_table.selectValue(columnIndex, WaColumnProperty.type);
+                //     let columnType = grid.column_table.selectValue(columnIndex, COLUMN_KEYS.type);
                 //     let value = grid.view_table.selectValue(rowIndex, columnName);
                 //
                 //     if (grid.notEmpty(grid.onClickLink)) {
@@ -536,7 +536,7 @@ export class WaPanel30 extends WaPanelBase {
                                 grid.input_focus();
                             } else grid.executeEvent('onClick', param);
                         } else if (e.detail == 2) {
-                            let isEditable = grid.column_table.data[startCellIndex][WaColumnProperty.editable];
+                            let isEditable = grid.column_table.data[startCellIndex][COLUMN_KEYS.editable];
                             if (isEditable) {
                                 if (grid.notNull(grid.onEdit)) {
                                     grid.editStart(e, 'mouse')
@@ -943,7 +943,7 @@ export class WaPanel30 extends WaPanelBase {
             let rowIndex = tableCell.dataset.rowIndex;
             let columnIndex = tableCell.cellIndex;
             let columnName = e.target.parentNode.dataset.name;
-            let value = grid.view_table.data[rowIndex][WaColumnProperty.isChecked];
+            let value = grid.view_table.data[rowIndex][COLUMN_KEYS.isChecked];
 
             // @ts-ignore
             if (grid.notEmpty(grid.onClickInfoCheckBox) && e.target.disabled != 'disabled') {
@@ -959,11 +959,11 @@ export class WaPanel30 extends WaPanelBase {
                 // @ts-ignore
                 let result = grid.onClickInfoCheckBox(grid, eventRow);
                 if (result) {
-                    grid.view_table.data[rowIndex][WaColumnProperty.isChecked] = grid.isNull(value, false) ? false : true;
+                    grid.view_table.data[rowIndex][COLUMN_KEYS.isChecked] = grid.isNull(value, false) ? false : true;
                 }
             }
             else {
-                grid.view_table.data[rowIndex][WaColumnProperty.isChecked] = grid.isNull(value, false) ? false : true;
+                grid.view_table.data[rowIndex][COLUMN_KEYS.isChecked] = grid.isNull(value, false) ? false : true;
             }
             setTimeout(() => grid.waPanel30.setDataPanel(grid.getFirstRowIndex()), 20);
         }
@@ -1059,7 +1059,7 @@ export class WaPanel30 extends WaPanelBase {
 
                     if (e.detail == 1) grid.executeEvent('onClick', param);
                     else if (e.detail == 2) {
-                        let isEditable = grid.column_table.data[startCellIndex][WaColumnProperty.editable];
+                        let isEditable = grid.column_table.data[startCellIndex][COLUMN_KEYS.editable];
                         if (isEditable) {
                             if (grid.notNull(grid.onEdit)) {
                                 //grid.input_edit(e, 0, 'mouse');

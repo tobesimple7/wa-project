@@ -1,5 +1,5 @@
 import {CellType, GridRenderer, OptionAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaGridCore} from "@/core/WaGridCore";
 
 export class WaBaseData {
@@ -34,29 +34,29 @@ export class WaBaseData {
 
         let cellIndex = this.getColumnIndex(columnName);
         let oldValue = this.view_table.data[rowIndex][columnName];
-        let mode = this.view_table.data[rowIndex][WaColumnProperty.rowMode];
+        let mode = this.view_table.data[rowIndex][COLUMN_KEYS.rowMode];
 
         let result = this.getFormat(this.column_table.selectRowByRowIndex(cellIndex), value);
         if (mode == 'I') {
             if (oldValue != result.value) {
                 grid.view_table.updateByRowIndex(rowIndex, columnName, result.value);
-                grid.view_table.updateByRowIndex(rowIndex, WaColumnProperty.rowMode, 'I');
+                grid.view_table.updateByRowIndex(rowIndex, COLUMN_KEYS.rowMode, 'I');
 
-                let rowId: number = grid.view_table.selectValue(rowIndex, WaColumnProperty.rowId);
+                let rowId: number = grid.view_table.selectValue(rowIndex, COLUMN_KEYS.rowId);
 
                 grid.source_table.updateByRowId(rowId, columnName, result.value);
-                grid.source_table.updateByRowId(rowId, WaColumnProperty.rowMode, 'I');
+                grid.source_table.updateByRowId(rowId, COLUMN_KEYS.rowMode, 'I');
             }
         }
         else {
             if (oldValue != result.value) {
                 grid.view_table.updateByRowIndex(rowIndex, columnName, result.value);
-                grid.view_table.updateByRowIndex(rowIndex, WaColumnProperty.rowMode, 'U');
+                grid.view_table.updateByRowIndex(rowIndex, COLUMN_KEYS.rowMode, 'U');
 
-                let rowId: number = grid.view_table.selectValue(rowIndex, WaColumnProperty.rowId);
+                let rowId: number = grid.view_table.selectValue(rowIndex, COLUMN_KEYS.rowId);
 
                 grid.source_table.updateByRowId(rowId, columnName, result.value);
-                grid.source_table.updateByRowId(rowId, WaColumnProperty.rowMode, 'U');
+                grid.source_table.updateByRowId(rowId, COLUMN_KEYS.rowMode, 'U');
             }
         }
     }
@@ -69,7 +69,7 @@ export class WaBaseData {
     /** info_column_table */
 
     getInfoValue(this: WaGridCore, columnName: string, property: string): any {
-        const dataRow = this.info_column_table.selectRow(WaColumnProperty.name, columnName);
+        const dataRow = this.info_column_table.selectRow(COLUMN_KEYS.name, columnName);
         return dataRow[property];
     }
 
@@ -121,13 +121,13 @@ export class WaBaseData {
         result.value = value;
         result.text = value;
 
-        let colType = column[WaColumnProperty.type];
-        let format  = column[WaColumnProperty.format];
+        let colType = column[COLUMN_KEYS.type];
+        let format  = column[COLUMN_KEYS.format];
 
         if (colType == CellType.number) {
             result = this.getFormatNumber(column, value);
-            if (column[WaColumnProperty.visible] == false
-                || (column[WaColumnProperty.showZero] == false && Number(result.value) == 0 )) {
+            if (column[COLUMN_KEYS.visible] == false
+                || (column[COLUMN_KEYS.showZero] == false && Number(result.value) == 0 )) {
                 result.text = this.options[OptionAlias.zeroChar];
             }
             return result;
@@ -139,7 +139,7 @@ export class WaBaseData {
                 return result;
             }
             if (colType == CellType.combo) {
-                const data = grid.renderer[column[WaColumnProperty.name]].data;
+                const data = grid.renderer[column[COLUMN_KEYS.name]].data;
 
                 let key = data.valueName;
                 let val = data.textName;
@@ -179,7 +179,7 @@ export class WaBaseData {
         else if (grid.trim(value) == '')  result.value = null;
         else if (grid.substr2(value.toString(), 0, 1) == '.') result.value = '0'; //php 0.1 => .1
         else {
-            if (column[WaColumnProperty.currencyChar])  value = value.toString().replace(column[WaColumnProperty.currencyChar], '');
+            if (column[COLUMN_KEYS.currencyChar])  value = value.toString().replace(column[COLUMN_KEYS.currencyChar], '');
             result.value = value.toString().replace(/,/gi, '')
         }
 
@@ -189,14 +189,14 @@ export class WaBaseData {
         }
         result.text = result.value;
 
-        let type = column[WaColumnProperty.type];
-        let scale = column[WaColumnProperty.scale];
+        let type = column[COLUMN_KEYS.type];
+        let scale = column[COLUMN_KEYS.scale];
 
         let arr = scale.split(',');
         let decimalPoint = (arr.length > 1) ? this.trim(arr[1]) : '0';
         if (decimalPoint == '') decimalPoint = '0';
 
-        let roundType = column[WaColumnProperty.roundType];
+        let roundType = column[COLUMN_KEYS.roundType];
         let n = (result.value == undefined || result.value == '') ? '0' : result.value.toString(); //전체값
         let dpLen = 0; //decimal length
 
@@ -214,16 +214,16 @@ export class WaBaseData {
             else { // @ts-ignore
                 parseFloat(this.round(n, dpLen));
             }
-            result.text = column[WaColumnProperty.commaUnit] == '0' ? n : formatWon(n);
+            result.text = column[COLUMN_KEYS.commaUnit] == '0' ? n : formatWon(n);
         }
         else if (decimalPoint != '0') {
             result.text = formatWon(parseFloat(n));
-            if (column[WaColumnProperty.fixedScale]) {
+            if (column[COLUMN_KEYS.fixedScale]) {
                 dpLen = parseInt(decimalPoint);
                 n =   (roundType == 'ceil')  ? this.ceil(n, dpLen).toFixed(dpLen)
                     : (roundType == 'floor') ? this.floor(n, dpLen).toFixed(dpLen)
                         : this.round(n, dpLen).toFixed(dpLen);
-                result.text = column[WaColumnProperty.commaUnit] == '0' ? n : formatWon(n);
+                result.text = column[COLUMN_KEYS.commaUnit] == '0' ? n : formatWon(n);
             }
             else {
                 dpLen = parseInt(decimalPoint);
@@ -239,16 +239,16 @@ export class WaBaseData {
                 // n =   (roundType == 'ceil')  ? parseFloat(this.ceil(n, dpLen))
                 //     : (roundType == 'floor') ? parseFloat(this.floor(n, dpLen))
                 //         : parseFloat(this.round(n, dpLen));
-                result.text = column[WaColumnProperty.commaUnit] == '0' ? n : formatWon(n);
+                result.text = column[COLUMN_KEYS.commaUnit] == '0' ? n : formatWon(n);
             }
         }
         if (result.text == '0') {
             if (grid.options[OptionAlias.zeroChar] != '') result.text = OptionAlias.zeroChar;
         }
         let regExp = new RegExp('', 'gi');
-        result.text = result.text.replaceAll(',',  column[WaColumnProperty.thousandChar]);
-        result.text = result.text.replaceAll('.',  column[WaColumnProperty.decimalChar]);
-        if (column[WaColumnProperty.currencyChar]) result.text = column[WaColumnProperty.currencyChar] + result.text
+        result.text = result.text.replaceAll(',',  column[COLUMN_KEYS.thousandChar]);
+        result.text = result.text.replaceAll('.',  column[COLUMN_KEYS.decimalChar]);
+        if (column[COLUMN_KEYS.currencyChar]) result.text = column[COLUMN_KEYS.currencyChar] + result.text
         return result;
     }
 
@@ -268,7 +268,7 @@ export class WaBaseData {
             result.text = '';
             return result;
         }
-        let format = column[WaColumnProperty.format];
+        let format = column[COLUMN_KEYS.format];
 
         // date char : . - /
         let formatText = format.replace(/\./gi, '');

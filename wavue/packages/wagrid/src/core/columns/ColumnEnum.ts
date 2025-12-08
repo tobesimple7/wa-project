@@ -1,9 +1,9 @@
-export enum WaColumnKind {
+export enum COLUMN_KIND {
     column = 'column',
     header = 'header',
     empty  = 'empty',
 }
-export enum WaColumnProperty {
+export enum COLUMN_KEYS {
     rowId = '_rowId',
     rowMode = '_mode',
     isChecked = '_isChecked',

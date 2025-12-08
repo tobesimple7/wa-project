@@ -3,7 +3,7 @@ import { WaStringRender } from "../renderer/StringRender";
 import { WaCheckboxRender } from "../renderer/CheckboxRender";
 import {WaGridCore} from "@/core/WaGridCore"
 import {CellType, GridMode} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaRenderPanelInfo {
 
@@ -72,14 +72,14 @@ export class WaRenderPanelInfo {
         render.rowIndex   = rowIndex;
         render.columnIndex= columnIndex;
 
-        render.columnName = grid.getProperty(column, WaColumnProperty.name);
-        render.columnType = grid.getProperty(column, WaColumnProperty.type);
+        render.columnName = grid.getProperty(column, COLUMN_KEYS.name);
+        render.columnType = grid.getProperty(column, COLUMN_KEYS.type);
 
-        render.visible    = grid.getProperty(column, WaColumnProperty.visible);
-        render.width      = grid.getProperty(column, WaColumnProperty.width);
-        render.editable   = grid.getProperty(column, WaColumnProperty.editable);
-        render.align      = grid.getProperty(column, WaColumnProperty.align);
-        render.className  = grid.getProperty(column, WaColumnProperty.className);
+        render.visible    = grid.getProperty(column, COLUMN_KEYS.visible);
+        render.width      = grid.getProperty(column, COLUMN_KEYS.width);
+        render.editable   = grid.getProperty(column, COLUMN_KEYS.editable);
+        render.align      = grid.getProperty(column, COLUMN_KEYS.align);
+        render.className  = grid.getProperty(column, COLUMN_KEYS.className);
 
         if (panelName == 'panel41' || panelName == 'panle51' || panelName == 'panle71') this.columnType = CellType.string;
 
@@ -115,14 +115,14 @@ export class WaRenderPanelInfo {
                     }
                 }
                 else if (render.columnName == 'mode') {
-                    let mode = dataRow[WaColumnProperty.rowMode];
+                    let mode = dataRow[COLUMN_KEYS.rowMode];
                     mode = (mode != '' && mode != 'S') ? mode : '';
 
                     render.cellValue = mode;
                     render.cellText  = mode;
                 }
                 else if (render.columnName == 'checkbox') {
-                    let check = grid.isNull(dataRow[WaColumnProperty.isChecked], false);
+                    let check = grid.isNull(dataRow[COLUMN_KEYS.isChecked], false);
                     render.cellValue  = check;
                     render.cellText   = check;
                 }
@@ -199,8 +199,8 @@ export class WaRenderPanelInfo {
             eventRow.rowIndex    = this.rowIndex;
             eventRow.columnIndex = this.columnIndex;
             eventRow.columnName  = this.columnName;
-            eventRow.value       = grid.isNull(dataRow[WaColumnProperty.isChecked], false);
-            eventRow.text        = grid.isNull(dataRow[WaColumnProperty.isChecked], false);
+            eventRow.value       = grid.isNull(dataRow[COLUMN_KEYS.isChecked], false);
+            eventRow.text        = grid.isNull(dataRow[COLUMN_KEYS.isChecked], false);
             eventRow.data        = dataRow;
             const result= grid.infoRenderer[this.columnName].callback(grid, eventRow);
 

@@ -1,5 +1,5 @@
 import {AddRowDirection, CellType, GridMode, OptionAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaGridCore} from "@/core/WaGridCore";
 import {WaDom} from "../Dom";
 import {WaGridExcel} from "@/core/export/GridExcel";
@@ -183,8 +183,8 @@ export class WaBaseMain {
 
         for (let i = 0, len = grid.header_column_table.data.length; i < len; i++){
             for (let x = 0, len2 = grid.column_table.count(); x < len2; x++){
-                if (grid.header_column_table.data[i][x][WaColumnProperty.kind] == 'column') {
-                    let width = parseInt(grid.getTextWidth(canvas, grid.header_column_table.data[i][x][WaColumnProperty.text], fontSize, fontFamilty));
+                if (grid.header_column_table.data[i][x][COLUMN_KEYS.kind] == 'column') {
+                    let width = parseInt(grid.getTextWidth(canvas, grid.header_column_table.data[i][x][COLUMN_KEYS.text], fontSize, fontFamilty));
                     if (width >= arr[x]) {
                         arr[x] = width;
                     }
@@ -314,14 +314,14 @@ export class WaBaseMain {
             const columns: any[] = grid.column_table.selectRows();
             for (let x = 0, len = columns.length; x < len; x++) {
                 const column = columns[x];
-                let columnName  = column[WaColumnProperty.name];
+                let columnName  = column[COLUMN_KEYS.name];
                 source[columnName] = this.null(dataRow[columnName]) ? null : this.getFormatValue(column, dataRow[columnName]);
             }
 
             // const dataColumns: any[] = grid.field_table.selectRows();
             // for (let x = 0, len = dataColumns.length; x < len; x++) {
             //     const column = dataColumns[x];
-            //     let columnName  = column[WaColumnProperty.name];
+            //     let columnName  = column[COLUMN_KEYS.name];
             //     source[columnName] = dataRow[columnName];
             // }
 
@@ -369,14 +369,14 @@ export class WaBaseMain {
             let itemLeftSelect = {};
             let itemLeftView = {};
 
-            itemSelect[WaColumnProperty.rowId] = data[rowIndex][WaColumnProperty.rowId];
+            itemSelect[COLUMN_KEYS.rowId] = data[rowIndex][COLUMN_KEYS.rowId];
             itemSelect = new Uint8ClampedArray([]); //new
 
-            itemLeftView[WaColumnProperty.rowMode] = ''; //insert, update, delete
-            itemLeftView[WaColumnProperty.rowId] = data[rowIndex][WaColumnProperty.rowId];
+            itemLeftView[COLUMN_KEYS.rowMode] = ''; //insert, update, delete
+            itemLeftView[COLUMN_KEYS.rowId] = data[rowIndex][COLUMN_KEYS.rowId];
 
-            itemLeftSelect[WaColumnProperty.rowMode] = 0; //insert, update, delete
-            itemLeftSelect[WaColumnProperty.rowId] = data[rowIndex][WaColumnProperty.rowId];
+            itemLeftSelect[COLUMN_KEYS.rowMode] = 0; //insert, update, delete
+            itemLeftSelect[COLUMN_KEYS.rowId] = data[rowIndex][COLUMN_KEYS.rowId];
 
             this.data_select_panel30.push(itemSelect);
             this.data_select_panel31.push(itemLeftSelect);

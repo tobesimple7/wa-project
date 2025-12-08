@@ -1,6 +1,6 @@
-import {WaColumnKind} from "@/core/columns/ColumnEnum";
+import {COLUMN_KIND} from "@/core/columns/ColumnEnum";
 
-export interface WaColumnDef {
+export interface ColumnDef {
     _rowId?: number,
     _rowMode?: string,
     _isChecked?: boolean,
@@ -49,7 +49,7 @@ export interface WaColumnDef {
     required?: boolean,
     combo?: any
     format?: boolean,
-    kind?: WaColumnKind,
+    kind?: COLUMN_KIND,
     rowSpan?: any,
     colSpan?: any,
     rowIndex?: any,

@@ -1,5 +1,5 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaStringRender} from "../renderer/StringRender";
 
 
@@ -73,11 +73,11 @@ export class WaRenderPanel40 {
         this.rowIndex   = rowIndex;
         this.columnIndex= columnIndex;
 
-        this.columnName = column[WaColumnProperty.name];
-        this.columnType = column[WaColumnProperty.type];
+        this.columnName = column[COLUMN_KEYS.name];
+        this.columnType = column[COLUMN_KEYS.type];
 
-        this.visible    = column[WaColumnProperty.visible];
-        this.width      = column[WaColumnProperty.width];
+        this.visible    = column[COLUMN_KEYS.visible];
+        this.width      = column[COLUMN_KEYS.width];
 
         let columnTable = null;
         let dataTable = null;
@@ -91,20 +91,20 @@ export class WaRenderPanel40 {
             dataTable = grid.footer_table;
         }
 
-        const summaryColumn = columnTable.selectRow(WaColumnProperty.name, this.columnName);
+        const summaryColumn = columnTable.selectRow(COLUMN_KEYS.name, this.columnName);
         if (grid.notNull(summaryColumn)) {
-            this.align = grid.notNull(summaryColumn[WaColumnProperty.align]) ?
-                summaryColumn[WaColumnProperty.align] : column[WaColumnProperty.align];
+            this.align = grid.notNull(summaryColumn[COLUMN_KEYS.align]) ?
+                summaryColumn[COLUMN_KEYS.align] : column[COLUMN_KEYS.align];
 
-            this.className = grid.notNull(summaryColumn[WaColumnProperty.className]) ?
-                summaryColumn[WaColumnProperty.className] : column[WaColumnProperty.className];
+            this.className = grid.notNull(summaryColumn[COLUMN_KEYS.className]) ?
+                summaryColumn[COLUMN_KEYS.className] : column[COLUMN_KEYS.className];
 
             this.cellValue = grid.getValue(this.rowIndex, this.columnName, dataTable);
             this.cellText = grid.getText(this.rowIndex, this.columnName, dataTable);
         }
         else {
-            this.align = column[WaColumnProperty.align];
-            this.className = column[WaColumnProperty.className];
+            this.align = column[COLUMN_KEYS.align];
+            this.className = column[COLUMN_KEYS.className];
         }
 
 

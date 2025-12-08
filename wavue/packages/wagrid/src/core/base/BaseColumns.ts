@@ -1,4 +1,4 @@
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaGridCore} from "@/core/WaGridCore";
 
 export class WaBaseColumns {
@@ -19,15 +19,15 @@ export class WaBaseColumns {
      * Columns API.
      */
 
-    getColumn(this: WaGridCore, name: string, table?: any) { return this.isNull(table, this.column_table).selectRow(WaColumnProperty.name, name); }
+    getColumn(this: WaGridCore, name: string, table?: any) { return this.isNull(table, this.column_table).selectRow(COLUMN_KEYS.name, name); }
 
     getColumns(this: WaGridCore, table?: any) { return this.isNull(table, this.column_table).select();  }
 
     getColumnByIndex(this: WaGridCore, columnIndex: number, table?: any) { return this.isNull(table, this.column_table).selectRowByRowIndex(columnIndex); }
 
-    getColumnName(this: WaGridCore, columnIndex: number, table?: any) { return this.isNull(table, this.column_table).selectValue(columnIndex, WaColumnProperty.name); }
+    getColumnName(this: WaGridCore, columnIndex: number, table?: any) { return this.isNull(table, this.column_table).selectValue(columnIndex, COLUMN_KEYS.name); }
 
-    getColumnIndex(this: WaGridCore, columnName: string, table?: any) { return this.isNull(table, this.column_table).selectRowIndex(WaColumnProperty.name, columnName); }
+    getColumnIndex(this: WaGridCore, columnName: string, table?: any) { return this.isNull(table, this.column_table).selectRowIndex(COLUMN_KEYS.name, columnName); }
 
     setColumn(this: WaGridCore, columnName: string, property: string, value: any, table?: any) { this.isNull(table, this.column_table).updateRow(columnName, property, value); }
 

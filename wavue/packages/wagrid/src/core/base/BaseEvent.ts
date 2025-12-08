@@ -1,5 +1,5 @@
 import {AddRowDirection, CellType, GridMode, OptionAlias, RowAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaDate} from "@/core/layer/Date"
 import {WaCombo} from "@/core/layer/Combo"
 import {WaGridCore} from "@/core/WaGridCore"
@@ -70,7 +70,7 @@ export class WaBaseEvent {
                     //console.log('input');
                     let cellIndex = grid.startCellIndex;
                     let column = grid.getColumnByIndex(cellIndex);
-                    if (grid.isNull(column[WaColumnProperty.editable], false)) {
+                    if (grid.isNull(column[COLUMN_KEYS.editable], false)) {
                         if (grid.notNull(grid.onEdit)) { // state
                             //console.log(`panelInput.style.left : ${panelInput.style.left}`);
                             if (panelInputt.style.left == '70000px') {
@@ -97,7 +97,7 @@ export class WaBaseEvent {
         const clickEvent = function(e) {
             let column = grid.column_table.data;
             let input = document.querySelector(selector + ' .wa-grid-input');
-            let colType = grid.column_table.data[grid.startCellIndex][WaColumnProperty.type];
+            let colType = grid.column_table.data[grid.startCellIndex][COLUMN_KEYS.type];
         }
         const blurEvent = function(e) {
             const inputLayerPanel: any = document.querySelector(selector + ' .wa-grid-input-layer-panel');
@@ -123,8 +123,8 @@ export class WaBaseEvent {
             else {
                 if (isNaN(cellIndex)) return;
                 let s = input.value;
-                if (column[WaColumnProperty.type] == CellType.combo) s = input_code.value;
-                else if (column[WaColumnProperty.type] == 'number' && grid.trim(s) == grid.options[OptionAlias.zeroChar]) s = '0';
+                if (column[COLUMN_KEYS.type] == CellType.combo) s = input_code.value;
+                else if (column[COLUMN_KEYS.type] == 'number' && grid.trim(s) == grid.options[OptionAlias.zeroChar]) s = '0';
                 grid.setValueByColumnIndex(rowIndex, cellIndex, grid.getFormatValue(column, s));
                 grid.input_hide();
             }
@@ -142,7 +142,7 @@ export class WaBaseEvent {
 
                 for (let rowIndex = startRowIndex; rowIndex <= lastRowIndex; rowIndex++) {
                     for (let colIndex = startCellIndex; colIndex <= lastCellIndex; colIndex++) {
-                        let columnName = grid.column_table.selectValue(colIndex, WaColumnProperty.name);
+                        let columnName = grid.column_table.selectValue(colIndex, COLUMN_KEYS.name);
                         let val = grid.getValue(rowIndex, columnName, grid.top_table);
                         if (grid.null(val)) val = '';
                         s += val;
@@ -219,7 +219,7 @@ export class WaBaseEvent {
 
                 for (let colIndex = startCellIndex; colIndex < startCellIndex + colArray.length; colIndex++) {
                     //if (grid.column_table.data[colIndex].column_readonly == true) continue;
-                    if (grid.column_table.data[colIndex][WaColumnProperty.editable] == false) continue;
+                    if (grid.column_table.data[colIndex][COLUMN_KEYS.editable] == false) continue;
                     grid.setValueByColumnIndex(rowIndex, colIndex, colArray[j]);
                     j += 1;
                 }
@@ -255,7 +255,7 @@ export class WaBaseEvent {
             const input_code: any = document.querySelector(selector + ' .wa-grid-input-code');
             const input_panel: any = document.querySelector(selector + ' .wa-grid-input-layer-panel');
             const column: any = grid.column_table.data[grid.startCellIndex];
-            const colType: any = grid.column_table.data[grid.startCellIndex][WaColumnProperty.type];
+            const colType: any = grid.column_table.data[grid.startCellIndex][COLUMN_KEYS.type];
 
             //wa-grid-input-layer-panel : calendar, combo
             if (colType == 'date') {
@@ -278,7 +278,7 @@ export class WaBaseEvent {
 
         let columns = grid.column_table.data;
         let column = columns[cellIndex];
-        let colType  = column[WaColumnProperty.type];
+        let colType  = column[COLUMN_KEYS.type];
 
         let panelInput: any = document.querySelector(selector + ' .wa-grid-input-panel');
         let input: any = document.querySelector(selector + ' .wa-grid-input');
@@ -289,10 +289,10 @@ export class WaBaseEvent {
         let td = document.querySelector(selector + ' .wa-grid-group30 .wa-grid-cell-start');
         if (td == null) return;
 
-        let value  = this.getValue(rowIndex, column[WaColumnProperty.name]);
+        let value  = this.getValue(rowIndex, column[COLUMN_KEYS.name]);
         const result: any = this.getFormat(column, value); //result.value, result.text
 
-        if (column[WaColumnProperty.editable] == false) return;
+        if (column[COLUMN_KEYS.editable] == false) return;
 
         grid.tbs_moveCellLine(td, rowIndex, cellIndex);
 
@@ -319,7 +319,7 @@ export class WaBaseEvent {
 
         let input_icon: any = document.querySelector(selector + ' .wa-grid-input-panel-icon');
         if (colType == 'date') {
-            let width = parseInt(column[WaColumnProperty.width]);
+            let width = parseInt(String(column[COLUMN_KEYS.width]));
             panelInput.style.width = (width - 15 - 3) + 'px';
 
             input_icon.style.display = '';
@@ -328,7 +328,7 @@ export class WaBaseEvent {
             input_icon.childNodes[0].className = 'wa-grid-html-icon-date';
         }
         else if (colType == CellType.combo) {
-            let width = parseInt(column[WaColumnProperty.width]);
+            let width = parseInt(String(column[COLUMN_KEYS.width]));
             panelInput.style.width = (width - 15 - 3) + 'px';
 
             input_icon.style.display = '';
@@ -342,7 +342,7 @@ export class WaBaseEvent {
             input.style.backgroundImage = '';
             input.style.backgroundPosition = '';
             input.style.backgroundSize = '';
-            panelInput.style.width = (parseInt(column[WaColumnProperty.width]) - lineWeight) + 'px';
+            panelInput.style.width = (parseInt(String(column[COLUMN_KEYS.width])) - lineWeight) + 'px';
         }
         if (mode == 'mouse') input.select();
     }
@@ -407,7 +407,7 @@ export class WaBaseEvent {
         const eventRow = grid.getRow(rowIndex);
 
         if (grid.group_column_table.count() > 0) {
-            if (eventRow[WaColumnProperty.depth] <= grid.group_column_table.count()) return;
+            if (eventRow[COLUMN_KEYS.depth] <= grid.group_column_table.count()) return;
         }
 
         const column: any = grid.getColumnByIndex(cellIndex);
@@ -427,7 +427,7 @@ export class WaBaseEvent {
         eventRow.data        = eventRow;
 
         if (mode == 'key') {
-            if (column[WaColumnProperty.editable] == true && grid.notNull(grid.onEdit)) {
+            if (column[COLUMN_KEYS.editable] == true && grid.notNull(grid.onEdit)) {
                 let result =  grid.onEdit(grid, state, eventRow);
                 if (grid.isNull(result, true)) {
                     grid.input_show(e, mode);
@@ -440,7 +440,7 @@ export class WaBaseEvent {
             }
         }
         else {
-            if (column[WaColumnProperty.editable] == true && grid.notNull(grid.onEdit)) {
+            if (column[COLUMN_KEYS.editable] == true && grid.notNull(grid.onEdit)) {
                 let result = true;
                 result = grid.onEdit(grid, state, eventRow);
                 if (grid.null(result) || result == true) {
@@ -484,7 +484,7 @@ export class WaBaseEvent {
         eventData.state       = state;
         eventData.newValue    = input.value;
         eventData.data        = eventRow;
-        if (column[WaColumnProperty.editable] == true && grid.notNull(grid.onEdit)) {
+        if (column[COLUMN_KEYS.editable] == true && grid.notNull(grid.onEdit)) {
             let result = true;
             if (state == 1 && panelInput.style.left != '70000px') {
                 result = grid.onEdit(grid, state, eventRow);
@@ -532,14 +532,14 @@ export class WaBaseEvent {
             eventData.state       = state;
             eventData.newValue    = input.value;
             eventData.data        = eventRow;
-            if (column[WaColumnProperty.editable] == true && grid.notNull(grid.onEdit)) {
+            if (column[COLUMN_KEYS.editable] == true && grid.notNull(grid.onEdit)) {
                 let result = true;
                 if (state == 2 && panelInput.style.left != '70000px') {
                     result = grid.onEdit(grid, state, eventRow);
                     if (grid.null(result) || result == true) {
                         //console.log(2);
                         let s = input.value;
-                        if (column[WaColumnProperty.type] == CellType.combo) s = input_code.value;
+                        if (column[COLUMN_KEYS.type] == CellType.combo) s = input_code.value;
                         grid.setValueByColumnIndex(rowIndex, cellIndex, grid.getFormatValue(column, s));
                         grid.input_hide();
                         grid.apply();
@@ -700,9 +700,9 @@ export class WaBaseEvent {
         let curSortKind = '';
         let sortKind = '';
 
-        if (grid.sort_column_table.isRow(WaColumnProperty.name, columnName)) {
-            let dataRow = grid.sort_column_table.selectRow(WaColumnProperty.name, columnName);
-            curSortKind = dataRow[WaColumnProperty.order];
+        if (grid.sort_column_table.isRow(COLUMN_KEYS.name, columnName)) {
+            let dataRow = grid.sort_column_table.selectRow(COLUMN_KEYS.name, columnName);
+            curSortKind = dataRow[COLUMN_KEYS.order];
         }
         else {
             curSortKind = '';
@@ -712,15 +712,15 @@ export class WaBaseEvent {
         else if (curSortKind == 'asc') sortKind = 'desc';
         else sortKind = 'asc';
 
-        if (grid.sort_column_table.isRow(WaColumnProperty.name, columnName)) {
-            let dataRow = grid.sort_column_table.selectRow(WaColumnProperty.name, columnName);
-            let rowId = dataRow[WaColumnProperty.rowId];
-            grid.sort_column_table.updateByRowId(rowId, WaColumnProperty.order, sortKind);
+        if (grid.sort_column_table.isRow(COLUMN_KEYS.name, columnName)) {
+            let dataRow = grid.sort_column_table.selectRow(COLUMN_KEYS.name, columnName);
+            let rowId = dataRow[COLUMN_KEYS.rowId];
+            grid.sort_column_table.updateByRowId(rowId, COLUMN_KEYS.order, sortKind);
         }
         else {
             let dataRow = {};
-            dataRow[WaColumnProperty.name] = columnName;
-            dataRow[WaColumnProperty.order] = sortKind;
+            dataRow[COLUMN_KEYS.name] = columnName;
+            dataRow[COLUMN_KEYS.order] = sortKind;
             grid.sort_column_table.insert(dataRow);
         }
 
@@ -877,7 +877,7 @@ export class WaBaseEvent {
             eventDetail = e.detail;
             if (eventDetail == 1) {
                 e.stopPropagation();
-                // if (grid.options[WaColumnProperty.resizable] == false) return;
+                // if (grid.options[COLUMN_KEYS.resizable] == false) return;
 
                 let isResizable = grid.isResizableColumn(tableCell.dataset.name);
                 if (!isResizable) return;
@@ -922,7 +922,7 @@ export class WaBaseEvent {
 
                 let colIndex   = cell.cellIndex + parseInt(cell.colSpan) - 1;
                 let column     = grid.getColumn(columnName);
-                let firstWidth = parseInt(column[WaColumnProperty.width]);
+                let firstWidth = parseInt(String(column[COLUMN_KEYS.width]));
                 let maxWidth  = 0;
 
                 let canvas = document.querySelector(selector + ' .wa-grid-canvas').childNodes[0];
@@ -933,8 +933,8 @@ export class WaBaseEvent {
                 for (let i = 0, len = grid.header_column_table.count(); i < len; i++){
                     let headerColumns = grid.header_column_table.data[i];
 
-                    if (headerColumns[colIndex][WaColumnProperty.kind] == 'column') {
-                        let width = parseInt(grid.getTextWidth(canvas, headerColumns[colIndex][WaColumnProperty.text], fontSize, fontFamilty));
+                    if (headerColumns[colIndex][COLUMN_KEYS.kind] == 'column') {
+                        let width = parseInt(grid.getTextWidth(canvas, headerColumns[colIndex][COLUMN_KEYS.text], fontSize, fontFamilty));
                         if (width >= maxWidth) maxWidth = width;
                     }
                 }
@@ -1021,8 +1021,8 @@ export class WaBaseEvent {
     //             let tr = e.target.parentNode.parentNode.parentNode;
     //             let rowIndex = parseInt(tr.childNodes[0].childNodes[0].textContent) - 1;
     //
-    //             if (e.target.checked) grid.view_table.updateByRowIndex(rowIndex, WaColumnProperty.isChecked, false);
-    //             else grid.view_table.updateByRowIndex(rowIndex, WaColumnProperty.isChecked, true);
+    //             if (e.target.checked) grid.view_table.updateByRowIndex(rowIndex, COLUMN_KEYS.isChecked, false);
+    //             else grid.view_table.updateByRowIndex(rowIndex, COLUMN_KEYS.isChecked, true);
     //         }
     //     }
     //     document.querySelector(selector + ' .wa-grid-panel31 .wa-grid-table').addEventListener('mousedown', checkDowntEvent, false);
@@ -1500,7 +1500,7 @@ export class WaBaseEvent {
         for (let x = startColumnIndex; x < lastColumnIndex; x++) {
             const tableCell: any = tableRow.childNodes[x];
             let column = grid.column_table.data[x];
-            if (column[WaColumnProperty.visible] == false) continue;
+            if (column[COLUMN_KEYS.visible] == false) continue;
             let rect = grid.getOffset(tableCell);
             let rectLeft = rect.left;
             //console.log(`${panelName} : tableCell.cellIndex  ${tableCell.cellIndex} : maxCellIndex ${maxCellIndex} : rect.left  ${rect.left} : rectRight ${rectLeft} : lastX  ${this.lastX}`);
@@ -1537,7 +1537,7 @@ export class WaBaseEvent {
         for (let x = lastColumnIndex; x >= startColumnIndex; x--) {
             const tableCell: any = tableRow.childNodes[x];
             let column = grid.column_table.data[x];
-            if (column[WaColumnProperty.visible] == false) continue;
+            if (column[COLUMN_KEYS.visible] == false) continue;
             let rect = grid.getOffset(tableCell);
             let rectRight= rect.left + tableCell.getBoundingClientRect().width;
             //console.log(`${panelName} : tableCell.cellIndex  ${tableCell.cellIndex} : minCellIndex ${minCellIndex} : rect.left  ${rect.left} : rectRight ${rectRight} : lastX  ${this.lastX}`);
@@ -1623,10 +1623,10 @@ export class WaBaseEvent {
             cellIndex = cellIndex - 1;
             for (let i = cellIndex; i >= 0; i--) {
                 let column = this.column_table.data[i];
-                if (column[WaColumnProperty.visible] == false) cellIndex -= 1;
+                if (column[COLUMN_KEYS.visible] == false) cellIndex -= 1;
                 else break;
             }
-            if (cellIndex < 0 || this.column_table.data[cellIndex][WaColumnProperty.visible] == false) {
+            if (cellIndex < 0 || this.column_table.data[cellIndex][COLUMN_KEYS.visible] == false) {
                 grid.classRange.removeRange(0, -1);
                 let _topRowIndex = grid.classRange.selectRange(dataRowIndex, dataRowIndex, startCellIndex, startCellIndex);
                 grid.waPanel30.setDataPanel(_topRowIndex);
@@ -1662,7 +1662,7 @@ export class WaBaseEvent {
             cellIndex = cellIndex + 1;
             for (let i = cellIndex, len = this.column_table.count(); i < len; i++){
                 let column = this.column_table.data[i]
-                if (column[WaColumnProperty.visible] == false) cellIndex += 1;
+                if (column[COLUMN_KEYS.visible] == false) cellIndex += 1;
                 else break;
             }
             if (cellIndex >= this.column_table.count()) cellIndex = startCellIndex;

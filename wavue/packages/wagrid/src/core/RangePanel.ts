@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {RowAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaRangePanel {
     grid: WaGridCore;
     selector: string;
@@ -328,7 +328,7 @@ export class WaRangePanel {
         for (let x = startColumnIndex; x < lastColumnIndex; x++) {
             let tableCell: any = tableRow.childNodes[x];
             let column = grid.column_table.data[x];
-            if (column[WaColumnProperty.visible] == false) continue;
+            if (column[COLUMN_KEYS.visible] == false) continue;
             let rect = grid.getOffset(tableCell);
             let rectLeft = rect.left;
             //console.log(`rect2.left ${rect2.left} rectLeft ${rectLeft} lastX ${lastX} `);
@@ -366,7 +366,7 @@ export class WaRangePanel {
         for (let x = lastColumnIndex; x >= startColumnIndex; x--) {
             let tableCell: any = tableRow.childNodes[x];
             let column = grid.column_table.data[x];
-            if (column[WaColumnProperty.visible] == false) continue;
+            if (column[COLUMN_KEYS.visible] == false) continue;
             let rect = grid.getOffset(tableCell);
             let rectRight= rect.left + tableCell.getBoundingClientRect().width;
             if (lastX < rectRight) minCellIndex = tableCell.cellIndex;

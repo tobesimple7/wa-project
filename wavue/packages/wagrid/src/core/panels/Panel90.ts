@@ -2,7 +2,7 @@
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel30 } from './RenderPanel30';
 import { WaRenderPanelInfo } from './RenderPanelInfo';
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaPanel90 extends WaPanelBase {
 
     constructor(grid) {
@@ -137,7 +137,7 @@ export class WaPanel90 extends WaPanelBase {
 
                         let name = moveElement.dataset.name;
                         let column = grid.getColumn(name);
-                        let text = column.header[WaColumnProperty.text];
+                        let text = column.header[COLUMN_KEYS.text];
                         let order = 'asc';
 
                         // Find the one that is smaller to the button left than then move element left
@@ -330,7 +330,7 @@ export class WaPanel90 extends WaPanelBase {
                 let maxCellIndex;
                 for (let x = 0, len = tdList.length; x < len; x++) {
                     let cell: any =  tdList[x];
-                    if (grid.column_table.data[x][WaColumnProperty.visible] == false) continue;
+                    if (grid.column_table.data[x][COLUMN_KEYS.visible] == false) continue;
                     let left = window.pageXOffset + cell.getBoundingClientRect().left;
                     if (lastX > left) maxCellIndex = cell.cellIndex;
                 }
@@ -342,7 +342,7 @@ export class WaPanel90 extends WaPanelBase {
                 let minCellIndex;
                 for (let x = tdList.length - 1; x >= 0; x--) {
                     let cell: any =  tdList[x];
-                    if (grid.column_table.data[x][WaColumnProperty.visible] == false) continue;
+                    if (grid.column_table.data[x][COLUMN_KEYS.visible] == false) continue;
                     let right = window.pageXOffset + cell.getBoundingClientRect().right;
                     if (lastX < right) minCellIndex = cell.cellIndex;
                 }
@@ -376,7 +376,7 @@ export class WaPanel90 extends WaPanelBase {
                     grid.classScroll.setBarPositionByDirection('right');
                     for (let trRowIndex = 0; trRowIndex < trCount; trRowIndex++) {
                         for (let cellIndex = 0; cellIndex < tdCount; cellIndex++) {
-                            if (grid.column_table.data[cellIndex][WaColumnProperty.visible] == false) continue;
+                            if (grid.column_table.data[cellIndex][COLUMN_KEYS.visible] == false) continue;
                             let left = window.scrollX + trContent[trRowIndex].childNodes[cellIndex].getBoundingClientRect().left;
                             if (lastX > left) maxCellIndex = trContent[trRowIndex].childNodes[cellIndex].cellIndex;
                         }
@@ -398,7 +398,7 @@ export class WaPanel90 extends WaPanelBase {
                     grid.classScroll.setBarPositionByDirection('left');
                     for (let rowIndex = 0; rowIndex < trCount; rowIndex++) {
                         for (let cellIndex = tdCount - 1; cellIndex >= 0; cellIndex--) {
-                            if (grid.column_table.data[cellIndex][WaColumnProperty.visible] == false) continue;
+                            if (grid.column_table.data[cellIndex][COLUMN_KEYS.visible] == false) continue;
                             let right = window.pageXOffset + trContent[rowIndex].childNodes[cellIndex].getBoundingClientRect().right;
                             if (lastX < right) minCellIndex = trContent[rowIndex].childNodes[cellIndex].cellIndex;
                         }

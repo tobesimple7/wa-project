@@ -2,7 +2,7 @@ import * as XLSX from 'xlsx';
 import {saveAs} from 'file-saver';
 
 import {WaGridCore} from "@/core/WaGridCore";
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaGridExcel {
     grid: WaGridCore;
@@ -115,7 +115,7 @@ export class WaGridExcel {
         const tr = document.createElement('tr');
         grid.column_table.data.map(column => {
             const th = document.createElement('th');
-            th.style.width = (column[WaColumnProperty.visible] == true) ? column.width + 'px' : '0px';
+            th.style.width = (column[COLUMN_KEYS.visible] == true) ? column.width + 'px' : '0px';
             tr.appendChild(th);
         });
         result.push(tr);
@@ -131,22 +131,22 @@ export class WaGridExcel {
             tr.style.height = grid.rowHeight + 'px';
             for (let i = 0, len = row.length; i < len; i++) {
                 const column = row[i];
-                let kind = column[WaColumnProperty.kind];
+                let kind = column[COLUMN_KEYS.kind];
 
                 if (kind == 'empty') continue;
 
                 const td = document.createElement('td');
-                td.rowSpan = column[WaColumnProperty.rowSpan];
-                td.colSpan = column[WaColumnProperty.colSpan];
+                td.rowSpan = column[COLUMN_KEYS.rowSpan];
+                td.colSpan = column[COLUMN_KEYS.colSpan];
 
-                td.style.textAlign = column[WaColumnProperty.align];
+                td.style.textAlign = column[COLUMN_KEYS.align];
                 td.style.borderTop = 'solid 1px #9b9b9b';
                 td.style.borderLeft = 'solid 1px #9b9b9b';
                 td.style.borderRight = 'solid 1px #9b9b9b';
                 td.style.borderBottom = 'solid 1px #9b9b9b';
                 td.style.backgroundColor = '#fcf1f4';
 
-                td.textContent = column[WaColumnProperty.text];
+                td.textContent = column[COLUMN_KEYS.text];
 
                 tr.appendChild(td);
             }
@@ -165,8 +165,8 @@ export class WaGridExcel {
             for (let i = 0, len = grid.column_table.count(); i < len; i++) {
 
                 const column = grid.column_table.selectRowByRowIndex(i);
-                let columnName = column[WaColumnProperty.name];
-                let visible = column[WaColumnProperty.visible];
+                let columnName = column[COLUMN_KEYS.name];
+                let visible = column[COLUMN_KEYS.visible];
 
                 if (visible == false) continue;
 
@@ -178,7 +178,7 @@ export class WaGridExcel {
                 td.rowSpan = 1;
                 td.colSpan = 1;
 
-                td.style.textAlign = column[WaColumnProperty.align];
+                td.style.textAlign = column[COLUMN_KEYS.align];
                 td.style.borderTop = 'solid 1px #9b9b9b';
                 td.style.borderLeft = 'solid 1px #9b9b9b';
                 td.style.borderRight = 'solid 1px #9b9b9b';
@@ -203,8 +203,8 @@ export class WaGridExcel {
             for (let i = 0, len = grid.column_table.count(); i < len; i++) {
 
                 const column = grid.column_table.selectRowByRowIndex(i);
-                let columnName = column[WaColumnProperty.name];
-                let visible = column[WaColumnProperty.visible];
+                let columnName = column[COLUMN_KEYS.name];
+                let visible = column[COLUMN_KEYS.visible];
 
                 if (visible == false) continue;
 
@@ -221,7 +221,7 @@ export class WaGridExcel {
                 td.rowSpan = 1;
                 td.colSpan = 1;
 
-                td.style.textAlign = column[WaColumnProperty.align];
+                td.style.textAlign = column[COLUMN_KEYS.align];
                 td.style.borderTop = 'solid 1px #9b9b9b';
                 td.style.borderLeft = 'solid 1px #9b9b9b';
                 td.style.borderRight = 'solid 1px #9b9b9b';
@@ -246,8 +246,8 @@ export class WaGridExcel {
             for (let i = 0, len = grid.column_table.count(); i < len; i++) {
 
                 const column = grid.column_table.selectRowByRowIndex(i);
-                let columnName = column[WaColumnProperty.name];
-                let visible = column[WaColumnProperty.visible];
+                let columnName = column[COLUMN_KEYS.name];
+                let visible = column[COLUMN_KEYS.visible];
 
                 if (visible == false) continue;
 
@@ -263,7 +263,7 @@ export class WaGridExcel {
                 td.rowSpan = 1;
                 td.colSpan = 1;
 
-                td.style.textAlign = column[WaColumnProperty.align];
+                td.style.textAlign = column[COLUMN_KEYS.align];
                 td.style.borderTop = 'solid 1px #9b9b9b';
                 td.style.borderLeft = 'solid 1px #9b9b9b';
                 td.style.borderRight = 'solid 1px #9b9b9b';

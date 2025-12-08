@@ -2,7 +2,7 @@
 import {WaPanelBase } from './PanelBase';
 import {WaTable } from "../Table";
 import {GridMode} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaPanel70 extends WaPanelBase {
 
     constructor(grid) {
@@ -68,10 +68,10 @@ export class WaPanel70 extends WaPanelBase {
         for (let x = 0; x <= grid.fixedColumnIndex; x++) {
             let column = grid.column_table.data[x];
             let tableCell: any = tableRow.childNodes[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
 
-            tableCell.style.display = (column[WaColumnProperty.visible]) ? '' : 'none';
-            tableCell.style.width   = column[WaColumnProperty.width] + 'px';
+            tableCell.style.display = (column[COLUMN_KEYS.visible]) ? '' : 'none';
+            tableCell.style.width   = column[COLUMN_KEYS.width] + 'px';
             tableCell.dataset.name = columnName;
 
             let combo = grid.classFilter.createFilterCombo(column);
@@ -93,10 +93,10 @@ export class WaPanel70 extends WaPanelBase {
         for (let x = 0; x <= grid.fixedColumnIndex; x++) {
             let column = grid.column_table.data[x];
             let tableCell: any = tableRow.childNodes[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
 
-            tableCell.style.display = (column[WaColumnProperty.visible]) ? '' : 'none';
-            tableCell.style.width   = column[WaColumnProperty.width] + 'px';
+            tableCell.style.display = (column[COLUMN_KEYS.visible]) ? '' : 'none';
+            tableCell.style.width   = column[COLUMN_KEYS.width] + 'px';
             tableCell.dataset.name = columnName;
 
             // Set input
@@ -136,10 +136,10 @@ export class WaPanel70 extends WaPanelBase {
         for (let x = 0; x <= lastColumnIndex; x++) {
             let column = grid.column_table.data[x];
             let tableCell: any = tableRow.childNodes[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
 
-            tableCell.style.display = (column[WaColumnProperty.visible]) ? '' : 'none';
-            tableCell.style.width   = column[WaColumnProperty.width] + 'px';
+            tableCell.style.display = (column[COLUMN_KEYS.visible]) ? '' : 'none';
+            tableCell.style.width   = column[COLUMN_KEYS.width] + 'px';
             tableCell.dataset.name = columnName;
 
             let combo = grid.classFilter.createFilterCombo(column);
@@ -162,10 +162,10 @@ export class WaPanel70 extends WaPanelBase {
         for (let x = 0; x <= lastColumnIndex; x++) {
             let column = grid.column_table.data[x];
             let tableCell: any = tableRow.childNodes[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
 
-            tableCell.style.display = (column[WaColumnProperty.visible]) ? '' : 'none';
-            tableCell.style.width   = column[WaColumnProperty.width] + 'px';
+            tableCell.style.display = (column[COLUMN_KEYS.visible]) ? '' : 'none';
+            tableCell.style.width   = column[COLUMN_KEYS.width] + 'px';
             tableCell.dataset.name = columnName;
             // Set input
             let input = document.createElement('input');
@@ -202,7 +202,7 @@ export class WaPanel70 extends WaPanelBase {
             let columnName = combo.dataset.name;
             let column = grid.getColumn(columnName);
             let columnIndex = grid.getColumnIndex(columnName);
-            let columnType = column[WaColumnProperty.type];
+            let columnType = column[COLUMN_KEYS.type];
 
             let filterType = combo.selectedOptions[0].value;
 
@@ -218,7 +218,7 @@ export class WaPanel70 extends WaPanelBase {
                 else grid.apply();
             }
             else if (filterType != '0' && word != '') {
-                let filterColumn = grid.filter_column_table.selectRow(WaColumnProperty.name, column[WaColumnProperty.name]);
+                let filterColumn = grid.filter_column_table.selectRow(COLUMN_KEYS.name, column[COLUMN_KEYS.name]);
                 grid.classFilter.setFilterColumn(column, filterType, word);
                 grid.classFilter.filters();
                 if (grid.group_column_table.count() > 0
@@ -257,7 +257,7 @@ export class WaPanel70 extends WaPanelBase {
             let columnName = input.dataset.name;
             let column = grid.getColumn(columnName);
             let columnIndex = grid.getColumnIndex(columnName);
-            let columnType = column[WaColumnProperty.type];
+            let columnType = column[COLUMN_KEYS.type];
 
             let combos = document.querySelectorAll(selector + ' .wa-grid-' + panelName + ' .wa-grid-cell-filter-combo');
             let combo: any = combos[columnIndex];
@@ -266,7 +266,7 @@ export class WaPanel70 extends WaPanelBase {
             let word = input.value;
 
             if (filterType != '0') {
-                let filterColumn = grid.filter_column_table.selectRow(WaColumnProperty.name, column[WaColumnProperty.name]);
+                let filterColumn = grid.filter_column_table.selectRow(COLUMN_KEYS.name, column[COLUMN_KEYS.name]);
                 grid.classFilter.setFilterColumn(column, filterType, word);
 
                 if (grid.group_column_table.count() > 0

@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {GridMode, OptionAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaGridGroup {
     grid: WaGridCore;
     selector: string;
@@ -41,7 +41,7 @@ export class WaGridGroup {
                 const item = {};
                 for (let x = 0, len = grid.column_table.count(); x < len; x++) {
                     const column = grid.column_table.data[x];
-                    let columnName = column[WaColumnProperty.name];
+                    let columnName = column[COLUMN_KEYS.name];
                     let val = grid.null(dataRow[columnName]) ? null : dataRow[columnName];
                     item[columnName] = val;
                 }
@@ -49,7 +49,7 @@ export class WaGridGroup {
                 // const dataColumns: any[] = grid.field_table.selectRows();
                 // for (let x = 0, len = dataColumns.length; x < len; x++) {
                 //     const column = dataColumns[x];
-                //     let columnName  = column[WaColumnProperty.name];
+                //     let columnName  = column[COLUMN_KEYS.name];
                 //     item[columnName] = dataRow[columnName];
                 // }
 
@@ -72,26 +72,26 @@ export class WaGridGroup {
         grid.sort_column_table.remove();
 
         grid.group_column_table.data.map(dataRow => {
-            let columnName = dataRow[WaColumnProperty.name];
-            //let groupOrder = grid.isNull(dataRow[WaColumnProperty.order], '');
+            let columnName = dataRow[COLUMN_KEYS.name];
+            //let groupOrder = grid.isNull(dataRow[COLUMN_KEYS.order], '');
 
-            const row = grid.temp_table.selectRow(WaColumnProperty.name, columnName);
+            const row = grid.temp_table.selectRow(COLUMN_KEYS.name, columnName);
             if (row) {
-                let order = row[WaColumnProperty.order];
+                let order = row[COLUMN_KEYS.order];
                 if (order == '') order = 'asc';
 
-                row[WaColumnProperty.order] = order;
+                row[COLUMN_KEYS.order] = order;
                 grid.sort_column_table.insert(row);
-                // grid.group_column_table.update(columnName, WaColumnProperty.order, order);
+                // grid.group_column_table.update(columnName, COLUMN_KEYS.order, order);
             }
             else {
                 const item = {};
-                item[WaColumnProperty.name] = columnName;
-                item[WaColumnProperty.order] = 'asc';
+                item[COLUMN_KEYS.name] = columnName;
+                item[COLUMN_KEYS.order] = 'asc';
                 grid.sort_column_table.insert(item);
-                // grid.group_column_table.update(columnName, WaColumnProperty.order, 'asc');
+                // grid.group_column_table.update(columnName, COLUMN_KEYS.order, 'asc');
             }
-            let rowIndex = grid.temp_table.selectRowIndex(WaColumnProperty.name, columnName);
+            let rowIndex = grid.temp_table.selectRowIndex(COLUMN_KEYS.name, columnName);
             if (grid.notNull(rowIndex)) grid.temp_table.remove(rowIndex);
         });
 
@@ -109,12 +109,12 @@ export class WaGridGroup {
         for (let i = 0, len = grid.group_table.count(); i < len; i++) {
             let dataRow = grid.group_table.data[i];
 
-            dataRow[WaColumnProperty.rowMode]   = ''; // S, U, I, D, blank
-            dataRow[WaColumnProperty.isOpen] = false;
+            dataRow[COLUMN_KEYS.rowMode]   = ''; // S, U, I, D, blank
+            dataRow[COLUMN_KEYS.isOpen] = false;
 
             for (let x = 0, len = grid.column_table.count(); x < len; x++) {
                 let column = grid.column_table.data[x];
-                let columnName = column[WaColumnProperty.name];
+                let columnName = column[COLUMN_KEYS.name];
                 let val = grid.null(dataRow[columnName]) ? null : dataRow[columnName];
 
                 dataRow[columnName] = val;
@@ -128,16 +128,16 @@ export class WaGridGroup {
 
         // open depth
         grid.view_table.data.map(row => {
-            let depth = row[WaColumnProperty.depth];
+            let depth = row[COLUMN_KEYS.depth];
 
-            row[WaColumnProperty.isOpen] = (depth < openDepth) ? true : false;
-            row[WaColumnProperty.childRows] = [];
+            row[COLUMN_KEYS.isOpen] = (depth < openDepth) ? true : false;
+            row[COLUMN_KEYS.childRows] = [];
         })
 
         if (openDepth <= grid.group_column_table.count()) {
             for (let i = grid.view_table.count() - 1; i >= 0; i--) {
                 const rootRow = grid.view_table.selectRowByRowIndex(i);
-                let rootDepth = rootRow[WaColumnProperty.depth];
+                let rootDepth = rootRow[COLUMN_KEYS.depth];
 
                 if (rootDepth == openDepth && rootDepth <= grid.group_column_table.count()) {
                     this.closeGroupRow(i);
@@ -160,7 +160,7 @@ export class WaGridGroup {
             grid.waPanel40.setDataPanel();
             grid.waPanel50.setDataPanel();
         }
-        if (grid.options[WaColumnProperty.autoWidth] == true)  grid.setColumnAutoWidth();
+        if (grid.options[COLUMN_KEYS.autoWidth] == true)  grid.setColumnAutoWidth();
 
         grid.classGroup.getGroupButtonList();
         grid.classScroll.setPanelSize();
@@ -177,7 +177,7 @@ export class WaGridGroup {
         const groupData = grid.classGroup.createGroupKeyData(grid.view_table.data);
         groupData.map(row => {
             grid.source_table.currentRowId += 1;
-            row[WaColumnProperty.rowId] = grid.source_table.currentRowId;
+            row[COLUMN_KEYS.rowId] = grid.source_table.currentRowId;
             grid.group_header_table.insert(grid.copyJson(row));
         });
 
@@ -186,18 +186,18 @@ export class WaGridGroup {
             const rootRow = grid.group_header_table.selectRowByRowIndex(i);
             const children = [];
             const item = {}
-            let rootDepth = rootRow[WaColumnProperty.depth];
+            let rootDepth = rootRow[COLUMN_KEYS.depth];
             let rootString = this.getGroupKeyByDepth(rootRow, rootDepth);
 
             // get children group
             let isChild = false;
             for (let x = 0, len2 = grid.group_header_table.count(); x < len2; x++) {
                 const row = grid.group_header_table.selectRowByRowIndex(x);
-                let depth = row[WaColumnProperty.depth];
+                let depth = row[COLUMN_KEYS.depth];
                 let childString = this.getGroupKeyByDepth(row, rootDepth);
                 if (rootDepth + 1 == depth && rootString == childString) {
                     isChild = true;
-                    children.push(row[WaColumnProperty.rowId]);
+                    children.push(row[COLUMN_KEYS.rowId]);
                 }
                 else {
                     if (isChild) break;
@@ -205,8 +205,8 @@ export class WaGridGroup {
             }
 
             // insert group_header_table
-            rootRow[WaColumnProperty.childRowIds] = children;
-            rootRow[WaColumnProperty.isOpen] = false;
+            rootRow[COLUMN_KEYS.childRowIds] = children;
+            rootRow[COLUMN_KEYS.isOpen] = false;
             grid.group_table.insert(rootRow);
 
             // insert view_table
@@ -219,17 +219,17 @@ export class WaGridGroup {
                     let childString = this.getGroupKeyByDepth(row, rootDepth);
                     if (rootString == childString) {
                         isChild = true;
-                        children.push(row[WaColumnProperty.rowId]);
+                        children.push(row[COLUMN_KEYS.rowId]);
                         arr.push(x);
-                        row[WaColumnProperty.isOpen] = false;
-                        row[WaColumnProperty.depth] = grid.group_column_table.count() + 1;
+                        row[COLUMN_KEYS.isOpen] = false;
+                        row[COLUMN_KEYS.depth] = grid.group_column_table.count() + 1;
                         grid.group_table.insert(grid.copyJson(row));
                     }
                     else {
                         if (isChild) break;
                     }
                 }
-                rootRow[WaColumnProperty.childRowIds] = children;
+                rootRow[COLUMN_KEYS.childRowIds] = children;
                 //delete row
                 if (arr.length > 0) {
                     let startRowIndex = arr[0]
@@ -259,14 +259,14 @@ export class WaGridGroup {
         }
 
         const addRow = function (dataRow) {
-            let rootDepth = dataRow[WaColumnProperty.depth];
+            let rootDepth = dataRow[COLUMN_KEYS.depth];
             let rootStr = grid.classGroup.getGroupKeyByDepth(dataRow, rootDepth);
 
             result.push(dataRow);
 
             for (let i = depth, len = resultRows.length; i < len; i++) {
                 const row = resultRows[i];
-                let depth = row[WaColumnProperty.depth];
+                let depth = row[COLUMN_KEYS.depth];
                 let str = grid.classGroup.getGroupKeyByDepth(row, rootDepth);
                 if (rootDepth + 1 == depth && rootStr == str) {
                     addRow(row);
@@ -275,7 +275,7 @@ export class WaGridGroup {
         }
 
         for (let i = 0, len = resultRows.length; i < len; i++) {
-            let depth = resultRows[i][WaColumnProperty.depth];
+            let depth = resultRows[i][COLUMN_KEYS.depth];
             if (depth == 1) addRow(resultRows[i]);
         }
         return result;
@@ -286,7 +286,7 @@ export class WaGridGroup {
         let key = '';
         for (let i = 0; i < depth; i++) {
             let groupColumn = grid.group_column_table.data[i];
-            let name = groupColumn[WaColumnProperty.name];
+            let name = groupColumn[COLUMN_KEYS.name];
             key += this.splitChar + grid.isNull(row[name], '');
         }
         return key;
@@ -298,9 +298,9 @@ export class WaGridGroup {
         let tempRow = {};
         for (let i = 0; i < depth; i++) {
             let groupColumn = grid.group_column_table.data[i];
-            let name = groupColumn[WaColumnProperty.name];
+            let name = groupColumn[COLUMN_KEYS.name];
             tempRow[name] = row[name];
-            tempRow[WaColumnProperty.depth] = depth;
+            tempRow[COLUMN_KEYS.depth] = depth;
         }
         return tempRow;
     }
@@ -313,7 +313,7 @@ export class WaGridGroup {
         const grid = this.grid;
 
         const rootRow = grid.view_table.selectRowByRowIndex(rowIndex)
-        const rootDepth = rootRow[WaColumnProperty.depth];
+        const rootDepth = rootRow[COLUMN_KEYS.depth];
 
         // if (rootDepth <= grid.group_column_table.count()) return;
 
@@ -323,18 +323,18 @@ export class WaGridGroup {
 
             if (grid.null(row)) break;
 
-            let depth = row[WaColumnProperty.depth];
+            let depth = row[COLUMN_KEYS.depth];
             if (rootDepth + 1 == depth) resultRows.push(row);
             else if (rootDepth == depth) break;
         }
 
         for (let i = 0, len = grid.column_table.count(); i < len; i++) {
             const column = grid.column_table.data[i];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
 
-            if (grid.null(column[WaColumnProperty.summaryType])) continue;
+            if (grid.null(column[COLUMN_KEYS.summaryType])) continue;
 
-            let summaryType = column[WaColumnProperty.summaryType];
+            let summaryType = column[COLUMN_KEYS.summaryType];
 
             const arrayItem = [];
             resultRows.map(row => {
@@ -361,12 +361,12 @@ export class WaGridGroup {
 
         let childCount = 0;
         if (rootDepth < grid.group_column_table.count()) {
-            resultRows.map(row => childCount += row[WaColumnProperty.childCount]);
+            resultRows.map(row => childCount += row[COLUMN_KEYS.childCount]);
         }
         else {
             childCount = resultRows.length;
         }
-        rootRow[WaColumnProperty.childCount] = childCount;
+        rootRow[COLUMN_KEYS.childCount] = childCount;
     }
 
     getGroupSummary() {
@@ -375,7 +375,7 @@ export class WaGridGroup {
         for (let depthIndex = grid.group_column_table.count(); depthIndex >= 1; depthIndex--) {
             for (let i = grid.view_table.count() - 1; i >= 0; i--) {
                 const row = grid.view_table.data[i];
-                let depth = row[WaColumnProperty.depth];
+                let depth = row[COLUMN_KEYS.depth];
                 if (depth == depthIndex) this.getGroupDepthSummary(i);
             }
         }
@@ -383,14 +383,14 @@ export class WaGridGroup {
         // agv 만 나중에...
         for (let i = grid.view_table.count() - 1; i >= 0; i--) {
             const row = grid.view_table.data[i];
-            let depth = row[WaColumnProperty.depth];
+            let depth = row[COLUMN_KEYS.depth];
             if (depth <= grid.group_column_table.count()) {
                 for (let x = 0, len2 = grid.column_table.count(); x < len2; x++) {
                     const column = grid.column_table.data[x];
-                    let columnName = column[WaColumnProperty.name];
-                    let summaryType = grid.isNull(column[WaColumnProperty.summaryType], '');
+                    let columnName = column[COLUMN_KEYS.name];
+                    let summaryType = grid.isNull(column[COLUMN_KEYS.summaryType], '');
                     if (summaryType == 'avg') {
-                        row[columnName] = row[columnName] / row[WaColumnProperty.childCount];
+                        row[columnName] = row[columnName] / row[COLUMN_KEYS.childCount];
                     }
                 }
             }
@@ -405,7 +405,7 @@ export class WaGridGroup {
         const grid = this.grid;
 
         const row = grid.getRow(rowIndex);
-        const childRows = grid.isNull(row[WaColumnProperty.childRows], []);
+        const childRows = grid.isNull(row[COLUMN_KEYS.childRows], []);
         const element = tableCell.querySelector('.wa-grid-html-icon');
 
         if (childRows.length > 0) grid.classGroup.toggleGroupIcon(element, 'closed');
@@ -417,11 +417,11 @@ export class WaGridGroup {
 
         if (grid.null(element)) return;
 
-        if (type == WaColumnProperty.open) {
+        if (type == COLUMN_KEYS.open) {
             element.classList.remove('wa-grid-html-icon-closed');
             element.classList.add('wa-grid-html-icon-open');
         }
-        else if (type == WaColumnProperty.closed) {
+        else if (type == COLUMN_KEYS.closed) {
             element.classList.remove('wa-grid-html-icon-open');
             element.classList.add('wa-grid-html-icon-closed');
         }
@@ -440,8 +440,8 @@ export class WaGridGroup {
         if (grid.null(spanIcon)) return;
 
         let folding = grid.classGroup.getGroupFoldingStatus(tableCell);
-        if      (folding == WaColumnProperty.open)   grid.classGroup.closeGroupRow(rowIndex);
-        else if (folding == WaColumnProperty.closed) grid.classGroup.openGroupRow(rowIndex);
+        if      (folding == COLUMN_KEYS.open)   grid.classGroup.closeGroupRow(rowIndex);
+        else if (folding == COLUMN_KEYS.closed) grid.classGroup.openGroupRow(rowIndex);
 
         grid.horizontalScroll.setScroll(grid.code_horizontal);;
         grid.verticalScroll.setScroll(grid.code_vertical);
@@ -454,18 +454,18 @@ export class WaGridGroup {
         let spanIcon = tableCell.querySelector('.wa-grid-html-icon');
         if (grid.null(spanIcon)) return null;
 
-        if (spanIcon.className.includes('wa-grid-html-icon-open')) return WaColumnProperty.open;
-        else if (spanIcon.className.includes('wa-grid-html-icon-closed')) return WaColumnProperty.closed;
+        if (spanIcon.className.includes('wa-grid-html-icon-open')) return COLUMN_KEYS.open;
+        else if (spanIcon.className.includes('wa-grid-html-icon-closed')) return COLUMN_KEYS.closed;
         else return null;
     }
 
     openChildRow(arrayRows, rootRow) {
-        const rootChildRows = [...rootRow[WaColumnProperty.childRows]];
+        const rootChildRows = [...rootRow[COLUMN_KEYS.childRows]];
 
-        let isOpen = rootRow[WaColumnProperty.isOpen];
+        let isOpen = rootRow[COLUMN_KEYS.isOpen];
 
         if (isOpen && rootChildRows.length > 0) {
-            rootRow[WaColumnProperty.childRows] = [];
+            rootRow[COLUMN_KEYS.childRows] = [];
             arrayRows.push(rootRow);
 
             for (let i = 0; i < rootChildRows.length; i++) {
@@ -484,11 +484,11 @@ export class WaGridGroup {
         const arrayRows = [];
 
         const rootDataRow = grid.view_table.selectRowByRowIndex(rowIndex);
-        const rootDepth = rootDataRow[WaColumnProperty.depth];
-        const rootChildRows = [...rootDataRow[WaColumnProperty.childRows]];
+        const rootDepth = rootDataRow[COLUMN_KEYS.depth];
+        const rootChildRows = [...rootDataRow[COLUMN_KEYS.childRows]];
 
-        rootDataRow[WaColumnProperty.childRows] = [];
-        rootDataRow[WaColumnProperty.isOpen] = true;
+        rootDataRow[COLUMN_KEYS.childRows] = [];
+        rootDataRow[COLUMN_KEYS.isOpen] = true;
 
         if (rootChildRows.length == 0) return;
 
@@ -506,9 +506,9 @@ export class WaGridGroup {
         const grid = this.grid;
 
         const rootDataRow = grid.view_table.selectRowByRowIndex(rowIndex);
-        const rootDepth = rootDataRow[WaColumnProperty.depth];
+        const rootDepth = rootDataRow[COLUMN_KEYS.depth];
 
-        const rootChildRows = grid.isNull(rootDataRow[WaColumnProperty.childRows], []);
+        const rootChildRows = grid.isNull(rootDataRow[COLUMN_KEYS.childRows], []);
 
         if (rootChildRows.length > 0) return;
 
@@ -517,9 +517,9 @@ export class WaGridGroup {
             const row = grid.view_table.selectRowByRowIndex(i);
             if (grid.null(row)) break;
 
-            let depth = row[WaColumnProperty.depth];
+            let depth = row[COLUMN_KEYS.depth];
             if (depth == rootDepth + 1) {
-                rootDataRow[WaColumnProperty.childRows].push(row);
+                rootDataRow[COLUMN_KEYS.childRows].push(row);
                 arrayRowIndex.push(i);
             }
             else break;
@@ -532,14 +532,14 @@ export class WaGridGroup {
         const grid = this.grid;
 
         const rootDataRow = grid.view_table.selectRowByRowIndex(rowIndex);
-        const rootDepth = rootDataRow[WaColumnProperty.depth];
-        rootDataRow[WaColumnProperty.isOpen] = false;
+        const rootDepth = rootDataRow[COLUMN_KEYS.depth];
+        rootDataRow[COLUMN_KEYS.isOpen] = false;
 
         const arrayRowIndex = [];
         for (let i = rowIndex + 1, len = grid.view_table.count(); i < len; i++) {
             const row = grid.view_table.selectRowByRowIndex(i);
             if (grid.null(row)) break;
-            let depth = row[WaColumnProperty.depth];
+            let depth = row[COLUMN_KEYS.depth];
             if (depth > rootDepth && depth <= grid.group_column_table.count()) arrayRowIndex.push(i);
             else if (depth == rootDepth) break;
         }
@@ -563,23 +563,23 @@ export class WaGridGroup {
         let groupColumns = grid.group_column_table.data;
 
         /* targetIndex != name Index */
-        let sourceIndex = grid.group_column_table.selectRowIndex(WaColumnProperty.name, name);
+        let sourceIndex = grid.group_column_table.selectRowIndex(COLUMN_KEYS.name, name);
         if (sourceIndex == targetIndex) return;
 
         /* create column */
         let dataRow = {};
-        dataRow[WaColumnProperty.name] = name;
-        dataRow[WaColumnProperty.text] = text;
+        dataRow[COLUMN_KEYS.name] = name;
+        dataRow[COLUMN_KEYS.text] = text;
 
         /* update source column */
-        grid.group_column_table.updateByRowIndex(sourceIndex, WaColumnProperty.name, '_temp_group');
+        grid.group_column_table.updateByRowIndex(sourceIndex, COLUMN_KEYS.name, '_temp_group');
 
         /* add dataRow */
         if (grid.null(targetIndex)) grid.group_column_table.insert(dataRow);
         else grid.group_column_table.insertBefore(dataRow, targetIndex);
 
         /* remove source */
-        sourceIndex = grid.group_column_table.selectRowIndex(WaColumnProperty.name, '_temp_group');
+        sourceIndex = grid.group_column_table.selectRowIndex(COLUMN_KEYS.name, '_temp_group');
         grid.group_column_table.remove(sourceIndex);
 
         /* add button in group panel */
@@ -597,12 +597,12 @@ export class WaGridGroup {
         const grid = this.grid;
 
         /* Check Existing */
-        if (grid.group_column_table.selectRows(WaColumnProperty.name, name, 1).length > 0) return;
+        if (grid.group_column_table.selectRows(COLUMN_KEYS.name, name, 1).length > 0) return;
 
         /* create dataRow */
         let dataRow = {};
-        dataRow[WaColumnProperty.name] = name;
-        dataRow[WaColumnProperty.text] = text;
+        dataRow[COLUMN_KEYS.name] = name;
+        dataRow[COLUMN_KEYS.text] = text;
 
         /* add dataRow */
         if (grid.null(targetIndex)) grid.group_column_table.insert(dataRow);
@@ -627,7 +627,7 @@ export class WaGridGroup {
         let name = element.dataset.name;
 
         /* remove group data */
-        let rowIndex = grid.group_column_table.selectRowIndex(WaColumnProperty.name, name);
+        let rowIndex = grid.group_column_table.selectRowIndex(COLUMN_KEYS.name, name);
         grid.group_column_table.remove(rowIndex);
 
         // remove button in group panel
@@ -664,7 +664,7 @@ export class WaGridGroup {
 
         for (let i = 0, len = groupColumns.length; i < len; i++) {
             let groupColumn = groupColumns[i];
-            let button = grid.classGroup.createGroupButton(groupColumn[WaColumnProperty.name]);
+            let button = grid.classGroup.createGroupButton(groupColumn[COLUMN_KEYS.name]);
             let bar = document.querySelector(selector + ' .wa-grid-panel80 .wa-grid-panel-bar');
             if (grid.null(bar)) return;
             bar.append(button);
@@ -680,7 +680,7 @@ export class WaGridGroup {
 
         let text= document.createElement('span');
         text.classList.add('wa-grid-panel-button-text');
-        text.textContent  = column.header[WaColumnProperty.text];
+        text.textContent  = column.header[COLUMN_KEYS.text];
         text.dataset.name = columnName;
 
         let icon= document.createElement('span');
@@ -768,7 +768,7 @@ export class WaGridGroup {
         grid.apply();
     }
 
-    getGroupRow(columnName) { return this.grid.group_column_table.selectRow(WaColumnProperty.name, columnName); }
+    getGroupRow(columnName) { return this.grid.group_column_table.selectRow(COLUMN_KEYS.name, columnName); }
 
     expandGroup() {
         let selector = this.selector;

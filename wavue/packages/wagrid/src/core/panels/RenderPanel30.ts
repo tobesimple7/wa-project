@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {CellType, GridMode} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaGroupRender} from "../renderer/GroupRender";
 import {WaTreeRender} from "../renderer/TreeRender";
 import {WaCheckboxRender} from "../renderer/CheckboxRender";
@@ -82,19 +82,19 @@ export class WaRenderPanel30 {
         render.rowIndex   = rowIndex;
         render.columnIndex= columnIndex;
 
-        render.columnName = column[WaColumnProperty.name];
-        render.columnType = column[WaColumnProperty.type];
+        render.columnName = column[COLUMN_KEYS.name];
+        render.columnType = column[COLUMN_KEYS.type];
 
-        render.visible    = column[WaColumnProperty.visible];
-        render.width      = column[WaColumnProperty.width];
-        render.editable   = column[WaColumnProperty.editable];
+        render.visible    = column[COLUMN_KEYS.visible];
+        render.width      = column[COLUMN_KEYS.width];
+        render.editable   = column[COLUMN_KEYS.editable];
 
-        render.align      = column[WaColumnProperty.align];
-        render.className  = column[WaColumnProperty.className];
+        render.align      = column[COLUMN_KEYS.align];
+        render.className  = column[COLUMN_KEYS.className];
         render.cellValue  = grid.getValue(render.rowIndex, render.columnName);
         render.cellText   = grid.getText(render.rowIndex, render.columnName);
 
-        if (grid.group_column_table.count() > 0) render.depth = grid.getValue(render.rowIndex, WaColumnProperty.depth);
+        if (grid.group_column_table.count() > 0) render.depth = grid.getValue(render.rowIndex, COLUMN_KEYS.depth);
         render.updateData();
     }
 
@@ -105,9 +105,9 @@ export class WaRenderPanel30 {
         if (grid.group_column_table.count() > 0) {
             if (render.columnIndex == 0) {
                 const row = grid.view_table.selectRowByRowIndex(render.rowIndex);
-                let rowDepth = row[WaColumnProperty.depth];
+                let rowDepth = row[COLUMN_KEYS.depth];
                 if (rowDepth <= grid.group_column_table.count()) {
-                    render.cellText = grid.getText(render.rowIndex, grid.group_column_table.data[rowDepth - 1][WaColumnProperty.name]) + '(' + row[WaColumnProperty.childRowIds].length + ')';
+                    render.cellText = grid.getText(render.rowIndex, grid.group_column_table.data[rowDepth - 1][COLUMN_KEYS.name]) + '(' + row[COLUMN_KEYS.childRowIds].length + ')';
                     this.align = 'left';
                 }
                 else {
@@ -118,11 +118,11 @@ export class WaRenderPanel30 {
         else if (grid.grid_mode == GridMode.tree) {
             if (render.columnIndex == 0) {
                 const row = grid.view_table.selectRowByRowIndex(render.rowIndex);
-                let rowDepth = row[WaColumnProperty.depth];
-                const children = row[WaColumnProperty.children];
+                let rowDepth = row[COLUMN_KEYS.depth];
+                const children = row[COLUMN_KEYS.children];
 
                 if (children.length > 0) {
-                    render.cellText = grid.getText(render.rowIndex, render.columnName) + '(' + row[WaColumnProperty.children].length + ')';
+                    render.cellText = grid.getText(render.rowIndex, render.columnName) + '(' + row[COLUMN_KEYS.children].length + ')';
                 }
                 else {
                     render.cellText = grid.getText(render.rowIndex, render.columnName);

@@ -2,8 +2,8 @@
 
 <script setup lang="ts">
 import {inject, onMounted, onBeforeUnmount} from 'vue'
-import {WaColumnDef} from '@/core/columns/ColumnDef'
-import {WaColumnKind} from "@/core/columns/ColumnEnum";
+import {ColumnDef} from '@/core/columns/ColumnDef'
+import {COLUMN_KIND} from "@/core/columns/ColumnEnum";
 
 export interface columnDef {
   name: any,
@@ -50,7 +50,7 @@ export interface columnDef {
 const props = defineProps<columnDef>()
 
 // 부모로 등록/해제 함수 주입
-const register = inject<(col: WaColumnDef) => void>('wagrid_register')
+const register = inject<(col: ColumnDef) => void>('wagrid_register')
 const unregister = inject<(name: string) => void>('wagrid_unregister')
 
 onMounted(() => {

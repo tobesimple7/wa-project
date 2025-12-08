@@ -1,5 +1,5 @@
 import {WaDom} from "../Dom";
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaImgRender {
 
@@ -27,7 +27,7 @@ export class WaImgRender {
         // set value
         element.src = param.grid.getUserImageRoot(param.columnName) + param.cellValue;
         element.width = param.grid.getRenderer(param.columnName, 'width') ?
-                        param.grid.getRenderer(param.columnName, 'width') : param.column[WaColumnProperty.width];
+                        param.grid.getRenderer(param.columnName, 'width') : param.column[COLUMN_KEYS.width];
         element.height = param.grid.getRenderer(param.columnName, 'height') ?
                         param.grid.getRenderer(param.columnName, 'height') : param.grid.rowHeight;
     }

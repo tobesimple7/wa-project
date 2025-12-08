@@ -31,7 +31,7 @@ import {WaRenderPanelInfo} from '@/core/panels/RenderPanelInfo'
 import {WaTable} from "../Table"
 import {WaGridCore} from "@/core/WaGridCore"
 import {CellType} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaPanel20 extends WaPanelBase {
     isChecked: boolean;
@@ -106,7 +106,7 @@ export class WaPanel20 extends WaPanelBase {
 
                 tableCell.dataset.rowIndex = i;
                 tableCell.dataset.displayRowIndex = i;
-                tableCell.dataset.cellType = grid.info_column_table.selectValue(x, WaColumnProperty.type);
+                tableCell.dataset.cellType = grid.info_column_table.selectValue(x, COLUMN_KEYS.type);
 
 
                 /**
@@ -194,22 +194,22 @@ export class WaPanel20 extends WaPanelBase {
                 let selectedValue = grid.isSelectedHeaderCell(panelName, x);
                 if (selectedValue == 1) tableCell.classList.add('wa-grid-cell-select');
 
-                let columnName = header[WaColumnProperty.name];
+                let columnName = header[COLUMN_KEYS.name];
 
-                tableCell.style.display = (header[WaColumnProperty.visible] == true) ? '' : 'none';
-                tableCell.style.textAlign = header[WaColumnProperty.align];
+                tableCell.style.display = (header[COLUMN_KEYS.visible] == true) ? '' : 'none';
+                tableCell.style.textAlign = header[COLUMN_KEYS.align];
 
-                tableCell.colSpan = header[WaColumnProperty.colSpan];
-                tableCell.rowSpan = header[WaColumnProperty.rowSpan];
+                tableCell.colSpan = header[COLUMN_KEYS.colSpan];
+                tableCell.rowSpan = header[COLUMN_KEYS.rowSpan];
 
-                tableCell.dataset.name = (header[WaColumnProperty.kind] == 'column') ? columnName : '';
-                tableCell.dataset.kind = header[WaColumnProperty.kind];
+                tableCell.dataset.name = (header[COLUMN_KEYS.kind] == 'column') ? columnName : '';
+                tableCell.dataset.kind = header[COLUMN_KEYS.kind];
 
-                if (header[WaColumnProperty.kind] == 'column') {
-                    let className = grid.classHeader.getHeaderProperty(columnName, WaColumnProperty.className);
+                if (header[COLUMN_KEYS.kind] == 'column') {
+                    let className = grid.classHeader.getHeaderProperty(columnName, COLUMN_KEYS.className);
                     if (grid.notNull(className)) tableCell.classList.add(className);
-                    tableCell.style.display = (column[WaColumnProperty.visible] == true) ? '' : 'none';
-                    let columnType = column[WaColumnProperty.type];
+                    tableCell.style.display = (column[COLUMN_KEYS.visible] == true) ? '' : 'none';
+                    let columnType = column[COLUMN_KEYS.type];
                     if (columnType == CellType.checkbox) {
                         const checkbox = tableCell.querySelector('.wa-grid-html-checkbox');
                         checkbox.style.display = '';
@@ -221,7 +221,7 @@ export class WaPanel20 extends WaPanelBase {
                 }
 
                 tableCell.querySelector('.wa-grid-html-sort').textContent = '';
-                if (grid.sort_column_table.isRow(WaColumnProperty.name, columnName) && header[WaColumnProperty.kind] == 'column') {
+                if (grid.sort_column_table.isRow(COLUMN_KEYS.name, columnName) && header[COLUMN_KEYS.kind] == 'column') {
                     let sortColumn = grid.classSort.getSortRow(columnName);
                     let sortSymbol = '';
 
@@ -234,7 +234,7 @@ export class WaPanel20 extends WaPanelBase {
                 }
 
                 const textSpan = tableCell.querySelector('.wa-grid-html-string');
-                textSpan.textContent = header[WaColumnProperty.text];
+                textSpan.textContent = header[COLUMN_KEYS.text];
             }
         }
     }
@@ -252,7 +252,7 @@ export class WaPanel20 extends WaPanelBase {
 
             const tableCell = e.target.parentNode.parentNode;
             const column = grid.info_column_table.selectRowByRowIndex(tableCell.cellIndex);
-            const columnName = column[WaColumnProperty.name];
+            const columnName = column[COLUMN_KEYS.name];
 
             if (clsPanel.isChecked) clsPanel.isChecked = false;
             else clsPanel.isChecked = true;
@@ -266,15 +266,15 @@ export class WaPanel20 extends WaPanelBase {
                     eventRow.rowIndex    = i;
                     eventRow.columnIndex = tableCell.cellIndex;
                     eventRow.columnName  = columnName;
-                    eventRow.value       = dataRow[WaColumnProperty.isChecked];
-                    eventRow.text        = dataRow[WaColumnProperty.isChecked];
+                    eventRow.value       = dataRow[COLUMN_KEYS.isChecked];
+                    eventRow.text        = dataRow[COLUMN_KEYS.isChecked];
                     eventRow.data        = dataRow;
                     const result = callback(grid, eventRow);
                     if (result.editable == false) continue;
-                    else grid.view_table.data[i][WaColumnProperty.isChecked] = clsPanel.isChecked;
+                    else grid.view_table.data[i][COLUMN_KEYS.isChecked] = clsPanel.isChecked;
                 }
                 else {
-                    grid.view_table.data[i][WaColumnProperty.isChecked] = clsPanel.isChecked;
+                    grid.view_table.data[i][COLUMN_KEYS.isChecked] = clsPanel.isChecked;
                 }
             }
             setTimeout(function() {
@@ -394,8 +394,8 @@ export class WaPanel20 extends WaPanelBase {
                     let rowIndex = moveElement.dataset.rowIndex;
 
                     let column = grid.getColumnByIndex(columnIndex);
-                    let name  = column[WaColumnProperty.name];
-                    let text  = column[WaColumnProperty.text];
+                    let name  = column[COLUMN_KEYS.name];
+                    let text  = column[COLUMN_KEYS.text];
                     let order = 'asc';
 
                     // Find the one that is smaller to the button left than then move element left
@@ -448,8 +448,8 @@ export class WaPanel20 extends WaPanelBase {
                     let rowIndex = moveElement.dataset.rowIndex;
 
                     let column = grid.getColumnByIndex(columnIndex);
-                    let name  = column[WaColumnProperty.name];
-                    let text  = column[WaColumnProperty.text];
+                    let name  = column[COLUMN_KEYS.name];
+                    let text  = column[COLUMN_KEYS.text];
                     let order = 'asc';
 
                     // Find the one that is smaller to the button left than then move element left
@@ -493,11 +493,11 @@ export class WaPanel20 extends WaPanelBase {
                 if (e.target.classList.contains('wa-grid-html-checkbox')) {
                     tableCell = e.target.parentNode.parentNode;
                     const column = grid.column_table.selectRowByRowIndex(tableCell.cellIndex);
-                    const columnName = column[WaColumnProperty.name];
+                    const columnName = column[COLUMN_KEYS.name];
 
-                    // let isChecked = column[WaColumnProperty.isChecked] ? true : false;
-                    // if (isChecked) grid.column_table.update(columnName, WaColumnProperty.isChecked, false);
-                    // else grid.column_table.update(columnName, WaColumnProperty.isChecked, true);
+                    // let isChecked = column[COLUMN_KEYS.isChecked] ? true : false;
+                    // if (isChecked) grid.column_table.update(columnName, COLUMN_KEYS.isChecked, false);
+                    // else grid.column_table.update(columnName, COLUMN_KEYS.isChecked, true);
                     let isChecked = false;
                     if (e.target.checked) isChecked = false;
                     else isChecked = true;
@@ -513,8 +513,8 @@ export class WaPanel20 extends WaPanelBase {
                             eventRow.rowIndex    = i;
                             eventRow.columnIndex = tableCell.cellIndex;
                             eventRow.columnName  = columnName;
-                            eventRow.value       = dataRow[WaColumnProperty.name];
-                            eventRow.text        = dataRow[WaColumnProperty.name];
+                            eventRow.value       = dataRow[COLUMN_KEYS.name];
+                            eventRow.text        = dataRow[COLUMN_KEYS.name];
                             eventRow.data        = dataRow;
                             const result = callback(grid, eventRow);
                             if (result.editable == false) continue;
@@ -564,8 +564,8 @@ export class WaPanel20 extends WaPanelBase {
                             if (lastX - startX > 0) { // right direction move.
                                 if ((lastX - fixedWidth <= cell.getBoundingClientRect().right
                                         && lastX + fixedWidth >= cell.getBoundingClientRect().right)
-                                    && movingColumn[WaColumnProperty.rowIndex] == targetColumn[WaColumnProperty.rowIndex]
-                                    && movingColumn[WaColumnProperty.parentNum] == targetColumn[WaColumnProperty.parentNum]
+                                    && movingColumn[COLUMN_KEYS.rowIndex] == targetColumn[COLUMN_KEYS.rowIndex]
+                                    && movingColumn[COLUMN_KEYS.parentNum] == targetColumn[COLUMN_KEYS.parentNum]
                                     && moveCell.cellIndex != cell.cellIndex) {
                                     grid.classColumn.changeColumnOrder(movingColumn, targetColumn, 'after');
                                     break;
@@ -574,8 +574,8 @@ export class WaPanel20 extends WaPanelBase {
                             else {
                                 if ((lastX - fixedWidth <= cell.getBoundingClientRect().left
                                         && lastX + fixedWidth >= cell.getBoundingClientRect().left)
-                                    && movingColumn[WaColumnProperty.rowIndex] == targetColumn[WaColumnProperty.rowIndex]
-                                    && movingColumn[WaColumnProperty.parentNum] == targetColumn[WaColumnProperty.parentNum]
+                                    && movingColumn[COLUMN_KEYS.rowIndex] == targetColumn[COLUMN_KEYS.rowIndex]
+                                    && movingColumn[COLUMN_KEYS.parentNum] == targetColumn[COLUMN_KEYS.parentNum]
                                     && moveCell.cellIndex != cell.cellIndex) {
                                     grid.classColumn.changeColumnOrder(movingColumn, targetColumn, 'before');
                                     break;
@@ -600,8 +600,8 @@ export class WaPanel20 extends WaPanelBase {
                                 if (lastX - startX > 0) { // right direction move.
                                     if ((lastX - fixedWidth <= cell.getBoundingClientRect().right
                                             && lastX + fixedWidth >= cell.getBoundingClientRect().right)
-                                        && movingColumn[WaColumnProperty.rowIndex] == targetColumn[WaColumnProperty.rowIndex]
-                                        && movingColumn[WaColumnProperty.parentNum] == targetColumn[WaColumnProperty.parentNum]
+                                        && movingColumn[COLUMN_KEYS.rowIndex] == targetColumn[COLUMN_KEYS.rowIndex]
+                                        && movingColumn[COLUMN_KEYS.parentNum] == targetColumn[COLUMN_KEYS.parentNum]
                                         && moveCell.cellIndex != cell.cellIndex) {
                                         grid.classColumn.changeColumnOrder(movingColumn, targetColumn, 'after');
                                         break;
@@ -610,8 +610,8 @@ export class WaPanel20 extends WaPanelBase {
                                 else {
                                     if ((lastX - fixedWidth <= cell.getBoundingClientRect().left
                                             && lastX + fixedWidth >= cell.getBoundingClientRect().left)
-                                        && movingColumn[WaColumnProperty.rowIndex] == targetColumn[WaColumnProperty.rowIndex]
-                                        && movingColumn[WaColumnProperty.parentNum] == targetColumn[WaColumnProperty.parentNum]  //column_parentNum
+                                        && movingColumn[COLUMN_KEYS.rowIndex] == targetColumn[COLUMN_KEYS.rowIndex]
+                                        && movingColumn[COLUMN_KEYS.parentNum] == targetColumn[COLUMN_KEYS.parentNum]  //column_parentNum
                                         && moveCell.cellIndex != cell.cellIndex) {
                                         grid.classColumn.changeColumnOrder(movingColumn, targetColumn, 'before');
                                         break;
@@ -636,7 +636,7 @@ export class WaPanel20 extends WaPanelBase {
             let col = e.target.closest('.wa-grid-cell');
 
             let column = grid.getColumnByIndex(col.cellIndex);
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
 
             let isMovable = grid.isMovableColumn(columnName);
             if (isMovable) {
@@ -716,7 +716,7 @@ export class WaPanel20 extends WaPanelBase {
             let moveX = lastX - startX;
 
             // let column = grid.getColumnByIndex(col.cellIndex);
-            // let columnName = column[WaColumnProperty.name];
+            // let columnName = column[COLUMN_KEYS.name];
             let isMovable: any = grid.isMovableColumn();
             if (isMovable) {
                 let moveDiv: any = document.querySelector('.wa-grid-move');
@@ -776,7 +776,7 @@ export class WaPanel20 extends WaPanelBase {
                 let maxCellIndex;
                 for (let x = 0, len = tdList.length; x < len; x++) {
                     let cell =  tdList[x];
-                    if (grid.column_table.data[x][WaColumnProperty.visible] == false) continue;
+                    if (grid.column_table.data[x][COLUMN_KEYS.visible] == false) continue;
 
                     let left = window.pageXOffset + cell.getBoundingClientRect().left;
                     if (lastX > left) maxCellIndex = cell.cellIndex;
@@ -790,7 +790,7 @@ export class WaPanel20 extends WaPanelBase {
                 let minCellIndex;
                 for (let x = tdList.length - 1; x >= 0; x--) {
                     let cell =  tdList[x];
-                    if (grid.column_table.data[x][WaColumnProperty.visible] == false) continue;
+                    if (grid.column_table.data[x][COLUMN_KEYS.visible] == false) continue;
                     let right = window.pageXOffset + cell.getBoundingClientRect().right;
                     if (lastX < right) minCellIndex = cell.cellIndex;
                 }
@@ -894,8 +894,8 @@ export class WaPanel20 extends WaPanelBase {
 //
 //     const columnIndex = Number(moveEl.dataset.columnIndex);
 //     const column = grid.getColumnByIndex(columnIndex);
-//     const name = column[WaColumnProperty.name];
-//     const text = column[WaColumnProperty.text];
+//     const name = column[COLUMN_KEYS.name];
+//     const text = column[COLUMN_KEYS.text];
 //     const order = 'asc';
 //
 //     const buttons = document.querySelectorAll(`${selector} .wa-grid-panel-bar .wa-grid-panel-button`);
@@ -924,8 +924,8 @@ export class WaPanel20 extends WaPanelBase {
 //
 //     const columnIndex = Number(moveEl.dataset.columnIndex);
 //     const column = grid.getColumnByIndex(columnIndex);
-//     const name = column[WaColumnProperty.name];
-//     const text = column[WaColumnProperty.text];
+//     const name = column[COLUMN_KEYS.name];
+//     const text = column[COLUMN_KEYS.text];
 //     const order = 'asc';
 //
 //     const buttons = document.querySelectorAll(`${selector} .wa-grid-panel-bar .wa-grid-panel-button`);
@@ -949,7 +949,7 @@ export class WaPanel20 extends WaPanelBase {
 //     if (!tableCell) return cleanup();
 //
 //     const column = grid.column_table.selectRowByRowIndex(tableCell.cellIndex);
-//     const columnName = column[WaColumnProperty.name];
+//     const columnName = column[COLUMN_KEYS.name];
 //     const isChecked = !(e.target as HTMLInputElement).checked;
 //     const newValue = isChecked ? grid.getTrueValue(columnName) : grid.getFalseValue(columnName);
 //     const callback = grid.getRenderer(columnName, 'callback');
@@ -1019,8 +1019,8 @@ export class WaPanel20 extends WaPanelBase {
 //         const targetColumn = headerColumns[cell.parentElement!.rowIndex - 1][cell.cellIndex];
 //
 //         const sameGroup =
-//             movingColumn[WaColumnProperty.rowIndex] === targetColumn[WaColumnProperty.rowIndex] &&
-//             movingColumn[WaColumnProperty.parentNum] === targetColumn[WaColumnProperty.parentNum];
+//             movingColumn[COLUMN_KEYS.rowIndex] === targetColumn[COLUMN_KEYS.rowIndex] &&
+//             movingColumn[COLUMN_KEYS.parentNum] === targetColumn[COLUMN_KEYS.parentNum];
 //
 //         if (!sameGroup || grid.moveCell.cellIndex === cell.cellIndex) continue;
 //

@@ -1,4 +1,3 @@
-
 export class WaFilterLayer {
     //
     // constructor (grid, icon, input, column) {
@@ -25,26 +24,26 @@ export class WaFilterLayer {
     //     let combo = document.createElement('select');
     //     combo.classList.add('wa-grid-layer-filter-combo');
     //     //combo.multiple = 'multiple';
-    //     if (column[WaColumnProperty.type] == CellType.string) {
+    //     if (column[COLUMN_KEYS.type] == CellType.string) {
     //         let option;
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Equal         , grid.getCofnigLabel('filter_equal'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Include 	  , grid.getCofnigLabel('filter_include'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.StartCharacter, grid.getCofnigLabel('filter_startCharacter'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.EndCharacter  , grid.getCofnigLabel('filter_endCharacter'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Blank         , grid.getCofnigLabel('filter_blank'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.NotEqual      , grid.getCofnigLabel('filter_notEqual'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.NotInclude 	  , grid.getCofnigLabel('filter_notInclude'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Equal         , grid.getCofnigLabel('filter_equal'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Include 	  , grid.getCofnigLabel('filter_include'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.StartCharacter, grid.getCofnigLabel('filter_startCharacter'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.EndCharacter  , grid.getCofnigLabel('filter_endCharacter'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Blank         , grid.getCofnigLabel('filter_blank'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.NotEqual      , grid.getCofnigLabel('filter_notEqual'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.NotInclude 	  , grid.getCofnigLabel('filter_notInclude'));
     //     }
-    //     else if (column[WaColumnProperty.type] == CellType.number) {
+    //     else if (column[COLUMN_KEYS.type] == CellType.number) {
     //         let option;
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Select      , grid.getCofnigLabel('filter_select'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Equal       , grid.getCofnigLabel('filter_equal'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.GreaterEqual, grid.getCofnigLabel('filter_greaterEqual'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.LessEqual   , grid.getCofnigLabel('filter_lessEqual'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Greater     , grid.getCofnigLabel('filter_greater'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Less        , grid.getCofnigLabel('filter_less'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Between     , grid.getCofnigLabel('filter_between'));
-    //         gridFilter.addComboOption(combo, tbsGridTypes.FilterType.Blank       , grid.getCofnigLabel('filter_blank'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Select      , grid.getCofnigLabel('filter_select'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Equal       , grid.getCofnigLabel('filter_equal'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.GreaterEqual, grid.getCofnigLabel('filter_greaterEqual'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.LessEqual   , grid.getCofnigLabel('filter_lessEqual'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Greater     , grid.getCofnigLabel('filter_greater'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Less        , grid.getCofnigLabel('filter_less'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Between     , grid.getCofnigLabel('filter_between'));
+    //         gridFilter.addComboOption(combo, tbsGridTypes.FILTER_TYPES.Blank       , grid.getCofnigLabel('filter_blank'));
     //     }
     //     return combo;
     // }
@@ -139,7 +138,7 @@ export class WaFilterLayer {
     //
     //     const changeEvent = function (e) {
     //         let combo = e.target;
-    //         let columnType = column[WaColumnProperty.type];
+    //         let columnType = column[COLUMN_KEYS.type];
     //         // if (columnType == CellType.number) {
     //         //     let toInput = document.querySelector(selector + ' .wa-grid-layer-filter-content-input-to');
     //         //     if (combo.selectedOptions[0].value == grid.const_filterBetween) toInput.style.display = '';
@@ -181,7 +180,7 @@ export class WaFilterLayer {
     //     let iconElement = this.iconElement
     //     let inputElement =this.inputElement
     //
-    //     let filterColumn = grid.filter_column_table.selectRow(WaColumnProperty.name, column[WaColumnProperty.name]);
+    //     let filterColumn = grid.filter_column_table.selectRow(COLUMN_KEYS.name, column[COLUMN_KEYS.name]);
     //
     //     if (grid.notNull(filterColumn)) {
     //         let combo = document.querySelector(selector + ' .wa-grid-layer-filter-combo');

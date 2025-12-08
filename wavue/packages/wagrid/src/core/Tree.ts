@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
 import {OptionAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaTree {
     grid: WaGridCore;
     selector: string;
@@ -18,12 +18,12 @@ export class WaTree {
         grid.tree_table.remove();
 
         const fn_getChildrenRowIds = function(row) {
-            row[WaColumnProperty.children] = [];
+            row[COLUMN_KEYS.children] = [];
 
             for (let i = 0, len = grid.view_table.count(); i < len; i++) {
                 let dataRow = grid.view_table.data[i];
                 if (row[grid.options.treeItemName] == dataRow[grid.options.treeParentName]) {
-                    row[WaColumnProperty.children].push(dataRow[WaColumnProperty.rowId]);
+                    row[COLUMN_KEYS.children].push(dataRow[COLUMN_KEYS.rowId]);
                 }
             }
         }
@@ -31,14 +31,14 @@ export class WaTree {
         const fn_setRelation = function(row, depth = 1) {
             fn_getChildrenRowIds(row);
 
-            row[WaColumnProperty.depth] = depth;
+            row[COLUMN_KEYS.depth] = depth;
             grid.tree_table.insert(grid.copyJson(row));
 
-            let arr = row[WaColumnProperty.children];
+            let arr = row[COLUMN_KEYS.children];
             if (arr.length > 0) {
                 for (let i = 0, len = grid.view_table.count(); i < len; i++) {
                     let dataRow = grid.view_table.data[i];
-                    if (arr.indexOf(dataRow[WaColumnProperty.rowId]) != -1) fn_setRelation(dataRow, depth + 1);
+                    if (arr.indexOf(dataRow[COLUMN_KEYS.rowId]) != -1) fn_setRelation(dataRow, depth + 1);
                 }
             }
         }
@@ -73,14 +73,14 @@ export class WaTree {
                 const item = {};
                 for (let x = 0, len = grid.column_table.count(); x < len; x++) {
                     const column = grid.column_table.data[x];
-                    let columnName = column[WaColumnProperty.name];
+                    let columnName = column[COLUMN_KEYS.name];
                     let val = grid.null(dataRow[columnName]) ? null : dataRow[columnName];
                     item[columnName] = val;
                 }
                 // const dataColumns: any[] = grid.field_table.selectRows();
                 // for (let x = 0, len = dataColumns.length; x < len; x++) {
                 //     const column = dataColumns[x];
-                //     let columnName  = column[WaColumnProperty.name];
+                //     let columnName  = column[COLUMN_KEYS.name];
                 //     item[columnName] = dataRow[columnName];
                 // }
 
@@ -109,12 +109,12 @@ export class WaTree {
         for (let i = 0, len = grid.tree_table.count(); i < len; i++) {
             let dataRow = grid.tree_table.data[i];
 
-            dataRow[WaColumnProperty.rowMode]      = '';
-            dataRow[WaColumnProperty.isOpen]    = false;
+            dataRow[COLUMN_KEYS.rowMode]      = '';
+            dataRow[COLUMN_KEYS.isOpen]    = false;
 
             for (let x = 0, len = grid.column_table.count(); x < len; x++) {
                 let column = grid.column_table.data[x];
-                let columnName  = column[WaColumnProperty.name];
+                let columnName  = column[COLUMN_KEYS.name];
                 let val = grid.null(dataRow[columnName]) ? null : dataRow[columnName];
 
                 dataRow[columnName] = val;
@@ -129,7 +129,7 @@ export class WaTree {
         grid.tree_table.remove();
         grid.view_table.data.map(dataRow => {
             let item = grid.copyJson(dataRow);
-            item[WaColumnProperty.isOpen] = false;
+            item[COLUMN_KEYS.isOpen] = false;
             grid.tree_table.insert(item);
         });
 
@@ -137,7 +137,7 @@ export class WaTree {
         if (grid.notNull(openDepth)) {
             for (let i = grid.view_table.count() - 1; i >= 0; i--) {
                 let row = grid.view_table.data[i];
-                let depth = row[WaColumnProperty.depth];
+                let depth = row[COLUMN_KEYS.depth];
                 if (openDepth != 0 && depth > openDepth) grid.view_table.remove(i);
             }
         }
@@ -155,7 +155,7 @@ export class WaTree {
             grid.waPanel40.setDataPanel();
             grid.waPanel50.setDataPanel();
         }
-        if (grid.options[WaColumnProperty.autoWidth] == true)  grid.setColumnAutoWidth();
+        if (grid.options[COLUMN_KEYS.autoWidth] == true)  grid.setColumnAutoWidth();
 
         grid.classRange.removeRange(0, -1);
         let _topRowIndex = grid.classRange.selectRange(0, 0, 0, 0);
@@ -166,7 +166,7 @@ export class WaTree {
         const grid = this.grid;
 
         const row = grid.getRow(rowIndex);
-        const arrayChildren = row[WaColumnProperty.children];
+        const arrayChildren = row[COLUMN_KEYS.children];
         const element = tableCell.querySelector('.wa-grid-html-icon');
 
         if (arrayChildren.length > 0) {
@@ -183,11 +183,11 @@ export class WaTree {
     }
 
     toggleTreeIcon(element, type?) {
-        if (type == WaColumnProperty.open) {
+        if (type == COLUMN_KEYS.open) {
             element.classList.remove('wa-grid-html-icon-closed');
             element.classList.add('wa-grid-html-icon-open');
         }
-        else if (type == WaColumnProperty.closed) {
+        else if (type == COLUMN_KEYS.closed) {
             element.classList.remove('wa-grid-html-icon-open');
             element.classList.add('wa-grid-html-icon-closed');
         }
@@ -203,8 +203,8 @@ export class WaTree {
         const spanIcon = tableCell.querySelector('.wa-grid-html-icon');
         if (grid.null(spanIcon)) return null;
 
-        if (spanIcon.className.includes('wa-grid-html-icon-open')) return WaColumnProperty.open;
-        else if (spanIcon.className.includes('wa-grid-html-icon-closed')) return WaColumnProperty.closed;
+        if (spanIcon.className.includes('wa-grid-html-icon-open')) return COLUMN_KEYS.open;
+        else if (spanIcon.className.includes('wa-grid-html-icon-closed')) return COLUMN_KEYS.closed;
         else return null;
     }
 
@@ -216,8 +216,8 @@ export class WaTree {
         if (grid.null(spanIcon)) return;
 
         let folding = grid.classTree.getTreeFoldingStatus(tableCell);
-        if      (folding == WaColumnProperty.open)   grid.classTree.closeTreeRow(rowIndex);
-        else if (folding == WaColumnProperty.closed) grid.classTree.openTreeRow(rowIndex);
+        if      (folding == COLUMN_KEYS.open)   grid.classTree.closeTreeRow(rowIndex);
+        else if (folding == COLUMN_KEYS.closed) grid.classTree.openTreeRow(rowIndex);
 
         grid.horizontalScroll.setScroll(grid.code_horizontal);;
         grid.verticalScroll.setScroll(grid.code_vertical);
@@ -235,7 +235,7 @@ export class WaTree {
 
             if (count > 1) resultRows.push(grid.copyJson(row));
 
-            let arr = row[WaColumnProperty.children];
+            let arr = row[COLUMN_KEYS.children];
             if (arr.length > 0) {
                 //default : get first lower rows
                 if (count == 1) {
@@ -245,8 +245,8 @@ export class WaTree {
                     }
                 }
                 else {
-                    if (folding == WaColumnProperty.open) {
-                        if (row[WaColumnProperty.isOpen]) {
+                    if (folding == COLUMN_KEYS.open) {
+                        if (row[COLUMN_KEYS.isOpen]) {
                             for (let i = 0, len = arr.length; i < len; i++) {
                                 let dataRow = grid.getTreeRowByRowId(arr[i]);
                                 fn_getchildRows(dataRow, count + 1);
@@ -271,13 +271,13 @@ export class WaTree {
         const grid = this.grid;
 
         let row = grid.getRow(rowIndex);
-        let rowId = row[WaColumnProperty.rowId];
+        let rowId = row[COLUMN_KEYS.rowId];
         for (let i = 0, len = grid.source_table.count(); i < len; i++) {
-            if (rowId == grid.source_table.data[i][WaColumnProperty.rowId])
-                grid.source_table.data[i][WaColumnProperty.isOpen] = true; // keep folding status
+            if (rowId == grid.source_table.data[i][COLUMN_KEYS.rowId])
+                grid.source_table.data[i][COLUMN_KEYS.isOpen] = true; // keep folding status
         }
 
-        let rows = grid.classTree.getTreechildRows(WaColumnProperty.open, rowIndex, false);
+        let rows = grid.classTree.getTreechildRows(COLUMN_KEYS.open, rowIndex, false);
         grid.classTree.addTreeRows(rowIndex);
 
     }
@@ -286,13 +286,13 @@ export class WaTree {
         const grid = this.grid;
 
         let row = grid.getRow(rowIndex);
-        let rowId = row[WaColumnProperty.rowId];
+        let rowId = row[COLUMN_KEYS.rowId];
         for (let i = 0, len = grid.source_table.count(); i < len; i++) {
-            if (rowId == grid.source_table.data[i][WaColumnProperty.rowId])
-                grid.source_table.data[i][WaColumnProperty.isOpen] = false; // keep folding status
+            if (rowId == grid.source_table.data[i][COLUMN_KEYS.rowId])
+                grid.source_table.data[i][COLUMN_KEYS.isOpen] = false; // keep folding status
         }
 
-        let rows = grid.classTree.getTreechildRows(WaColumnProperty.closed, rowIndex, true);
+        let rows = grid.classTree.getTreechildRows(COLUMN_KEYS.closed, rowIndex, true);
         rows.map(row => grid.classTree.removeTreeRow(row));
 
     }
@@ -300,7 +300,7 @@ export class WaTree {
     addTreeRows(rowIndex) {
         const grid = this.grid;
 
-        let rows = grid.classTree.getTreechildRows(WaColumnProperty.open, rowIndex, false);
+        let rows = grid.classTree.getTreechildRows(COLUMN_KEYS.open, rowIndex, false);
         for (let i = 0, startRowIndex = rowIndex + 1, len = rows.length; i < len; i++, startRowIndex++) {
             grid.classTree.addTreeRow(startRowIndex, rows[i]);
         }
@@ -321,7 +321,7 @@ export class WaTree {
     removeTreeRow(row) {
         const grid = this.grid;
 
-        grid.view_table.removeByRowId(row[WaColumnProperty.rowId]);
+        grid.view_table.removeByRowId(row[COLUMN_KEYS.rowId]);
 
         grid.data_select_panel30 = [];
         grid.data_select_panel31 = [];

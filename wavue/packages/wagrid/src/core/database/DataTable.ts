@@ -1,7 +1,8 @@
 import { WaBase } from '../base/Base'
 import { CellType } from '@/core/Grid.types'
 import { SortColumnDef } from '@/core/sort/SortColumnDef'
-import { WaColumnProperty } from '@/core/columns/ColumnEnum'
+import { COLUMN_KEYS } from '@/core/columns/ColumnEnum'
+import { ColumnDef } from '../columns/ColumnDef'
 
 type Row = Record<string, any>
 type KeyOf<T> = keyof T & string
@@ -54,13 +55,13 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
     return this.data[rowIndex]
   }
 
-  selectRowByRowId(rowId: T[typeof WaColumnProperty.rowId]): T | null {
-    const rows = this.selectRows(WaColumnProperty.rowId as KeyOf<T>, rowId as any, 1)
+  selectRowByRowId(rowId: T[typeof COLUMN_KEYS.rowId]): T | null {
+    const rows = this.selectRows(COLUMN_KEYS.rowId as KeyOf<T>, rowId as any, 1)
     return rows.length > 0 ? rows[0] : null
   }
 
-  selectRowIndexByRowId(rowId: T[typeof WaColumnProperty.rowId]): number {
-    return this.selectRowIndex(WaColumnProperty.rowId as KeyOf<T>, rowId as any)
+  selectRowIndexByRowId(rowId: T[typeof COLUMN_KEYS.rowId]): number {
+    return this.selectRowIndex(COLUMN_KEYS.rowId as KeyOf<T>, rowId as any)
   }
 
   selectRowIndex<K extends KeyOf<T>>(field: K, value: T[K]): number {
@@ -74,7 +75,7 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 
   selectRowIdByRowIndex(rowIndex: number) {
     const row = this.selectRowByRowIndex(rowIndex)
-    return row[WaColumnProperty.rowId as KeyOf<T>]
+    return row[COLUMN_KEYS.rowId as KeyOf<T>]
   }
 
   selectRowRange(startRowIndex = 0, endRowIndex = this.count() - 1): T[] {
@@ -98,8 +99,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
     if (this.type === 'table') {
       rows.forEach((row) => {
         this.currentRowId += 1
-        ;(row as Row)[WaColumnProperty.rowId] = this.currentRowId
-        ;(row as Row)[WaColumnProperty.rowMode] = 'I'
+        ;(row as Row)[COLUMN_KEYS.rowId] = this.currentRowId
+        ;(row as Row)[COLUMN_KEYS.rowMode] = 'I'
       })
     }
     this.data.push(...rows)
@@ -109,8 +110,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
     if (this.type === 'table') {
       rows.forEach((row) => {
         this.currentRowId += 1
-        ;(row as Row)[WaColumnProperty.rowId] = this.currentRowId
-        ;(row as Row)[WaColumnProperty.rowMode] = 'I'
+        ;(row as Row)[COLUMN_KEYS.rowId] = this.currentRowId
+        ;(row as Row)[COLUMN_KEYS.rowMode] = 'I'
       })
     }
     if (rowIndex < this.data.length) this.data.splice(rowIndex, 0, ...rows)
@@ -121,8 +122,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
     if (this.type === 'table') {
       rows.forEach((row) => {
         this.currentRowId += 1
-        ;(row as Row)[WaColumnProperty.rowId] = this.currentRowId
-        ;(row as Row)[WaColumnProperty.rowMode] = 'I'
+        ;(row as Row)[COLUMN_KEYS.rowId] = this.currentRowId
+        ;(row as Row)[COLUMN_KEYS.rowMode] = 'I'
       })
     }
     if (rowIndex + 1 < this.data.length) this.data.splice(rowIndex + 1, 0, ...rows)
@@ -132,8 +133,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
   insert(row: T) {
     if (this.type === 'table') {
       this.currentRowId += 1
-      ;(row as Row)[WaColumnProperty.rowId] = this.currentRowId
-      ;(row as Row)[WaColumnProperty.rowMode] = 'I'
+      ;(row as Row)[COLUMN_KEYS.rowId] = this.currentRowId
+      ;(row as Row)[COLUMN_KEYS.rowMode] = 'I'
     }
     this.data.push(row)
   }
@@ -141,8 +142,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
   insertBefore(row: T, rowIndex: number) {
     if (this.type === 'table') {
       this.currentRowId += 1
-      ;(row as Row)[WaColumnProperty.rowId] = this.currentRowId
-      ;(row as Row)[WaColumnProperty.rowMode] = 'I'
+      ;(row as Row)[COLUMN_KEYS.rowId] = this.currentRowId
+      ;(row as Row)[COLUMN_KEYS.rowMode] = 'I'
     }
     if (rowIndex < this.data.length) this.data.splice(rowIndex, 0, row)
     else this.data.push(row)
@@ -151,8 +152,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
   insertAfter(row: T, rowIndex: number) {
     if (this.type === 'table') {
       this.currentRowId += 1
-      ;(row as Row)[WaColumnProperty.rowId] = this.currentRowId
-      ;(row as Row)[WaColumnProperty.rowMode] = 'I'
+      ;(row as Row)[COLUMN_KEYS.rowId] = this.currentRowId
+      ;(row as Row)[COLUMN_KEYS.rowMode] = 'I'
     }
     if (rowIndex + 1 < this.data.length) this.data.splice(rowIndex + 1, 0, row)
     else this.data.push(row)
@@ -166,21 +167,21 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
     else this.data = []
   }
 
-  removeByRowId(rowId: T[typeof WaColumnProperty.rowId]) {
-    const index = this.selectRowIndex(WaColumnProperty.rowId as KeyOf<T>, rowId as any)
+  removeByRowId(rowId: T[typeof COLUMN_KEYS.rowId]) {
+    const index = this.selectRowIndex(COLUMN_KEYS.rowId as KeyOf<T>, rowId as any)
     if (this.notNull(index)) this.remove(index)
   }
 
   /**
    * Update
    */
-  update<K extends KeyOf<T>>(columnName: T[typeof WaColumnProperty.name], field: K, value: T[K]) {
-    const rows = this.selectRows(WaColumnProperty.name as KeyOf<T>, columnName as any)
+  update<K extends KeyOf<T>>(columnName: T[typeof COLUMN_KEYS.name], field: K, value: T[K]) {
+    const rows = this.selectRows(COLUMN_KEYS.name as KeyOf<T>, columnName as any)
     rows.forEach((r) => (r[field] = value))
   }
 
-  updateRow<K extends KeyOf<T>>(columnName: T[typeof WaColumnProperty.name], field: K, value: T[K]) {
-    const rows = this.selectRows(WaColumnProperty.name as KeyOf<T>, columnName as any)
+  updateRow<K extends KeyOf<T>>(columnName: T[typeof COLUMN_KEYS.name], field: K, value: T[K]) {
+    const rows = this.selectRows(COLUMN_KEYS.name as KeyOf<T>, columnName as any)
     rows.forEach((r) => (r[field] = value))
   }
 
@@ -189,7 +190,7 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
     row[field] = value
   }
 
-  updateByRowId<K extends KeyOf<T>>(rowId: T[typeof WaColumnProperty.rowId], field: K, value: T[K]) {
+  updateByRowId<K extends KeyOf<T>>(rowId: T[typeof COLUMN_KEYS.rowId], field: K, value: T[K]) {
     const row = this.selectRowByRowId(rowId)
     if (row) row[field] = value
   }
@@ -207,17 +208,17 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
    * @param sort_column_table : 정렬 스펙 테이블( name, order 등 )
    */
   orderBy(
-    column_table: WaDataTable<Row>,
+    column_table: WaDataTable<ColumnDef>,
     sort_column_table: WaDataTable<SortColumnDef>
   ): T[] {
     return this.data.sort((a: Row, b: Row) => {
       for (let i = 0, len = sort_column_table.count(); i < len; i++) {
         const sortCol = sort_column_table.data[i] as SortColumnDef & Row
-        const name = sortCol[WaColumnProperty.name] as string
-        const order = (sortCol[WaColumnProperty.order] as string) || 'asc'
+        const name = sortCol[COLUMN_KEYS.name] as string
+        const order = (sortCol[COLUMN_KEYS.order] as string) || 'asc'
 
-        const column = column_table.selectRow(WaColumnProperty.name as any, name) as Row | null
-        const type = (column?.[WaColumnProperty.type] as CellType) ?? CellType.string
+        const column = column_table.selectRow(COLUMN_KEYS.name as any, name) as Row | null
+        const type = (column?.[COLUMN_KEYS.type] as CellType) ?? CellType.string
 
         if (order === 'asc') {
           if (type === CellType.number) {
@@ -287,7 +288,7 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 
 // import {WaBase} from '@/core/base/Base';
 // import {CellType, SortColumnDef} from "@/core/Grid.types"
-// import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+// import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 // export class WaDataTable extends WaBase {
 //     tableName: string;
 //     data: any[];
@@ -342,11 +343,11 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     selectRowByRowIndex(rowIndex: number): object { return this.data[rowIndex]; }
 
 //     selectRowByRowId(rowId: any) : object {
-//         const dataRows: object[] = this.selectRows(WaColumnProperty.rowId, rowId, 1);
+//         const dataRows: object[] = this.selectRows(COLUMN_KEYS.rowId, rowId, 1);
 //         return dataRows.length > 0 ? dataRows[0] : null;
 //     }
 
-//     selectRowIndexByRowId(rowId: any) : number { return this.selectRowIndex(WaColumnProperty.rowId, rowId); }
+//     selectRowIndexByRowId(rowId: any) : number { return this.selectRowIndex(COLUMN_KEYS.rowId, rowId); }
 
 //     selectRowIndex(field: any, value: any) : number {
 //         let result: number = null;
@@ -359,7 +360,7 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 
 //     selectRowIdByRowIndex(rowIndex: any) {
 //         const dataRow = this.selectRowByRowIndex(rowIndex);
-//         return dataRow[WaColumnProperty.rowId];
+//         return dataRow[COLUMN_KEYS.rowId];
 //     }
 
 //     selectRowRange(startRowIndex?: number, endRowIndex?: number) {
@@ -386,8 +387,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //         if (this.type == 'table') {
 //             dataRows.map(dataRow => {
 //                 this.currentRowId += 1;
-//                 dataRow[WaColumnProperty.rowId] = this.currentRowId;
-//                 dataRow[WaColumnProperty.rowMode] = 'I';
+//                 dataRow[COLUMN_KEYS.rowId] = this.currentRowId;
+//                 dataRow[COLUMN_KEYS.rowMode] = 'I';
 //             });
 //         }
 //         this.data.push(...dataRows);
@@ -397,8 +398,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //         if (this.type == 'table') {
 //             dataRows.map(dataRow => {
 //                 this.currentRowId += 1;
-//                 dataRow[WaColumnProperty.rowId] = this.currentRowId;
-//                 dataRow[WaColumnProperty.rowMode] = 'I';
+//                 dataRow[COLUMN_KEYS.rowId] = this.currentRowId;
+//                 dataRow[COLUMN_KEYS.rowMode] = 'I';
 //             });
 //         }
 //         if (rowIndex < this.data.length) this.data.splice(rowIndex, 0, ...dataRows);
@@ -409,8 +410,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //         if (this.type == 'table') {
 //             dataRows.map(dataRow => {
 //                 this.currentRowId += 1;
-//                 dataRow[WaColumnProperty.rowId] = this.currentRowId;
-//                 dataRow[WaColumnProperty.rowMode] = 'I';
+//                 dataRow[COLUMN_KEYS.rowId] = this.currentRowId;
+//                 dataRow[COLUMN_KEYS.rowMode] = 'I';
 //             });
 //         }
 
@@ -421,8 +422,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     insert(dataRow: object) {
 //         if (this.type == 'table') {
 //             this.currentRowId += 1;
-//             dataRow[WaColumnProperty.rowId] = this.currentRowId;
-//             dataRow[WaColumnProperty.rowMode] = 'I';
+//             dataRow[COLUMN_KEYS.rowId] = this.currentRowId;
+//             dataRow[COLUMN_KEYS.rowMode] = 'I';
 //         }
 //         this.data.push(dataRow);
 //     }
@@ -430,8 +431,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     insertBefore(dataRow: object, rowIndex: any) {
 //         if (this.type == 'table') {
 //             this.currentRowId += 1;
-//             dataRow[WaColumnProperty.rowId] = this.currentRowId;
-//             dataRow[WaColumnProperty.rowMode] = 'I';
+//             dataRow[COLUMN_KEYS.rowId] = this.currentRowId;
+//             dataRow[COLUMN_KEYS.rowMode] = 'I';
 //         }
 
 //         if (rowIndex < this.data.length) this.data.splice(rowIndex, 0, dataRow);
@@ -441,8 +442,8 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     insertAfter(dataRow: any, rowIndex: number) {
 //         if (this.type == 'table') {
 //             this.currentRowId += 1;
-//             dataRow[WaColumnProperty.rowId] = this.currentRowId;
-//             dataRow[WaColumnProperty.rowMode] = 'I';
+//             dataRow[COLUMN_KEYS.rowId] = this.currentRowId;
+//             dataRow[COLUMN_KEYS.rowMode] = 'I';
 //         }
 
 //         if (rowIndex + 1 < this.data.length) this.data.splice(rowIndex + 1, 0, dataRow);
@@ -458,7 +459,7 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     }
 
 //     removeByRowId(rowId: any) {
-//         let rowIndex = this.selectRowIndex(WaColumnProperty.rowId, rowId);
+//         let rowIndex = this.selectRowIndex(COLUMN_KEYS.rowId, rowId);
 //         if (this.notNull(rowIndex)) this.remove(rowIndex);
 //     }
 
@@ -467,11 +468,11 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //      */
 
 //     update(columnName: string, field: string, value: any) {
-//         let dataRows = this.selectRows(WaColumnProperty.name, columnName);
+//         let dataRows = this.selectRows(COLUMN_KEYS.name, columnName);
 //         dataRows.map(dataRow => dataRow[field] = value);
 //     }
 //     updateRow(columnName: string, field: string, value: any) {
-//         let dataRows = this.selectRows(WaColumnProperty.name, columnName);
+//         let dataRows = this.selectRows(COLUMN_KEYS.name, columnName);
 //         dataRows.map(dataRow => dataRow[field] = value);
 //     }
 //     updateByRowIndex(rowIndex: number, name: string, value: any) {
@@ -501,11 +502,11 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //         return this.data.sort((a, b) => {
 //             for (let i = 0, len: number = sort_column_table.count(); i < len; i++) {
 //                 const sortColumn: any = sort_column_table.data[i];
-//                 const name: string = sortColumn[WaColumnProperty.name];
-//                 const order: string = (sortColumn[WaColumnProperty.order]) ? sortColumn[WaColumnProperty.order] : 'asc';
+//                 const name: string = sortColumn[COLUMN_KEYS.name];
+//                 const order: string = (sortColumn[COLUMN_KEYS.order]) ? sortColumn[COLUMN_KEYS.order] : 'asc';
 
-//                 const column: any = column_table.selectRow(WaColumnProperty.name, name);
-//                 const type: string = column[WaColumnProperty.type];
+//                 const column: any = column_table.selectRow(COLUMN_KEYS.name, name);
+//                 const type: string = column[COLUMN_KEYS.type];
 
 //                 if (order == 'asc') {
 //                     if (type == CellType.number) {
@@ -578,7 +579,7 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     //     const grid = this.grid;
 //     //
 //     //     let column = grid.getColumn(filterColumn.name);
-//     //     let columnType = column[WaColumnProperty.type];
+//     //     let columnType = column[COLUMN_KEYS.type];
 //     //     let columnName = filterColumn.name;
 //     //     let filterType = filterColumn.type;
 //     //     let value = filterColumn.value;
@@ -627,28 +628,28 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     //
 //     //     targetNumber = parseFloat(targetNumber);
 //     //
-//     //     if      (filterType == tbsGridTypes.FilterType.Equal) {
+//     //     if      (filterType == tbsGridTypes.FILTER_TYPES.Equal) {
 //     //         return (n == targetNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.NotEqual) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.NotEqual) {
 //     //         return (n != targetNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.Greater) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.Greater) {
 //     //         return (n < targetNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.GreaterEqual) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.GreaterEqual) {
 //     //         return (n <= targetNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.Less) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.Less) {
 //     //         return (n > targetNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.LessEqual) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.LessEqual) {
 //     //         return (n >= targetNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.Between) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.Between) {
 //     //         return (targetNumber >= n && targetNumber <= toNumber) ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.Blank) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.Blank) {
 //     //         return grid.null(targetNumber) || targetNumber == 0;
 //     //     }
 //     // }
@@ -661,31 +662,31 @@ export class WaDataTable<T extends Row = Row> extends WaBase {
 //     //     // String comparisons are case-insensitive.
 //     //     s = s.toLowerCase();
 //     //     targetString = targetString.toLowerCase();
-//     //     if      (filterType == tbsGridTypes.FilterType.Equal) {
+//     //     if      (filterType == tbsGridTypes.FILTER_TYPES.Equal) {
 //     //         regExp =new RegExp(`^${s}$`)
 //     //         return regExp.test(targetString);
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.NotEqual) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.NotEqual) {
 //     //         regExp = new RegExp(`^${s}$`);
 //     //         return regExp.test(targetString) == false ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.Include) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.Include) {
 //     //         regExp = new RegExp(`${s}`);
 //     //         return regExp.test(targetString);
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.NotInclude) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.NotInclude) {
 //     //         regExp = new RegExp(`${s}`);
 //     //         return regExp.test(targetString) == false ? true : false;
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.StartCharacter) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.StartCharacter) {
 //     //         regExp = new RegExp(`^${s}`);
 //     //         return regExp.test(targetString);
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.EndCharacter) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.EndCharacter) {
 //     //         regExp = new RegExp(`${s}$`);
 //     //         return regExp.test(targetString);
 //     //     }
-//     //     else if (filterType == tbsGridTypes.FilterType.Blank) {
+//     //     else if (filterType == tbsGridTypes.FILTER_TYPES.Blank) {
 //     //         regExp = new RegExp(`^$`);
 //     //         return regExp.test(targetString);
 //     //     }

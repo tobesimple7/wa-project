@@ -1,5 +1,5 @@
 import {CellType} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaGridCore} from "@/core/WaGridCore";
 
 export class WaBaseIs {
@@ -13,7 +13,7 @@ export class WaBaseIs {
      */
 
     isEditableColumn(this:WaGridCore, columnName: string): boolean {
-        let result: any = this.column_table.selectRow(WaColumnProperty.name, columnName);
+        let result: any = this.column_table.selectRow(COLUMN_KEYS.name, columnName);
         return result.editable ? result.editable : false;
     }
 
@@ -23,10 +23,10 @@ export class WaBaseIs {
         let result = false;
         //let column = grid.getColumn(columnName);
 
-        // if (column[WaColumnProperty.sortable] == true)  result = true;
-        // else if (column[WaColumnProperty.sortable] == false) result = false;
+        // if (column[COLUMN_KEYS.sortable] == true)  result = true;
+        // else if (column[COLUMN_KEYS.sortable] == false) result = false;
         // else {
-        result = grid.options[WaColumnProperty.sortable];
+        result = grid.options[COLUMN_KEYS.sortable];
         //}
         return result;
     }
@@ -38,10 +38,10 @@ export class WaBaseIs {
         let result = false;
         //let column = grid.getColumn(columnName);
 
-        // if (column[WaColumnProperty.resizable] == true)  result = true;
-        // else if (column[WaColumnProperty.resizable] == false) result = false;
+        // if (column[COLUMN_KEYS.resizable] == true)  result = true;
+        // else if (column[COLUMN_KEYS.resizable] == false) result = false;
         // else {
-        result = grid.options[WaColumnProperty.resizable];
+        result = grid.options[COLUMN_KEYS.resizable];
         // }
         return result;
     }
@@ -53,10 +53,10 @@ export class WaBaseIs {
         let result = false;
         //let column = grid.getColumn(columnName);
 
-        // if (column[WaColumnProperty.movable] == true)  result = true;
-        // else if (column[WaColumnProperty.movable] == false) result = false;
+        // if (column[COLUMN_KEYS.movable] == true)  result = true;
+        // else if (column[COLUMN_KEYS.movable] == false) result = false;
         // else {
-        result = grid.options[WaColumnProperty.movable];
+        result = grid.options[COLUMN_KEYS.movable];
         // }
         return result;
     }
@@ -68,10 +68,10 @@ export class WaBaseIs {
         let result = false;
         //let column = grid.getColumn(columnName);
 
-        // if (column[WaColumnProperty.autoResizable] == true)  result = true;
-        // else if (column[WaColumnProperty.autoResizable] == false) result = false;
+        // if (column[COLUMN_KEYS.autoResizable] == true)  result = true;
+        // else if (column[COLUMN_KEYS.autoResizable] == false) result = false;
         // else {
-        result = grid.options[WaColumnProperty.autoResizable];
+        result = grid.options[COLUMN_KEYS.autoResizable];
         //}
         return result;
     }
@@ -83,10 +83,10 @@ export class WaBaseIs {
         let result = false;
         //let column = grid.getColumn(columnName);
 
-        // if (column[WaColumnProperty.autoResizable] == true)  result = true;
-        // else if (column[WaColumnProperty.autoResizable] == false) result = false;
+        // if (column[COLUMN_KEYS.autoResizable] == true)  result = true;
+        // else if (column[COLUMN_KEYS.autoResizable] == false) result = false;
         // else {
-        result = grid.options[WaColumnProperty.autoWidth];
+        result = grid.options[COLUMN_KEYS.autoWidth];
         //}
         return result;
     }
@@ -201,7 +201,7 @@ export class WaBaseIs {
         let result = false;
         for (let i = 0, len = this.column_table.count(); i < len; i++) {
             let column = this.column_table.data[i];
-            if (columnName == column[WaColumnProperty.name]) {
+            if (columnName == column[COLUMN_KEYS.name]) {
                 result = true;
                 break;
             }
@@ -214,13 +214,13 @@ export class WaBaseIs {
 
         let result = false;
         let column = grid.getColumn(columnName)
-        if (column[WaColumnProperty.type] == CellType.number) result = true;
+        if (column[COLUMN_KEYS.type] == CellType.number) result = true;
         return result;
     }
 
     isFilterColumnName(this:WaGridCore, columnName: string): boolean {
         const grid = this;
-        return grid.filter_column_table.isRow(WaColumnProperty.name, columnName);
+        return grid.filter_column_table.isRow(COLUMN_KEYS.name, columnName);
     }
 
     isLastTopRowIndex(this:WaGridCore, rowIndex: number): boolean {

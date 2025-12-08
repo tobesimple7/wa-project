@@ -23,18 +23,18 @@ import {ref, computed} from 'vue'
 import {waGridConfigs} from "@/components/WaGridConfigs"
 import WaGrid from '@/components/WaGrid.vue'
 import {grid_data} from "@/components/wagrid_data.js"; 
-import {WaColumnDef} from '@/core/columns/ColumnDef';
+import {ColumnDef} from '@/core/columns/ColumnDef';
 
 const gridConfigs = waGridConfigs;
 
-const columns1: WaColumnDef[] = [
+const columns1: ColumnDef[] = [
     { name: "ACCTG_TRANS_ID", header: {text: "Code"}, width: 100, editable: true }
   , { name: "ACCTG_TRANS_TYPE_ID", header: {text: "Manager"}, width: 100}
   , { name: "DESCRIPTION", header: {text: "Customer"}, width: 100}
   , { name: "SCHEDULED_POSTING_DATE", header: {text: "Biz Number"}, width: 100}
   , { name: "VOUCHER_DATE", header: {text: "ceo"}, width: 100}
 ]
-const columns2: WaColumnDef[] = [
+const columns2: ColumnDef[] = [
     { name: "ACCTG_TRANS_ID", header: {text: "Code"}, width: 100, editable: true }
   , { name: "ACCTG_TRANS_TYPE_ID", header: {text: "Manager"}, width: 100}
   , { name: "DESCRIPTION", header: {text: "Customer"}, width: 100}

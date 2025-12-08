@@ -1,61 +1,62 @@
-import {WaBase} from '../base/Base';
-import {WaDataTable} from "./DataTable";
-import {WaDataArrayTable} from "./DataArrayTable";
+// WaDatabase.ts
+import { WaBase } from '../base/Base'
+import { WaDataTable } from './DataTable'
+import { WaDataArrayTable } from './DataArrayTable'
 
-export type DataTableType = WaDataTable | WaDataArrayTable;
+// 내부 기본 Row
+type Row = Record<string, any>
+
+// 두 테이블 공통 유니온을 제네릭으로
+export type DataTableType<T extends Row = Row> =
+  | WaDataTable<T>
+  | WaDataArrayTable<T>
 
 export class WaDatabase extends WaBase {
-    tables: DataTableType[];
+  // 이름→테이블 맵 (서로 다른 T 가능하게 any 수용)
+  public tables = new Map<string, DataTableType<any>>()
 
-    constructor() {
-        super();
-        this.tables = [];
-    }
+  constructor() {
+    super()
+  }
 
-    createTable(tableName: string): WaDataTable {
-        const table = new WaDataTable(tableName);
-        table.type = 'table';
-        this.tables.push(table);
+  // ----- 생성기 (각 호출 시점에 T를 지정 가능) -----
+  createTable<T extends Row = Row>(tableName: string): WaDataTable<T> {
+    const table = new WaDataTable<T>(tableName)
+    table.type = 'table'
+    this.tables.set(tableName, table)
+    return table
+  }
 
-        return this.getTable(tableName) as WaDataTable;
-    }
+  createView<T extends Row = Row>(tableName: string): WaDataTable<T> {
+    const table = new WaDataTable<T>(tableName)
+    table.type = 'view'
+    this.tables.set(tableName, table)
+    return table
+  }
 
-    createView(tableName: string): WaDataTable {
-        const table = new WaDataTable(tableName);
-        table.type = 'view';
-        this.tables.push(table);
+  createArrayTable<T extends Row = Row>(tableName: string): WaDataArrayTable<T> {
+    const table = new WaDataArrayTable<T>(tableName)
+    table.type = 'table'
+    this.tables.set(tableName, table)
+    return table
+  }
 
-        return this.getTable(tableName) as WaDataTable;
-    }
+  // ----- 조회기 (필요할 때 원하는 T로 캐스팅받음) -----
+  getTable<T extends Row = Row>(tableName: string): DataTableType<T> | undefined {
+    return this.tables.get(tableName) as DataTableType<T> | undefined
+  }
 
-    createArrayTable(tableName: string): WaDataArrayTable {
-        const table = new WaDataArrayTable(tableName);
-        table.type = 'table';
-        this.tables.push(table);
+  getDataTable<T extends Row = Row>(tableName: string): WaDataTable<T> | undefined {
+    const t = this.tables.get(tableName)
+    return t instanceof WaDataTable ? (t as WaDataTable<T>) : undefined
+  }
 
-        return this.getTable(tableName) as WaDataArrayTable;
-    }
+  getArrayTable<T extends Row = Row>(tableName: string): WaDataArrayTable<T> | undefined {
+    const t = this.tables.get(tableName)
+    return t instanceof WaDataArrayTable ? (t as WaDataArrayTable<T>) : undefined
+  }
 
-    removeTable(tableName: string): void {
-        for (let i = 0, len = this.tables.length; i < len; i++) {
-            const table: DataTableType = this.tables[i];
-            if (table!.tableName === tableName) {
-                this.tables.splice(i, 1);
-                break;
-            }
-        }
-    }
-
-    getTable(tableName: string): DataTableType {
-        let result: DataTableType = null;
-        for (let i: number = 0, len: number = this.tables.length; i < len; i++) {
-            const table: DataTableType = this.tables[i];
-            if (table!.tableName == tableName) {
-                result = table;
-                break;
-            }
-        }
-        return result;
-    }
+  removeTable(tableName: string): void {
+    this.tables.delete(tableName)
+  }
 }
-

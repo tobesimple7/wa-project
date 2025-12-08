@@ -5,7 +5,12 @@ import {WaDataTable} from '@/core/database/DataTable';
 import {waGridConfigs} from "./GridConfigs";
 import {WaDataArrayTable} from "@/core/database/DataArrayTable";
 import { SortColumnDef } from "./sort/SortColumnDef";
+import { ColumnDef } from "./columns/ColumnDef";
+import { TopColumnDef } from "./summary/TopDef";
+import { FooterColumnDef } from "./summary/FooterDef";
+import { HeaderColumnDef } from '@/core/header/HeaderDef'
 
+type Row = Record<string, any>
 export class WaGridBase extends WaBase {
     gridId: string;
     gridConfig: object;
@@ -24,26 +29,26 @@ export class WaGridBase extends WaBase {
     db: WaDatabase;
 
     // field_table: WaDataTable;
-    header_column_table: WaDataArrayTable;
-    column_table: WaDataTable;
-    top_column_table: WaDataTable;
-    footer_column_table: WaDataTable;
-    sort_column_table: WaDataTable<SortColumnDef>;
-    filter_column_table: WaDataTable;
-    group_column_table: WaDataTable;
-    source_table: WaDataTable;
-    view_table: WaDataTable;
-    group_table: WaDataTable;
-    group_header_table: WaDataTable;
-    tree_table: WaDataTable;
-    page_table: WaDataTable;
-    top_table: WaDataTable;
-    footer_table: WaDataTable;
-    temp_table: WaDataTable;
+    header_column_table: WaDataArrayTable<HeaderColumnDef>
+    column_table: WaDataTable<ColumnDef>
+    top_column_table: WaDataTable<TopColumnDef>
+    footer_column_table: WaDataTable<FooterColumnDef>
+    sort_column_table: WaDataTable<SortColumnDef>
+    filter_column_table: WaDataTable
+    group_column_table: WaDataTable
+    source_table: WaDataTable
+    view_table: WaDataTable<Record<string, any>>
+    group_table: WaDataTable
+    group_header_table: WaDataTable
+    tree_table: WaDataTable
+    page_table: WaDataTable
+    top_table: WaDataTable
+    footer_table: WaDataTable
+    temp_table: WaDataTable
 
-    data_update: any[];
-    data_insert: any[];
-    data_delete: any[];
+    data_update: any[]
+    data_insert: any[]
+    data_delete: any[]
 
     info_column_table: WaDataTable;
 
@@ -125,7 +130,7 @@ export class WaGridBase extends WaBase {
 
         // this.field_table        = this.db.createTable('field');
 
-        this.header_column_table= this.db.createArrayTable('header_column');
+        this.header_column_table= this.db.createArrayTable<HeaderColumnDef>('header_column');
 
         this.column_table       = this.db.createTable('column');
         this.top_column_table   = this.db.createTable('top_column');
@@ -135,7 +140,7 @@ export class WaGridBase extends WaBase {
         this.group_column_table = this.db.createTable('group_column');
 
         this.source_table       = this.db.createTable('source');
-        this.view_table         = this.db.createView('view');
+        this.view_table         = this.db.createView<Record<string, any>>('view');
 
         this.group_table        = this.db.createView('group');
         this.group_header_table = this.db.createView('group_header');

@@ -1,5 +1,5 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {GridMode} from "@/core/Grid.types"
 export class WaPage {
     grid: WaGridCore;
@@ -68,7 +68,7 @@ export class WaPage {
                 const columns: any[] = grid.column_table.selectRows();
                 for (let x = 0, len = columns.length; x < len; x++) {
                     const column = columns[x];
-                    let columnName  = column[WaColumnProperty.name];
+                    let columnName  = column[COLUMN_KEYS.name];
                     source[columnName] = grid.null(dataRow[columnName]) ? null : grid.getFormatValue(column, dataRow[columnName]);
                 }
 

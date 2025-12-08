@@ -1,5 +1,5 @@
 ﻿import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaDate{
     colType: any;
@@ -218,7 +218,7 @@ export class WaDate{
         let selector = '#' + this.grid;
         const grid = this.grid;
 
-        let format = this.column[WaColumnProperty.format];
+        let format = this.column[COLUMN_KEYS.format];
         format = format.replace('yyyy', curYear);
         format = format.replace('MM', this.addZero(curMonth));
         format = format.replace('dd', this.addZero(curDay));
@@ -272,7 +272,7 @@ export class WaDate{
             let MM = grid.substr2(dateText, 5, 2);
             let dd = grid.substr2(dateText,8, 2);
 
-            let format = column[WaColumnProperty.format];
+            let format = column[COLUMN_KEYS.format];
             format = format.replace('yyyy', yyyy);
             format = format.replace('MM', MM);
             format = format.replace('dd', dd);

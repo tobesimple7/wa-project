@@ -1,7 +1,7 @@
 
 import { WaDom } from "./Dom";
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaGridRow {
     grid: WaGridCore;
@@ -20,9 +20,9 @@ export class WaGridRow {
                 let column = grid.column_table.data[x];
                 let tableCell = tableRow.childNodes[x];
 
-                WaDom.setCellStyle(tableCell, 'width', column[WaColumnProperty.width] + 'px');
+                WaDom.setCellStyle(tableCell, 'width', column[COLUMN_KEYS.width] + 'px');
                 WaDom.setCellStyle(tableCell, 'display', '');
-                if (column[WaColumnProperty.visible] == false) {
+                if (column[COLUMN_KEYS.visible] == false) {
                     WaDom.setCellStyle(tableCell, 'width', '0px');
                     WaDom.setCellStyle(tableCell, 'display', 'none');
                 }
@@ -43,8 +43,8 @@ export class WaGridRow {
                 let column = grid.column_table.data[x];
                 let tableCell = tableRow.childNodes[x];
                 if (panelName.substring(6) == '0') {
-                    WaDom.setCellStyle(tableCell, 'display', column[WaColumnProperty.visible] ? '' : 'none');
-                    WaDom.setCellStyle(tableCell, 'width', column[WaColumnProperty.width] + 'px');
+                    WaDom.setCellStyle(tableCell, 'display', column[COLUMN_KEYS.visible] ? '' : 'none');
+                    WaDom.setCellStyle(tableCell, 'width', column[COLUMN_KEYS.width] + 'px');
                 }
             }
         }
@@ -62,7 +62,7 @@ export class WaGridRow {
         if (grid.group_column_table.count() > 0) {
             if (panelName.substring(6) == '0' || panelName.substring(6) == '2') {
                 let rowData = grid.getRow(rowIndex);
-                let depth = rowData[WaColumnProperty.depth];
+                let depth = rowData[COLUMN_KEYS.depth];
 
                 if (depth == grid.group_column_table.count() + 1) WaDom.addUserClass(tableRow, '.tbs-row-color-white');
                 else if (depth <= 5) WaDom.addUserClass(tableRow, 'tbs-row-color' + depth);

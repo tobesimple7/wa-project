@@ -1,6 +1,7 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {CellType, FilterType} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {CellType} from "@/core/Grid.types"
+import {FILTER_TYPES} from "@/core/filter/FilterEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaFilter {
     grid: WaGridCore;
     selector: string;
@@ -30,7 +31,7 @@ export class WaFilter {
     //         let columnArray = [];
     //         for (let key in item){
     //             let column = grid.getColumn(key);
-    //             if (column[WaColumnProperty.visible] === false) continue;
+    //             if (column[COLUMN_KEYS.visible] === false) continue;
     //             else columnArray.push(item[key]);
     //         }
     //
@@ -104,7 +105,7 @@ export class WaFilter {
         const grid = this.grid;
 
         let column = grid.getColumn(filterColumn.name);
-        let columnType = column[WaColumnProperty.type];
+        let columnType = column[COLUMN_KEYS.type];
         let columnName = filterColumn.name;
         let filterType = filterColumn.type;
         let value = filterColumn.value;
@@ -127,7 +128,7 @@ export class WaFilter {
         });
     }
 
-    filterNumberByType(filterType: FilterType, n: any, targetNumber: any) {
+    filterNumberByType(filterType: FILTER_TYPES, n: any, targetNumber: any) {
         const grid = this.grid;
 
         // @Rule : when number is null, number is zero
@@ -135,7 +136,7 @@ export class WaFilter {
         if (grid.null(targetNumber)) targetNumber = 0;
 
         let toNumber = null;
-        if (filterType == FilterType.Between) {
+        if (filterType == FILTER_TYPES.Between) {
             let arr = n.split('-');
             n = parseFloat(arr[0]);
             if (arr.length > 1) {
@@ -152,63 +153,63 @@ export class WaFilter {
 
         targetNumber = parseFloat(targetNumber);
 
-        if      (filterType == FilterType.Equal) {
+        if      (filterType == FILTER_TYPES.Equal) {
             return n == targetNumber;
         }
-        else if (filterType == FilterType.NotEqual) {
+        else if (filterType == FILTER_TYPES.NotEqual) {
             return n != targetNumber;
         }
-        else if (filterType == FilterType.Greater) {
+        else if (filterType == FILTER_TYPES.Greater) {
             return n < targetNumber;
         }
-        else if (filterType == FilterType.GreaterEqual) {
+        else if (filterType == FILTER_TYPES.GreaterEqual) {
             return n <= targetNumber;
         }
-        else if (filterType == FilterType.Less) {
+        else if (filterType == FILTER_TYPES.Less) {
             return n > targetNumber;
         }
-        else if (filterType == FilterType.LessEqual) {
+        else if (filterType == FILTER_TYPES.LessEqual) {
             return n >= targetNumber;
         }
-        else if (filterType == FilterType.Between) {
+        else if (filterType == FILTER_TYPES.Between) {
             return targetNumber >= n && targetNumber <= toNumber;
         }
-        else if (filterType == FilterType.Blank) {
+        else if (filterType == FILTER_TYPES.Blank) {
             return grid.null(targetNumber) || targetNumber == 0;
         }
     }
 
-    filterStringByType(filterType: FilterType, s: any, targetString: any) {
+    filterStringByType(filterType: FILTER_TYPES, s: any, targetString: any) {
         let regExp: RegExp;
 
         // String comparisons are case-insensitive.
         s = s.toLowerCase();
         targetString = targetString.toLowerCase();
-        if      (filterType == FilterType.Equal) {
+        if      (filterType == FILTER_TYPES.Equal) {
             regExp =new RegExp(`^${s}$`)
             return regExp.test(targetString);
         }
-        else if (filterType == FilterType.NotEqual) {
+        else if (filterType == FILTER_TYPES.NotEqual) {
             regExp = new RegExp(`^${s}$`);
             return regExp.test(targetString) == false;
         }
-        else if (filterType == FilterType.Include) {
+        else if (filterType == FILTER_TYPES.Include) {
             regExp = new RegExp(`${s}`);
             return regExp.test(targetString);
         }
-        else if (filterType == FilterType.NotInclude) {
+        else if (filterType == FILTER_TYPES.NotInclude) {
             regExp = new RegExp(`${s}`);
             return regExp.test(targetString) == false;
         }
-        else if (filterType == FilterType.StartCharacter) {
+        else if (filterType == FILTER_TYPES.StartCharacter) {
             regExp = new RegExp(`^${s}`);
             return regExp.test(targetString);
         }
-        else if (filterType == FilterType.EndCharacter) {
+        else if (filterType == FILTER_TYPES.EndCharacter) {
             regExp = new RegExp(`${s}$`);
             return regExp.test(targetString);
         }
-        else if (filterType == FilterType.Blank) {
+        else if (filterType == FILTER_TYPES.Blank) {
             regExp = new RegExp(`^$`);
             return regExp.test(targetString);
         }
@@ -217,24 +218,24 @@ export class WaFilter {
     setFilterColumn(column, filterType, word) {
         const grid = this.grid;
 
-        let dataRow = grid.filter_column_table.selectRow(WaColumnProperty.name, column[WaColumnProperty.name]);
+        let dataRow = grid.filter_column_table.selectRow(COLUMN_KEYS.name, column[COLUMN_KEYS.name]);
         if (grid.null(dataRow)) {
             const item: any = {}
-            item.name = column[WaColumnProperty.name];
+            item.name = column[COLUMN_KEYS.name];
             item.type = filterType;
             item.value = word;
             grid.filter_column_table.insert(item);
         }
         else {
-            let rowId = dataRow[WaColumnProperty.rowId];
-            grid.filter_column_table.updateByRowId(rowId, WaColumnProperty.type, filterType);
-            grid.filter_column_table.updateByRowId(rowId, WaColumnProperty.value, word);
+            let rowId = dataRow[COLUMN_KEYS.rowId];
+            grid.filter_column_table.updateByRowId(rowId, COLUMN_KEYS.type, filterType);
+            grid.filter_column_table.updateByRowId(rowId, COLUMN_KEYS.value, word);
         }
     }
 
     removeFilterColumn(column) {
         const grid = this.grid;
-        let rowId = column[WaColumnProperty.rowId];
+        let rowId = column[COLUMN_KEYS.rowId];
         grid.filter_column_table.removeByRowId(rowId);
     }
 
@@ -242,24 +243,24 @@ export class WaFilter {
         const grid = this.grid;
 
         let combo = document.createElement('select');
-        if (column[WaColumnProperty.type] == CellType.number) {
-            grid.classFilter.addFilterComboOption(combo, FilterType.Select      , grid.getConfigLabel('filter_select'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Equal       , grid.getConfigLabel('filter_equal'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.GreaterEqual, grid.getConfigLabel('filter_greaterEqual'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.LessEqual   , grid.getConfigLabel('filter_lessEqual'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Greater     , grid.getConfigLabel('filter_greater'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Less        , grid.getConfigLabel('filter_less'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Between     , grid.getConfigLabel('filter_between'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Blank       , grid.getConfigLabel('filter_blank'));
+        if (column[COLUMN_KEYS.type] == CellType.number) {
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Select      , grid.getConfigLabel('filter_select'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Equal       , grid.getConfigLabel('filter_equal'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.GreaterEqual, grid.getConfigLabel('filter_greaterEqual'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.LessEqual   , grid.getConfigLabel('filter_lessEqual'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Greater     , grid.getConfigLabel('filter_greater'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Less        , grid.getConfigLabel('filter_less'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Between     , grid.getConfigLabel('filter_between'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Blank       , grid.getConfigLabel('filter_blank'));
         }
         else {
-            grid.classFilter.addFilterComboOption(combo, FilterType.Include 	  , grid.getConfigLabel('filter_include'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Equal         , grid.getConfigLabel('filter_equal'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.StartCharacter, grid.getConfigLabel('filter_startCharacter'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.EndCharacter  , grid.getConfigLabel('filter_endCharacter'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.Blank         , grid.getConfigLabel('filter_blank'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.NotEqual      , grid.getConfigLabel('filter_notEqual'));
-            grid.classFilter.addFilterComboOption(combo, FilterType.NotInclude 	  , grid.getConfigLabel('filter_notInclude'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Include 	  , grid.getConfigLabel('filter_include'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Equal         , grid.getConfigLabel('filter_equal'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.StartCharacter, grid.getConfigLabel('filter_startCharacter'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.EndCharacter  , grid.getConfigLabel('filter_endCharacter'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.Blank         , grid.getConfigLabel('filter_blank'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.NotEqual      , grid.getConfigLabel('filter_notEqual'));
+            grid.classFilter.addFilterComboOption(combo, FILTER_TYPES.NotInclude 	  , grid.getConfigLabel('filter_notInclude'));
         }
         return combo;
     }

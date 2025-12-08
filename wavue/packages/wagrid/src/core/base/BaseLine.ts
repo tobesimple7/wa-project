@@ -229,12 +229,12 @@ export class WaBaseLine {
 
         let accWidth = 0;
         for (let i = 0, len = column.length; i < len; i++) {
-            accWidth += parseInt(column[i].width);
+            accWidth += parseInt(String(column[i].width));
             if (accWidth + contentTableLeft > 0) { startColumnIndex = i; break; }
         }
         accWidth = contentTableRect.width;
         for (let i = column.length - 1; i >= 0; i--) {
-            accWidth -= parseInt(column[i].width);
+            accWidth -= parseInt(String(column[i].width));
             if (accWidth + contentTableLeft < contentRect.width) { lastColumnIndex = i; break; }
         }
         //============================================================= left, content, fixBottom

@@ -1,5 +1,5 @@
 import {AddRowDirection} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 import {WaGridCore} from "@/core/WaGridCore";
 
 export class WaBaseRows {
@@ -21,7 +21,7 @@ export class WaBaseRows {
 
     getRowIndexByRowId(this: WaGridCore,rowId: number, table?: any) { return this.isNull(table, this.view_table).selectRowIndexByRowId(rowId); }
 
-    getCheckedRows(this: WaGridCore) { return this.view_table.selectRows(WaColumnProperty.isChecked, true); }
+    getCheckedRows(this: WaGridCore) { return this.view_table.selectRows(COLUMN_KEYS.isChecked, true); }
 
     getSelectedRows(this: WaGridCore) {
         const result = [];
@@ -62,8 +62,8 @@ export class WaBaseRows {
         for (let i = 0, len = rows.length; i < len; i++) {
             let row = rows[i];
             let item = JSON.parse(JSON.stringify(row));
-            item[WaColumnProperty.rowId] = row[WaColumnProperty.rowId];
-            item[WaColumnProperty.rowMode]  = row[WaColumnProperty.rowMode];
+            item[COLUMN_KEYS.rowId] = row[COLUMN_KEYS.rowId];
+            item[COLUMN_KEYS.rowMode]  = row[COLUMN_KEYS.rowMode];
             result.push(item);
         }
         return result;
@@ -76,8 +76,8 @@ export class WaBaseRows {
             let row = rows[i];
             if (row.mode == 'U') {
                 let item = JSON.parse(JSON.stringify(row));
-                item[WaColumnProperty.rowId] = row[WaColumnProperty.rowId];
-                item[WaColumnProperty.rowMode] = row[WaColumnProperty.rowMode];
+                item[COLUMN_KEYS.rowId] = row[COLUMN_KEYS.rowId];
+                item[COLUMN_KEYS.rowMode] = row[COLUMN_KEYS.rowMode];
                 result.push(item);
             }
         }
@@ -89,10 +89,10 @@ export class WaBaseRows {
         let result = [];
         for (let i = 0, len = rows.length; i < len; i++) {
             let row = rows[i];
-            if (row[WaColumnProperty.rowMode] == 'I') {
+            if (row[COLUMN_KEYS.rowMode] == 'I') {
                 let item = JSON.parse(JSON.stringify(row));
-                item[WaColumnProperty.rowId] = row[WaColumnProperty.rowId];
-                item[WaColumnProperty.rowMode ] = row[WaColumnProperty.rowMode];
+                item[COLUMN_KEYS.rowId] = row[COLUMN_KEYS.rowId];
+                item[COLUMN_KEYS.rowMode ] = row[COLUMN_KEYS.rowMode];
                 result.push(item);
             }
         }
@@ -107,7 +107,7 @@ export class WaBaseRows {
 
         for (let i = 0, len = columns.length; i < len; i++) {
             const column: any = columns[i];
-            let columnName: string = column[WaColumnProperty.name];
+            let columnName: string = column[COLUMN_KEYS.name];
             item[columnName] = this.null(row[columnName]) ? null : row[columnName];
         }
         return item;
@@ -201,7 +201,7 @@ export class WaBaseRows {
 
         for (let i = 0, len = rows.length; i < len; i++) {
             const row = rows[i];
-            let rowId = row[WaColumnProperty.rowId];
+            let rowId = row[COLUMN_KEYS.rowId];
             this.source_table.removeByRowId(rowId);
             this.view_table.removeByRowId(rowId);
         }

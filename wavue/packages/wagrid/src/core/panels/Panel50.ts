@@ -2,7 +2,7 @@
 import { WaPanelBase } from './PanelBase';
 import { WaRenderPanel40 } from './RenderPanel40';
 import { WaTable } from "../Table";
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaPanel50 extends WaPanelBase {
     constructor(grid) {
@@ -143,7 +143,7 @@ export class WaPanel50 extends WaPanelBase {
         let tableRow = tableRows[0];
         for (let x = 0, len = grid.column_table.count(); x < len; x++) {
             let column = grid.column_table.data[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
             let tableCell = tableRow.childNodes[x];
 
             if (grid.fixedColumnIndex != -1) {

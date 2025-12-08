@@ -1,5 +1,5 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaFooter {
     grid: WaGridCore;
@@ -13,7 +13,7 @@ export class WaFooter {
     setFooterColumns(columns) {
         const grid = this.grid;
         columns.map(column => {
-            if (grid.null(column[WaColumnProperty.align])) column[WaColumnProperty.align] = 'center';
+            if (grid.null(column[COLUMN_KEYS.align])) column[COLUMN_KEYS.align] = 'center';
             grid.footer_column_table.insert(column);
         });
     }
@@ -27,7 +27,7 @@ export class WaFooter {
         let columns = grid.column_table.data;
         for (let x = 0, len = columns.length; x < len; x++) {
             let column = columns[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
             dataRow[columnName] = null;
         }
         grid.footer_table.insert(dataRow);
@@ -35,9 +35,9 @@ export class WaFooter {
         /* get sum, avg */
         for (let x = 0, len2 = grid.footer_column_table.count(); x < len2; x++) {
             const footerColumn = grid.footer_column_table.data[x];
-            let columnName = footerColumn[WaColumnProperty.name];
+            let columnName = footerColumn[COLUMN_KEYS.name];
 
-            let summaryType = footerColumn[WaColumnProperty.summaryType];
+            let summaryType = footerColumn[COLUMN_KEYS.summaryType];
             let result = null;
 
             if (summaryType == 'avg') {
@@ -56,13 +56,13 @@ export class WaFooter {
                 result = grid.view_table.getMin(columnName);
                 grid.footer_table.updateByRowIndex(0, columnName, result);
             }
-            else grid.footer_table.updateByRowIndex(0, columnName, footerColumn[WaColumnProperty.text]);
+            else grid.footer_table.updateByRowIndex(0, columnName, footerColumn[COLUMN_KEYS.text]);
         }
     }
 
     setFooterValue(rowIndex, columnName, value) {
         const grid = this.grid;
-        let column = grid.column_table.selectRow(WaColumnProperty.name, columnName);
+        let column = grid.column_table.selectRow(COLUMN_KEYS.name, columnName);
         const result: any = grid.getFormat(column, value);
         grid.footer_table.updateByRowIndex(rowIndex, columnName, result.value);
     }

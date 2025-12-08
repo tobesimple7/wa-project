@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch, provide, nextTick} from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, provide, nextTick, shallowRef} from 'vue'
 import type { Ref } from 'vue'
 import { WaGridCore } from '@/core/WaGridCore'
 import type { WaGridOption } from '@/core/Grid.types'
@@ -34,12 +34,12 @@ const rootRef: Ref<HTMLElement | null> = ref(null)
 const gridId = ref<string>(props.id)
 
 // Core 인스턴스
-const grid = ref<WaGridCore | null>(null)
+const grid = shallowRef<WaGridCore | null>(null)
 
 // 선언형 컬럼 수집 공간
-// const collectedColumns = ref<WaColumnDef[]>([])
+// const collectedColumns = ref<ColumnDef[]>([])
 //
-// function registerColumn(column: WaColumnDef) {
+// function registerColumn(column: ColumnDef) {
 //     const i = collectedColumns.value.findIndex(c => c.name === column.name)
 //     if (i >= 0) collectedColumns.value[i] = column
 //     else collectedColumns.value.push(column)

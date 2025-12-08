@@ -1,7 +1,7 @@
 ﻿
 import {WaGridCore} from "@/core/WaGridCore";
 import {CellType} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaCombo {
     colType: any;
@@ -98,7 +98,7 @@ export class WaCombo {
         let cellIndex = this.input.dataset.columnIndex;
 
         const column = grid.column_table.data[cellIndex];
-        let columnName = column[WaColumnProperty.name];
+        let columnName = column[COLUMN_KEYS.name];
         const data = grid.renderer[columnName].data;
         let key = data.valueName;
         let val = data.textName;

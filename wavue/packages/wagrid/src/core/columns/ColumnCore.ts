@@ -1,7 +1,7 @@
 import { BeforeAfter, CellType } from "@/core/Grid.types"
-import { WaColumnProperty } from "@/core/columns/ColumnEnum"
+import { COLUMN_KEYS } from "@/core/columns/ColumnEnum"
 import { WaGridCore } from "@/core/WaGridCore";
-import { WaColumnDef } from "./ColumnDef";
+import { ColumnDef } from "./ColumnDef";
 
 export class WaColumn {
     grid: WaGridCore;
@@ -18,21 +18,21 @@ export class WaColumn {
         const userColumns = [];
 
         const getChildren = function(node, rowIndex, startColumnIndex, lastColumnIndex) {
-            node[WaColumnProperty.children] = [];
+            node[COLUMN_KEYS.children] = [];
 
             for (let x = startColumnIndex; x <= lastColumnIndex; x++) {
                 const column = grid.header_column_table.selectRowByRowIndex(rowIndex + 1, x);
                 if (grid.null(column)) break;
 
-                if (column[WaColumnProperty.kind] == 'column') {
-                    let columnName = column[WaColumnProperty.name];
-                    node[WaColumnProperty.children].push(grid.getColumn(columnName));
+                if (column[COLUMN_KEYS.kind] == 'column') {
+                    let columnName = column[COLUMN_KEYS.name];
+                    node[COLUMN_KEYS.children].push(grid.getColumn(columnName));
                 }
-                else if (column[WaColumnProperty.kind] == 'header') {
-                    node[WaColumnProperty.children].push(column);
+                else if (column[COLUMN_KEYS.kind] == 'header') {
+                    node[COLUMN_KEYS.children].push(column);
 
                     let sIndex = x;
-                    let eIndex = x + column[WaColumnProperty.colSpan] - 1;
+                    let eIndex = x + column[COLUMN_KEYS.colSpan] - 1;
                     getChildren(column, rowIndex + 1, sIndex, eIndex);
                 }
             }
@@ -41,18 +41,18 @@ export class WaColumn {
         //  header 정보와 컬럼 정보를 가져온다.
         for (let x = 0; x < grid.column_table.count(); x++) {
             const column = grid.header_column_table.selectRowByRowIndex(0, x);
-            if (grid.notNull(column[WaColumnProperty.num])) delete column[WaColumnProperty.num];
-            if (grid.notNull(column[WaColumnProperty.parentNum])) delete column[WaColumnProperty.parentNum];
+            if (grid.notNull(column[COLUMN_KEYS.num])) delete column[COLUMN_KEYS.num];
+            if (grid.notNull(column[COLUMN_KEYS.parentNum])) delete column[COLUMN_KEYS.parentNum];
 
-            if (column[WaColumnProperty.kind] == 'column') {
-                let columnName = column[WaColumnProperty.name];
+            if (column[COLUMN_KEYS.kind] == 'column') {
+                let columnName = column[COLUMN_KEYS.name];
                 userColumns.push(grid.getColumn(columnName));
             }
-            else if (column[WaColumnProperty.kind] == 'header') {
+            else if (column[COLUMN_KEYS.kind] == 'header') {
                 userColumns.push(column);
 
                 let startColumnIndex = x;
-                let lastColumnIndex = x + column[WaColumnProperty.colSpan] - 1;
+                let lastColumnIndex = x + column[COLUMN_KEYS.colSpan] - 1;
                 getChildren(column, 0, startColumnIndex, lastColumnIndex);
             }
         }
@@ -61,55 +61,59 @@ export class WaColumn {
     }
 
     setColumnDefaultValue(column: any) {
-        const grid = this.grid;
+        const grid = this.grid
+        const columnType = column[COLUMN_KEYS.type]
 
-        let columnType = column[WaColumnProperty.type];
-        if (grid.null(column[WaColumnProperty.dataType])) {
-            if (columnType == CellType.number)      column[WaColumnProperty.dataType] = CellType.number;
-            else if (columnType == CellType.date)   column[WaColumnProperty.dataType] = CellType.string;
-            else if (columnType == CellType.combo)  column[WaColumnProperty.dataType] = CellType.string;
-            else column[WaColumnProperty.dataType] = CellType.string;
+        // ----- DataType -----
+        if (column[COLUMN_KEYS.dataType] == null) {
+            if (columnType === CellType.number) column[COLUMN_KEYS.dataType] = CellType.number
+            else if (columnType === CellType.date) column[COLUMN_KEYS.dataType] = CellType.string
+            else if (columnType === CellType.combo) column[COLUMN_KEYS.dataType] = CellType.string
+            else column[COLUMN_KEYS.dataType] = CellType.string
         }
 
-        if (grid.null(column[WaColumnProperty.width]))    column[WaColumnProperty.width]    = 100;
-        if (grid.null(column[WaColumnProperty.editable])) column[WaColumnProperty.editable] = false;
-        if (grid.null(column[WaColumnProperty.visible ])) column[WaColumnProperty.visible ] = true;
+        // ----- Common Defaults -----
+        column[COLUMN_KEYS.width]    = column[COLUMN_KEYS.width]    ?? 100
+        column[COLUMN_KEYS.editable] = column[COLUMN_KEYS.editable] ?? false
+        column[COLUMN_KEYS.visible]  = column[COLUMN_KEYS.visible]  ?? true
 
-        if (columnType == CellType.string) {
-            if (grid.null(column[WaColumnProperty.align])) column[WaColumnProperty.align] = 'left';
+        // ----- Type-specific Defaults -----
+        if (columnType === CellType.string) {
+            column[COLUMN_KEYS.align] = column[COLUMN_KEYS.align] ?? 'left'
         }
-        else if (columnType == CellType.number) {
-            if (grid.null(column[WaColumnProperty.align]))        column[WaColumnProperty.align]        = 'right';
-            if (grid.null(column[WaColumnProperty.scale]))        column[WaColumnProperty.scale]        = '18,0';
-            if (grid.null(column[WaColumnProperty.roundType]))    column[WaColumnProperty.roundType]    = 'round';
-            if (grid.null(column[WaColumnProperty.fixedScale]))   column[WaColumnProperty.fixedScale]   = true;
-            if (grid.null(column[WaColumnProperty.showZero]))     column[WaColumnProperty.showZero]     = false;
-            if (grid.null(column[WaColumnProperty.commaUnit]))    column[WaColumnProperty.commaUnit]    = 3; // Fixed value.
-            if (grid.null(column[WaColumnProperty.thousandChar])) column[WaColumnProperty.thousandChar] = grid.getConfigCulture('thousandChar');
-            if (grid.null(column[WaColumnProperty.decimalChar]))  column[WaColumnProperty.decimalChar]  = grid.getConfigCulture('decimalChar');
-            //if (grid.null(column[WaColumnProperty.currencyChar])) column[WaColumnProperty.currencyChar] = grid.getConfigCulture('currencyChar');
+        else if (columnType === CellType.number) {
+            column[COLUMN_KEYS.align]        = column[COLUMN_KEYS.align]        ?? 'right'
+            column[COLUMN_KEYS.scale]        = column[COLUMN_KEYS.scale]        ?? '18,0'
+            column[COLUMN_KEYS.roundType]    = column[COLUMN_KEYS.roundType]    ?? 'round'
+            column[COLUMN_KEYS.fixedScale]   = column[COLUMN_KEYS.fixedScale]   ?? true
+            column[COLUMN_KEYS.showZero]     = column[COLUMN_KEYS.showZero]     ?? false
+            column[COLUMN_KEYS.commaUnit]    = column[COLUMN_KEYS.commaUnit]    ?? 3
+            column[COLUMN_KEYS.thousandChar] = column[COLUMN_KEYS.thousandChar] ?? grid.getConfigCulture('thousandChar')
+            column[COLUMN_KEYS.decimalChar]  = column[COLUMN_KEYS.decimalChar]  ?? grid.getConfigCulture('decimalChar')
+            // column[COLUMN_KEYS.currencyChar] = column[COLUMN_KEYS.currencyChar] ?? grid.getConfigCulture('currencyChar')
         }
-        else if (columnType == CellType.date)   {
-            if (grid.null(column[WaColumnProperty.align]))  column[WaColumnProperty.align]  = 'center';
-            if (grid.null(column[WaColumnProperty.format])) column[WaColumnProperty.format] = grid.getConfigCalendar('dayPattern');
+        else if (columnType === CellType.date) {
+            column[COLUMN_KEYS.align]  = column[COLUMN_KEYS.align]  ?? 'center'
+            column[COLUMN_KEYS.format] = column[COLUMN_KEYS.format] ?? grid.getConfigCalendar('dayPattern')
         }
-        else if (columnType == CellType.combo)  {
-            if (grid.null(column[WaColumnProperty.align])) column[WaColumnProperty.align] = 'left';
+        else if (columnType === CellType.combo) {
+            column[COLUMN_KEYS.align] = column[COLUMN_KEYS.align] ?? 'left'
         }
-        return column;
+
+        return column
     }
 
     createColumns(columns: any) {
         const grid = this.grid;
 
         const searchColumn = function (column) {
-            if (!column[WaColumnProperty.children]) {
-                let columnType = column[WaColumnProperty.type];
+            if (!column[COLUMN_KEYS.children]) {
+                let columnType = column[COLUMN_KEYS.type];
 
-                column[WaColumnProperty.type] = grid.null(columnType) ? CellType.string : columnType;
+                column[COLUMN_KEYS.type] = grid.null(columnType) ? CellType.string : columnType;
                 grid.classColumn.setColumnDefaultValue(column);
             }
-            else column[WaColumnProperty.children].map(n => searchColumn(n));
+            else column[COLUMN_KEYS.children].map(n => searchColumn(n));
         }
         columns.map(column => searchColumn(column));
     }
@@ -119,8 +123,8 @@ export class WaColumn {
 
         let dataRows = [];
         const searchColumn = function (column) {
-            if (!column[WaColumnProperty.children]) dataRows.push(column);
-            else column[WaColumnProperty.children].map(n => searchColumn(n));
+            if (!column[COLUMN_KEYS.children]) dataRows.push(column);
+            else column[COLUMN_KEYS.children].map(n => searchColumn(n));
         }
         grid.columns.map(column => searchColumn(column));
 
@@ -172,13 +176,13 @@ export class WaColumn {
         let lastRowIndex = grid.headerRowCount;
 
         let startColIndex = targetColumnIndex;
-        let lastColIndex = targetColumnIndex + rootColumn[WaColumnProperty.colSpan] - 1;
+        let lastColIndex = targetColumnIndex + rootColumn[COLUMN_KEYS.colSpan] - 1;
 
         grid.header_column_table.data.map(columns => {
-            columns.splice(targetColumnIndex, rootColumn[WaColumnProperty.colSpan]);
+            columns.splice(targetColumnIndex, rootColumn[COLUMN_KEYS.colSpan]);
         });
 
-        grid.column_table.data.splice(targetColumnIndex, rootColumn[WaColumnProperty.colSpan]);
+        grid.column_table.data.splice(targetColumnIndex, rootColumn[COLUMN_KEYS.colSpan]);
 
         grid.updateGrid();
 
@@ -202,7 +206,7 @@ export class WaColumn {
 
             for (let i = colIndex; i >= 0; i--) {
                 const dataRow = grid.header_column_table.data[rootRowIndex][i];
-                let kind = dataRow[WaColumnProperty.kind];
+                let kind = dataRow[COLUMN_KEYS.kind];
                 if (kind != 'empty') {
                     result = dataRow;
                     break;
@@ -229,8 +233,8 @@ export class WaColumn {
         const moveRootColumn   = this.getParentTableCell(moveColumn);
         const targetRootColumn = this.getParentTableCell(targetColumn);
 
-        let moveRootRowId   = grid.null(moveRootColumn)  ? -1 : moveRootColumn[WaColumnProperty.rowId];
-        let targetRootRowId = grid.null(targetRootColumn) ? -1 : targetRootColumn[WaColumnProperty.rowId];
+        let moveRootRowId   = grid.null(moveRootColumn)  ? -1 : moveRootColumn[COLUMN_KEYS.rowId];
+        let targetRootRowId = grid.null(targetRootColumn) ? -1 : targetRootColumn[COLUMN_KEYS.rowId];
 
         if (moveRootRowId != targetRootRowId) return;
 
@@ -257,7 +261,7 @@ export class WaColumn {
             for (let x = rangeStartColIndex; x <= rangeLastColIndex; x++) {
                 const column = columns[x];
                 temp[i].push(grid.copyJson(column));
-                column[WaColumnProperty.name] = '__$$changed$$__';
+                column[COLUMN_KEYS.name] = '__$$changed$$__';
             }
         }
 
@@ -268,7 +272,7 @@ export class WaColumn {
                 grid.header_column_table.insertRowsBefore(i, columns, targetColIndex);
             }
             else if (orderType == 'after') {
-                let index = targetColIndex + targetColumn[WaColumnProperty.colSpan] - 1;
+                let index = targetColIndex + targetColumn[COLUMN_KEYS.colSpan] - 1;
                 grid.header_column_table.insertRowsAfter(i, columns, index);
             }
         }
@@ -279,7 +283,7 @@ export class WaColumn {
             const columns = grid.header_column_table.data[i];
             for (let x = columns.length - 1; x >= 0; x--) {
                 const column = columns[x];
-                if (column[WaColumnProperty.name] == '__$$changed$$__') columns.splice(x, 1);
+                if (column[COLUMN_KEYS.name] == '__$$changed$$__') columns.splice(x, 1);
             }
         }
         
@@ -291,7 +295,7 @@ export class WaColumn {
         for (let x = 0; x < grid.column_table.count(); x++) {
             for (let i = 0; i < grid.header_column_table.count(); i++) {
                 const column = grid.header_column_table.data[i][x];
-                if (column[WaColumnProperty.kind] == 'column') copyColumns.push(grid.copyJson(column));
+                if (column[COLUMN_KEYS.kind] == 'column') copyColumns.push(grid.copyJson(column));
             }
         }
 
@@ -427,7 +431,7 @@ export class WaColumn {
         let result = null;
         for (let i = 0; i < grid.column_table.count(); i++ ) {
             let column = grid.column_table.data[i];
-            if (column[WaColumnProperty.visible]) { result = i; break; }
+            if (column[COLUMN_KEYS.visible]) { result = i; break; }
         }
         return result;
     }
@@ -438,7 +442,7 @@ export class WaColumn {
         let result = null;
         for (let i = grid.column_table.count() - 1; i >= 0; i-- ) {
             let column = grid.column_table.data[i];
-            if (column[WaColumnProperty.visible]) { result = i; break; }
+            if (column[COLUMN_KEYS.visible]) { result = i; break; }
         }
         return result;
     }

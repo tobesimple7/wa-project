@@ -1,11 +1,11 @@
 
 import {WaDom} from "../Dom";
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaTreeRender {
     addElement(param) {
         const row = param.grid.view_table.selectRowByRowIndex(param.rowIndex);;
-        const children = row[WaColumnProperty.children];
+        const children = row[COLUMN_KEYS.children];
         for (let i = param.tableCell.childNodes[0].childNodes.length - 1; i >= 0; i--) {
             param.tableCell.childNodes[0].childNodes[i].remove();
         }
@@ -24,8 +24,8 @@ export class WaTreeRender {
 
     setBounding(param) {
         const row = param.grid.view_table.selectRowByRowIndex(param.rowIndex);
-        const children = row[WaColumnProperty.children];
-        let rowDepth = row[WaColumnProperty.depth];
+        const children = row[COLUMN_KEYS.children];
+        let rowDepth = row[COLUMN_KEYS.depth];
 
         WaDom.setStyle(param.tableCell, param);
 

@@ -1,6 +1,6 @@
 import {WaGridCore} from "@/core/WaGridCore"
 //import {CellType, OptionAlias, SortColumnDef} from "@/core/WaGrid.types"
-import { WaColumnProperty } from "@/core/columns/ColumnEnum"
+import { COLUMN_KEYS } from "@/core/columns/ColumnEnum"
 import { SortColumnDef } from "./SortColumnDef";
 import { SORT_KEYS } from "./SortColumnEnum";
 export class WaSort {
@@ -22,7 +22,7 @@ export class WaSort {
         grid.view_table.orderBy(grid.column_table, grid.sort_column_table);
     }
 
-    getSortRow(columnName: string) { return this.grid.sort_column_table.selectRow(WaColumnProperty.name, columnName); }
+    getSortRow(columnName: string) { return this.grid.sort_column_table.selectRow(COLUMN_KEYS.name, columnName); }
 
     changeSortButtonOrder(name: string, text: string, order: string, targetIndex: number) {
         const selector: string = this.selector;
@@ -42,14 +42,14 @@ export class WaSort {
         sortColumn.order = grid.sort_column_table.selectValue(sourceIndex, SORT_KEYS.order);
 
         /* update source column */
-        grid.sort_column_table.updateByRowIndex(sourceIndex, WaColumnProperty.name, '_temp_sort');
+        grid.sort_column_table.updateByRowIndex(sourceIndex, COLUMN_KEYS.name, '_temp_sort');
 
         /* create sort data */
         if (grid.null(targetIndex)) grid.sort_column_table.insert(sortColumn);
         else grid.sort_column_table.insertBefore(sortColumn, targetIndex);
 
         /* remove source */
-        sourceIndex = grid.sort_column_table.selectRowIndex(WaColumnProperty.name, '_temp_sort');
+        sourceIndex = grid.sort_column_table.selectRowIndex(COLUMN_KEYS.name, '_temp_sort');
         grid.sort_column_table.remove(sourceIndex);
 
         const button = grid.classSort.createSortButton(name);
@@ -69,12 +69,12 @@ export class WaSort {
 
         // add sortColumn in grid.sort_data
         // already existing column
-        let dataRows = grid.sort_column_table.selectRows(WaColumnProperty.name, name, 1);
+        let dataRows = grid.sort_column_table.selectRows(COLUMN_KEYS.name, name, 1);
         if (dataRows.length > 0) return;
 
         let dataRow = {};
-        dataRow[WaColumnProperty.name]  = name;
-        dataRow[WaColumnProperty.order] = order;
+        dataRow[COLUMN_KEYS.name]  = name;
+        dataRow[COLUMN_KEYS.order] = order;
 
         /* create sort data */
         //console.log(name);
@@ -99,7 +99,7 @@ export class WaSort {
         let name = element.dataset.name;
         //console.log('name :' + name);
 
-        let rowIndex = grid.sort_column_table.selectRowIndex(WaColumnProperty.name, name);
+        let rowIndex = grid.sort_column_table.selectRowIndex(COLUMN_KEYS.name, name);
 
         //console.log('rowIndex :' + rowIndex);
 
@@ -141,7 +141,7 @@ export class WaSort {
 
         for (let i = 0, len = grid.sort_column_table.count(); i < len; i++) {
             let dataRow = grid.sort_column_table.data[i];
-            let columnName = dataRow[WaColumnProperty.name];
+            let columnName = dataRow[COLUMN_KEYS.name];
             let button = grid.classSort.createSortButton(columnName);
             let bar = document.querySelector(selector + ' .wa-grid-panel90 .wa-grid-panel-bar');
             if (grid.null(bar)) return;
@@ -157,7 +157,7 @@ export class WaSort {
         let column = grid.getColumn(columnName);
         let sortColumn = grid.classSort.getSortRow(columnName);
 
-        let order = sortColumn[WaColumnProperty.order];
+        let order = sortColumn[COLUMN_KEYS.order];
         let orderChar = '';
         if (order == 'asc') orderChar = '▲';
         else if (order == 'desc') orderChar = '▼';
@@ -165,7 +165,7 @@ export class WaSort {
 
         const text= document.createElement('span');
         text.classList.add('wa-grid-panel-button-text');
-        text.textContent  = column.header[WaColumnProperty.text] + orderChar;
+        text.textContent  = column.header[COLUMN_KEYS.text] + orderChar;
         text.dataset.name = columnName;
 
         const icon= document.createElement('span');

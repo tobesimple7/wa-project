@@ -5,7 +5,7 @@ import {WaColumn} from "@/core/columns/ColumnCore";
 import {WaControl} from "./Control";
 import {WaRange} from "./Range";
 import {WaRangePanel} from "./RangePanel";
-import {WaFilter} from "./Filter";
+import {WaFilter} from "./filter/Filter";
 import {WaGridGroup} from "./Group";
 import {WaPage} from "@/core/page/Page";
 import {WaSort} from "./sort/Sort";

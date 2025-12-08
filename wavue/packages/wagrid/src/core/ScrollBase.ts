@@ -1,5 +1,5 @@
 import {WaGridCore} from "@/core/WaGridCore"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 
 export class WaScrollBase {
 
@@ -380,7 +380,7 @@ export class WaScrollBase {
         const colList7: any = document.querySelectorAll(selector + ' .wa-grid-panel70 .wa-grid-table thead th');
 
         let nWidth = parseInt(value) + 'px';
-        grid.column_table.data[colIndex][WaColumnProperty.width] = parseInt(value, 10);
+        grid.column_table.data[colIndex][COLUMN_KEYS.width] = parseInt(value, 10);
 
         colList[colIndex].style.width  = nWidth;
         colList2[colIndex].style.width = nWidth;
@@ -403,7 +403,7 @@ export class WaScrollBase {
         const colList7: any = document.querySelectorAll(selector + ' .wa-grid-panel72 .wa-grid-table thead th');
 
         let nWidth = parseInt(value) + 'px';
-        grid.column_table.data[colIndex][WaColumnProperty.width] = parseInt(value, 10);
+        grid.column_table.data[colIndex][COLUMN_KEYS.width] = parseInt(value, 10);
 
         colList[colIndex].style.width  = nWidth;
         colList2[colIndex].style.width = nWidth;
@@ -423,7 +423,7 @@ export class WaScrollBase {
         let result = 0;
         for (let x = 0; x <= grid.fixedColumnIndex; x++){
             let column = grid.column_table.data[x];
-            if (column[WaColumnProperty.visible]) result += Number(column[WaColumnProperty.width]);
+            if (column[COLUMN_KEYS.visible]) result += Number(String(column[COLUMN_KEYS.width]));
         }
         return result;
     }

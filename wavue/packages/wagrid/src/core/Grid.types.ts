@@ -3,21 +3,6 @@ export interface FormatData {
     value: string | number
 }
 
-export interface TopColumn {
-    name: string,
-    text?: string,
-    align?: string,
-    summaryType?: string,
-    className?:  string,
-}
-
-export interface FooterColumn {
-    name: string,
-    text?: string,
-    align?: string,
-    summaryType?: string,
-    className?:  string,
-}
 
 export interface GroupColumn {
     name: string
@@ -29,11 +14,7 @@ export interface GroupColumn {
 //     orderNumber: number
 // }
 
-export interface FilterColumn {
-    name: string,
-    type: string,
-    value: any,
-}
+
 
 
 export interface WaGridOption {
@@ -86,24 +67,6 @@ export enum ClickPageOrder {
     prev = 'prev',
     next = 'next'
 }
-
-export enum FilterType {
-    Select         =  0,
-    Equal          =  1,
-    NotEqual       =  2,
-    Greater        =  3,
-    GreaterEqual   =  4,
-    Less           =  5,
-    LessEqual      =  6,
-    Between        =  7,
-    Blank          =  8,
-    Include        =  9,
-    NotInclude     = 10,
-    StartCharacter = 11,
-    EndCharacter   = 12,
-}
-
-
 
 export enum CellType {
     string = 'string',

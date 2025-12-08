@@ -4,7 +4,7 @@ import {WaRenderPanel40 } from './RenderPanel40';
 import {WaRenderPanelInfo } from './RenderPanelInfo';
 import {WaTable } from "../Table";
 import {Direction, GridMode, RowAlias} from "@/core/Grid.types"
-import {WaColumnProperty} from "@/core/columns/ColumnEnum"
+import {COLUMN_KEYS} from "@/core/columns/ColumnEnum"
 export class WaPanel40 extends WaPanelBase {
 
     constructor(grid) {
@@ -150,7 +150,7 @@ export class WaPanel40 extends WaPanelBase {
         let tableRow = tableRows[0];
         for (let x = 0, len = grid.column_table.count(); x < len; x++) {
             let column = grid.column_table.data[x];
-            let columnName = column[WaColumnProperty.name];
+            let columnName = column[COLUMN_KEYS.name];
             let tableCell = tableRow.childNodes[x];
 
             if (grid.fixedColumnIndex != -1) {
@@ -293,7 +293,7 @@ export class WaPanel40 extends WaPanelBase {
                         else grid.executeEvent('onClick', param);
                     }
                     else if (e.detail == 2) {
-                        let isEditable = grid.column_table.data[startCellIndex][WaColumnProperty.editable];
+                        let isEditable = grid.column_table.data[startCellIndex][COLUMN_KEYS.editable];
                         if (isEditable) {
                             if (grid.notNull(grid.onEdit)) {
                                 grid.editStart(e, 'mouse')
@@ -628,7 +628,7 @@ export class WaPanel40 extends WaPanelBase {
 
                     if (e.detail == 1) grid.executeEvent('onClick', param);
                     else if (e.detail == 2) {
-                        let isEditable = grid.column_table.data[startCellIndex][WaColumnProperty.editable];
+                        let isEditable = grid.column_table.data[startCellIndex][COLUMN_KEYS.editable];
                         if (isEditable) {
                             if (grid.notNull(grid.onEdit)) {
                                 grid.editStart(e, 'mouse');
