@@ -1,7 +1,7 @@
 <template>
   <n-space vertical>
     <n-card size="large">
-      <template #header>[강의 2강] : v-bind:(축약형 : 콜론), v-on:(축약형 @ 골뱅이)</template>
+      <template #header>[강의 4강] : v-bind:(축약형 : 콜론)</template>
     </n-card>
 
     <n-card size="medium">
@@ -13,31 +13,13 @@
         </n-space>
       </template>
 
-      <input v-model="inputValue" :class="inputClass"/>
+      <input v-model="inputValue" :class="inputClass" @click="clickEnvet"/>
       {{ inputValue }}
 
     </n-card>
 
     <!-- 주석 -->
     <highlightjs language="javascript" :code="lectureDesc" />
-
-    <!-- Naive input box -->
-    <n-card size="medium">
-      <template #header>(예제 2) button과 v-on:(축약형 @) 이벤트</template>
-      <template #header-extra>
-        <n-space justify="end">
-          <n-button type="primary" size="small" @click="btnChange2">값을 변경</n-button>
-          <n-button size="small" @click="btnInit2">초기화</n-button>
-        </n-space>
-      </template>
-
-      <n-button type="primary" size="small" @click="btnClick">버튼</n-button>
-      <n-input v-model:value="inputValueNaive"/>
-      {{ inputValueNaive }}
-
-    </n-card>
-    <!-- 주석 -->
-    <highlightjs language="javascript" :code="lectureDesc2" />
   </n-space>
 </template>
 
@@ -60,20 +42,6 @@ function btnInit() {
   inputValue.value = ''
   inputClass.value = 'red'
 }
-
-// Naive input box
-function btnChange2() {
-  inputValueNaive.value = '값을 변경' //ref로 할 경우 문자열이 아니라 객체이기 때문에 .value를 붙여야 합니다.
-}
-
-function btnInit2() {
-  inputValueNaive.value = ''
-}
-
-function btnClick() {
-  inputValueNaive.value = 'v-on:click="btnClick"과  @click="btnClick"은 서로 같습니다.'
-}
-
 
 
 const lectureDesc = `
@@ -98,18 +66,7 @@ const lectureDesc = `
   color: blue;
 }
 `
-const lectureDesc2 = `
-<template>
-<n-button type="primary" size="small" @click="btnClick">버튼</n-button>
-<n-input v-model:value="inputValueNaive"/>
-{{ inputValueNaive }}
 
-<script setup>
-const inputValueNaive = ref('')
-function btnClick() {
-  inputValueNaive.value = 'v-on:click="btnClick"과  @click="btnClick"은 서로 같습니다.'
-}
-`
 </script>
 
 <style scoped>

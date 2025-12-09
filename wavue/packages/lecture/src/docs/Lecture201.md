@@ -1,27 +1,25 @@
+### 1. Composition API (Vue 3 / script setup)
 
-## 1. Composition API (Vue 3 / script setup)
 ```vue
 <template></template>
 
 <script setup>
 import { ref } from 'vue'
-
 const message = ref('Hello Options API')
-
 function hello() {
   alert('hello')
 }
-
 // return 필요 없음 (자동 노출)
 </script>
-
 <style scoped>
 .input { 
   color: red; 
 }
 </style>
 ```
-## 2. Composition API (Vue 3 / setup 함수)
+
+
+### 2. Composition API (Vue 3 / setup 함수)
 ```vue
 <template></template>
 
@@ -75,8 +73,8 @@ export default {
 </style>
 ```
 
-## API 용어 이해
-### 함수형 API : array.map()	
-### 라이브러리 API : axios.get()	
-### HTTP API : http://localhost/user_list	
-### 브라우저 API : localStorage.setItem()	
+### API 용어 이해
+#### 함수형 API : array.map()	
+#### 라이브러리 API : axios.get()	
+#### HTTP API : http://localhost/user_list	
+#### 브라우저 API : localStorage.setItem()	

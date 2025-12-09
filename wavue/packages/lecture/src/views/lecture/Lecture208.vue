@@ -1,7 +1,7 @@
 <template>
   <n-space vertical>
     <n-card size="large">
-      <template #header>[강의 5강] : v-for</template>
+      <template #header>[강의 8강] : v-for</template>
     </n-card>
 
     <n-card size="medium">

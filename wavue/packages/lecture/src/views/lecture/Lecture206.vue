@@ -2,7 +2,7 @@
   <n-space vertical>
     <!-- 강의 제목 -->
     <n-card size="large">
-      <template #header>[강의 3강] : select와 v-model / v-bind(:) / v-on(@) / v-for</template>
+      <template #header>[강의 6강] : select와 v-model / v-bind(:) / v-on(@) / v-for</template>
     </n-card>
 
     <!-- (예제 1) select -->

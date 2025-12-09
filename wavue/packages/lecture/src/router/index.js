@@ -21,8 +21,6 @@ const routes = [
     { path: '/lecture/lecture207',   name: 'lecture207', component: () => import('../views/lecture/Lecture207.vue') , meta: { keepAlive: true } },
     { path: '/lecture/lecture208',   name: 'lecture208', component: () => import('../views/lecture/Lecture208.vue') , meta: { keepAlive: true } },
     { path: '/lecture/lecture209',   name: 'lecture209', component: () => import('../views/lecture/Lecture209.vue') , meta: { keepAlive: true } },
-    { path: '/lecture/lecture210',   name: 'lecture210', component: () => import('../views/lecture/Lecture210.vue') , meta: { keepAlive: true } },
-    { path: '/lecture/lecture211',   name: 'lecture211', component: () => import('../views/lecture/Lecture211.vue') , meta: { keepAlive: true } },    
 ]
 
 const router = createRouter({

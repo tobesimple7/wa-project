@@ -1,7 +1,7 @@
 <template>
   <n-space vertical>
     <n-card size="large">
-      <template #header>[강의 4강] v-if / v-show</template>
+      <template #header>[강의 7강] v-if / v-show</template>
     </n-card>
 
     <n-card size="medium">
@@ -15,7 +15,7 @@
       </template>
 
       <div>
-        <p id="P_TAG_ID" v-if="isShow">✅ p 태그가 보입니다</p>
+        <p id="P_TAG_ID" v-if="isShow">p 태그가 보입니다</p>
       </div>
     </n-card>
 
@@ -51,7 +51,7 @@
       </template>
 
       <div>
-        <p id="P_TAG" v-show="isShow3">✅ p 태그가 보입니다</p>
+        <p id="P_TAG" v-show="isShow3">p 태그가 보입니다</p>
       </div>
     </n-card>
 
@@ -137,7 +137,7 @@ const lectureDesc = `
 <template>
   <div>
     // v-if의 조건이 true 일 경우 p 태그가 생성됨
-    <p v-if="isShow">✅ p 태그가 보입니다</p>
+    <p v-if="isShow">p 태그가 보입니다</p>
   </div>
 
 <script setup>
@@ -160,7 +160,7 @@ const userType = ref('guest')
 const lectureDesc3 = `
 <template>
   <div>
-    <p id="P_TAG" v-show="isShow3">✅ p 태그가 보입니다</p>
+    <p id="P_TAG" v-show="isShow3">p 태그가 보입니다</p>
   </div>
 <script setup>
 const isShow3 = ref(true)

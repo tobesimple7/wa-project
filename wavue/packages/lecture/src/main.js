@@ -24,7 +24,7 @@ pinia.use(piniaPluginPersistedstate)
 // 🌗 Naive UI Theme 설정
 const Root = {
     setup() {
-        const isDark = ref(true)
+        const isDark = ref(false)
         return () =>
             h(
                 NConfigProvider,

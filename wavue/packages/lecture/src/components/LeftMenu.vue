@@ -71,9 +71,7 @@ const mainTree = ref([
       { key: 'lecture206', label: 'Part2. 6강. v-model, v-bind 예제' },
       { key: 'lecture207', label: 'Part2. 7강. v-if, v-show' },
       { key: 'lecture208', label: 'Part2. 8강. v-for (반복문)' },
-      { key: 'lecture209', label: 'Part2. 9강. v-for, v-if, v-show 예제' },
-      { key: 'lecture210', label: 'Part2. 10강. v-html' },
-      { key: 'lecture211', label: 'Part2. 11강. v-text' },
+      { key: 'lecture209', label: 'Part2. 9강. v-html, v-text' },
     ]
   },
 ])
@@ -84,7 +82,7 @@ const mainTree = ref([
   font-size: 13px;
   line-height: 1.4;
   --n-node-content-height: 26px;
-  color: white !important;
+  /* color: white !important; */
 }
 
 .nbs-tree :deep(.nbs-tree-node-content) {
