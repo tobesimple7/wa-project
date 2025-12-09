@@ -1,9 +1,9 @@
 <script setup>
-import IntroPage from '@/docs/md_001.md'
+import IntroPage from '@/docs/Lecture101.md'
 </script>
 
 <template>
-  <IntroPage />
+  <IntroPage style="margin: 0px 10px 10px 10px;" />
 </template>
 
 <style scoped>

@@ -1,6 +1,5 @@
 <template>
-  <!-- 🔹 탭 헤더 영역 -->
-  <n-tabs
+    <n-tabs
       type="card"
       v-model:value="tabStore.activeTab"
       closable

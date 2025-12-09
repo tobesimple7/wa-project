@@ -1,57 +1,36 @@
 <template>
   <n-space vertical>
-    <!-- 강의 제목 -->
     <n-card size="large">
-      <template #header>[강의 3강] : select와 v-model / v-bind(:) / v-on(@) / v-for</template>
+      <template #header>[강의 3강] : v-model(바인딩)</template>
     </n-card>
 
-    <!-- (예제 1) select -->
     <n-card size="medium">
-      <template #header>(예제 1) select box</template>
+      <template #header>(예제 1) input 박스와  v-model</template>
       <template #header-extra>
         <n-space justify="end">
-          <n-button size="small" type="primary" @click="btnChange">한국어로 선택</n-button>
-          <n-button size="small" type="primary" @click="btnAdd">일본어 추가</n-button>
+          <n-button type="primary" size="small" @click="btnChange">값을 변경</n-button>
           <n-button size="small" @click="btnInit">초기화</n-button>
         </n-space>
       </template>
 
-      <label>언어: </label>
-      <select v-model="item">
-        <!-- options 바인딩 -->
-        <option
-          v-for="opt in itemOptions"
-          :key="opt.value"
-          :value="opt.value"
-        >
-          {{ opt.label }}
-        </option>
-      </select>
-      <div>현재 선택 값: {{ item }}</div>
+      <input v-model="inputValue"/>
+      {{ inputValue }}
     </n-card>
-
     <!-- 주석 -->
     <highlightjs language="javascript" :code="lectureDesc" />
 
-    <!-- (예제 2) Naive-UI n-select + v-model:value -->
+    <!-- Naive input box -->
     <n-card size="medium">
-      <template #header>(예제 2) Naive-UI n-select 기본/다중/비활성/필터</template>
+      <template #header>(예제 2) Naive : input박스와 v-model</template>
       <template #header-extra>
         <n-space justify="end">
-          <n-button size="small" type="primary" @click="btnChange2">영어로 선택</n-button>
-          <n-button size="small" type="primary" @click="btnAdd2">중국어 추가</n-button>
+          <n-button type="primary" size="small" @click="btnChange2">값을 변경</n-button>
           <n-button size="small" @click="btnInit2">초기화</n-button>
         </n-space>
       </template>
-
-      <div style="margin-bottom:6px">단일 선택</div>
-      <n-select
-        v-model:value="item2"
-        :options="itemOptions2"
-      />
-      <div>현재 선택 값: {{ item2 }}</div>
+      <n-input v-model:value="inputValueNaive"/>
+      {{ inputValueNaive }}
     </n-card>
-
     <!-- 주석 -->
     <highlightjs language="javascript" :code="lectureDesc2" />
   </n-space>
@@ -59,85 +38,63 @@
 
 <script setup>
 import { ref } from 'vue'
-import { NSelect, NButton, NSpace, NCard } from 'naive-ui'
+import { NInput, NButton,  NSpace, NCard } from 'naive-ui'
 
-const item = ref('')
-const itemOptions = ref([
-  { value: ''  , label: '--언어선택--' },
-  { value: 'ko', label: '한국어' },
-  { value: 'en', label: '영어' },
-])
-const item2 = ref('')
-const itemOptions2 = ref([
-  { value: ''  , label: '--언어선택--' },
-  { value: 'ko', label: '한국어' },
-  { value: 'en', label: '영어' },
-])
 
+const inputValue = ref('')
+const inputValueNaive = ref('')
+
+
+
+// 일반 input box
 function btnChange() {
-  item.value = 'ko'
+  inputValue.value = '값을 변경' //ref로 할 경우 문자열이 아니라 객체이기 때문에 .value를 붙여야 합니다.
 }
-function btnAdd() {
-  itemOptions.value.push({ value: 'jp', label: '일본어'})
-}
+
 function btnInit() {
-  item.value = ''
-  // 일본어 제거
-  const index = itemOptions.value.findIndex(item => item.value === 'jp')
-  if (index !== -1) itemOptions.value.splice(index, 1)
+  inputValue.value = ''
 }
 
+// Naive input box
 function btnChange2() {
-  item2.value = 'en'
-}
-function btnAdd2() {
-  itemOptions2.value.push({ value: 'zh', label: '중국어'})
-}
-function btnInit2() {
-  item2.value = ''
-  // 중국어 제거
-  const index = itemOptions2.value.findIndex(item => item.value === 'zh')
-  if (index !== -1) itemOptions2.value.splice(index, 1)
+  inputValueNaive.value = '값을 변경' //ref로 할 경우 문자열이 아니라 객체이기 때문에 .value를 붙여야 합니다.
 }
 
-/** 주석 */
+function btnInit2() {
+  inputValueNaive.value = ''
+}
+
 const lectureDesc = `
 <template>
-  <select v-model="item">
-    <option v-for="opt in itemOptions"
-        :key="opt.value"
-        :value="opt.value">
-      {{ opt.label }}
-    </option>
-  </select>
-  {{ item }}
-</template>
+  // <input v-model="inputValue"/> 의 뜻은 다음과 같습니다.
+  // ㄴ v-model은 input의 값과 연결되어 있습니다.
+  // ㄴ v-model은 inputValue 변수와 연결되어 있습니다.
+  // ㄴ input의 값이 변경되면, inputValue의 값도 변경됩니다.
+  // ㄴ inputValue의 값이 변경되면, input box의 값도 변경됩니다.
+
+  <input v-model="inputValue"/>
+  {{ inputValue }}
 
 <script setup>
-import { ref } from 'vue'
-const item = ref('') // 단일: 문자열
-const itemOptions = [
-  { value: ''  , label: '--언어선택' }
-  { value: 'ko', label: '한국어' },
-  { value: 'en', label: '영어' },
-]
+  // ref 함수는 vue에서 제공하는 함수 입니다(vue에서 data 감지)
+  // ref 함수를 사용하지 않으면, inputValue와 동기화가 되지 않습니다.
+  const inputValue = ref('')
+  // inputValue 의 값을 변경하려면, 다음과 같이 써야 합니다.
+  // inputValue.value = '변경된 값'
+  // 반드시 .value를 붙여야 합니다.
 `.trim()
 
-/** 주석2 */
 const lectureDesc2 = `
 <template>
-  <n-select
-    v-model:value="item2"
-    :options="itemOptions2"
-  />
-  {{ item2 }}
+  <n-input v-model:value="inputValueNaive"/>
+  {{ inputValueNaive }}
 
 <script setup>
-import { ref } from 'vue'
-const item2 = ref(null)
-const itemOptions2 = [
-  { value: ''  , label: '--언어선택' }
-  { value: 'ko', label: '한국어' },
-  { value: 'en', label: '영어' },
-]`.trim()
+  const inputValueNaive = ref('')
+`.trim()
+
 </script>
+
+<style scoped>
+
+</style>

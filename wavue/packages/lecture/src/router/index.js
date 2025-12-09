@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { auth } from '../stores/auth'
 
 const routes = [
-    { path: '/login', name: 'login', component: () => import('../views/LoginView.vue') },
     { path: '/', redirect: '/home' },
     { path: '/home', name: 'home', component: () => import('../views/HomeView.vue') , meta: { keepAlive: true } },
 
@@ -11,6 +9,8 @@ const routes = [
     { path: '/lecture/lecture103',   name: 'lecture103', component: () => import('../views/lecture/Lecture103.vue') , meta: { keepAlive: true } },
     { path: '/lecture/lecture104',   name: 'lecture104', component: () => import('../views/lecture/Lecture104.vue') , meta: { keepAlive: true } },
     { path: '/lecture/lecture105',   name: 'lecture105', component: () => import('../views/lecture/Lecture105.vue') , meta: { keepAlive: true } },
+    { path: '/lecture/lecture106',   name: 'lecture106', component: () => import('../views/lecture/Lecture106.vue') , meta: { keepAlive: true } },
+    { path: '/lecture/lecture107',   name: 'lecture107', component: () => import('../views/lecture/Lecture107.vue') , meta: { keepAlive: true } },
 
     { path: '/lecture/lecture201',   name: 'lecture201', component: () => import('../views/lecture/Lecture201.vue') , meta: { keepAlive: true } },
     { path: '/lecture/lecture202',   name: 'lecture202', component: () => import('../views/lecture/Lecture202.vue') , meta: { keepAlive: true } },
@@ -31,13 +31,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  //if (to.path !== '/login' && !auth.isLoggedIn()) {
-  //  next('/login')
-  //} else if (to.path === '/login' && auth.isLoggedIn()) {
-  //  next('/')
-  //} else {
-  //  next()
-  //}
   next()
 })
 

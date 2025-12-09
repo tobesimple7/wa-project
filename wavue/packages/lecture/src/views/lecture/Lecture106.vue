@@ -1,5 +1,5 @@
 <script setup>
-import IntroPage from '@/docs/Lecture102.md'
+import IntroPage from '@/docs/Lecture106.md'
 </script>
 
 <template>

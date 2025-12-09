@@ -1,206 +1,122 @@
 <template>
   <n-space vertical>
     <n-card size="large">
-      <template #header>[강의 4강] v-if / v-show</template>
+      <template #header>[강의 2강] : v-bind:(축약형 : 콜론), v-on:(축약형 @ 골뱅이)</template>
     </n-card>
 
     <n-card size="medium">
-      <template #header>(예제 1) v-if </template>
+      <template #header>(예제 1) input 박스와  v-bind</template>
       <template #header-extra>
         <n-space justify="end">
-          <n-button size="small" type="primary" @click="btnShow">보이기</n-button>
-          <n-button size="small" type="primary" @click="btnHide">감추기</n-button>
+          <n-button type="primary" size="small" @click="btnChange">스타일 변경</n-button>
           <n-button size="small" @click="btnInit">초기화</n-button>
         </n-space>
       </template>
 
-      <div>
-        <p id="P_TAG_ID" v-if="isShow">✅ p 태그가 보입니다</p>
-      </div>
+      <input v-model="inputValue" :class="inputClass"/>
+      {{ inputValue }}
+
     </n-card>
 
-    <highlightjs language="html" :code="lectureDesc" />
+    <!-- 주석 -->
+    <highlightjs language="javascript" :code="lectureDesc" />
 
+    <!-- Naive input box -->
     <n-card size="medium">
-      <template #header>(예제 2) v-if / v-else-if / v-else</template>
+      <template #header>(예제 2) button과 v-on:(축약형 @) 이벤트</template>
       <template #header-extra>
         <n-space justify="end">
-          <n-button size="small" type="primary" @click="btnChangeAdmin2">관리자로 변경</n-button>
-          <n-button size="small" type="primary" @click="btnChangeUser2">사용자로 변경</n-button>
+          <n-button type="primary" size="small" @click="btnChange2">값을 변경</n-button>
           <n-button size="small" @click="btnInit2">초기화</n-button>
         </n-space>
       </template>
 
-      <div>
-        <p v-if="userType === 'admin'">관리자</p>
-        <p v-else-if="userType === 'user'">사용자</p>
-        <p v-else>게스트</p>
-      </div>
-    </n-card>
+      <n-button type="primary" size="small" @click="btnClick">버튼</n-button>
+      <n-input v-model:value="inputValueNaive"/>
+      {{ inputValueNaive }}
 
+    </n-card>
+    <!-- 주석 -->
     <highlightjs language="javascript" :code="lectureDesc2" />
-
-    <n-card size="medium">
-      <template #header>(예제 3) v-show</template>
-      <template #header-extra>
-        <n-space justify="end">
-          <n-button size="small" type="primary" @click="btnShow3">보이기</n-button>
-          <n-button size="small" type="primary" @click="btnHide3">감추기</n-button>
-          <n-button size="small" @click="btnInit3">초기화</n-button>
-        </n-space>
-      </template>
-
-      <div>
-        <p id="P_TAG" v-show="isShow3">✅ p 태그가 보입니다</p>
-      </div>
-    </n-card>
-
-    <highlightjs language="javascript" :code="lectureDesc3" />
-
-    <n-card size="medium">
-      <template #header>(예제 4) v-if 와 v-show (같은 태그에 같이 쓰지 말자)</template>
-      <template #header-extra>
-        <n-space justify="end">
-          <!--<n-button size="small" type="primary" @click="">초기화</n-button>-->
-        </n-space>
-      </template>
-
-      <div v-if="true">
-        <p v-show="false">p 태그가 보여지지 않습니다.</p>
-        <p v-show="true">p 태그가 보여집니다.</p>
-      </div>
-    </n-card>
-
-    <highlightjs language="javascript" :code="lectureShow" />
   </n-space>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { NButton, NSpace, NCard } from 'naive-ui'
+import { ref } from 'vue'
+import { NInput, NButton,  NSpace, NCard } from 'naive-ui'
 
-// 예제 1
-const isShow = ref(true)
-function btnShow() {
-  isShow.value = true
+
+const inputValue = ref('')
+const inputClass = ref('red')
+
+const inputValueNaive = ref('')
+
+// 일반 input box
+function btnChange() {
+  inputClass.value = 'blue'
 }
-function btnHide() {
-  isShow.value = false
-}
+
 function btnInit() {
-  isShow.value = true
+  inputValue.value = ''
+  inputClass.value = 'red'
 }
 
-// 예제 2
-const userType = ref('guest') // 'admin' | 'user' | 'guest'
-function btnChangeAdmin2() {
-  userType.value = "admin"
+// Naive input box
+function btnChange2() {
+  inputValueNaive.value = '값을 변경' //ref로 할 경우 문자열이 아니라 객체이기 때문에 .value를 붙여야 합니다.
 }
-function btnChangeUser2() {
-  userType.value = "user"
-}
+
 function btnInit2() {
-  userType.value = "guest"
+  inputValueNaive.value = ''
 }
 
-// 예제 3
-const isShow3 = ref(true)
-function btnShow3() {
-  isShow3.value = true
-}
-function btnHide3() {
-  isShow3.value = false
-}
-function btnInit3() {
-  isShow3.value = true
+function btnClick() {
+  inputValueNaive.value = 'v-on:click="btnClick"과  @click="btnClick"은 서로 같습니다.'
 }
 
 
-function toggleLogin() {
-  isLogin.value = !isLogin.value
-}
-function nextuserType() {
-  userType.value = userType.value === 'guest' ? 'user' : userType.value === 'user' ? 'admin' : 'guest'
-}
 
-/** (예제 2) v-if vs v-show */
-const visible = ref(true)
-
-/** (예제 3) v-if + v-for */
-const numbers = ref([1, 2, 3, 4, 5, 6, 7])
-const onlyOdd = ref(false)
-const filteredNumbers = computed(() =>
-  onlyOdd.value ? numbers.value.filter(n => n % 2 === 1) : numbers.value
-)
-/** 주석 */
 const lectureDesc = `
 <template>
-  <div>
-    // v-if의 조건이 true 일 경우 p 태그가 생성됨
-    <p v-if="isShow">✅ p 태그가 보입니다</p>
-  </div>
+//1. v-bind는 input의 class에 연결되어 있습니다.
+//2. v-bind는 inputClass 변수와 연결되어 있습니다.
+//3. v-bind는 단축어로 땡땡이(콜론)으로 표시합니다.
+//   v-bind:class 는 :class 서로 같음(축약형)
+<input v-model="inputValue" v-bind:class="inputClass"/>
+<input v-model="inputValue" :class="inputClass"/>
+{{ inputValue }}
 
 <script setup>
-const isShow = ref(true)
-`.trim()
+    const inputValue = ref('') // ref 함수는 vue.js에서 제공하는 함수 입니다. vue.js에서 inputValue의 값을 감시합니다.
+    const inputClass = ref('red') // vue.js에서 inputValue의 값을 감시합니다. 값이 변경되면 바로 변경됩니다.
 
-/** 주석2 */
+<style scoped>
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+`
 const lectureDesc2 = `
 <template>
-  <p v-if="userType === 'admin'">관리자</p>
-  <p v-else-if="userType === 'user'">사용자</p>
-  <p v-else>게스트</p>
-</template>
+<n-button type="primary" size="small" @click="btnClick">버튼</n-button>
+<n-input v-model:value="inputValueNaive"/>
+{{ inputValueNaive }}
 
 <script setup>
-const userType = ref('guest')
-`.trim()
-
-/** 주석3 */
-const lectureDesc3 = `
-<template>
-  <div>
-    <p id="P_TAG" v-show="isShow3">✅ p 태그가 보입니다</p>
-  </div>
-<script setup>
-const isShow3 = ref(true)
-`.trim()
-
-const lectureShow = `
-<template>
-  <div v-if="true">
-    <p v-show="false">p 태그가 보여지지 않습니다.</p>
-    <p v-show="true">p 태그가 보여집니다.</p>
-  </div>
-
-
-// v-if="true"  일 경우 dom에 div tag 생성
-// v-if="false" 일 경우 dom에 div tag 제거
-
-// v-show="true"  일 경우 dom에 항상 존재. p 태그가 표시됨
-// v-show="false" 일 경우 dom에 항상 존재. p 태그가 표시 않됨 style="display:none" 이 발생함
-
-
-// v-if는 생성과 제거에 사용됨으로 v-if > v-show 순서로 사용 하는 것이 좋다.
-  </div>
-
-`.trim()
-
-const lectureIfFor = `
-<li v-for="n in numbers" :key="n" v-if="n % 2 === 1">{{ n }}</li>
-
-<!-- 권장: computed로 필터 후 v-for -->
-<li v-for="n in filteredNumbers" :key="n">{{ n }}</li>
-
-<script setup>
-import { ref, computed } from 'vue'
-const numbers = ref([1,2,3,4,5,6,7])
-const filteredNumbers = computed(() => numbers.value.filter(n => n % 2 === 1))
-`.trim()
+const inputValueNaive = ref('')
+function btnClick() {
+  inputValueNaive.value = 'v-on:click="btnClick"과  @click="btnClick"은 서로 같습니다.'
+}
+`
 </script>
 
 <style scoped>
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.note { margin: 8px 0; color: #666; }
-.warn { color: #c2410c; }
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
 </style>

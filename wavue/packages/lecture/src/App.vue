@@ -1,20 +1,14 @@
 <template>
-  <div v-if="!isLoginPage">
-    <HeaderBar />
-    <n-layout has-sider style="height: calc(100vh - 48px);">
-      <n-layout-sider width="280" bordered>
-        <LeftMenu />
-      </n-layout-sider>
+  <HeaderBar />
+  <n-layout has-sider style="height: calc(100vh - 48px);">
+    <n-layout-sider width="280" bordered>
+      <LeftMenu />
+    </n-layout-sider>
 
-      <n-layout-content style="padding: 8px;">
-        <TabView />
-      </n-layout-content>
-    </n-layout>
-  </div>
-
-  <div v-else>
-    <router-view />
-  </div>
+    <n-layout-content style="padding: 8px;">
+      <TabView />
+    </n-layout-content>
+  </n-layout>
 </template>
 
 <script setup>
@@ -36,20 +30,14 @@ defineProps({
 const route = useRoute()
 const tabStore = useTabStore()
 
-// ✅ 로그인 페이지 여부
-const isLoginPage = computed(() => route.path === '/login')
-
-// ✅ 안전한 마운트 (router & store 모두 준비 후)
 onMounted(async () => {
   try {
     await nextTick()
 
-    // 홈 탭 보장
     if (typeof tabStore.ensureHome === 'function') {
       tabStore.ensureHome()
     }
 
-    // 세션 복원 (컴포넌트 로딩 오류 방지)
     if (typeof tabStore.restoreSession === 'function') {
       await tabStore.restoreSession()
     }

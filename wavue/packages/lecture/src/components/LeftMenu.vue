@@ -34,9 +34,6 @@ function onMenuClick(key) {
   }
 }
 
-// ========================
-// 트리 선택 (즐겨찾기 + 메인 메뉴)
-// ========================
 function onSelect(keys, options) {
   const node = options[0]
   if (!node) return
@@ -50,21 +47,23 @@ function onSelect(keys, options) {
 // ========================
 const mainTree = ref([
   {
-    label: 'Part 2. Vue.js 시작하기',
+    label: 'Part 1. Vue.js 시작하기',
     key: 'Lecture100',
     children: [
-      { key: 'lecture101', label: 'Part1. 1강. vue.js 소개' },
-      { key: 'lecture102', label: 'Part1. 2강. node.js와 npm, pnpm 설치' },
-      { key: 'lecture103', label: 'Part1. 3강. vscode, webstorm 편집기)' },
-      { key: 'lecture104', label: 'Part1. 4강. vue 프로젝트 만들기, 실행' },
-      { key: 'lecture105', label: 'Part1. 5강. wavue project 실행 ' },
+      { key: 'lecture101', label: 'Part1. 1강. vue.js 안내' },
+      { key: 'lecture102', label: 'Part1. 2강. node.js 다운로드' },
+      { key: 'lecture103', label: 'Part1. 3강. vscode 편집기' },
+      { key: 'lecture104', label: 'Part1. 4강. nvm' },
+      { key: 'lecture105', label: 'Part1. 5강. npm' },
+      { key: 'lecture106', label: 'Part1. 6강. pnpm' },
+      { key: 'lecture107', label: 'Part1. 7강. 강의소스 다운로드' },
     ]
   },  
   {
     label: 'Part 2. Vue3 문법',
     key: 'Lecture200',
     children: [
-      { key: 'lecture201', label: 'Part2. 1강. Vue 만들기(Componsition, Options)' },
+      { key: 'lecture201', label: 'Part2. 1강. Vue 만들기' },
       { key: 'lecture202', label: 'Part2. 2강. {{ }} Mustache(머스타치)' },
       { key: 'lecture203', label: 'Part2. 3강. v-model (바인딩)' },
       { key: 'lecture204', label: 'Part2. 4강. v-bind (바인딩)' },
@@ -81,10 +80,11 @@ const mainTree = ref([
 </script>
 
 <style scoped>
-.nbs-tree {
+.nbs-tree:deep(*) {
   font-size: 13px;
   line-height: 1.4;
   --n-node-content-height: 26px;
+  color: white !important;
 }
 
 .nbs-tree :deep(.nbs-tree-node-content) {

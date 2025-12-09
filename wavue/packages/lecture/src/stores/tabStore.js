@@ -50,7 +50,6 @@ export const useTabStore = defineStore('tabStore', {
             router.push(tab.path)
         }
     },
-
     closeTab(key) {
         if (this.restoring) return  // ✅ 복원 중이면 무시
 
@@ -67,7 +66,6 @@ export const useTabStore = defineStore('tabStore', {
 
         this.saveState()
     },
-
     saveState() {
         const simple = this.tabs.map(t => ({
             key: t.key,
@@ -77,7 +75,6 @@ export const useTabStore = defineStore('tabStore', {
         sessionStorage.setItem('tabs', JSON.stringify(simple))
         sessionStorage.setItem('activeTab', this.activeTab)
     },
-
     async restoreSession() {
       this.restoring = true   // ✅ 시작
 

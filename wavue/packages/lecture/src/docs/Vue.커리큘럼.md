@@ -5,10 +5,11 @@
 ## Part 1. Vue.js 소개 & 환경 설정
 
 ### 1.01. Vue.js 과정 안내
-### 1.02. Node.js, npm, pnpm 설치
-### 1.03. VSCode / WebStorm 개발환경
-### 1.04. Vue 프로젝트 생성 및 실행
-### 1.05. wavue_project 소개
+### 1.02. Node.js 설치 
+### 1.03. vscode 개발툴 
+### 1.04. npm, pnpm 사용
+### 1.05. Vue 프로젝트 생성 및 실행
+### 1.06. 강의소스 다운로드 및 사용
 
 ---
 
