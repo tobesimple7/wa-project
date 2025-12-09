@@ -1,27 +1,27 @@
-# Vue.js 소개
+# Vue.js 안내
 
 ## 1. Vue를 학습하기 위해선, Node.js를 알아야 합니다.
 ---
 ### - Node.js는 C#의 닷넷프레임웍, Java JDK1.8 같은 개발 프레임웍 입니다. 
-### - 따라서, Node.js 프레임웍을 PC에 설치해야 합니다.
+### - 따라서, Node.js를 PC에 설치해야 합니다.
 ### - Node.js는 자바스크립트를 사용합니다.
 ### - 크롬이나 엣지 같은 브라우저에서만 실행되는 자바스크립트가 아닙니다.
-### - Node.js 안에서 동작하기 때문에, PC의 모든 자원에 접근할 수 있습니다.
+### - Node.js 안에서 동작하기 때문에, PC의 자원에 접근할 수 있습니다.
 
 ## 2. vue.js 란?
 ---
 ### - **Vue.js**는 Node.js 환경 안에서 동작하는 프론트엔드 프레임웍입니다.  
 ### - Vue.js는 자바스크립트/타입스크립트(Vue3)로 개발 되었습니다.
 ### - Vue.js는 **HTML + CSS + JavaScript**를 효율적으로 사용할 수 있도록 설계되었습니다.  
-### - Vue는 React, Angular와 함께 **대표적인 SPA(Single Page Application)** 프레임웍입니다.  
 ### - 화면 전체를 새로고침하지 않고, 필요한 부분만 빠르게 갱신할 수 있습니다.  
-### - Vue.js는 다양한 패키지를 사용 할 수 있습니다.  
-- **Vite** : 빠른 개발 빌드 도구  
-- **Vue Router** : 페이지 전환 관리  
-- **Pinia / Vuex** : 상태관리  
-- **Naive UI / Vuetify 등등** : UI 컴포넌트 라이브러리  
 ---
 # Vue.js 개발 과정
+
+### 환경설정
+### Vue.js 사용법
+### VUE UI 프레임웍 사용(vue에서 사용할 수 있는 Bootstrap 같은 UI 프레임웍)
+### Vue 전용 패키지 사용
+### 컴포넌트 개발
 
 ## 1.환경설정
 ---
@@ -35,7 +35,7 @@
 
 ## 2. Vue.js 사용법
 ---
-### Vue 디렉티브(Directive) v-bind, v-on, v-mode, ref, reactive, v-if, v-show, v-for, v-html, v-text 
+### Vue 디렉티브(Directive) v-bind, v-on, v-model, v-if, v-show, v-for, v-html, v-text 
 ### ref, reactive, props, emit, slot, template
 
 ## 3.VUE UI 프레임웍
@@ -54,7 +54,8 @@ Vue 컴포넌트 간 데이터를 공유하거나,
 ### - Route : **Vue Router**는 Vue 애플리케이션의 **페이지 전환(경로 관리)** 을 담당하는 공식 라이브러리입니다.  
 브라우저의 URL 경로에 따라 **다른 컴포넌트를 표시**할 수 있게 해주는 기능을 제공합니다.  
 즉, 하나의 페이지 안에서 여러 화면을 구성하는 **SPA(Single Page Application)** 구현의 핵심 도구입니다.
-## 4.컴포넌트 개발
+
+## 5.컴포넌트 개발
 ---
 ### - 부모 컴포넌트와 자식 컴포넌트 구조를 이해하고, 이를 활용하여 프로그램을 개발합니다.
 ### - Router와 Pinia 등의 패키지를 활용하여 프로그램을 구현합니다.
